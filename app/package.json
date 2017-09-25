@@ -2,13 +2,7 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
-  },
-  "devDependencies": {
-    "react-scripts": "1.0.13"
-  },
+  "proxy": "159.203.240.133:5432",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
