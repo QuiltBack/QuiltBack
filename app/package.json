@@ -1,5 +1,6 @@
 {
   "name": "app",
+  "main":"server/server.js",
   "version": "0.1.0",
   "private": true,
   "proxy": "159.203.240.133:5432",
