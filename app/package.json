@@ -4,11 +4,16 @@
   "private": true,
   "proxy": "159.203.240.133:5432",
   "dependencies": {
-  "react": "^15.6.1",
-  "react-dom": "^15.6.1"
+    "body-parser": "^1.18.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.5",
+    "express-session": "^1.15.5",
+    "massive": "^4.2.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
   },
   "devDependencies": {
-  "react-scripts": "1.0.13"
+    "react-scripts": "1.0.13"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -17,4 +22,3 @@
     "eject": "react-scripts eject"
   }
 }
-
