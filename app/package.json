@@ -4,14 +4,20 @@
   "private": true,
   "proxy": "159.203.240.133:5432",
   "dependencies": {
+    "axios": "^0.16.2",
     "body-parser": "^1.18.2",
     "dotenv": "^4.0.0",
     "express": "^4.15.5",
     "express-session": "^1.15.5",
+    "greensock": "^1.20.2",
     "massive": "^4.2.0",
+    "quill": "^1.3.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-redux": "^5.0.6"
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2"
   },
   "devDependencies": {
     "react-scripts": "1.0.13"
