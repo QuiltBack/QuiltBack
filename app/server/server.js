@@ -49,7 +49,7 @@ password:process.env.POSTGRES_PASSWORD,
 
 /* END Initialize Massive */
 
-app.use(bodyParser.json);
+app.use(bodyParser.json());
 
 /* Setup Session Defaults and secret key */
 
@@ -83,12 +83,28 @@ passport.use(new Auth0Strategy({
       if (profile && profile.emails){
        if (profile.emails[0]) email=profile.emails.value;
       }
-
+      if (!email && profile.email) email=profile.email;
+    
+  
       db.find_user(["" +profile.identities[0].user_id])
         .then(user=>{
                 if (user[0]) return done(null,{id:user[0].id});
                 else {
-                   db.create_user([profile.displayName,email,profile.picture,"" + profile.identities[0].user_id])
+console.log(profile);
+console.log("END PROFILE");
+console.log(profile.displayName);
+console.log("email " + email);
+console.log(profile.name.given_name);
+console.log(profile.name.family_name);
+console.log( "" + profile.identities[0].user_id )
+
+ let given_name='';
+ let family_name='';
+if (profile.name && profile.name.given_name) given_name=profile.name.given_name;
+if (profile.name && profile.name.family_name) given_name=profile.name.family_name;
+
+                  /* username, email,first_name,last_name,auth_id */
+                   db.create_user([profile.displayName,email,profile.given_name,profile.family_name,"" + profile.identities[0].user_id])
                      .then(user=>{return done(null,{id:user[0].id})});
                     }
                   })
@@ -127,6 +143,7 @@ app.get('/auth/me',cors(corsOptions),(req,res,next)=>{
 });
 
 app.get('/auth',(req,res,next)=>{
+  console.log("start authentication");
  next();
 },passport.authenticate('auth0'));
 
@@ -142,7 +159,6 @@ app.get('/auth/logout',(req,res)=>{
 
 
  /* END ENDPOINTS */
-
 
 
 
