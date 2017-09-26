@@ -23,6 +23,7 @@
     "redux": "^3.7.2"
   },
   "devDependencies": {
+    "css-loader": "^0.28.7",
     "react-scripts": "1.0.13"
   },
   "scripts": {
