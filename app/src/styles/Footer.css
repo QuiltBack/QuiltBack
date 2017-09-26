@@ -1,9 +1,155 @@
 .main-footer-container {
   width: 100%;
   background:#F7F7F7;
-  border: black 1px solid;
   height: 235px;
   display: grid;
   grid-template-columns: repeat(16, 1fr);
-  font-family: myfont;
+}
+.footer-grid-one {
+  display: grid;
+  grid-area: 1 / 1 / span 1 / span 5;
+  grid-template: 40px 26px 16px 37px 77px 15px 24px / repeat(5, 1fr);
+}
+.footer-grid-two {
+  display: grid;
+  grid-area: 1 / 6 / span 1 / span 5;
+  grid-template: 40px 26px 8px 30px 16px 90px 78px / repeat(5, 1fr);
+}
+.footer-grid-three {
+  display: grid;
+  grid-area: 1 / 12 / span 1 / span 4;
+  grid-template: 40px 26px 16px 45px 108px / repeat(5, 1fr);
+}
+.footer-question {
+  display: grid;
+  grid-area: 2 / 2;
+  color: #D93044;	
+  width: 187px;
+  font-family: "FuturaRegular";	
+  font-size: 20px;	
+  line-height: 26px;
+}
+.footer-contact {
+  display: grid;
+  grid-area: 4 / 2;
+  width: 162px;
+  color: #ffffff;
+  border: 1.87px solid #D93044;	
+  border-radius: 93.69px;	
+  background-color: #D93044;
+  text-align: center;
+  align-content: center;
+  font-family: "FuturaMedium";
+  font-size: 16px;	
+  line-height: 21px;
+  outline: none;	
+}
+.footer-copyright {
+  display: grid;
+  grid-area: 6 / 2;
+  width: 318px;	
+  color: #D93044;	
+  font-family: "FuturaRegular";	
+  font-size: 12px;	
+  line-height: 15px;
+}
+
+/* second grid */
+.footer-stay-connected {
+  display: grid;
+  grid-area: 2 / 1;
+  width: 103px;
+  color: #D93044;	
+  font-family: "FuturaRegular";	
+  font-size: 20px;	
+  line-height: 26px;
+}
+.footer-receive-emails {
+  display: grid;
+  grid-area: 4 / 1;
+  width: 336px;	
+  color: #D93044;	
+  font-family: Georgia;	
+  font-size: 13px;	
+  line-height: 15px;
+}
+.footer-form {
+  display: grid;
+  grid-area: 6 / 1 / span 1 / span 4;
+  grid-template-columns: repeat(5, 1fr);
+}
+.footer-email-address {
+  height: 37px;
+  width: 90%;
+  display: grid;
+  grid-area: 1 / 1 / span 1 / span 3;
+  border: 1px solid #C2C2C2;	
+  border-radius: 2px;
+  color: black;	
+  font-family: "FuturaMedium";	
+  font-size: 16px;
+  line-height: 21px;
+  outline: none;
+  padding: 15px;
+}
+.footer-button-subscribe {
+  display: grid;
+  grid-area:  1 / 4 / span 2;
+  height: 37px;
+  width: 162px;	
+  border: 1.87px solid #D93044;	
+  border-radius: 93.69px;	
+  background-color: #D93044;
+  font-family: "FuturaMedium";
+  font-size: 16px;	
+  font-weight: 500;	
+  line-height: 21px;	
+  text-align: center;
+  color: white;
+  outline: none;
+}
+
+/* third grid */
+.footer-follow-us {
+  display: grid;
+  grid-area: 2 / 1;
+  height: 26px;	
+  width: 64px;	
+  color: #D93044;	
+  font-family: "FuturaRegular";	
+  font-size: 20px;	
+  line-height: 26px;
+}
+.footer-facebook {
+  display: grid;
+  grid-area:  4 / 1;
+  height: 45px;	
+  width: 45px;	
+  border: 1px solid #D93044;	
+  border-radius: 100px;
+  text-align: center;
+  align-content: center;
+}
+.footer-twitter {
+  display: grid;
+  grid-area: 4 / 2;
+  height: 45px;	
+  width: 45px;	
+  border: 1px solid #D93044;	
+  border-radius: 100px;
+  text-align: center;
+  align-content: center;
+}
+.footer-google {
+  display: grid;
+  grid-area: 4 / 3;
+  height: 45px;	
+  width: 45px;	
+  border: 1px solid #D93044;	
+  border-radius: 100px;
+  text-align: center;
+  align-content: center;
+}
+::-webkit-input-placeholder {
+  color: #C2C2C2;
 }
