@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Routes from '../Routes';
-
 import '../styles/App.css';
 import Login from './login/Login';
 import Header from './common/Header';
@@ -19,4 +18,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default App;

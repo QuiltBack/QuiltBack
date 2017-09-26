@@ -11,10 +11,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 
 
-var jQuery = require('jquery');
-var $ = jQuery;
-window.jQuery = require('jquery');
-var bootstrap = require('bootstrap/dist/js/bootstrap.min.js');
+
 
 ReactDOM.render(
 <BrowserRouter>

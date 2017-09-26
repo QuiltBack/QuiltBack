@@ -1,13 +1,38 @@
 @font-face {
-    font-family: "bloggerBold";
+    font-family: 'BloggerSansMedium';
+    font-weight: normal;
+    src: url('./fonts/BloggerSansMedium.ttf') format('truetype');
+}
+@font-face {
+    font-family: "BloggerSansBold";
     font-weight: bold;
-    src: url("./fonts/bloggersans_bold_macroman/Blogger_Sans-Bold-webfont.woff") format('woff');
+    src: url("./fonts/BloggerSansBold.ttf") format('truetype');
+}
+@font-face {
+    font-family: 'FuturaBold';
+    font-weight: bold;
+    src: url('./fonts/FuturaBold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'FuturaMedium';
+    font-weight: 500;
+    src: url('./fonts/FuturaMedium.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'FuturaRegular';
+    font-weight: normal;
+    src: url('./fonts/FuturaRegular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'GeorgiaRegular';
+    font-weight: normal;
+    src: url('./fonts/GeorgiaRegular.ttf') format('truetype');
 }
 
 .main-header-container {
     height: 75px;
     width: 100%;
-    background-color: green;
+    background-color: #ffffff;
     display: grid;
     grid-template-columns: repeat(16, 1fr);
     align-content: center;
@@ -17,11 +42,30 @@
     grid-area: 1 / 2 / span 1 / span 3;
     height: 57px;
     width: 100%;
+}
+#Q, #B {
+    color: #FFFFFF;	
+    font-family: "BloggerSansBold";	
+    font-size: 14.08px;	
+    font-weight: bold;	
+    line-height: 15px;	
+    text-align: center;
+}
+#QuiltBack {
     font-size: 36px;
     font-weight: 800;	
     letter-spacing: 2px;	
     line-height: 39px;
-    font-family: myfont;
-    color: #D93044;
+    font-family: "BloggerSansBold";
+    color: #D93044;    
 }
-
+.host-an-event-text {
+    font-family: "FuturaRegular";
+    color: #5E5E5E;	
+    font-size: 22px;	
+    line-height: 29px;
+    display: grid;
+    grid-column: 5 / span 2;
+    text-align: center;
+    align-content: center;
+}
