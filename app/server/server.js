@@ -3,19 +3,34 @@ massive = require('massive'),
 cors = require('cors'),
 bodyParser = require('body-parser'),
 session = require('express-session'),
-express=require('express'),
+
 passport=require('passport'),
 Auth0Strategy = require('passport-auth0'),
-env = require('dotenv).config({
- path:'./config/.env'}),
+env = require('dotenv').config({path:'./server/config/.env'}),
 
 path = require('path');
 
 
 const app = express();
-const port = 3000;
+const port = process.env.SERVER_PORT;
 app.use(cors());
 app.use(bodyParser.json());
+
+/* CorsOptions change this when production rolls */
+/* I think this is needed when backend and front end running on different ports */
+/* use cors(corsOptions) as middleware where authentication is needed - except auth/me */
+const corsOptions={
+  origin:function(origin,callback){
+    if (true) callback(null,true);
+    
+    else callback(new Error("Not Allowed by CORS"));
+      
+  },
+  credentials:true
+}
+/* END corsOptions */
+
+
 
 /* Initialize Massive */
 massive({
@@ -23,14 +38,18 @@ host:process.env.POSTGRES_HOST,
 port:process.env.POSTGRES_PORT,
 user:process.env.POSTGRES_USER,
 database:process.env.POSTGRES_DATABASE,
-password:process.env.POSTGRES_PASSWORD
-})
-.then(db=>{abb.set('db',db);
+password:process.env.POSTGRES_PASSWORD,
+
+},{scripts:__dirname + '/db'})
+.then(db=>{
+
+  app.set('db',db);
+  
 });
 
 /* END Initialize Massive */
 
-app.use(bodyParser.json);
+app.use(bodyParser.json());
 
 /* Setup Session Defaults and secret key */
 
@@ -52,9 +71,9 @@ app.use(express.static(__dirname + '/..build'));
 /* Passport Configuration */
 
 app.use(passport.initialize());
-app.user(passport.session());
+app.use(passport.session());
 passport.use(new Auth0Strategy({
-   domain:process.env.AUTH_DOMAIN
+   domain:process.env.AUTH_DOMAIN,
    clientID:process.env.AUTH_CLIENT_ID,
    clientSecret: process.env.AUTH_CLIENT_SECRET,
    callbackURL: process.env.AUTH_CALLBACK
@@ -64,15 +83,31 @@ passport.use(new Auth0Strategy({
       if (profile && profile.emails){
        if (profile.emails[0]) email=profile.emails.value;
       }
-
-      db.find_user("" +profile.identities[0].user_id])
+      if (!email && profile.email) email=profile.email;
+    
+  
+      db.find_user(["" +profile.identities[0].user_id])
         .then(user=>{
                 if (user[0]) return done(null,{id:user[0].id});
                 else {
-                   db.create_user([profile.displayName,email,profile.picture,"" + profile.identities[0].user_id)
+console.log(profile);
+console.log("END PROFILE");
+console.log(profile.displayName);
+console.log("email " + email);
+console.log(profile.name.given_name);
+console.log(profile.name.family_name);
+console.log( "" + profile.identities[0].user_id )
+
+ let given_name='';
+ let family_name='';
+if (profile.name && profile.name.given_name) given_name=profile.name.given_name;
+if (profile.name && profile.name.family_name) given_name=profile.name.family_name;
+
+                  /* username, email,first_name,last_name,auth_id */
+                   db.create_user([profile.displayName,email,profile.given_name,profile.family_name,"" + profile.identities[0].user_id])
                      .then(user=>{return done(null,{id:user[0].id})});
                     }
-:                  })
+                  })
         .catch(err=>{console.log("DB QUERY ERROR");console.log(err)});
  }));
 
@@ -90,8 +125,13 @@ passport.deserializeUser(function(obj,done){
       .then(user=>{return done(null,user[0]);})
   });
 
-/* HERE we may need cors(corsOptions)
-app.get('/auth/me',(req,res,next)=>{
+
+
+
+ /* ENDPOINTS */
+
+/* HERE we may need cors(corsOptions) */
+app.get('/auth/me',cors(corsOptions),(req,res,next)=>{
    if (!req.user){ 
     console.log("user not found");
     res.status(404).send('User not found');
@@ -103,13 +143,23 @@ app.get('/auth/me',(req,res,next)=>{
 });
 
 app.get('/auth',(req,res,next)=>{
+  console.log("start authentication");
  next();
 },passport.authenticate('auth0'));
 
 
- 
+app.get('/auth/logout',(req,res)=>{
+  req.logOut();
+  res.redirect(302,'http://localhost:' + process.env.SERVER_FRONTEND_PORT)
+})
 
 
 
 
-app.listen(port, () => console.log("I'm lookin at you!"))
+
+
+ /* END ENDPOINTS */
+
+
+
+app.listen(port, () => console.log(`listening on port ${port}`))
