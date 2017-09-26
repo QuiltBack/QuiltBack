@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import * as types from '../actions/ActionTypes';
 import initialState from './initialState'
 import {apiGetPosts} from '../services/apiServices';
@@ -22,4 +23,14 @@ export default function rootReducer(state=initialState,action){
  }
 
 
+=======
+import * as types from '../actions/actionTypes';
+import initialState from './initialState';
+
+export function general(state = initialState, action) {
+    switch(action.type) {
+        default: 
+            return Object.assign({}, state)
+    }
+>>>>>>> master
 }

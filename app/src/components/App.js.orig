@@ -12,8 +12,11 @@ class App extends Component {
       <div className="App">
         <Header/>
         <Login/>
-            {Routes}
+<<<<<<< HEAD
+        {Routes}
+=======
         <Footer/>
+>>>>>>> master
       </div>
     );
   }
