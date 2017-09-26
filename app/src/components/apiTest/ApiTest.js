@@ -1,32 +1,45 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getPosts} from '../../reducers/generalReducer';
+import {getPosts,getEvents} from '../../reducers/generalReducer';
 
 import 'font-awesome/css/font-awesome.min.css';
 
 
 
 class ApiTest extends Component{
+ testType='events';
+
 componentDidMount() {
 
-    if (this.props && this.props.getPosts && this.props.general && this.props.general.posts.length < 1) {
-
+    if (this.props && this.props.getPosts && this.props.general ) {
+      if (this.testType==='posts' && this.props.general.posts.length < 1){
         this.props.getPosts();
+      }
+      if (this.testType==='events' && this.props.general.events.length<1){
+          this.props.getEvents();
+      }
     }
+    
 
 }
 componentWillReceiveProps(ownProps) {
-    if (this.props && this.props.getPosts && this.props.general && this.props.general.posts.length < 1) {
-
-
+   
+    if (this.props && this.props.getPosts && this.props.general ) {
+      if (this.testType==='posts' && this.props.general.posts.length < 1){
         this.props.getPosts();
+      }
+      if (this.testType==='events' && this.props.general.events.length<1){
+          this.props.getEvents();
+      }
     }
+    
 
 }
 
  render(){
    let posts='';
-   if (this.props && this.props.general.posts){
+   let events='';
+   if (this.props && this.props.general.posts && this.testType==='posts'){
     posts = this.props.general.posts.map((post,index)=>{
       return (<div className="post" key={index}>
           
@@ -36,14 +49,36 @@ componentWillReceiveProps(ownProps) {
       </div>)
    })
     
+}
+
+
+   if (this.props && this.props.general.posts && this.testType==='events'){
+    events = this.props.general.events.map((event,index)=>{
+      return (<div className="event" key={index}>
+          
+           <h1>{event.event_title}</h1>
+           <p>{event.event_description}</p>
+
+      </div>)
+   })
+    
    }
+
+
    return (
         <div className="apiTest">
+
+           <div className="events">
+             <h1>Events</h1>
+             {events}
+           </div>
 
            <div className="posts">
              <h1>Posts</h1>
              {posts}
            </div>
+
+
         </div>
     )
  }
@@ -63,5 +98,6 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default connect(mapStateToProps, {
-    getPosts: getPosts
+    getPosts: getPosts,
+    getEvents:getEvents
 })(ApiTest);

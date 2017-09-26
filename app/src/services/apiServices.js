@@ -22,3 +22,22 @@ export function apiGetPosts(){
 
 
 
+export function apiGetEvents(){
+    console.log("inside apiGetEvents");
+    return api.get(localApiUrl + '/api/events')
+              .then(response=>{
+                  console.log("EVENTS");
+                  console.log(response);
+                  return response.data;
+              })
+              .catch(err=>{
+              console.log("apiGetEvents error");
+              console.log(err);
+
+            })
+           
+}
+
+
+
+
