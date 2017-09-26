@@ -27,6 +27,7 @@
     "redux-promise-middleware": "^4.4.1"
   },
   "devDependencies": {
+    "css-loader": "^0.28.7",
     "react-scripts": "1.0.13"
   },
   "scripts": {
