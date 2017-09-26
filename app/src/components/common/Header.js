@@ -45,6 +45,16 @@ const Header = () => {
                     <div className='host-an-event-text'>
                         Host an Event
                     </div>
+                    <div className='find-an-event'>
+                        Find an Event
+                    </div>
+                    <div className="blog">
+                        Blog
+                    </div>
+                    <form className="bar" ><input placeholder="Search"></input></form>
+                    <div className="signup-login">
+                        signup / login
+                    </div>
                 </nav>
             </div>
         )

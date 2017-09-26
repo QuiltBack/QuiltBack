@@ -1,78 +1,30 @@
 @font-face {
+    font-family: 'BloggerSansMedium';
+    font-weight: normal;
+    src: url('./fonts/BloggerSansMedium.ttf') format('truetype');
+}
+@font-face {
     font-family: "BloggerSansBold";
     font-weight: bold;
-    src: url("./fonts/bloggersans_bold_macroman/Blogger_Sans-Bold-webfont.woff") format('woff');
+    src: url("./fonts/BloggerSansBold.ttf") format('truetype');
+}
+@font-face {
+    font-family: 'FuturaBold';
+    font-weight: bold;
+    src: url('./fonts/FuturaBold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'FuturaMedium';
+    font-weight: 500;
+    src: url('./fonts/FuturaMedium.ttf') format('truetype');
 }
 @font-face {
     font-family: 'FuturaRegular';
-    font-weight: bold;
+    font-weight: normal;
     src: url('./fonts/FuturaRegular.ttf') format('truetype');
 }
-.main-header-container {
-    height: 75px;
-    width: 100%;
-    background-color: #ffffff;
-    display: grid;
-    grid-template-columns: repeat(16, 1fr);
-    align-content: center;
-    text-align: center;
-}
-.qb-small-logo {
-    display: grid;
-    grid-area: 1 / 2 / span 1 / span 3;
-    height: 57px;
-    width: 100%;
-}
-#Q, #B {
-    color: #FFFFFF;	
-    font-family: "BloggerSansBold";	
-    font-size: 14.08px;	
-    font-weight: bold;	
-    line-height: 15px;	
-    text-align: center;
-}
-#QuiltBack {
-    font-size: 36px;
-    font-weight: 800;	
-    letter-spacing: 2px;	
-    line-height: 39px;
-    font-family: "BloggerSansBold";
-    color: #D93044;    
-}
-.host-an-event-text {
-    font-family: "FuturaRegular";
-    color: #5E5E5E;	
-    font-size: 22px;	
-    line-height: 29px;
-    display: grid;
-    grid-column: 5 / span 2;
-    text-align: center;
-    align-content: center;
-}
-.find-an-event {
-    display: grid;
-    grid-column: 7 / span 2;
-	color: #5E5E5E;
-	font-family: "FuturaRegular";
-	font-size: 22px;
-    line-height: 29px;
-    align-content: center;
-    text-align: center;
-}
-.blog {
-    display: grid;
-    grid-column: 9 / span 2;
-	color: #5E5E5E;
-	font-family: "FuturaRegular";
-	font-size: 22px;
-    line-height: 29px;
-    text-align: center;
-    align-content: center;
-}
-.bar {
-	height: 24px;
-	border-radius: 13.04px;
-    background-color: #F7F7F7;
-    align-self: center;
-    display: grid;
+@font-face {
+    font-family: 'GeorgiaRegular';
+    font-weight: normal;
+    src: url('./fonts/GeorgiaRegular.ttf') format('truetype');
 }
