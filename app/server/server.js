@@ -3,12 +3,13 @@ massive = require('massive'),
 cors = require('cors'),
 bodyParser = require('body-parser'),
 session = require('express-session'),
-
+CTRL = require('./controllers/controller.js')
 passport=require('passport'),
 Auth0Strategy = require('passport-auth0'),
 env = require('dotenv').config({path:'./server/config/.env'}),
 
 path = require('path');
+
 
 
 const app = express();
@@ -21,8 +22,10 @@ app.use(bodyParser.json());
 /* use cors(corsOptions) as middleware where authentication is needed - except auth/me */
 const corsOptions={
   origin:function(origin,callback){
-    if (true) callback(null,true);
-    
+    if (true){
+       console.log("origin is " +origin);
+      callback(null,true);
+    }
     else callback(new Error("Not Allowed by CORS"));
       
   },
@@ -81,34 +84,37 @@ passport.use(new Auth0Strategy({
       const db = app.get('db');
       let email='';
       if (profile && profile.emails){
-       if (profile.emails[0]) email=profile.emails.value;
+       if (profile.emails[0]) email=profile.emails[0].value;
       }
       if (!email && profile.email) email=profile.email;
     
   
-      db.find_user(["" +profile.identities[0].user_id])
+      db.findUser(["" +profile.identities[0].user_id])
         .then(user=>{
-                if (user[0]) return done(null,{id:user[0].id});
+
+                if (user[0]){
+                console.log("user found");
+                return done(null,{id:user[0].id});
+                }
                 else {
 console.log(profile);
-console.log("END PROFILE");
-console.log(profile.displayName);
-console.log("email " + email);
-console.log(profile.name.given_name);
-console.log(profile.name.family_name);
-console.log( "" + profile.identities[0].user_id )
 
  let given_name='';
  let family_name='';
-if (profile.name && profile.name.given_name) given_name=profile.name.given_name;
-if (profile.name && profile.name.family_name) given_name=profile.name.family_name;
+if (profile.name && profile.name.givenName) given_name=profile.name.givenName;
+if (profile.name && profile.name.familyName) given_name=profile.name.familyName;
+
 
                   /* username, email,first_name,last_name,auth_id */
-                   db.create_user([profile.displayName,email,profile.given_name,profile.family_name,"" + profile.identities[0].user_id])
-                     .then(user=>{return done(null,{id:user[0].id})});
+
+               
+                   db.createUser([profile.displayName,email,profile.given_name,profile.family_name,"" + profile.identities[0].user_id])
+                     .then(user=>{return done(null,{id:user[0].id})})
+                     .catch(err=>{console.log("CREATE USER ERROR");console.log(err);});
                     }
                   })
-        .catch(err=>{console.log("DB QUERY ERROR");console.log(err)});
+                .catch(err=>{console.log("DB QUERY ERROR");console.log(err)});
+      
  }));
 
 app.get ('/auth/callback',passport.authenticate('auth0',{
@@ -121,7 +127,7 @@ passport.serializeUser(function(user,done){
 });
 
 passport.deserializeUser(function(obj,done){
-   app.get('db').find_session_user([obj.id])
+   app.get('db').findSessionUser([obj.id])
       .then(user=>{return done(null,user[0]);})
   });
 
@@ -156,6 +162,7 @@ app.get('/auth/logout',(req,res)=>{
 
 
 
+app.get('/api/posts',cors(corsOptions),CTRL.getPosts);
 
 
  /* END ENDPOINTS */
