@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../styles/App.css';
 import Login from './login/Login';
 import Header from './common/Header';
-
+import Footer from './common/Footer';
 
 class App extends Component {
   render() {
@@ -10,6 +10,7 @@ class App extends Component {
       <div className="App">
         <Header/>
         <Login/>
+        <Footer/>
       </div>
     );
   }
