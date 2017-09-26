@@ -1,13 +1,34 @@
 @font-face {
+    font-family: 'BloggerSansMedium';
+    font-weight: normal;
+    src: url('./fonts/BloggerSansMedium.ttf') format('truetype');
+}
+@font-face {
     font-family: "BloggerSansBold";
     font-weight: bold;
-    src: url("./fonts/bloggersans_bold_macroman/Blogger_Sans-Bold-webfont.woff") format('woff');
+    src: url("./fonts/BloggerSansBold.ttf") format('truetype');
+}
+@font-face {
+    font-family: 'FuturaBold';
+    font-weight: bold;
+    src: url('./fonts/FuturaBold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'FuturaMedium';
+    font-weight: 500;
+    src: url('./fonts/FuturaMedium.ttf') format('truetype');
 }
 @font-face {
     font-family: 'FuturaRegular';
-    font-weight: bold;
-    src: url('./fonts/futura_regular/FuturaRegular.ttf') format('truetype');
+    font-weight: normal;
+    src: url('./fonts/FuturaRegular.ttf') format('truetype');
 }
+@font-face {
+    font-family: 'GeorgiaRegular';
+    font-weight: normal;
+    src: url('./fonts/GeorgiaRegular.ttf') format('truetype');
+}
+
 .main-header-container {
     height: 75px;
     width: 100%;
