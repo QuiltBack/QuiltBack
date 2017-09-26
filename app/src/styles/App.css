@@ -1,0 +1,16 @@
+.main-header-container {
+    height: 75px;
+    width: 100%;
+    background-color: green;
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    align-content: center;
+}
+.qb-small-logo {
+    display: grid;
+    grid-area: 1 / 2 / span 1 / span 3;
+    height: 57px;
+    width: 100%;
+    font-family: "Blogger_Sans-Medium";	font-size: 36px;	font-weight: bold;	letter-spacing: 2px;	line-height: 39px;	text-align: center;
+}
+

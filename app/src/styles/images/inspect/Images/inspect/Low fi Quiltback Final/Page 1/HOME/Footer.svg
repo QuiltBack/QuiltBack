@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1440px" height="235px" viewBox="0 0 1440 235" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Footer</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="HOME" transform="translate(0.000000, -2314.000000)">
+            <g id="Footer" transform="translate(0.000000, 2314.000000)">
+                <g stroke-width="1" fill-rule="evenodd">
+                    <rect id="Rectangle-21" fill="#F7F7F7" x="0" y="0" width="1440" height="235"></rect>
+                    <g id="Facebook-round-small" transform="translate(1003.000000, 82.000000)">
+                        <g>
+                            <g id="Social" transform="translate(17.857143, 15.142857)" fill-rule="nonzero" fill="#D93044">
+                                <path d="M5.33333333,5.12820513 L5.33333333,3.60176282 C5.33333333,2.91266026 5.49166667,2.56410256 6.60416667,2.56410256 L8,2.56410256 L8,0 L5.67083333,0 C2.81666667,0 1.875,1.25801282 1.875,3.41746795 L1.875,5.12820513 L0,5.12820513 L0,7.69230769 L1.875,7.69230769 L1.875,15.3846154 L5.33333333,15.3846154 L5.33333333,7.69230769 L7.68333333,7.69230769 L8,5.12820513 L5.33333333,5.12820513 Z" id="Shape"></path>
+                            </g>
+                            <rect id="Rectangle-2" stroke="#D93044" x="0.5" y="0.5" width="44" height="44" rx="22"></rect>
+                        </g>
+                    </g>
+                    <g id="Twitter-round-small" transform="translate(1093.000000, 82.000000)">
+                        <g>
+                            <path d="M30.8974609,18.2640856 C30.2744141,18.5398017 29.6083984,18.7259996 28.9065755,18.8119371 C29.6227214,18.3822496 30.1741536,17.7019111 30.4319661,16.8926663 C29.7623698,17.2901272 29.0211589,17.5801663 28.2298177,17.7341376 C27.5960286,17.0573798 26.6936849,16.6348538 25.6982422,16.6348538 C23.7825521,16.6348538 22.2320964,18.1888902 22.2320964,20.1045803 C22.2320964,20.3767158 22.2607422,20.6416897 22.3216146,20.8959215 C19.4391276,20.7526923 16.882487,19.3705309 15.1744792,17.2686428 C14.8772786,17.7806871 14.7054036,18.3786689 14.7054036,19.0124579 C14.7054036,20.2155829 15.3212891,21.2790595 16.2522786,21.9021064 C15.679362,21.8877835 15.1422526,21.7302314 14.6767578,21.4688382 C14.6767578,21.4831611 14.6767578,21.497484 14.6767578,21.5118069 C14.6767578,23.1947496 15.8727214,24.5948147 17.4589844,24.9134996 C17.1689453,24.9922757 16.8610026,25.0352444 16.5458984,25.0352444 C16.3238932,25.0352444 16.1054688,25.01376 15.8942057,24.9707913 C16.3346354,26.349372 17.6165365,27.3519762 19.1347656,27.380622 C17.9495443,28.3116116 16.4527995,28.8666246 14.8271484,28.8666246 C14.5478516,28.8666246 14.2721354,28.848721 14,28.8164944 C15.5289714,29.8119371 17.3515625,30.3848538 19.3066406,30.3848538 C25.6910807,30.3848538 29.1787109,25.0961168 29.1787109,20.5092027 C29.1787109,20.3588121 29.1751302,20.2084215 29.1679688,20.0616116 C29.8447266,19.5710517 30.4319661,18.9623277 30.8974609,18.2640856 Z" id="Shape" fill="#D93044" fill-rule="nonzero"></path>
+                            <rect id="Rectangle-2" stroke="#D93044" x="0.5" y="0.5" width="44" height="44" rx="22"></rect>
+                        </g>
+                    </g>
+                    <g id="Google-round-small" transform="translate(1183.000000, 82.000000)">
+                        <g>
+                            <g id="Social" transform="translate(14.000000, 17.000000)" fill="#D93044">
+                                <path d="M5.58454311,4.73564686 L5.58454311,6.62990561 L8.75177685,6.62990561 C8.62413015,7.44285832 7.7944266,9.01351453 5.58454311,9.01351453 C3.67782054,9.01351453 2.12212638,7.45075106 2.12212638,5.52492134 C2.12212638,3.59909161 3.67782054,2.03632815 5.58454311,2.03632815 C6.66954006,2.03632815 7.39553066,2.49410735 7.81038244,2.88874459 L9.326187,1.44437229 C8.35288091,0.544599389 7.09236975,0 5.58454311,0 C2.49708856,0 0,2.47042911 0,5.52492134 C0,8.57941356 2.49708856,11.0498427 5.58454311,11.0498427 C8.80762228,11.0498427 10.9457045,8.80830316 10.9457045,5.65120525 C10.9457045,5.288139 10.9058149,5.01189293 10.8579474,4.73564686 L5.58454311,4.73564686 L5.58454311,4.73564686 Z" id="Shape"></path>
+                                <polyline id="Shape" points="17.5514212 4.73564686 15.9558375 4.73564686 15.9558375 3.15709791 14.3602537 3.15709791 14.3602537 4.73564686 12.76467 4.73564686 12.76467 6.31419582 14.3602537 6.31419582 14.3602537 7.89274477 15.9558375 7.89274477 15.9558375 6.31419582 17.5514212 6.31419582"></polyline>
+                            </g>
+                            <rect id="Rectangle-2" stroke="#D93044" x="0.5" y="0.5" width="44" height="44" rx="22"></rect>
+                        </g>
+                    </g>
+                </g>
+                <g id="Text-area" transform="translate(462.000000, 105.000000)" stroke-width="1" fill-rule="evenodd">
+                    <g>
+                        <rect id="Rectangle" stroke="#C2C2C2" x="0.5" y="0.5" width="245" height="36" rx="2"></rect>
+                        <text id="Email-Address" font-family="Futura-Medium, Futura" font-size="16" font-weight="400" fill="#C2C2C2">
+                            <tspan x="15" y="24">Email Adress</tspan>
+                        </text>
+                    </g>
+                </g>
+                <text id="Receive-e-mails-when" font-family="Georgia" font-size="13" font-weight="normal" fill="#D93044">
+                    <tspan x="462" y="86">Receive e-mails when a new event is hosted or a new blog posted.</tspan>
+                </text>
+                <text id="QuiltBack-is-a-501(c" font-family="FuturaCondMedium, Futura" font-size="12" font-weight="normal" fill="#D93044">
+                    <tspan x="102" y="208">QuiltBack is a 501(c)(3) not-for-profit organization. Copyright QuiltBack, 2017.</tspan>
+                </text>
+                <text id="Have-a-question?-Com" font-family="FuturaCondMedium, Futura" font-size="20" font-weight="normal" fill="#D93044">
+                    <tspan x="102" y="61">Have a question? Comment?</tspan>
+                </text>
+                <g id="READ-MORE-SYMBOL" transform="translate(102.000000, 82.000000)" stroke-width="1" fill-rule="evenodd">
+                    <g id="Group-2">
+                        <rect id="Rectangle-19" fill="#D93044" x="0" y="0" width="162" height="37" rx="18.5"></rect>
+                        <text id="READ-MORE" font-family="Futura-Medium, Futura" font-size="16" font-weight="400" fill="#FFFFFF">
+                            <tspan x="29.8476562" y="25.4868421">CONTACT US</tspan>
+                        </text>
+                    </g>
+                </g>
+                <text id="Stay-Connected" font-family="FuturaCondMedium, Futura" font-size="20" font-weight="normal" fill="#D93044">
+                    <tspan x="462" y="61">Stay Connected</tspan>
+                </text>
+                <g id="READ-MORE-SYMBOL" transform="translate(732.000000, 105.000000)" stroke-width="1" fill-rule="evenodd">
+                    <g id="Group-2">
+                        <rect id="Rectangle-19" fill="#D93044" x="0" y="0" width="162" height="37" rx="18.5"></rect>
+                        <text id="READ-MORE" font-family="Futura-Medium, Futura" font-size="16" font-weight="400" fill="#FFFFFF">
+                            <tspan x="38.9960937" y="25.4868421">SUBSCRIBE</tspan>
+                        </text>
+                    </g>
+                </g>
+                <text id="Follow-Us" font-family="FuturaCondMedium, Futura" font-size="20" font-weight="normal" fill="#D93044">
+                    <tspan x="1002" y="61">Follow Us</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

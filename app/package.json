@@ -2,7 +2,6 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
-  "proxy": "159.203.240.133:5432",
   "dependencies": {
     "axios": "^0.16.2",
     "body-parser": "^1.18.2",
@@ -20,6 +19,7 @@
     "redux": "^3.7.2"
   },
   "devDependencies": {
+    "css-loader": "^0.28.7",
     "react-scripts": "1.0.13"
   },
   "scripts": {
