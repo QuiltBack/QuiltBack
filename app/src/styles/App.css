@@ -1,3 +1,9 @@
+@font-face {
+    font-family: "bloggerBold";
+    font-weight: bold;
+    src: url("./fonts/bloggersans_bold_macroman/Blogger_Sans-Bold-webfont.woff") format('woff');
+}
+
 .main-header-container {
     height: 75px;
     width: 100%;
@@ -11,6 +17,11 @@
     grid-area: 1 / 2 / span 1 / span 3;
     height: 57px;
     width: 100%;
-    font-family: "Blogger_Sans-Medium";	font-size: 36px;	font-weight: bold;	letter-spacing: 2px;	line-height: 39px;	text-align: center;
+    font-size: 36px;
+    font-weight: 800;	
+    letter-spacing: 2px;	
+    line-height: 39px;
+    font-family: myfont;
+    color: #D93044;
 }
 
