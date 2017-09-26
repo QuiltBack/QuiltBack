@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'blogger_sansbold';
+    src: url('Blogger_Sans-Bold-webfont.eot');
+    src: url('Blogger_Sans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Blogger_Sans-Bold-webfont.woff2') format('woff2'),
+         url('Blogger_Sans-Bold-webfont.woff') format('woff'),
+         url('Blogger_Sans-Bold-webfont.ttf') format('truetype'),
+         url('Blogger_Sans-Bold-webfont.svg#blogger_sansbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+

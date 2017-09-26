@@ -4,5 +4,6 @@
   border: black 1px solid;
   height: 235px;
   display: grid;
-  grid-template-columns: repeat(16, 1fr) 
+  grid-template-columns: repeat(16, 1fr);
+  font-family: myfont;
 }

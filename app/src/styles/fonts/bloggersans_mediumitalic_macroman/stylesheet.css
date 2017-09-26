@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'blogger_sansmedium_italic';
+    src: url('Blogger_Sans-Medium_Italic-webfont.eot');
+    src: url('Blogger_Sans-Medium_Italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Blogger_Sans-Medium_Italic-webfont.woff2') format('woff2'),
+         url('Blogger_Sans-Medium_Italic-webfont.woff') format('woff'),
+         url('Blogger_Sans-Medium_Italic-webfont.ttf') format('truetype'),
+         url('Blogger_Sans-Medium_Italic-webfont.svg#blogger_sansmedium_italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
