@@ -5,7 +5,7 @@ const Header = () => {
         return (
             <div>
                <nav className="main-header-container">
-               <svg className="qb-small-logo"width="238px" height="57px" viewBox="0 0 238 57" version="1.1" xmlns="http://www.w3.org/2000/svg">
+               <svg className="qb-small-logo" width="238px" height="57px" viewBox="0 0 238 57" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         
                         <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                             <g id="HEADER-FOR-REAL" transform="translate(-102.000000, -9.000000)">
@@ -42,6 +42,9 @@ const Header = () => {
                             </g>
                         </g>
                     </svg>
+                    <div className='host-an-event-text'>
+                        Host an Event
+                    </div>
                 </nav>
             </div>
         )
