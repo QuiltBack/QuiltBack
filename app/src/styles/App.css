@@ -6,7 +6,7 @@
 @font-face {
     font-family: 'FuturaRegular';
     font-weight: bold;
-    src: url('./fonts/futura_regular/FuturaRegular.ttf') format('truetype');
+    src: url('./fonts/FuturaRegular.ttf') format('truetype');
 }
 .main-header-container {
     height: 75px;
@@ -15,6 +15,7 @@
     display: grid;
     grid-template-columns: repeat(16, 1fr);
     align-content: center;
+    text-align: center;
 }
 .qb-small-logo {
     display: grid;
@@ -47,4 +48,31 @@
     grid-column: 5 / span 2;
     text-align: center;
     align-content: center;
+}
+.find-an-event {
+    display: grid;
+    grid-column: 7 / span 2;
+	color: #5E5E5E;
+	font-family: "FuturaRegular";
+	font-size: 22px;
+    line-height: 29px;
+    align-content: center;
+    text-align: center;
+}
+.blog {
+    display: grid;
+    grid-column: 9 / span 2;
+	color: #5E5E5E;
+	font-family: "FuturaRegular";
+	font-size: 22px;
+    line-height: 29px;
+    text-align: center;
+    align-content: center;
+}
+.bar {
+	height: 24px;
+	border-radius: 13.04px;
+    background-color: #F7F7F7;
+    align-self: center;
+    display: grid;
 }
