@@ -1,3 +1,4 @@
 export default {
-    someData: "Yeah Tiny Rick!"
+    someData: "Yeah Tiny Rick!",
+    posts:[]
 }
