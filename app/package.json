@@ -13,7 +13,6 @@
     "express-session": "^1.15.5",
     "font-awesome": "^4.7.0",
     "greensock": "^1.20.2",
-    "jquery": "^3.2.1",
     "massive": "^4.2.0",
     "passport": "^0.4.0",
     "passport-auth0": "^0.6.0",
@@ -27,7 +26,6 @@
     "redux-promise-middleware": "^4.4.1"
   },
   "devDependencies": {
-    "css-loader": "^0.28.7",
     "react-scripts": "1.0.13"
   },
   "scripts": {
