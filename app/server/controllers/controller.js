@@ -23,8 +23,9 @@ module.exports ={
         }
         else{
            
-            req.app.get("db").tables.map(table =>console.log("TABLE "  + table.name) );
-           
+            console.log(req.app.get("db"));
+            console.log("debug1");
+            
             req.app.get("db").getAllEvents()
                    .then(response=>{
                        res.status(200).json(response);
