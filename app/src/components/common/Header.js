@@ -1,7 +1,17 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-const Header = () => {
-
+class Header extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            searchInputValue: ''
+        };
+        this.handleChange = this.handleChange.bind(this);
+    };
+    handleChange(text) {
+        this.setState({searchInputValue: text})
+    };
+    render() {
         return (
             <div>
                <nav className="main-header-container">
@@ -51,14 +61,14 @@ const Header = () => {
                     <div className="blog">
                         Blog
                     </div>
-                    <form className="bar" ><input placeholder="Search"></input></form>
+                    <form className="bar" ><input onChange={(e) => {this.handleChange(e.target.value)}} placeholder="Search"></input></form>
                     <div className="signup-login">
-                        signup / login
+                        Signup/Login
                     </div>
                 </nav>
             </div>
-        )
-    
+        );
+    };
 
-}
+};
 export default Header;
