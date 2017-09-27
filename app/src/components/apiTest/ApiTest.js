@@ -1,49 +1,23 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getPosts} from '../../reducers/generalReducer';
-
+import {Switch,Route} from 'react-router-dom';
+import ApiPosts from './ApiPosts';
+import ApiEvents from './ApiEvents';
 import 'font-awesome/css/font-awesome.min.css';
 
 
-
 class ApiTest extends Component{
-componentDidMount() {
-
-    if (this.props && this.props.getPosts && this.props.general && this.props.general.posts.length < 1) {
-
-        this.props.getPosts();
-    }
-
-}
-componentWillReceiveProps(ownProps) {
-    if (this.props && this.props.getPosts && this.props.general && this.props.general.posts.length < 1) {
-
-
-        this.props.getPosts();
-    }
-
-}
 
  render(){
-   let posts='';
-   if (this.props && this.props.general.posts){
-    posts = this.props.general.posts.map((post,index)=>{
-      return (<div className="post" key={index}>
-          
-           <h1>{post.post_title}</h1>
-           <p>{post.post_text}</p>
+   
 
-      </div>)
-   })
-    
-   }
+
    return (
         <div className="apiTest">
+api TESTS
+        <Route path="/apitest/posts" component={ApiPosts} />
+        <Route path="/apitest/events" component={ApiEvents} />
 
-           <div className="posts">
-             <h1>Posts</h1>
-             {posts}
-           </div>
         </div>
     )
  }
@@ -63,5 +37,4 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default connect(mapStateToProps, {
-    getPosts: getPosts
 })(ApiTest);
