@@ -165,6 +165,10 @@ app.get('/auth/logout',(req,res)=>{
 app.get('/api/posts',cors(corsOptions),CTRL.getPosts);
 
 
+
+
+app.get('/api/events',cors(corsOptions),CTRL.getEvents);
+
  /* END ENDPOINTS */
 
 
