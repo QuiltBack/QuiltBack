@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 class Header extends Component {
     constructor(props) {
@@ -15,8 +16,8 @@ class Header extends Component {
         return (
             <div>
                <nav className="main-header-container">
-               <svg className="qb-small-logo" width="238px" height="57px" viewBox="0 0 238 57" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                        
+                    <Link className="qb-small-logo" to='/'>
+                    <svg width="238px" height="57px" viewBox="0 0 238 57" version="1.1" xmlns="http://www.w3.org/2000/svg">    
                         <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                             <g id="HEADER-FOR-REAL" transform="translate(-102.000000, -9.000000)">
                                 <g id="Group">
@@ -52,19 +53,18 @@ class Header extends Component {
                             </g>
                         </g>
                     </svg>
-                    <div className='host-an-event-text'>
+                    </Link>
+                    <Link to='/createEvent' className='host-an-event-text'>
                         Host an Event
-                    </div>
-                    <div className='find-an-event'>
+                    </Link>
+                    <Link to='/events' className='find-an-event'>
                         Find an Event
-                    </div>
-                    <div className="blog">
+                    </Link>
+                    <Link to='/blog' className="blog">
                         Blog
-                    </div>
+                    </Link>
                     <form className="bar" ><input onChange={(e) => {this.handleChange(e.target.value)}} placeholder="Search"></input></form>
-                    <div className="signup-login">
-                        Signup/Login
-                    </div>
+                    <a className="signup-login" href="http://localhost:3001/auth">Login/signup</a>
                 </nav>
             </div>
         );
