@@ -1,0 +1,33 @@
+.eventImage{
+    width:100px;
+    height:100px;
+}
+.eventLabel {
+
+font-weight:600;
+padding-right:16px;
+}
+.eventDescription {
+    width:80vw;
+}
+.eventBanner{
+   
+height:300px;
+    display:grid;
+    grid-template-columns: 40% 40%;
+   
+
+   border:2px solid blue; 
+}
+.eventBannerImage{
+   border:1px solid red;
+    grid-column-start:1;
+    grid-column-end:1;
+    grid-row:1;
+}
+.eventBannerInfo{
+    
+    grid-column-start:1;
+    grid-column-end:2;
+     grid-row:1;
+}

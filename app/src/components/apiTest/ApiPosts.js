@@ -43,7 +43,8 @@ componentWillReceiveProps(ownProps) {
    console.log("general");
    console.log(this.props.general);
    console.log(this.props.general.posts);
-   if (this.props && this.props.general.posts && this.testType==='posts'){
+   if (this.props && this.props.general.posts ){
+  
     posts = this.props.general.posts.map((post,index)=>{
       console.log(post);
       return (<div className="post" key={index}>
