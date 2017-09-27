@@ -1,0 +1,15 @@
+.events-page-background {
+  height: 400px;
+  width: 100%;
+  background: url('./images/events_placeholder.jpg') no-repeat center bottom fixed;
+  background-size: cover;
+  display: grid;
+  align-content: center;
+}
+.events-page-title {
+  color: #FFFFFF;	
+  font-family: "FuturaBold";	
+  font-size: 72px;	
+  line-height: 96px;	
+  text-align: center;
+}

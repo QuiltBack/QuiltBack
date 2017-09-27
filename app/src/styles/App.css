@@ -11,12 +11,12 @@
 @font-face {
     font-family: 'FuturaBold';
     font-weight: bold;
-    src: url('./fonts/FuturaBold.ttf') format('truetype');
+    src: url('./fonts/FuturaBold.otf') format('opentype');
 }
 @font-face {
     font-family: 'FuturaMedium';
     font-weight: 500;
-    src: url('./fonts/FuturaMedium.ttf') format('truetype');
+    src: url('./fonts/FuturaMedium.otf') format('opentype');
 }
 @font-face {
     font-family: 'FuturaRegular';
