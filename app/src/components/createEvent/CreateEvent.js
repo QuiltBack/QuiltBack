@@ -1,11 +1,11 @@
 import React from 'react';
 
-const BlogPage = () => {
+const CreateEvent = () => {
   return (
     <section>
-      Blog
+      create event
     </section>
   )
 }
 
-export default BlogPage;
+export default CreateEvent;
