@@ -7,18 +7,19 @@
 }
 .footer-grid-one {
   display: grid;
-  grid-area: 1 / 1 / span 1 / span 5;
-  grid-template: 40px 26px 16px 37px 77px 15px 24px / repeat(5, 1fr);
+  grid-area: 1 / 2 / span 1 / span 4;
+  grid-template: 40px 26px 16px 37px 77px 15px 24px / repeat(4, 1fr);
 }
 .footer-grid-two {
   display: grid;
-  grid-area: 1 / 6 / span 1 / span 5;
-  grid-template: 40px 26px 8px 30px 16px 90px 78px / repeat(5, 1fr);
+  grid-area: 1 / 6 / span 1 / span 6;
+  grid-template: 40px 26px 8px 30px 16px 90px 78px / repeat(6, 1fr);
 }
 .footer-grid-three {
   display: grid;
-  grid-area: 1 / 12 / span 1 / span 4;
-  grid-template: 40px 26px 16px 45px 108px / repeat(5, 1fr);
+  grid-area: 1 / 12 / span 1 / span 3;
+  grid-template: 40px 26px 16px 45px 108px / repeat(3, 45px);
+  grid-gap: 0 45px;
 }
 .footer-question {
   display: grid;
@@ -82,7 +83,7 @@
   height: 37px;
   width: 90%;
   display: grid;
-  grid-area: 1 / 1 / span 1 / span 3;
+  grid-area: 1 / 1 / span 1 / span 4;
   border: 1px solid #C2C2C2;	
   border-radius: 2px;
   color: black;	
@@ -94,7 +95,7 @@
 }
 .footer-button-subscribe {
   display: grid;
-  grid-area:  1 / 4 / span 2;
+  grid-area:  1 / 5 / span 2;
   height: 37px;
   width: 162px;	
   border: 1.87px solid #D93044;	

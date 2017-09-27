@@ -1,12 +1,23 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
-const Header = () => {
-
+class Header extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            searchInputValue: ''
+        };
+        this.handleChange = this.handleChange.bind(this);
+    };
+    handleChange(text) {
+        this.setState({searchInputValue: text})
+    };
+    render() {
         return (
             <div>
                <nav className="main-header-container">
-               <svg className="qb-small-logo" width="238px" height="57px" viewBox="0 0 238 57" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                        
+                    <Link className="qb-small-logo" to='/'>
+                    <svg width="238px" height="57px" viewBox="0 0 238 57" version="1.1" xmlns="http://www.w3.org/2000/svg">    
                         <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                             <g id="HEADER-FOR-REAL" transform="translate(-102.000000, -9.000000)">
                                 <g id="Group">
@@ -42,23 +53,22 @@ const Header = () => {
                             </g>
                         </g>
                     </svg>
-                    <div className='host-an-event-text'>
+                    </Link>
+                    <Link to='/createEvent' className='host-an-event-text'>
                         Host an Event
-                    </div>
-                    <div className='find-an-event'>
+                    </Link>
+                    <Link to='/events' className='find-an-event'>
                         Find an Event
-                    </div>
-                    <div className="blog">
+                    </Link>
+                    <Link to='/blog' className="blog">
                         Blog
-                    </div>
-                    <form className="bar" ><input placeholder="Search"></input></form>
-                    <div className="signup-login">
-                        signup / login
-                    </div>
+                    </Link>
+                    <form className="bar" ><input onChange={(e) => {this.handleChange(e.target.value)}} placeholder="Search"></input></form>
+                    <a className="signup-login" href="http://localhost:3001/auth">Login/signup</a>
                 </nav>
             </div>
-        )
-    
+        );
+    };
 
-}
+};
 export default Header;
