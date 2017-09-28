@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import {TimelineMax, Power4} from 'greensock';
+import axios from 'axios';
+import {connect} from 'react-redux';
+import {getEvents} from '../../reducers/generalReducer';
+import moment from 'moment';
 import '../../styles/EventsPage.css';
 
 class EventsPage extends Component {
@@ -21,7 +25,20 @@ class EventsPage extends Component {
         value:'',
         clickable:true,
       },
+      loadedEvents:null,
     }
+  }
+  componentDidMount() {
+    this.loadEvents();
+  }
+  componentWillReceiveProps() {
+    this.loadEvents();
+  }
+  loadEvents() {
+    if (this.props && this.props.getEvents && (this.props.general.events.length < 1) ){
+      this.props.getEvents();
+    }
+    
   }
   updateForm(form, type) {
     let newType;
@@ -118,6 +135,56 @@ class EventsPage extends Component {
     },500) 
   }
   render(){
+    let events='Loading events...';
+    let weekDays={
+        1:"Sun",
+        2:"Mon",
+        3:"Tues",
+        4:"Wed",
+        5:"Thurs",
+        6:"Fri",
+        7:"Sat"
+    };
+  console.log(this.props.general);
+    if (this.props && this.props.general.events ){
+      console.log("map events object");
+      if (this.state.sortBy.value) {
+        switch(this.state.sortBy.value) {
+          case 'Relevance':
+            break;
+          case 'Newest':
+            this.props.general.events.sort((a, b)=>{
+              let date1 = new Date(a.date);
+              let date2 = new Date(b.date);
+            return (date2 - date1);
+          })
+        }
+      }
+      events = this.props.general.events.map((event,index)=>{
+        console.log("EVENT");
+        console.log(event);
+        var d1 = moment.utc(event.date);
+        return (
+          <div className="events-page-events" key={index}>
+            <div className="events-page-banner">
+              <div className='events-page-banner-image'/>
+            </div>
+            <div className='events-page-social-media'>
+              <div className='events-page-facebook'>F</div>
+              <div className='events-page-twitter'>T</div>
+              <div className='events-page-google'>G</div>
+              <div className='events-page-email'>E</div>
+            </div>
+            <div className="events-page-event-info">
+              <div className='events-page-event-title'>{event.title}</div>
+              <div className='events-page-event-place'>{d1.format("MMMM DD, YYYY ") + d1.format('h A ') + event.location + ' location'}</div>
+              <div className="events-page-event-description">{590 > event.description.length? 
+                event.description : (event.description).substring(0, 590) + '...'}</div>
+            </div>
+          </div>
+        )
+      })
+    }
     return (
       <section>
       <div className='events-page-background'>
@@ -171,8 +238,21 @@ class EventsPage extends Component {
           <div onClick={(e)=>{this.state.date.clickable?this.expandForm('date'):null}} className='events-page-filter-three-arrow'>V</div>
         </div>
       </div>
+      <div>
+        {events}
+      </div>
       </section>
     )
   }
 }
-export default EventsPage;
+function mapStateToProps(state, ownProps) {
+      if (ownProps && ownProps.history && !(state && state.history))
+          return Object.assign({}, state, {
+              history: ownProps.history
+          });
+      return state;
+  }
+export default connect(mapStateToProps, {
+  
+   getEvents:getEvents
+})(EventsPage);

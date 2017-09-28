@@ -17,11 +17,6 @@ module.exports ={
         }
     },
        getEvents:(req,res)=>{
-        if (!req.user){
-            console.log("UNKNOWN user");
-            return res.status(404).send('User not found');
-        }
-        else{
             req.app.get("db").getTables()
                 .then(response=>{
                     let tables = response.map(table=>{
@@ -40,7 +35,6 @@ module.exports ={
                    .catch(err=>{
                        res.status(500).end();
                    })
-        }
     }
 
 
