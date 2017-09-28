@@ -1,0 +1,1 @@
+select * from posts WHERE post_id = $1;

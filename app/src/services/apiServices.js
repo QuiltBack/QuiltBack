@@ -8,6 +8,72 @@ const api = axios.create({
 
 });
 */
+export function apiGetNextEventPage(page,limit){
+    return axios.get(localApiUrl + '/api/eventpage/' + limit + '/' + page+1)
+       .then(response=>{
+                  return response.data;
+              })
+              .catch(err=>{
+              console.log("apiGetPosts error");
+              console.log(err);
+
+            })
+}
+export function apiGetEventPage(page,limit){
+    console.log(`
+    page is ${page}
+    limit is ${limit}
+    `)
+    return axios.get(localApiUrl + '/api/eventpage/' + limit + '/' + page)
+       .then(response=>{
+                  return response.data;
+              })
+              .catch(err=>{
+              console.log("apiGetPosts error");
+              console.log(err);
+
+            })
+}
+
+
+
+export function apiGetNextPostPage(page,limit){
+    return axios.get(localApiUrl + '/api/postpage/' + limit + '/' + page)
+       .then(response=>{
+                  return response.data;
+              })
+              .catch(err=>{
+              console.log("apiGetPosts error");
+              console.log(err);
+
+            })
+}
+
+
+
+export function apiGetPostDetail(postId){
+    return axios.get(localApiUrl + '/api/post/' + postId)
+          .then(response=>{
+                  return response.data;
+              })
+              .catch(err=>{
+              console.log("apiGetPosts error");
+              console.log(err);
+
+            })
+}
+export function apiGetEventDetail(eventId){
+return axios.get(localApiUrl + '/api/event/' + eventId)
+             .then(response=>{
+                  return response.data;
+              })
+              .catch(err=>{
+              console.log("apiGetPosts error");
+              console.log(err);
+
+            })
+
+}
 export function apiGetPosts(){
     console.log("inside apiGetPosts");
     return  axios.get(localApiUrl + '/api/posts')

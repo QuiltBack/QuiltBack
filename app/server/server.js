@@ -177,12 +177,13 @@ app.get('/auth/logout', (req, res) => {
 
 
 app.get('/api/posts',  CTRL.getPosts);
+app.get('/api/post/:postId',CTRL.getPost);
 
-
-
+app.get('/api/event/:eventId',CTRL.getEvent);
 
 app.get('/api/events', CTRL.getEvents);
 
+app.get('/api/eventpage/:limit/:page',CTRL.getEventPage);
 
 /* End points for NewsLetter Subscriptions */
 

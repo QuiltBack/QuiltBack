@@ -12,25 +12,49 @@ module.exports ={
                    })
         
     },
-       getEvents:(req,res)=>{
-       
-        
-            req.app.get("db").getTables()
-                .then(response=>{
-                    let tables = response.map(table=>{
-                        return table.table_name;
-                    })
-                    console.log(tables);
-                })
-           
-            console.log(req.app.get("db"));
-            console.log("debug1");
-            
+       getEvents:(req,res)=>{    
             req.app.get("db").getAllEvents()
                    .then(response=>{
                        res.status(200).json(response);
                    })
                    .catch(err=>{
+                       res.status(500).end();
+                   })
+        
+    },
+      getEventPage:(req,res)=>{    
+
+console.log("limit is " +req.params.limit);
+console.log("page is " +req.params.page)
+            req.app.get("db").getEventPage([+req.params.limit,(+req.params.page)*+req.params.limit])
+                   .then(response=>{
+                       res.status(200).json(response);
+                   })
+                   .catch(err=>{
+                       res.status(500).end();
+                   })
+        
+    },
+      getEvent:(req,res)=>{
+    console.log("getting event by id");
+        req.app.get("db").getEventById([+req.params.eventId])
+                   .then(response=>{
+                       res.status(200).json(response);
+                   })
+                   .catch(err=>{
+                       console.log(err);
+                       res.status(500).end();
+                   })
+        
+    },
+        getPost:(req,res)=>{
+    console.log("getting post by id");
+        req.app.get("db").getPostById([+req.params.postId])
+                   .then(response=>{
+                       res.status(200).json(response);
+                   })
+                   .catch(err=>{
+                       console.log(err);
                        res.status(500).end();
                    })
         
