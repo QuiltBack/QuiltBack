@@ -126,30 +126,21 @@
   grid-area:  4 / 1;
   height: 45px;	
   width: 45px;	
-  border: 1px solid #D93044;	
-  border-radius: 100px;
-  text-align: center;
-  align-content: center;
+  background: url('./images/footer/facebook.png')
 }
-.footer-twitter {
+.footer-pinterest {
   display: grid;
   grid-area: 4 / 2;
   height: 45px;	
   width: 45px;	
-  border: 1px solid #D93044;	
-  border-radius: 100px;
-  text-align: center;
-  align-content: center;
+  background: url('./images/footer/pinterest.png')
 }
-.footer-google {
+.footer-instagram {
   display: grid;
   grid-area: 4 / 3;
   height: 45px;	
   width: 45px;	
-  border: 1px solid #D93044;	
-  border-radius: 100px;
-  text-align: center;
-  align-content: center;
+  background: url('./images/footer/instagram.png')
 }
 ::-webkit-input-placeholder {
   color: #C2C2C2;
