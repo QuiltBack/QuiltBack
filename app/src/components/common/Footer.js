@@ -19,9 +19,9 @@ const Footer = () => {
       </div>
       <div className='footer-grid-three'>
         <div className='footer-follow-us'>Follow Us</div>
-        <div className='footer-facebook'>F</div>
-        <div className='footer-twitter'>T</div>
-        <div className='footer-google'>G</div>
+        <div className='footer-facebook'/>
+        <div className='footer-pinterest'/>
+        <div className='footer-instagram'/>
       </div>
     </footer>  
   )
