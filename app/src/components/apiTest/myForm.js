@@ -3,9 +3,8 @@ import {bindAll} from 'lodash';
 import axios from "axios";
 
 
-var jQuery = require('jquery');
-var $ = jQuery;
-window.jQuery = require('jquery');
+
+
 const api = axios.create({
         withCredentials:true
 });
