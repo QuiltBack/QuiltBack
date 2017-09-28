@@ -176,12 +176,12 @@ app.get('/auth/logout', (req, res) => {
 
 
 
-app.get('/api/posts', cors(corsOptions), CTRL.getPosts);
+app.get('/api/posts',  CTRL.getPosts);
 
 
 
 
-app.get('/api/events', cors(corsOptions), CTRL.getEvents);
+app.get('/api/events', CTRL.getEvents);
 
 
 /* End points for NewsLetter Subscriptions */
@@ -199,7 +199,7 @@ app.delete ('/api/subscriber/:subscriberEmail',cors(corsOptions),CTRL.removeSubs
 
 /* END of End points for NewsLetter Subscriptions */
 
-app.post('/api/upload', cors(corsOptions),(req, res) => {
+app.post('/api/upload',(req, res) => {
   console.log(req.body);
   imageUpload.sendPics(req.body.pic, (data, err) => {
     if (err) {

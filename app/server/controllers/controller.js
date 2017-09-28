@@ -2,11 +2,7 @@
 
 module.exports ={
     getPosts:(req,res)=>{
-        if (!req.user){
-            console.log("UNKNOWN user");
-            return res.status(404).send('User not found');
-        }
-        else{
+       
             req.app.get("db").getAllPosts()
                    .then(response=>{
                        res.status(200).json(response);
@@ -14,14 +10,11 @@ module.exports ={
                    .catch(err=>{
                        res.status(500).end();
                    })
-        }
+        
     },
        getEvents:(req,res)=>{
-        if (!req.user){
-            console.log("UNKNOWN user");
-            return res.status(404).send('User not found');
-        }
-        else{
+       
+        
             req.app.get("db").getTables()
                 .then(response=>{
                     let tables = response.map(table=>{
@@ -40,7 +33,7 @@ module.exports ={
                    .catch(err=>{
                        res.status(500).end();
                    })
-        }
+        
     },
   
 
@@ -65,8 +58,10 @@ app.post('/api/subscriber',CTRL.addSubscriber); */
 
 addSubscriber: (req,res)=>{
      let email = req.body.email;
+
      req.app.get("db").addSubscriber([email])
         .then(response=>{
+          console.log("add Subscriber email " + email)
             res.status(200).send(response);
         })
         .catch(err=>{

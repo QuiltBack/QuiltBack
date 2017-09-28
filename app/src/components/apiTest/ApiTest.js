@@ -4,6 +4,7 @@ import {Switch,Route} from 'react-router-dom';
 import ApiPosts from './ApiPosts';
 import ApiEvents from './ApiEvents';
 import myForm from './myForm';
+import ApiNewsLetter from './ApiNewsLetter';
 import 'font-awesome/css/font-awesome.min.css';
 
 
@@ -19,7 +20,7 @@ api TESTS
         <Route path="/apitest/posts" component={ApiPosts} />
         <Route path="/apitest/events" component={ApiEvents} />
        <Route path="/apitest/form" component={myForm} />
-
+       <Route path="/apitest/newsletter" component={ApiNewsLetter} />
         </div>
     )
  }

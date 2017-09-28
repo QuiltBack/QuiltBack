@@ -18,6 +18,7 @@ export function getEvents(){
 }
 
 export function addSubscriber(email){
+    console.log("will call api function with " +email);
       return {
           type:types.ADD_SUBSCRIBER,
           payload:apiAddSubscriber(email)
@@ -42,6 +43,7 @@ export default function rootReducer(state=initialState,action){
 
  switch(action.type){
     case types.ADD_SUBSCRIBER + types.FULFILLED:
+    console.log("apiAddSubscriber FULFILLED");
         return Object.assign({},state,{subscriberEmail:action.payload});
     case types.REMOVE_SUBSCRIBER +types.PENDING:
       return Object.assign({},state,{subscriberEmail:'pending'})

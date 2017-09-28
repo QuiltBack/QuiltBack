@@ -1,14 +1,16 @@
 import axios from 'axios';
 
 const localApiUrl ='http://localhost:3001'
+/*
+// api not used now.
 const api = axios.create({
     withCredentials:true
 
 });
-
+*/
 export function apiGetPosts(){
     console.log("inside apiGetPosts");
-    return api.get(localApiUrl + '/api/posts')
+    return  axios.get(localApiUrl + '/api/posts')
               .then(response=>{
                   return response.data;
               })
@@ -21,7 +23,7 @@ export function apiGetPosts(){
 }
 export function apiGetSubscribers(){
     console.log("getting subscribers");
-    return api.get(localApiUrl + '/api/subscriber')
+    return axios.get(localApiUrl + '/api/subscriber')
     .then(response=>{
         console.log('returning from get api/subscriber');
         console.log(response);
@@ -70,7 +72,7 @@ export function apiRemoveSubscriber(email){
 
 export function apiGetEvents(){
     console.log("inside apiGetEvents");
-    return api.get(localApiUrl + '/api/events')
+    return axios.get(localApiUrl + '/api/events')
               .then(response=>{
                   console.log("EVENTS");
                   console.log(response);
