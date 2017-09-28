@@ -8,7 +8,7 @@ const api = axios.create({
 
 export function apiGetPosts(){
     console.log("inside apiGetPosts");
-    return api.get(localApiUrl + '/api/posts')
+    return axios.get(localApiUrl + '/api/posts')
               .then(response=>{
                   return response.data;
               })
@@ -24,7 +24,7 @@ export function apiGetPosts(){
 
 export function apiGetEvents(){
     console.log("inside apiGetEvents");
-    return api.get(localApiUrl + '/api/events')
+    return axios.get(localApiUrl + '/api/events')
               .then(response=>{
                   console.log("EVENTS");
                   console.log(response);
