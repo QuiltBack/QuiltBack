@@ -25,7 +25,9 @@ class EventsPage extends Component {
         value:'',
         clickable:true,
       },
-      loadedEvents:null,
+      query:'',
+      location:'',
+      numberOfEvents:6,
     }
   }
   componentDidMount() {
@@ -124,7 +126,7 @@ class EventsPage extends Component {
           value:newType.value,
           clickable: true,
         }
-      }):
+      }) :
       this.setState({
         date : {
           expanded:newType.expanded? false:true,
@@ -133,6 +135,19 @@ class EventsPage extends Component {
         }
       });
     },500) 
+  }
+  handleChange(val, type) {
+    type==='query'?
+    this.setState({
+      query: val
+    }) : this.setState({
+      location: val
+    });
+    console.log(val)
+  }
+  submitForm(event) {
+    event.preventDefault();
+    console.log(event.target)
   }
   render(){
     let events='Loading events...';
@@ -160,12 +175,24 @@ class EventsPage extends Component {
           })
         }
       }
-      events = this.props.general.events.map((event,index)=>{
+      let eventsFiltered = this.props.general.events.filter((e)=>{
+        let splitQuery = this.state.query.split(' ')
+        console.log(splitQuery);
+        return splitQuery.reduce((acc, current)=>
+        {
+          console.log(e.description, 'description')
+          console.log(current, 'current')
+            if (! e.description.toLowerCase().includes(current.toLowerCase()) &&  ! e.title.toLowerCase().includes(current.toLowerCase())) {console.log('returning false'); return false}
+            else return acc;
+        },true)
+      });
+      events = eventsFiltered.map((event,index)=>{
         console.log("EVENT");
         console.log(event);
         var d1 = moment.utc(event.date);
-        return (
-          <div className="events-page-events" key={index}>
+        return index<(this.state.numberOfEvents)?
+           (
+            <div className="events-page-events" key={index}>
             <div className="events-page-banner">
               <div className='events-page-banner-image'/>
             </div>
@@ -176,29 +203,33 @@ class EventsPage extends Component {
               <div className='events-page-email'>E</div>
             </div>
             <div className="events-page-event-info">
-              <div className='events-page-event-title'>{event.title}</div>
-              <div className='events-page-event-place'>{d1.format("MMMM DD, YYYY ") + d1.format('h A ') + event.location + ' location'}</div>
+              <div className='events-page-event-title'>{ 30 > event.title.length? 
+                event.title : (event.title).substring(0, 30) + '...'}</div>
+              <div className='events-page-event-place'>{d1.format("MMMM DD, YYYY ") + d1.format('h A ') + event.city + ', ' + event.state + ' ' + event.zipcode + ', ' + event.address}</div>
               <div className="events-page-event-description">{590 > event.description.length? 
                 event.description : (event.description).substring(0, 590) + '...'}</div>
             </div>
           </div>
-        )
-      })
+        ) : null
+      }) 
     }
+    let button = this.props.general.events.length >= this.state.numberOfEvents? 
+    (<button onClick={(e)=>{this.setState({numberOfEvents: this.state.numberOfEvents + 6})}}>Show more</button>) :
+    (null)
     return (
       <section>
       <div className='events-page-background'>
         <div className='events-page-title'>Events</div>
       </div>
       <div className='events-page-filter'>
-        <form className='events-page-filter-one'>
+        <div className='events-page-filter-one'>
           <div className='events-page-filter-one-find'> Find </div>
-          <input className='events-page-filter-one-input-find' placeholder='Ruby Jubilee, Salt Lake City, Silent auction'/>
+          <input onChange={(e)=>{this.handleChange(e.target.value, 'query')}} className='events-page-filter-one-input-find' placeholder='Ruby Jubilee, Salt Lake City, Silent auction'/>
           <div className='events-page-filter-one-line'/>
           <div className='events-page-filter-one-near'> Near </div>
-          <input className='events-page-filter-one-input-near' placeholder='Salt Lake City, UT'/>
-          <button className='events-page-filter-one-button'> Search </button>
-        </form>
+          <input onChange={(e)=>{this.handleChange(e.target.value, 'location')}} className='events-page-filter-one-input-near' placeholder='Salt Lake City, UT'/>
+          <div className='events-page-filter-one-button'/>
+        </div>
         <div className='events-page-filter-two'>
           <div className='events-page-filter-two-select'>
             <div className='events-page-filter-two-select-name'>{this.state.sortBy.value? this.state.sortBy.value:'Sort By'}</div>
@@ -240,6 +271,7 @@ class EventsPage extends Component {
       </div>
       <div>
         {events}
+        {button}
       </div>
       </section>
     )
