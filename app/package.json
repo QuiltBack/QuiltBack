@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "aws-sdk": "^2.123.0",
     "axios": "^0.16.2",
     "body-parser": "^1.18.2",
     "bootstrap": "^3.3.7",

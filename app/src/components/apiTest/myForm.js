@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
 import {bindAll} from 'lodash';
+import axios from "axios";
+
 
 var jQuery = require('jquery');
 var $ = jQuery;
 window.jQuery = require('jquery');
-
+const api = axios.create({
+        withCredentials:true
+});
 class myForm extends Component {
 
   constructor(props) {
@@ -28,21 +32,18 @@ console.log("file data?");
 console.log(this.state.data_uri);
 console.log(this.state.filename);
 console.log(this.state.filetype);
-
-    const promise = $.ajax({
-      url: 'http://localhost:3001/api/upload',
-      type: "POST",
-      data: {
-        pic: {
+console.log("sending data");
+   let pic={
             imageBody:this.state.data_uri,
             imageName: this.state.filename,
             imageExtension: this.state.filetype
-         }
-      },
-      dataType: 'json'
-    });
-
-    promise.done(function(data){
+    
+     
+   }
+   console.log("pic");
+   console.log(pic);
+   axios.post('http://localhost:3001/api/upload',{pic:pic})
+    .then(function(data){
         console.log("s3 return");
         console.log(data);
       _this.setState({
