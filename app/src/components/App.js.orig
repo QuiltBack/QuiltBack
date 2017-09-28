@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import Routes from '../Routes';
 import '../styles/App.css';
+<<<<<<< HEAD
 import '../styles/Header.css';
 import '../styles/HomePage.css';
+=======
+>>>>>>> af71b54e34d24e5074ab1da20102d11559e52dbc
 import Login from './login/Login';
 import Header from './common/Header';
 import Footer from './common/Footer';
