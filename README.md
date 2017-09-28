@@ -1,1 +1,1 @@
-using a .env file for config.
+Using a .env file for config.
