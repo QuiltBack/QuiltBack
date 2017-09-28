@@ -1,4 +1,7 @@
 import React from 'react';
+import Discover from '../../styles/images/home/Discover_Image.svg';
+import Promote from '../../styles/images/home/Promote_Image.svg';
+import Share from '../../styles/images/home/Share_Image.svg';
 
 class HomePage extends React.Component {
 
@@ -44,6 +47,29 @@ class HomePage extends React.Component {
                         <h1 className="quilt-back-gives-back">QuiltBack Gives Back</h1>
                         <div className="rectangle-2"></div>
                         <p className="we-are-a-community">We are a community that fosters aid for refugees by hosting charity quilt auctions. Learn how you can get involved. Become a QuiltBacker today.</p>
+                    </div>
+                </span>
+                <span className="host-section-container">
+                    <span className="host-an-event" >Host an Event</span>
+                    <section className="host-a">
+                        <img className="discover-icon" src={Discover}/>
+                        <p className="discover">Discover.</p>
+                        <p className="learn-how-to-host-yo">Learn how to host your own event using our free online resources.</p>
+                    </section>
+                    <section className="host-b">
+                        <img className="promote-icon" src={Promote} />
+                        <p className="promote">Promote</p>
+                        <p className="publish-your-event-b">Publish your event page and upload an auction catalogue.</p>
+                    </section>
+                    <section className="host-c">
+                        <img className="share-icon" src={Share} />
+                        <p className="share">Share.</p>
+                        <p className="create-an-account-to">Create an account to blog your experience with the community.</p>
+                    </section>
+
+                </span>
+                <span>
+                    <div className="learn-more-button">
                     </div>
                 </span>
             </div>
