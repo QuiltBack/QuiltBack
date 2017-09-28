@@ -157,7 +157,7 @@ app.get('/auth/me', cors(corsOptions), (req, res, next) => {
     res.status(404).send('User not found');
   }
   else {
-    console.log("USER FOUND");
+    consolelog("USER FOUND");
     res.status(200).send(req.user);
   }
 });
@@ -194,7 +194,7 @@ app.get('/api/subscriber',cors(corsOptions),CTRL.getSubscribers);
 app.post('/api/subscriber',CTRL.addSubscriber);
 
 /* api/subscriber/:subscriberID remove Subscriber */
-app.delete ('/api/subscriber/:subscriberEmail',cors(corsOptions),CTRL.removeSubscriber);
+app.delete('/api/subscriber/:subscriberEmail',cors(corsOptions),CTRL.removeSubscriber);
 
 
 

@@ -76,7 +76,7 @@ return axios.get(localApiUrl + '/api/event/' + eventId)
 }
 export function apiGetPosts(){
     console.log("inside apiGetPosts");
-    return  axios.get(localApiUrl + '/api/posts')
+    return axios.get(localApiUrl + '/api/posts')
               .then(response=>{
                   return response.data;
               })

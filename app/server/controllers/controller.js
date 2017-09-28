@@ -12,7 +12,8 @@ module.exports ={
                    })
         
     },
-       getEvents:(req,res)=>{    
+       getEvents:(req,res)=>{
+            
             req.app.get("db").getAllEvents()
                    .then(response=>{
                        res.status(200).json(response);
