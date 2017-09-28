@@ -170,7 +170,8 @@ app.get('/api/posts', cors(corsOptions), CTRL.getPosts);
 app.get('/api/events', cors(corsOptions), CTRL.getEvents);
 
 
-app.post('/api/upload', (req, res) => {
+app.post('/api/upload', cors(corsOptions),(req, res) => {
+  console.log(req.body);
   imageUpload.sendPics(req.body.pic, (data, err) => {
     if (err) {
       console.log(err);

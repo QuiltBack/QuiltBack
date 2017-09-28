@@ -22,6 +22,13 @@ module.exports ={
             return res.status(404).send('User not found');
         }
         else{
+            req.app.get("db").getTables()
+                .then(response=>{
+                    let tables = response.map(table=>{
+                        return table.table_name;
+                    })
+                    console.log(tables);
+                })
            
             console.log(req.app.get("db"));
             console.log("debug1");
