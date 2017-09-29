@@ -48,6 +48,18 @@ console.log("page is " +req.params.page)
                    })
         
     },
+        getAddress:(req,res)=>{
+            console.log("getting addresses");
+                req.app.get("db").getAddress()
+                    .then(response=>{
+                        console.log(response)
+                        res.status(200).send(response)
+                    })
+                    .catch(err=>{
+                        console.log(err)
+                        res.status(500).end();
+                    })
+        },
         getPost:(req,res)=>{
     console.log("getting post by id");
         req.app.get("db").getPostById([+req.params.postId])

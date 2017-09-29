@@ -1,5 +1,6 @@
 CREATE TABLE events(
 Date DATE,
+PostDate TIMESTAMP,
 StartTime VARCHAR,
 EndTime VARCHAR,
 City TEXT,
