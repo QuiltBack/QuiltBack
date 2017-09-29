@@ -1,12 +1,18 @@
 import * as types from '../actions/ActionTypes';
 import initialState from './initialState'
-import {apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents} from '../services/apiServices';
+import {apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
 
 export function getPostDetail(postId){
    return {
        type: types.GET_POST_DETAIL,
        payload: apiGetPostDetail(postId)
    }
+}
+export function getAddress(){
+    return{
+        type:types.GET_ADDRESS,
+        payload: apiGetAddress()
+    }
 }
 
 export function getEventPage(page,limit){
