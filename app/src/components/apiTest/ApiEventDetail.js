@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getEvents} from '../../reducers/generalReducer';
+import {getEventDetail} from '../../reducers/generalReducer';
 
 import 'font-awesome/css/font-awesome.min.css';
 import './ApiEvents.css';
@@ -10,35 +10,32 @@ import './ApiEvents.css';
 const moment = require('moment');
 
 
-class ApiEvents extends Component{
- testType='events';
+class ApiEventDetail extends Component{
+
+eventdetails()
+{
+    console.log("GET EVENT DETAIL")
+
+  if (this.props && this.props.getEventDetail && this.props.general ) {
+    
+    console.log("dEBUG 1");   
+      if (! this.props.general.eventDetail && this.props.match.params.eventId){
+          console.log("TRYING TO GET DEATAIL FOR event " +this.props.match.params.eventId)
+          this.props.getEventDetail(this.props.match.params.eventId);
+      }
+    }
+}
 
 componentDidMount() {
-
-    if (this.props && this.props.getEvents && this.props.general ) {
-    
-      if ( this.props.general.events.length<1){
-          this.props.getEvents();
-      }
-    }
-    
-
+    this.eventdetails();
 }
-componentWillReceiveProps(ownProps) {
-   
-    if (this.props && this.props.getEvents && this.props.general ) {
-     
-      if (this.props.general.events.length<1){
-          this.props.getEvents();
-      }
-    }
-    
-
+componentWillReceiveProps(ownProps) {  
+    this.eventdetails();
 }
 
  render(){
   
-   let events='';
+   let eventDetail='';
   let weekDays={
       1:"Sun",
       2:"Mon",
@@ -52,15 +49,13 @@ componentWillReceiveProps(ownProps) {
 
 console.log(this.props.general);
 
-   if (this.props && this.props.general.events ){
-       console.log("map events object");
-    events = this.props.general.events.map((event,index)=>{
-        console.log("EVENT");
-        console.log(event);
-        var d1 = moment(event.date);
-            
-
-      return (<div className="event" key={index}>
+   if (this.props && this.props.general.eventDetail ){
+       
+        
+     console.log("debug b");
+            let event=this.props.general.eventDetail;
+   let d1 = moment.utc(event.date);
+     eventDetail=(<div className="event">
 
           <div className="eventBanner">
               <div className="eventBannerImage" style={
@@ -94,8 +89,8 @@ console.log(this.props.general);
           <p><span className="eventLabel">Volunteer</span></p>
           <p>{event.volunteerinfo}</p>
 
-      </div>)
-   })
+      </div>);
+ 
     
    }
 
@@ -104,8 +99,8 @@ console.log(this.props.general);
         
 
            <div className="events">
-             <h1>Events</h1>
-             {events}
+             <h1>Event</h1>
+             {eventDetail}
            </div>
 
 
@@ -129,5 +124,5 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(mapStateToProps, {
    
-    getEvents:getEvents
-})(ApiEvents);
+    getEventDetail:getEventDetail
+})(ApiEventDetail);
