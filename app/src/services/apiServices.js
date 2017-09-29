@@ -152,6 +152,17 @@ export function apiGetEvents(){
            
 }
 
+export function apiGetAddress(){
+    console.log('inside getAddress');
+    return axios.get(localApiUrl + '/api/address')
+        .then(response=>{
+            console.log('address' + response);
+            return response.data;
+        })
+        .catch(err=>{
+            console.log('getAddress error' + err);
+        })
+}
 
 
 

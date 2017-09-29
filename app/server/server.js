@@ -184,6 +184,7 @@ app.get('/api/event/:eventId',CTRL.getEvent);
 app.get('/api/events', CTRL.getEvents);
 
 app.get('/api/eventpage/:limit/:page',CTRL.getEventPage);
+app.get('/api/address', CTRL.getAddress);
 
 /* End points for NewsLetter Subscriptions */
 
