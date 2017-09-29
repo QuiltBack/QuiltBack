@@ -43,9 +43,7 @@ class EventsPage extends Component {
     
   }
   updateForm(form, type) {
-    let newType;
-    eval('newType=this.state.'+type);
-    
+    let newType = this.state[type]
     type==='sortBy'?
     this.setState({
       sortBy : {
@@ -74,9 +72,7 @@ class EventsPage extends Component {
     },100)
   }
   expandForm(type) {
-    let newType;
-    eval('newType=this.state.'+type);
-
+    let newType = this.state[type]
     let tl = new TimelineMax();
     let className = type==='sortBy'? 
     '.events-page-filter-two-options' : type==='distance'? 
@@ -150,6 +146,7 @@ class EventsPage extends Component {
     console.log(event.target)
   }
   render(){
+    let button;
     let events='Loading events...';
     let weekDays={
         1:"Sun",
@@ -166,27 +163,54 @@ class EventsPage extends Component {
       if (this.state.sortBy.value) {
         switch(this.state.sortBy.value) {
           case 'Relevance':
+            this.props.general.events.sort((a, b)=>{
+              let split = this.state.query.split(' ');
+              let aCount = split.reduce((acc, current)=>{
+                if (!current) {
+                  return acc;
+                }
+                let reg = new RegExp(current, "gi");
+                acc += ((a.title.match(reg) || []).length) * 2;
+                return acc + (a.description.match(reg) || []).length;
+              },0)
+              let bCount = split.reduce((acc, current)=>{
+                if (!current) {
+                  return acc;
+                }
+                let reg = new RegExp(current, "gi");
+                acc += ((b.title.match(reg) || []).length) * 2;
+                return acc + (b.description.match(reg) || []).length;
+              },0)
+              return (bCount - aCount);
+            })
             break;
           case 'Newest':
             this.props.general.events.sort((a, b)=>{
               let date1 = new Date(a.date);
               let date2 = new Date(b.date);
-            return (date2 - date1);
-          })
+              return (date2 - date1);
+            })
+            break;
         }
       }
       let eventsFiltered = this.props.general.events.filter((e)=>{
-        let splitQuery = this.state.query.split(' ')
-        console.log(splitQuery);
-        return splitQuery.reduce((acc, current)=>
-        {
-          console.log(e.description, 'description')
-          console.log(current, 'current')
-            if (! e.description.toLowerCase().includes(current.toLowerCase()) &&  ! e.title.toLowerCase().includes(current.toLowerCase())) {console.log('returning false'); return false}
+        let splitQuery = this.state.query.split(' ');
+        return splitQuery.reduce((acc, current)=>{
+            if (!e.description.toLowerCase().includes(current.toLowerCase()) && !e.title.toLowerCase().includes(current.toLowerCase())) return false
             else return acc;
         },true)
       });
-      events = eventsFiltered.map((event,index)=>{
+      let locationFiltered = eventsFiltered.filter((e)=>{
+        let splitLocation = this.state.location.split(' ');
+        return splitLocation.reduce((acc, current)=>{
+          if (!e.city.toLowerCase().includes(current.toLowerCase()) && !e.state.toLowerCase().includes(current.toLowerCase()) && !e.address.includes(current)) return false
+          else return acc;
+      },true)
+      })
+      button = locationFiltered.length >= this.state.numberOfEvents? 
+      (<button onClick={(e)=>{this.setState({numberOfEvents: this.state.numberOfEvents + 6})}}>Show more</button>) :
+      (null)
+      events = locationFiltered.map((event,index)=>{
         console.log("EVENT");
         console.log(event);
         var d1 = moment.utc(event.date);
@@ -213,9 +237,6 @@ class EventsPage extends Component {
         ) : null
       }) 
     }
-    let button = this.props.general.events.length >= this.state.numberOfEvents? 
-    (<button onClick={(e)=>{this.setState({numberOfEvents: this.state.numberOfEvents + 6})}}>Show more</button>) :
-    (null)
     return (
       <section>
       <div className='events-page-background'>
