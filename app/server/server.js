@@ -82,7 +82,9 @@ passport.use(new Auth0Strategy({
   callbackURL: process.env.AUTH_CALLBACK
 }, function (accessToken, refreshToken, extraParams, profile, done) {
   const db = app.get('db');
-  
+
+db.getAllUsers().then(
+response=>console.log(response))  
 
   db.findUser(["" + profile.identities[0].user_id])
     .then(user => {
