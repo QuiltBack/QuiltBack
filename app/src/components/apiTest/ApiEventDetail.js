@@ -12,6 +12,15 @@ const moment = require('moment');
 
 class ApiEventDetail extends Component{
 
+test(){
+ str.match(/(\w+)/g).reduce((acc, current)=>
+{
+    if (! e.description.toLowerCase().includes(current) &&  ! e.title.toLowerCase().includes(current)) return false;
+    else return acc;
+},true)
+
+}
+
 eventdetails()
 {
     console.log("GET EVENT DETAIL")
