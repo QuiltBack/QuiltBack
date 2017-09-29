@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getEvents} from '../../reducers/generalReducer';
+import {getEventPage,getNextEventPage} from '../../reducers/generalReducer';
 
 import 'font-awesome/css/font-awesome.min.css';
 import './ApiEvents.css';
@@ -10,30 +10,33 @@ import './ApiEvents.css';
 const moment = require('moment');
 
 
-class ApiEvents extends Component{
+class ApiEventPage extends Component{
  testType='events';
 
 componentDidMount() {
 
-    if (this.props && this.props.getEvents && this.props.general ) {
+console.log("DIDMOUNT");
+    if (this.props && this.props.getEventPage && this.props.general ) {
     
+    console.log("props valid");
       if ( this.props.general.events.length<1){
-          this.props.getEvents();
+          console.log("call get event page");
+          console.log(`pageSize ${this.props.general.eventPageSize}`);
+          this.props.getEventPage(this.props.general.eventPage,this.props.general.eventPageSize);
       }
     }
     
 
 }
-componentWillReceiveProps(ownProps) {
-   
-    if (this.props && this.props.getEvents && this.props.general ) {
-     
-      if (this.props.general.events.length<1){
-          this.props.getEvents();
-      }
-    }
-    
+nextPage()
+{
+    console.log("GET NEXTPAGE");
+     if (this.props && this.props.getNextEventPage && this.props.general ) {
 
+          console.log("call get next event page");
+          this.props.getNextEventPage(this.props.general.eventPage,this.props.general.eventPageSize);
+    
+     }
 }
 
  render(){
@@ -104,13 +107,15 @@ console.log(this.props.general);
         
 
            <div className="events">
-             <h1>Events</h1>
+             <h1>Event Page</h1>
+             <button onClick={(e)=>{this.nextPage()}}>Next Page</button>
              {events}
            </div>
 
 
        
     )
+
  }
 
 
@@ -128,6 +133,6 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default connect(mapStateToProps, {
-   
-    getEvents:getEvents
-})(ApiEvents);
+   getEventPage:getEventPage, 
+    getNextEventPage:getNextEventPage
+})(ApiEventPage);

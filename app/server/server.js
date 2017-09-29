@@ -82,12 +82,7 @@ passport.use(new Auth0Strategy({
   callbackURL: process.env.AUTH_CALLBACK
 }, function (accessToken, refreshToken, extraParams, profile, done) {
   const db = app.get('db');
-  let email = '';
-  if (profile && profile.emails) {
-    if (profile.emails[0]) email = profile.emails[0].value;
-  }
-  if (!email && profile.email) email = profile.email;
-
+  
 
   db.findUser(["" + profile.identities[0].user_id])
     .then(user => {
@@ -101,14 +96,33 @@ passport.use(new Auth0Strategy({
 
         let given_name = '';
         let family_name = '';
-        if (profile.name && profile.name.givenName) given_name = profile.name.givenName;
-        if (profile.name && profile.name.familyName) given_name = profile.name.familyName;
+        if (profile.given_name){
+          given_name = profile.given_name;
+          console.log("NAME FROM profile.given_name")
 
+        } 
+        else if (profile.name.givenName){
+          given_name= profile.name.givenName;
+          console.log("NAME from profile.name.givenName")
+
+        } 
+
+        if (profile.family_name) family_name = profile.family_name;
+        else if (profile.name.familyName ) family_name = profile.name.familyName;
+        let email = '';
+        if (profile && profile.emails) {
+               if (profile.emails[0]) email = profile.emails[0].value;
+          }
+        if (!email && profile.email) email = profile.email;
+
+      
 
         /* username, email,first_name,last_name,auth_id */
 
-
-        db.createUser([profile.displayName, email, profile.given_name, profile.family_name, "" + profile.identities[0].user_id])
+console.log(`
+profile ${profile} displayName ${profile.displayName}, email ${email}, given ${given_name}, family ${family_name}, user_id ${profile.identities[0].user_id}
+`)
+        db.createUser([profile.displayName, email, given_name, family_name, "" + profile.identities[0].user_id])
           .then(user => { return done(null, { id: user[0].id }) })
           .catch(err => { console.log("CREATE USER ERROR"); console.log(err); });
       }
@@ -143,7 +157,7 @@ app.get('/auth/me', cors(corsOptions), (req, res, next) => {
     res.status(404).send('User not found');
   }
   else {
-    console.log("USER FOUND");
+    consolelog("USER FOUND");
     res.status(200).send(req.user);
   }
 });
@@ -162,15 +176,31 @@ app.get('/auth/logout', (req, res) => {
 
 
 
-app.get('/api/posts', cors(corsOptions), CTRL.getPosts);
+app.get('/api/posts',  CTRL.getPosts);
+app.get('/api/post/:postId',CTRL.getPost);
+
+app.get('/api/event/:eventId',CTRL.getEvent);
+
+app.get('/api/events', CTRL.getEvents);
+
+app.get('/api/eventpage/:limit/:page',CTRL.getEventPage);
+
+/* End points for NewsLetter Subscriptions */
+
+/* api/subscriber GET -> return subscriber emails */
+app.get('/api/subscriber',cors(corsOptions),CTRL.getSubscribers);
+
+/* api/subscriber POST -> add new subscriber */
+app.post('/api/subscriber',CTRL.addSubscriber);
+
+/* api/subscriber/:subscriberID remove Subscriber */
+app.delete('/api/subscriber/:subscriberEmail',cors(corsOptions),CTRL.removeSubscriber);
 
 
 
+/* END of End points for NewsLetter Subscriptions */
 
-app.get('/api/events', cors(corsOptions), CTRL.getEvents);
-
-
-app.post('/api/upload', cors(corsOptions),(req, res) => {
+app.post('/api/upload',(req, res) => {
   console.log(req.body);
   imageUpload.sendPics(req.body.pic, (data, err) => {
     if (err) {

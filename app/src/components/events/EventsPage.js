@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import {TimelineMax, Power4} from 'greensock';
+import axios from 'axios';
+import {connect} from 'react-redux';
+import {getEvents} from '../../reducers/generalReducer';
+import moment from 'moment';
 import '../../styles/EventsPage.css';
 
 class EventsPage extends Component {
@@ -21,7 +25,22 @@ class EventsPage extends Component {
         value:'',
         clickable:true,
       },
+      query:'',
+      location:'',
+      numberOfEvents:6,
     }
+  }
+  componentDidMount() {
+    this.loadEvents();
+  }
+  componentWillReceiveProps() {
+    this.loadEvents();
+  }
+  loadEvents() {
+    if (this.props && this.props.getEvents && (this.props.general.events.length < 1) ){
+      this.props.getEvents();
+    }
+    
   }
   updateForm(form, type) {
     let newType;
@@ -107,7 +126,7 @@ class EventsPage extends Component {
           value:newType.value,
           clickable: true,
         }
-      }):
+      }) :
       this.setState({
         date : {
           expanded:newType.expanded? false:true,
@@ -117,21 +136,100 @@ class EventsPage extends Component {
       });
     },500) 
   }
+  handleChange(val, type) {
+    type==='query'?
+    this.setState({
+      query: val
+    }) : this.setState({
+      location: val
+    });
+    console.log(val)
+  }
+  submitForm(event) {
+    event.preventDefault();
+    console.log(event.target)
+  }
   render(){
+    let events='Loading events...';
+    let weekDays={
+        1:"Sun",
+        2:"Mon",
+        3:"Tues",
+        4:"Wed",
+        5:"Thurs",
+        6:"Fri",
+        7:"Sat"
+    };
+  console.log(this.props.general);
+    if (this.props && this.props.general.events ){
+      console.log("map events object");
+      if (this.state.sortBy.value) {
+        switch(this.state.sortBy.value) {
+          case 'Relevance':
+            break;
+          case 'Newest':
+            this.props.general.events.sort((a, b)=>{
+              let date1 = new Date(a.date);
+              let date2 = new Date(b.date);
+            return (date2 - date1);
+          })
+        }
+      }
+      let eventsFiltered = this.props.general.events.filter((e)=>{
+        let splitQuery = this.state.query.split(' ')
+        console.log(splitQuery);
+        return splitQuery.reduce((acc, current)=>
+        {
+          console.log(e.description, 'description')
+          console.log(current, 'current')
+            if (! e.description.toLowerCase().includes(current.toLowerCase()) &&  ! e.title.toLowerCase().includes(current.toLowerCase())) {console.log('returning false'); return false}
+            else return acc;
+        },true)
+      });
+      events = eventsFiltered.map((event,index)=>{
+        console.log("EVENT");
+        console.log(event);
+        var d1 = moment.utc(event.date);
+        return index<(this.state.numberOfEvents)?
+           (
+            <div className="events-page-events" key={index}>
+            <div className="events-page-banner">
+              <div className='events-page-banner-image'/>
+            </div>
+            <div className='events-page-social-media'>
+              <div className='events-page-facebook'>F</div>
+              <div className='events-page-twitter'>T</div>
+              <div className='events-page-google'>G</div>
+              <div className='events-page-email'>E</div>
+            </div>
+            <div className="events-page-event-info">
+              <div className='events-page-event-title'>{ 30 > event.title.length? 
+                event.title : (event.title).substring(0, 30) + '...'}</div>
+              <div className='events-page-event-place'>{d1.format("MMMM DD, YYYY ") + d1.format('h A ') + event.city + ', ' + event.state + ' ' + event.zipcode + ', ' + event.address}</div>
+              <div className="events-page-event-description">{590 > event.description.length? 
+                event.description : (event.description).substring(0, 590) + '...'}</div>
+            </div>
+          </div>
+        ) : null
+      }) 
+    }
+    let button = this.props.general.events.length >= this.state.numberOfEvents? 
+    (<button onClick={(e)=>{this.setState({numberOfEvents: this.state.numberOfEvents + 6})}}>Show more</button>) :
+    (null)
     return (
       <section>
       <div className='events-page-background'>
         <div className='events-page-title'>Events</div>
       </div>
       <div className='events-page-filter'>
-        <form className='events-page-filter-one'>
+        <div className='events-page-filter-one'>
           <div className='events-page-filter-one-find'> Find </div>
-          <input className='events-page-filter-one-input-find' placeholder='Ruby Jubilee, Salt Lake City, Silent auction'/>
+          <input onChange={(e)=>{this.handleChange(e.target.value, 'query')}} className='events-page-filter-one-input-find' placeholder='Ruby Jubilee, Salt Lake City, Silent auction'/>
           <div className='events-page-filter-one-line'/>
           <div className='events-page-filter-one-near'> Near </div>
-          <input className='events-page-filter-one-input-near' placeholder='Salt Lake City, UT'/>
-          <button className='events-page-filter-one-button'> Search </button>
-        </form>
+          <input onChange={(e)=>{this.handleChange(e.target.value, 'location')}} className='events-page-filter-one-input-near' placeholder='Salt Lake City, UT'/>
+          <div className='events-page-filter-one-button'/>
+        </div>
         <div className='events-page-filter-two'>
           <div className='events-page-filter-two-select'>
             <div className='events-page-filter-two-select-name'>{this.state.sortBy.value? this.state.sortBy.value:'Sort By'}</div>
@@ -171,8 +269,22 @@ class EventsPage extends Component {
           <div onClick={(e)=>{this.state.date.clickable?this.expandForm('date'):null}} className='events-page-filter-three-arrow'>V</div>
         </div>
       </div>
+      <div>
+        {events}
+        {button}
+      </div>
       </section>
     )
   }
 }
-export default EventsPage;
+function mapStateToProps(state, ownProps) {
+      if (ownProps && ownProps.history && !(state && state.history))
+          return Object.assign({}, state, {
+              history: ownProps.history
+          });
+      return state;
+  }
+export default connect(mapStateToProps, {
+  
+   getEvents:getEvents
+})(EventsPage);
