@@ -1,7 +1,7 @@
 .events-page-background {
   height: 400px;
   width: 100%;
-  background: url('./images/events_placeholder.jpg') no-repeat center bottom fixed;
+  background: url('./images/events/events_placeholder.jpg') no-repeat center bottom fixed;
   background-size: cover;
   display: grid;
   align-content: center;
@@ -206,11 +206,12 @@
   display: grid;
   grid-area: 1 / 1;
   grid-template: 10% 80% 10% / 5% 90% 5%;
+  cursor: pointer;
 }
 .events-page-banner-image {
   display: grid;
   grid-area: 2 / 2;
-  background: url('./images/quilt_placeholder.jpg') no-repeat center center;
+  background: url('./images/events/quilt_placeholder.jpg') no-repeat center center;
   background-size: cover;
 }
 .events-page-social-media {
@@ -298,4 +299,24 @@
   font-size: 20px;	
   font-weight: 500;	
   line-height: 27px;
+}
+.events-page-scroll {
+  display: grid;
+  height: 120px;
+  width: 100%;
+  grid-template: 35% 10% 10% 10% 10% 35% / 42.5% 15% 42.5%;
+  cursor: pointer;
+  box-shadow: 0px -10px 20px 10px #F7F7F7;
+  background: #F7F7F7;
+  opacity: .9
+}
+.events-page-show-more {
+  display: grid;
+  grid-area: 1 / 2;
+  align-content: center;
+  margin: 0 auto;	
+  font-family: "FuturaBold";	
+  font-size: 24px;	
+  line-height: 32px;
+  color: black;
 }

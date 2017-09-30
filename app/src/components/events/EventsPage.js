@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {TimelineMax, Power4} from 'greensock';
-import axios from 'axios';
+import {TimelineMax, Power4, Power0} from 'greensock';
 import {connect} from 'react-redux';
 import {getEvents} from '../../reducers/generalReducer';
 import moment from 'moment';
 import '../../styles/EventsPage.css';
+import DownArrow from '../../styles/images/events/down_arrow.svg'
 
 class EventsPage extends Component {
   constructor(props){
@@ -28,20 +28,31 @@ class EventsPage extends Component {
       query:'',
       location:'',
       numberOfEvents:6,
+      resetButton:true
     }
   }
+
   componentDidMount() {
     this.loadEvents();
+    let tl = new TimelineMax({
+      repeat: -1,
+      repeatDelay:0,
+    })
+    tl.from('.events-page-down-arrow', 1, {bottom: 30, height: '25px', opacity: 0, ease: Power4.easeOut})
+      .from('.events-page-down-arrow2', 1, {bottom: 20, ease:Power0.easeOut}, '-=1')
+      .from('.events-page-down-arrow3', 1, {bottom: 10, height: '50px', opacity:1, ease:Power4.easeOut}, '-=1')
   }
+
   componentWillReceiveProps() {
     this.loadEvents();
   }
+
   loadEvents() {
     if (this.props && this.props.getEvents && (this.props.general.events.length < 1) ){
       this.props.getEvents();
     }
-    
   }
+
   updateForm(form, type) {
     let newType = this.state[type]
     type==='sortBy'?
@@ -132,6 +143,7 @@ class EventsPage extends Component {
       });
     },500) 
   }
+
   handleChange(val, type) {
     type==='query'?
     this.setState({
@@ -141,10 +153,7 @@ class EventsPage extends Component {
     });
     console.log(val)
   }
-  submitForm(event) {
-    event.preventDefault();
-    console.log(event.target)
-  }
+
   render(){
     let button;
     let events='Loading events...';
@@ -207,9 +216,56 @@ class EventsPage extends Component {
           else return acc;
       },true)
       })
+      let arrowStyle = {
+        height: '50px',
+        display: 'grid',
+        gridArea: '2 / 2',
+        position: 'relative',
+        margin: '0 auto',
+      }
+      let arrowStyle2 = {
+        height: '50px',
+        display: 'grid',
+        gridArea: '4 / 2',
+        position: 'relative',
+        margin: '0 auto',
+      }
+      let arrowStyle3 = {
+        height: '25px',
+        display: 'grid',
+        gridArea: '5 / 2',
+        position: 'relative',
+        margin: '0 auto',
+        opacity: 0,
+        bottom: -20,
+      }
       button = locationFiltered.length >= this.state.numberOfEvents? 
-      (<button onClick={(e)=>{this.setState({numberOfEvents: this.state.numberOfEvents + 6})}}>Show more</button>) :
+      (
+        <section className='events-page-scroll' onClick={(e)=>{this.setState({numberOfEvents: this.state.numberOfEvents + 6, resetButton: true})}}>
+          <div className='events-page-show-more'>
+            Show more
+          </div>
+          <img className='events-page-down-arrow' style={arrowStyle} src={DownArrow}/>
+          <img className='events-page-down-arrow2' style={arrowStyle2} src={DownArrow}/>
+          <img className='events-page-down-arrow3' style={arrowStyle3} src={DownArrow}/>
+        </section>) :
       (null)
+      
+      if(this.state.resetButton) {
+        let rtl = new TimelineMax()
+        rtl.to('.events-page-down-arrow', 0, {bottom: 0, height: '50px', opacity: 1})
+          .to('.events-page-down-arrow2', 0, {bottom: 0})
+          .to('.events-page-down-arrow3', 0, {bottom:-20, height:'25px', opacity: 0})
+          .to('.events-page-show-more', 0, {color: 'black', ease: Power0.easeOut})
+      }
+      let tl = new TimelineMax({
+        repeat: -1,
+        repeatDelay:0,
+      })
+      tl.from('.events-page-down-arrow', 1, {bottom: 30, height: '25px', opacity: 0, ease: Power4.easeOut})
+        .from('.events-page-down-arrow2', 1, {bottom: 24, ease:Power0.easeOut}, '-=1')
+        .from('.events-page-down-arrow3', 1, {bottom: 10, height: '50px', opacity:1, ease:Power4.easeOut}, '-=1')
+      
       events = locationFiltered.map((event,index)=>{
         console.log("EVENT");
         console.log(event);
@@ -237,6 +293,12 @@ class EventsPage extends Component {
         ) : null
       }) 
     }
+    let stl = new TimelineMax({
+      repeat: -1,
+      yoyo: true
+    });
+    stl.from('.events-page-show-more', 1, {color:'#4E4E4E', ease: Power0.easeOut})
+
     return (
       <section>
       <div className='events-page-background'>
@@ -258,7 +320,6 @@ class EventsPage extends Component {
           <div className='events-page-filter-two-options'>
             <li onClick={()=>{this.updateForm('Relevance', 'sortBy')}} className='events-page-filter-two-option-one'>Relevance</li>
             <li onClick={()=>{this.updateForm('Newest', 'sortBy')}} className='events-page-filter-two-option-two'>Newest</li>
-            <li onClick={()=>{this.updateForm('Type', 'sortBy')}} className='events-page-filter-two-option-three'>Type</li>
           </div>
           <div onClick={(e)=>{this.state.sortBy.clickable?this.expandForm('sortBy'):null}} className='events-page-filter-two-arrow'>V</div>
         </div>
@@ -305,7 +366,6 @@ function mapStateToProps(state, ownProps) {
           });
       return state;
   }
-export default connect(mapStateToProps, {
-  
+export default connect(mapStateToProps, {  
    getEvents:getEvents
 })(EventsPage);

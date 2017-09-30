@@ -1,0 +1,107 @@
+.blog-page-blog-section {
+  display: flex;
+  flex-wrap:wrap;
+  justify-content: space-around;
+}
+.blog-page-blog-container {
+  height: 500px;
+  width: 30vw;
+  display: grid;
+  margin-bottom: 32px;
+}
+.blog-page-blog-container-large {
+  height: 500px;
+  width: 100%;
+  display: grid;
+  margin-bottom: 32px;
+}
+.blog-page-blog-image {
+  display: grid;
+  width: 100%;
+  height: 500px;
+  background: url('./images/blogs/quilt_placeholder.jpg') no-repeat center center;
+  background-size: cover;
+  position: relative;
+}
+.blog-page-blog-details {
+  position: absolute;
+  bottom: 0;
+  height: 100px;
+  overflow: hidden;
+  opacity: 0.8;	
+  background-color: #000000;
+  display: grid;
+  grid-template: 24px 62px 13px 26px 16px 42px 32px 37px 30px /  5% 90% 5%;
+}
+.blog-page-blog-details-large {
+  position: absolute;
+  bottom: 0;
+  height: 280px;
+  width: 100%;
+  opacity: 0.8;	
+  background-color: #000000;
+  display: grid;
+  grid-template: 24px 62px 13px 26px 16px 42px 32px 37px 30px /  5% 90% 5%;
+}
+.blog-page-blog-title {
+  color: #FFFFFF;	
+  font-family: 'FuturaBold';	
+  font-size: 24px;	
+  line-height: 32px;
+  display: grid;
+  grid-area: 2 / 2;
+}
+.blog-page-blog-date {
+  display: grid;
+  grid-area: 4 / 2;
+  font-family: "FuturaRegular";	
+  font-size: 20px;	
+  line-height: 26px;
+  color: #FFFFFF;	
+}
+.blog-page-blog-text {
+  display: grid;
+  grid-area: 6 / 2;
+  width: 100%;
+  color: #FFFFFF;	
+  font-family: "FuturaMedium";	
+  font-size: 16px;	
+  line-height: 21px;
+}
+.blog-page-blog-button {
+  display: grid;
+  grid-area: 8 / 2;
+  height: 37px;	
+  width: 162px;	
+  border: 1.87px solid #FFFFFF;	
+  border-radius: 93.69px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  color: #FFFFFF;	
+  font-family: "FuturaMedium";	
+  font-size: 16px;	
+  line-height: 21px;	
+  text-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+.blogs-page-scroll {
+  display: grid;
+  height: 120px;
+  width: 100%;
+  grid-template: 35% 10% 10% 10% 10% 35% / 42.5% 15% 42.5%;
+  cursor: pointer;
+  box-shadow: 0px -10px 20px 10px #F7F7F7;
+  background: #F7F7F7;
+  opacity: .9
+}
+.blogs-page-show-more {
+  display: grid;
+  grid-area: 1 / 2;
+  align-content: center;
+  margin: 0 auto;	
+  font-family: "FuturaBold";	
+  font-size: 24px;	
+  line-height: 32px;
+  color: black;
+}
