@@ -5,6 +5,30 @@ import {getEvents} from '../../reducers/generalReducer';
 import moment from 'moment';
 import '../../styles/EventsPage.css';
 import DownArrow from '../../styles/images/events/down_arrow.svg'
+import {
+  ShareButtons,
+  ShareCounts,
+  generateShareIcon,
+} from 'react-share';
+
+
+const {
+  FacebookShareButton,
+  GooglePlusShareButton,
+  TwitterShareButton,
+  EmailShareButton,
+} = ShareButtons;
+
+const {
+  FacebookShareCount,
+  GooglePlusShareCount,
+} = ShareCounts;
+
+const FacebookIcon = generateShareIcon('facebook');
+const TwitterIcon = generateShareIcon('twitter');
+const GooglePlusIcon = generateShareIcon('google');
+const EmailIcon = generateShareIcon('email');
+
 
 class EventsPage extends Component {
   constructor(props){
@@ -270,6 +294,8 @@ class EventsPage extends Component {
         console.log("EVENT");
         console.log(event);
         var d1 = moment.utc(event.date);
+        let shareUrl="http://www.google.com";
+        let title=event.title;
         return index<(this.state.numberOfEvents)?
            (
             <div className="events-page-events" key={index}>
@@ -277,10 +303,54 @@ class EventsPage extends Component {
               <div className='events-page-banner-image'/>
             </div>
             <div className='events-page-social-media'>
-              <div className='events-page-facebook'>F</div>
-              <div className='events-page-twitter'>T</div>
-              <div className='events-page-google'>G</div>
-              <div className='events-page-email'>E</div>
+
+
+              <div className='events-page-facebook'>
+           
+         <FacebookShareButton
+            url={shareUrl}
+            quote={title}
+            className="share-button">
+            <FacebookIcon
+              size={49}
+              round />
+          </FacebookShareButton>
+              </div>
+              <div className='events-page-twitter'>
+               <TwitterShareButton
+            url={shareUrl}
+            quote={title}
+            className="share-button">
+            <TwitterIcon
+              size={49}
+              round />
+
+          </TwitterShareButton>
+
+              </div>
+              <div className='events-page-google'>
+                <GooglePlusShareButton
+            url={shareUrl}
+            quote={title}
+            className="share-button">
+            <GooglePlusIcon
+              size={49}
+              round />
+
+          </GooglePlusShareButton>
+                </div>
+              <div className='events-page-email'>
+              <EmailShareButton
+             url={shareUrl}
+            subject={title}
+            body="body"
+            className="share-button">
+            <EmailIcon
+              size={49}
+              round />
+
+          </EmailShareButton>
+              </div>
             </div>
             <div className="events-page-event-info">
               <div className='events-page-event-title'>{ 30 > event.title.length? 

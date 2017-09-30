@@ -7,6 +7,7 @@ import myForm from './myForm';
 import ApiNewsLetter from './ApiNewsLetter';
 import ApiEventDetail from './ApiEventDetail';
 import ApiEventPage from './ApiEventPage';
+import ApiCreateEvent from './ApiCreateEvent';
 import 'font-awesome/css/font-awesome.min.css';
 
 
@@ -25,6 +26,7 @@ api TESTS
          <Route path="/apitest/eventpage" component={ApiEventPage} />
         <Route path="/apitest/eventdetail/:eventId" component={ApiEventDetail} />
         <Route path="/apitest/newsletter" component={ApiNewsLetter} />
+        <Route path="/apitest/createevent" component={ApiCreateEvent} />
         </div>
     )
  }

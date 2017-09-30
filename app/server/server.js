@@ -15,7 +15,7 @@ passport = require('passport'),
 const app = express();
 const port = process.env.SERVER_PORT;
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
 
 /* CorsOptions change this when production rolls */
 /* I think this is needed when backend and front end running on different ports */
@@ -82,7 +82,7 @@ passport.use(new Auth0Strategy({
   callbackURL: process.env.AUTH_CALLBACK
 }, function (accessToken, refreshToken, extraParams, profile, done) {
   const db = app.get('db');
-  
+
 
   db.findUser(["" + profile.identities[0].user_id])
     .then(user => {
@@ -205,12 +205,13 @@ app.post('/api/upload',(req, res) => {
   console.log(req.body);
   imageUpload.sendPics(req.body.pic, (data, err) => {
     if (err) {
+      console.log("IMAGE UPLOAD ERRROR")
       console.log(err);
       res.status(500).end();
     }
-    console.log(data)
+  
     req.app.get('db').storeImage([data])
-    res.status(200).end()
+    res.status(200).send(data);
   })
 })
 
