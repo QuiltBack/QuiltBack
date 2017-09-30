@@ -1,3 +1,7 @@
+.events-page-section {
+  position: relative;
+  top: 75px;
+}
 .events-page-background {
   height: 400px;
   width: 100%;

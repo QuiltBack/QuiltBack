@@ -22,7 +22,7 @@ class BlogPage extends Component {
     })
     tl.from('.blogs-page-down-arrow', 1, {bottom: 30, height: '25px', opacity: 0, ease: Power4.easeOut})
       .from('.blogs-page-down-arrow2', 1, {bottom: 20, ease:Power0.easeOut}, '-=1')
-      .from('.blogs-page-down-arrow3', 1, {bottom: 10, height: '50px', opacity:1, ease:Power4.easeOut}, '-=1')
+      .from('.blogs-page-down-arrow3', 1, {bottom: 10, height: '50px', opacity:.7, ease:Power4.easeOut}, '-=1')
   }
   componentWillReceiveProps() {
     this.loadPosts();
@@ -112,6 +112,7 @@ class BlogPage extends Component {
         gridArea: '4 / 2',
         position: 'relative',
         margin: '0 auto',
+        opacity: .7,
       }
       let arrowStyle3 = {
         height: '25px',
@@ -137,7 +138,7 @@ class BlogPage extends Component {
       
       if(this.state.resetButton) {
         let rtl = new TimelineMax()
-        rtl.to('.blogs-page-down-arrow', 0, {bottom: 0, height: '50px', opacity: 1})
+        rtl.to('.blogs-page-down-arrow', 0, {bottom: 0, height: '50px', opacity: .7})
           .to('.blogs-page-down-arrow2', 0, {bottom: 0})
           .to('.blogs-page-down-arrow3', 0, {bottom:-20, height:'25px', opacity: 0})
           .to('.blogs-page-show-more', 0, {color: 'black', ease: Power0.easeOut})
@@ -148,11 +149,16 @@ class BlogPage extends Component {
       })
       tl.from('.blogs-page-down-arrow', 1, {bottom: 30, height: '25px', opacity: 0, ease: Power4.easeOut})
         .from('.blogs-page-down-arrow2', 1, {bottom: 24, ease:Power0.easeOut}, '-=1')
-        .from('.blogs-page-down-arrow3', 1, {bottom: 10, height: '50px', opacity:1, ease:Power4.easeOut}, '-=1')
+        .from('.blogs-page-down-arrow3', 1, {bottom: 10, height: '50px', opacity:.7, ease:Power4.easeOut}, '-=1')
+      let stl = new TimelineMax({
+        repeat: -1,
+        yoyo: true
+      });
+      stl.from('.blogs-page-show-more', 1, {color:'#4E4E4E', ease: Power0.easeOut})  
     }
     
     return (
-      <section>
+      <section className='blog-page-section'>
         <div className='blog-page-blog-section'>
           {blogs}
           {button}

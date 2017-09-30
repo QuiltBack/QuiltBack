@@ -6,12 +6,17 @@
     grid-template-columns: repeat(16, 1fr);
     align-content: center;
     text-align: center;
+    position: fixed;
+    top: 0;
+    z-index: 5;
 }
 .qb-small-logo {
     display: grid;
     grid-area: 1 / 2 / span 1 / span 3;
     height: 57px;
     width: 100%;
+    position: relative;
+    top: 0;
 }
 #Q, #B {
     color: #FFFFFF;	

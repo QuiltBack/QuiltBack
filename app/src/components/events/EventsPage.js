@@ -64,7 +64,7 @@ class EventsPage extends Component {
     })
     tl.from('.events-page-down-arrow', 1, {bottom: 30, height: '25px', opacity: 0, ease: Power4.easeOut})
       .from('.events-page-down-arrow2', 1, {bottom: 20, ease:Power0.easeOut}, '-=1')
-      .from('.events-page-down-arrow3', 1, {bottom: 10, height: '50px', opacity:1, ease:Power4.easeOut}, '-=1')
+      .from('.events-page-down-arrow3', 1, {bottom: 10, height: '50px', opacity:.7, ease:Power4.easeOut}, '-=1')
   }
 
   componentWillReceiveProps() {
@@ -113,7 +113,7 @@ class EventsPage extends Component {
     '.events-page-filter-two-options' : type==='distance'? 
     '.events-page-filter-three-options':'.events-page-filter-four-options';
     let height = type==='sortBy'? 
-    '137px' : type==='distance'? 
+    '100px' : type==='distance'? 
     '197px':'227px';
 
     type==='sortBy'?
@@ -253,6 +253,7 @@ class EventsPage extends Component {
         gridArea: '4 / 2',
         position: 'relative',
         margin: '0 auto',
+        opacity: .7,
       }
       let arrowStyle3 = {
         height: '25px',
@@ -277,7 +278,7 @@ class EventsPage extends Component {
       
       if(this.state.resetButton) {
         let rtl = new TimelineMax()
-        rtl.to('.events-page-down-arrow', 0, {bottom: 0, height: '50px', opacity: 1})
+        rtl.to('.events-page-down-arrow', 0, {bottom: 0, height: '50px', opacity: .7})
           .to('.events-page-down-arrow2', 0, {bottom: 0})
           .to('.events-page-down-arrow3', 0, {bottom:-20, height:'25px', opacity: 0})
           .to('.events-page-show-more', 0, {color: 'black', ease: Power0.easeOut})
@@ -288,7 +289,7 @@ class EventsPage extends Component {
       })
       tl.from('.events-page-down-arrow', 1, {bottom: 30, height: '25px', opacity: 0, ease: Power4.easeOut})
         .from('.events-page-down-arrow2', 1, {bottom: 24, ease:Power0.easeOut}, '-=1')
-        .from('.events-page-down-arrow3', 1, {bottom: 10, height: '50px', opacity:1, ease:Power4.easeOut}, '-=1')
+        .from('.events-page-down-arrow3', 1, {bottom: 10, height: '50px', opacity:.7, ease:Power4.easeOut}, '-=1')
       
       events = locationFiltered.map((event,index)=>{
         console.log("EVENT");
@@ -370,7 +371,7 @@ class EventsPage extends Component {
     stl.from('.events-page-show-more', 1, {color:'#4E4E4E', ease: Power0.easeOut})
 
     return (
-      <section>
+      <section className='events-page-section'>
       <div className='events-page-background'>
         <div className='events-page-title'>Events</div>
       </div>

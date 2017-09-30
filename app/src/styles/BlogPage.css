@@ -1,3 +1,7 @@
+.blog-page-section {
+  position: relative;
+  top: 75px;
+}
 .blog-page-blog-section {
   display: flex;
   flex-wrap:wrap;
