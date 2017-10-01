@@ -1,5 +1,208 @@
+
+.ImageAndInputContainer{
+
+display:grid;
+grid-template-columns: 5% 55% 35% 5%;
+grid-template-rows:100%;
+}
+.createEventSaveButton{
+    border-radius:15px;
+    padding:8px;
+    padding-left:32px;
+  padding-right:32px;
+  padding-top:4px;
+  padding-bottom:4px;
+  background-color:#DA3044;
+    color:white;
+   
+}
+.createEventCancelDiv{
+
+grid-columns: 1/1;
+grid-rows:1/1;
+justify-self:center;
+
+
+}
+
+.createEventSaveDiv{
+ grid-columns:2/2;
+ grid-rows:1/1;
+ justify-self:center;
+}
+.createEventSaveCancelButtons{
+    display:grid;
+    margin-left:50vw;
+    width:40vw;
+    grid-template-columns: 50% 50%;
+    grid-template-rows:100%;
+    margin-bottom:32px;
+    font-size:1.4rem;
+}
+.createEventCancelButton{
+    border-radius:15px;
+  background-color:white;
+  padding-left:32px;
+  padding-right:32px;
+  padding-top:4px;
+  padding-bottom:4px;
+  
+}
+.inputContainer{
+  padding-left:16px;
+  grid-column-start:3;
+  grid-column-end:4;
+  grid-row:1;
+  display:grid;
+  grid-template-columns: 100%;
+  grid-template-rows:  5% 10% 10% 25% 5% 10% 10% 10% 5%;
+}
+.descriptionHeader{
+    padding-top:32px;
+    padding-left:5%;
+    font-size:3rem;
+    padding-bottom:32px;
+}
+
+.eventDescription{
+    padding-left:5%;
+}
+.staticSizeLarge{
+    font-size:3rem;
+    
+}
+.eventTitle{
+    grid-column-start:1;
+    grid-column-end:1;
+    grid-row-start:4;
+    grid-row-end:5;
+    align-self:center;
+    
+}
+.eventHost{
+    grid-column-start:1;
+    grid-column-end:1;
+    grid-row-start:6;
+    grid-row-end:7;
+}
+.eventVolunteer{
+     grid-column-start:1;
+     grid-column-end:1;
+     grid-row-start:7;
+     grid-row-end:8;
+     
+
+}
+.eventDonor{
+     grid-column-start:1;
+     grid-column-end:1;
+     grid-row-start:8;
+     grid-row-end:9;
+
+}
+
+.staticColor{
+    color:lightgray;
+}
+.startDateContainer{
+    grid-row-start:2;
+    grid-row-end:2;
+    grid-column-start:1;
+    grid-column-end:1;
+    display:grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: 100%;
+}
+.startDateFull{
+    grid-row:1;
+    grid-column-start:1;
+    grid-column-end:3;
+}
+.startDateLabel{
+    grid-row:1;
+    grid-column-start:1;
+}
+.react-datepicker__time-list{
+    margin-left:0px;
+    padding-left:0px;
+    padding-right:0px;
+    margin-right:0px;
+
+}
+
+.react-datepicker__time-list-item{
+ margin-left:0px;
+ padding-left:0px;
+ padding-right:0px;
+ 
+ width:100px;
+
+}
+.react-datepicker__time-container {
+   
+}
+.inputLabel{
+    padding-right:8px;
+}
+.catalogueAddNewImageText{
+    font-size:0.75rem;
+    color:#C5C5C5;
+}
+.catalogueHeader{
+    padding-left:5%;
+    margin-top:16px;
+    margin-bottom:16px;
+    font-size:3rem;
+    font-weight:400;
+}
+.inputcalendar{
+    font-size:1rem;
+    width:140px;
+}
+.redButton{
+    border-radius:15px 15px 15px 15px;
+    background-color:#DA3044;
+    color:white;
+    font-size:0.75rem;
+}
+.react-datepicker__time{
+    width:100%;
+    padding-left:0px;
+}
+react-datepicker__time-list{
+    border:1 px solid green;
+}
+.react-datepicker__header--time{
+    width:100%;
+}
+
+.catalogueImageContainer{
+margin-left:5%;
+width:10vw;
+height:100px;
+border: 1px dashed #C5C5C5;
+}
+.catalogueItemName{
+  font-size:0.75rem;
+  padding-left:5%;
+}
+.catalogueItemAuctionId{
+    font-size:0.75rem;
+    padding-left:5%;
+}
+
+
 .ImageContainer{
-    width:50vw;
-    height:300px;
-    border: 1px solid red;
+   grid-column-start:2;
+   grid-column-end:3;
+   grid-row:1;
+   height:300px;
+    border: 4px dashed #C5C5C5;
+    
+}
+.imageUploadText{
+  
+  font-size:4rem;
+  text-align:center;
+  color:#C5C5C5;
 }
