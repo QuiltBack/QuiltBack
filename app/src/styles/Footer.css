@@ -3,7 +3,7 @@
   background:#F7F7F7;
   height: 235px;
   display: grid;
-  grid-template-columns: repeat(16, 1fr);
+  grid-template: 235px / repeat(16, 1fr);
 }
 .footer-grid-one {
   display: grid;
