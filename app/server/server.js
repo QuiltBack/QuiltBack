@@ -157,7 +157,7 @@ app.get('/auth/me', cors(corsOptions), (req, res, next) => {
     res.status(404).send('User not found');
   }
   else {
-    consolelog("USER FOUND");
+    console.log("USER FOUND");
     res.status(200).send(req.user);
   }
 });
@@ -180,7 +180,7 @@ app.get('/api/posts',  CTRL.getPosts);
 app.get('/api/post/:postId',CTRL.getPost);
 
 app.get('/api/event/:eventId',CTRL.getEvent);
-
+app.post('/api/event',CTRL.addEvent);
 app.get('/api/events', CTRL.getEvents);
 
 app.get('/api/eventpage/:limit/:page',CTRL.getEventPage);

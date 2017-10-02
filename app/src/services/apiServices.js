@@ -1,13 +1,24 @@
 import axios from 'axios';
 
 const localApiUrl ='http://localhost:3001'
-/*
-// api not used now.
+
+
 const api = axios.create({
     withCredentials:true
 
 });
-*/
+
+export function apiCreateEvent(event){
+
+    return axios.post(localApiUrl + '/api/event', {event:event})
+    .then(response=>{
+        console.log("response");
+        console.log(response);
+        return response;
+    })
+
+}
+
 export function apiGetNextEventPage(page,limit){
     return axios.get(localApiUrl + '/api/eventpage/' + limit + '/' + page+1)
        .then(response=>{
@@ -62,6 +73,8 @@ export function apiGetPostDetail(postId){
 
             })
 }
+
+
 export function apiGetEventDetail(eventId){
 return axios.get(localApiUrl + '/api/event/' + eventId)
              .then(response=>{
@@ -152,11 +165,40 @@ export function apiGetEvents(){
            
 }
 
+export function apiGetEventById(eventid){
+    //app.get('/api/event/:eventId',CTRL.getEvent);
+    console.log("inside apiGetEventById");
+    return axios.get(localApiUrl + '/api/event/' + eventid)
+              .then(response=>{
+                  console.log("EVENTS");
+                  console.log(response);
+                  return response.data;
+              })
+              .catch(err=>{
+              console.log("apiGetEvents error");
+              console.log(err);
+
+            })
+           
+}
+
 export function apiGetAddress(){
     console.log('inside getAddress');
     return axios.get(localApiUrl + '/api/address')
         .then(response=>{
             console.log('address' + response);
+            return response.data;
+        })
+        .catch(err=>{
+            console.log('getAddress error' + err);
+        })
+}
+
+export function apiAuthUser(){
+    console.log('inside getAddress');
+    return api.get(localApiUrl + '/auth/me')
+        .then(response=>{
+            console.log('auth/me' + response);
             return response.data;
         })
         .catch(err=>{

@@ -19,14 +19,14 @@ class ApiTest extends Component{
 
    return (
         <div className="apiTest">
-api TESTS
+
         <Route path="/apitest/posts" component={ApiPosts} />
         <Route path="/apitest/events" component={ApiEvents} />
         <Route path="/apitest/form" component={myForm} />
          <Route path="/apitest/eventpage" component={ApiEventPage} />
         <Route path="/apitest/eventdetail/:eventId" component={ApiEventDetail} />
         <Route path="/apitest/newsletter" component={ApiNewsLetter} />
-        <Route path="/apitest/createevent" component={ApiCreateEvent} />
+        <Route path="/apitest/createevent/:eventid" component={ApiCreateEvent} />
         </div>
     )
  }
