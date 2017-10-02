@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {TimelineMax, Power4} from 'greensock';
+import {getUser} from '../../reducers/generalReducer';
 import '../../styles/Dashboard.css';
 
 class Dashboard extends Component {
@@ -10,9 +11,13 @@ class Dashboard extends Component {
       expanded:false,
     }
   }
-  componentDidMount() {
-    
-  }
+  componentWillMount(){
+    if (this.props && this.props.getUser && 
+    !(this.props.general && this.props.general.user && this.props.general.user.id))
+    {
+        this.props.getUser();
+    }
+ }
   mouseEnter() {
     let tl = new TimelineMax();
     tl.to('.dashboard-expand', .3, {marginLeft:'150px', opacity: '.8'})
@@ -64,4 +69,6 @@ function mapStateToProps(state, ownProps) {
   return state;
 }
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps, {
+  getUser: getUser,
+})(Dashboard);

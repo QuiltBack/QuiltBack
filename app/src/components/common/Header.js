@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 class Header extends Component {
     constructor(props) {
@@ -9,6 +10,9 @@ class Header extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
     };
+  
+   
+
     handleChange(text) {
         this.setState({searchInputValue: text})
     };
@@ -70,4 +74,9 @@ class Header extends Component {
     };
 
 };
-export default Header;
+function mapStateToProps(state,ownProps){
+    if (ownProps && ownProps.history && !(state && state.history))
+      return Object.assign({},state,{history:ownProps.history});
+    return state;
+}
+export default connect(mapStateToProps)(Header);

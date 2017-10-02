@@ -12,3 +12,4 @@ export const GET_NEXT_EVENT_PAGE="GET_NEXT_EVENT_PAGE";
 export const GET_NEXT_POST_PAGE="GET_NEXT_POST_PAGE";
 export const GET_EVENT_PAGE="GET_EVENT_PAGE";
 export const GET_ADDRESS="GET_ADDRESS";
+export const GET_USER="GET_USER";
