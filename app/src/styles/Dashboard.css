@@ -1,0 +1,53 @@
+.dashboard-section {
+  width: 258px;
+  height: 100vh;
+  position: fixed;
+  top:0;
+  z-index: 6;
+}
+.dashboard-container {
+  width: 258px;
+  height: 100vh;
+  position: fixed;
+  z-index: 6;
+  background: #FBFBF2;
+  display: grid;
+  grid-template: repeat(16, 1fr) / auto;
+  padding: 18px;
+  padding-top: 40px;
+  margin-left: -258px;
+}
+.dashboard-expand {
+  display: flex;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  grid-area: 8 / 1;
+  margin-left: 120px;
+  background: #D93044;
+  opacity: .5;
+  position: relative;
+  cursor: pointer;
+}
+.dashboard-contents {
+  color: white;
+  margin-left: 60px;
+	font-family: 'FuturaRegular';
+	font-size: 30px;
+	line-height: 29px;
+}
+.dashboard-title {
+  color: #5E5E5E;	
+  font-family: FuturaBold;	
+  font-size: 24px;	
+  line-height: 32px;
+}
+.dashboard-login {
+  display: grid;
+  grid-area: 4 / 1;
+	font-family: 'FuturaMedium';
+	font-size: 22px;
+	line-height: 29px;
+}

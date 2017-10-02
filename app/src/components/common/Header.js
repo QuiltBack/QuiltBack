@@ -64,7 +64,6 @@ class Header extends Component {
                         Blog
                     </Link>
                     <form className="bar" ><input onChange={(e) => {this.handleChange(e.target.value)}} placeholder="Search"></input></form>
-                    <a className="signup-login" href="http://localhost:3001/auth">Login/signup</a>
                 </nav>
             </div>
         );
