@@ -84,11 +84,16 @@ passport.use(new Auth0Strategy({
   const db = app.get('db');
 
 
+console.log("ID CHECK " + profile.identities[0].user_id);
   db.findUser(["" + profile.identities[0].user_id])
     .then(user => {
 
       if (user[0]) {
         console.log("user found");
+<<<<<<< HEAD
+        console.log(user[0]);
+=======
+>>>>>>> master
         return done(null, { users_id: user[0].users_id });
       }
       else {
@@ -142,6 +147,11 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (obj, done) {
+<<<<<<< HEAD
+console.log("DESERIALIZE");
+console.log(obj);
+=======
+>>>>>>> master
   app.get('db').findSessionUser([obj.users_id])
     .then(user => { return done(null, user[0]); })
     .catch(err=>console.log(err))
