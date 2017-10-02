@@ -132,9 +132,10 @@ let {zip,title,description,date,host,catalogue,donor
     ,volunteer,image_uri,id,owner,address,city,state}=req.body.event;
 
 /*
+(Date, StartTime, Title, Description, ImageRef
+, VolunteerInfo, DonorInfo, City, State, Zipcode
+, address, EndTime, catalogue, host)
 
-INSERT INTO events(Date, StartTime, Title, Description, ImageRef, VolunteerInfo, DonorInfo, City, State, Zipcode, address, EndTime)
-values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
 */
 if (zip ) zip = +zip;
 else zip =0;
@@ -142,13 +143,14 @@ console.log('zip is ' +zip);
 // check to see if id is null
 if (!id){
     console.log("CREATE NEW EVENT ");
-    req.app.get("db").createEvent([date,'',title,description,image_uri,volunteer,donor,city,state,zip,address,''])
+    req.app.get("db").createEvent([date,'',title,description,image_uri,volunteer
+    ,donor,city,state,zip,address,'',JSON.stringify(catalogue),host])
     .then(response=>{console.log("event created");res.status(200).send(response)})
     .catch(err=>{console.log("event not created");console.log(err);res.status(500).end()});
 }
 else{
     console.log("EVENT EDITED");
-     req.app.get("db").editEvent([id,date,'',title,description,image_uri,volunteer,donor,city,state,zip,address,''])
+     req.app.get("db").editEvent([id,date,'',title,description,image_uri,volunteer,donor,city,state,zip,address,'',catalogue,host])
     .then(response=>{console.log("event created");console.log(response);res.status(200).send(response)})
     .catch(err=>{console.log("event not created");console.log(err);res.status(500).end()});
     

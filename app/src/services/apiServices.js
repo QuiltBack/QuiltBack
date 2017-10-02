@@ -7,6 +7,19 @@ const api = axios.create({
     withCredentials:true
 
 });
+export function apiGetUser(){
+        // debug try this
+        //end debug try this
+        return  api.get(localApiUrl  + '/auth/me')
+                    .then(response =>{
+                     return response.data;
+                    })
+                    .catch(err=>{
+                            console.log("auth me error");
+                            console.log(err)});
+
+}
+
 
 export function apiCreateEvent(event){
 
