@@ -3,7 +3,10 @@
   height: 100vh;
   position: fixed;
   top:0;
-  z-index: 6;
+  z-index: 4;
+}
+.zIndex {
+  z-index: 6
 }
 .dashboard-container {
   width: 258px;

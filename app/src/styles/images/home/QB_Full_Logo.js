@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="193px" height="193px" viewBox="0 0 193 193" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
-    <title>QuiltBack - Full Logo Site</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
+import React, {Component} from 'react';
+const QBLogo = () => {
+  return (
+    <svg className='homepage-QB-logo' width="193px" height="193px" viewBox="0 0 193 193" version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="HOME" transform="translate(-262.000000, -178.000000)">
             <g id="Banner-Image">
                 <g id="QuiltBack---Full-Logo-Site" transform="translate(262.000000, 178.000000)">
                     <rect id="Rectangle-3" fill="#D93044" fill-rule="evenodd" x="64.3333333" y="64.3333333" width="64.3333333" height="64.3333333"></rect>
-                    <text id="QUILT" font-family="BloggerSans-Bold, Blogger Sans" font-size="23.3208333" font-style="condensed" font-weight="bold" fill="#FFFFFF">
+                    <text id="QUILT" font-family="BloggerSansBold, Blogger Sans" font-size="23.3208333" font-style="condensed" font-weight="bold" fill="#FFFFFF">
                         <tspan x="67.7192771" y="91.1791667">QUILT</tspan>
                     </text>
                     <text id="BACK" font-family="BloggerSans-Bold, Blogger Sans" font-size="23.3208333" font-style="condensed" font-weight="bold" letter-spacing="1.4474999" fill="#FFFFFF">
@@ -37,3 +35,6 @@
         </g>
     </g>
 </svg>
+  )
+}
+export default QBLogo

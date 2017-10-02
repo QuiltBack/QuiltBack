@@ -13,9 +13,8 @@ class Dashboard extends Component {
   }
   componentWillMount(){
     if (this.props && this.props.getUser && 
-    !(this.props.general && this.props.general.user && this.props.general.user.id))
-    {
-        this.props.getUser();
+    (!this.props.general && !this.props.general.user && !this.props.general.user.users_id)) {
+      this.props.getUser();
     }
  }
   mouseEnter() {
@@ -28,6 +27,7 @@ class Dashboard extends Component {
   }
   mouseClick() {
     let tl = new TimelineMax();
+    document.getElementsByClassName('dashboard-section')[0].classList.add('zIndex');
     tl.to('.dashboard-container', .5, {marginLeft: 0})
     .to('.dashboard-expand', 0, {display:'none', opacity:0}, '-=.5');
     this.setState({
@@ -40,10 +40,14 @@ class Dashboard extends Component {
       tl.to('.dashboard-container', .5, {marginLeft: '-258px'})
         .to('.dashboard-expand', .1, {display:'flex', opacity:.5})
         .to('.dashboard-contents', 0, {opacity:1, marginLeft:'60px', color: 'white'})
-    }
+      }
+    setTimeout(()=>{
+      document.getElementsByClassName('dashboard-section')[0].classList.remove('zIndex');
+    },300)
   }
   render() {
-    console.log(this.props.general);
+    console.log(this.props.general)
+
     let dashboard;
     dashboard = (
       <section className='dashboard-container'>
