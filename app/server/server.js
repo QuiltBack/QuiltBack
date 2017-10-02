@@ -89,7 +89,7 @@ passport.use(new Auth0Strategy({
 
       if (user[0]) {
         console.log("user found");
-        return done(null, { id: user[0].id });
+        return done(null, { id: user[0].users_id });
       }
       else {
         console.log(profile);
@@ -123,7 +123,7 @@ console.log(`
 profile ${profile} displayName ${profile.displayName}, email ${email}, given ${given_name}, family ${family_name}, user_id ${profile.identities[0].user_id}
 `)
         db.createUser([profile.displayName, email, given_name, family_name, "" + profile.identities[0].user_id])
-          .then(user => { return done(null, { id: user[0].id }) })
+          .then(user => { return done(null, { id: user[0].users_id }) })
           .catch(err => { console.log("CREATE USER ERROR"); console.log(err); });
       }
     })
@@ -141,7 +141,7 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (obj, done) {
-  app.get('db').findSessionUser([obj.id])
+  app.get('db').findSessionUser([obj.users_id])
     .then(user => { return done(null, user[0]); })
 });
 
