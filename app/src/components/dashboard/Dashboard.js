@@ -47,6 +47,7 @@ class Dashboard extends Component {
   }
   render() {
     console.log(this.props.general)
+
     let dashboard;
     dashboard = (
       <section className='dashboard-container'>
