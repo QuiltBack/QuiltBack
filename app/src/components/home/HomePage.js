@@ -2,8 +2,52 @@ import React from 'react';
 import Discover from '../../styles/images/home/Discover_Image.svg';
 import Promote from '../../styles/images/home/Promote_Image.svg';
 import Share from '../../styles/images/home/Share_Image.svg';
+import {apiGetAddress} from '../../services/apiServices';
+var NodeGeocoder = require('node-geocoder');
+var env = require('dotenv').config({ path: './server/config/.env' });
+var options = {
+    provider: 'google',
+    httpAdapter: 'https',
+    apiKey: process.env.GOOGLE_API_KEY,
+    formatter: null
+}
+var geocoder = NodeGeocoder(options);
 
 class HomePage extends React.Component {
+constructor(props){
+    super(props);
+    this.state = {
+        data: []
+        
+        
+    }
+    this.loadAddress = this.loadAddress.bind(this)
+}
+componentDidMount(){
+this.loadAddress()
+
+}
+componentWillReceiveProps(){
+this.loadAddress()
+}
+
+loadAddress(){
+            /*geocoder.geocode(config, function(err,res){
+            console.log(res);
+            });*/   
+        
+        apiGetAddress()
+            .then((res)=>{
+                console.log(res)
+                this.setState({
+                    data: res
+                })
+            })
+            .catch(err=>{
+            console.log(err)
+            })
+}
+
 
     render() {
         return (
@@ -77,5 +121,4 @@ class HomePage extends React.Component {
     }
 
 }
-
 export default HomePage;

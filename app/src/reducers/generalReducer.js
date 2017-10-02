@@ -9,6 +9,7 @@ export function getPostDetail(postId){
    }
 }
 export function getAddress(){
+    console.log('inside reducer');
     return{
         type:types.GET_ADDRESS,
         payload: apiGetAddress()
