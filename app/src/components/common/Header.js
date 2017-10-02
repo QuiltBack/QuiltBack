@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {getUser} from '../../reducers/generalReducer.js';
 
 class Header extends Component {
     constructor(props) {
@@ -12,23 +11,12 @@ class Header extends Component {
         this.handleChange = this.handleChange.bind(this);
     };
   
-   componentWillMount(){
-      if (this.props && this.props.getUser && 
-      !(this.props.general && this.props.general.user && this.props.general.user.id))
-      {
-          this.props.getUser();
-      }
-   }
+   
 
     handleChange(text) {
         this.setState({searchInputValue: text})
     };
     render() {
-        let login=(  <a className="signup-login"  href="http://localhost:3001/auth">Login/signup</a>);
-        if (this.props && this.props.general && this.props.general.user &&this.props.general.user.id)
-        {
-            login=(<span className="signup-login">{this.props.general.user.username}</span>);
-        }
         return (
             <div>
                <nav className="main-header-container">
@@ -80,7 +68,6 @@ class Header extends Component {
                         Blog
                     </Link>
                     <form className="bar" ><input onChange={(e) => {this.handleChange(e.target.value)}} placeholder="Search"></input></form>
-                      {login}
                 </nav>
             </div>
         );
@@ -92,4 +79,4 @@ function mapStateToProps(state,ownProps){
       return Object.assign({},state,{history:ownProps.history});
     return state;
 }
-export default connect(mapStateToProps,{getUser:getUser})(Header);
+export default connect(mapStateToProps)(Header);
