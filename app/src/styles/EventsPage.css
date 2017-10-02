@@ -213,6 +213,7 @@
   cursor: pointer;
 }
 .events-page-banner-image {
+   cursor:pointer;
   display: grid;
   grid-area: 2 / 2;
   background: url('./images/events/quilt_placeholder.jpg') no-repeat center center;
@@ -274,6 +275,7 @@
   color: #D93044;
 }
 .events-page-event-info {
+  cursor:pointer;
   display: grid;
   grid-area: 1 / 3;
   grid-template: 20px 73px 24px 26px 8px 120px 49px / auto;

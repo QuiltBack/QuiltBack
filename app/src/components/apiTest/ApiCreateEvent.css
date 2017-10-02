@@ -186,12 +186,14 @@ justify-self:center;
     padding-left:0px;
 }
 react-datepicker__time-list{
-    border:1 px solid green;
+    
 }
 .react-datepicker__header--time{
     width:100%;
 }
-
+.catalogue{
+    padding-left:300px;
+}
 .catalogueImageContainer{
 margin-left:5%;
 width:10vw;

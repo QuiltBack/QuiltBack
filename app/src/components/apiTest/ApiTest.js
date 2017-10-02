@@ -8,6 +8,7 @@ import ApiNewsLetter from './ApiNewsLetter';
 import ApiEventDetail from './ApiEventDetail';
 import ApiEventPage from './ApiEventPage';
 import ApiCreateEvent from './ApiCreateEvent';
+import EventDetail from '../events/EventDetail';
 import 'font-awesome/css/font-awesome.min.css';
 
 
@@ -24,7 +25,7 @@ class ApiTest extends Component{
         <Route path="/apitest/events" component={ApiEvents} />
         <Route path="/apitest/form" component={myForm} />
          <Route path="/apitest/eventpage" component={ApiEventPage} />
-        <Route path="/apitest/eventdetail/:eventId" component={ApiEventDetail} />
+        <Route path="/apitest/eventdetail/:eventId" component={EventDetail} />
         <Route path="/apitest/newsletter" component={ApiNewsLetter} />
         <Route path="/apitest/createevent/:eventid" component={ApiCreateEvent} />
         </div>
