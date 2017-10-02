@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {TimelineMax, Power4} from 'greensock';
 import {getUser} from '../../reducers/generalReducer';
+import {Link} from 'react-router-dom';
 import '../../styles/Dashboard.css';
 
 class Dashboard extends Component {
@@ -13,7 +14,7 @@ class Dashboard extends Component {
   }
   componentWillMount(){
     if (this.props && this.props.getUser && 
-    (!this.props.general && !this.props.general.user && !this.props.general.user.users_id)) {
+    !(this.props.general && this.props.general.user && this.props.general.user.users_id)) {
       this.props.getUser();
     }
  }
@@ -46,18 +47,49 @@ class Dashboard extends Component {
     },300)
   }
   render() {
-    console.log(this.props.general)
-
     let dashboard;
-    dashboard = (
-      <section className='dashboard-container'>
-        <div className='dashboard-title'>Dashboard</div>
-        <a className="dashboard-login" href="http://localhost:3001/auth">Signup/Login</a>
-        <div onMouseEnter={(e)=>{this.mouseEnter()}} onMouseLeave={(e)=>{this.mouseLeave()}} onClick={(e)=>{this.mouseClick()}} className='dashboard-expand'>
-          <div className='dashboard-contents'> {'<'} </div>
-        </div>
-      </section>
-    )
+    let props = this.props.general
+    if (props && props.user) {
+      console.log(props)
+      if (props.user.user_type==='Admin') {
+        dashboard = (
+          <section className='dashboard-container'>
+            <div className='dashboard-title'>Dashboard</div>
+            <Link className='dashboard-admin-notifications' to='/notifications'>Notifications</Link>
+            <Link className='dashboard-admin-pages' to='/pages'>Pages</Link>
+            <Link className='dashboard-admin-users' to='/users'>Users</Link>
+            <Link className='dashboard-admin-posts' to='/posts'>Posts</Link>
+            <a className="dashboard-admin-logout" href="http://localhost:3001/auth/logout">Logout</a>
+            <div onMouseEnter={(e)=>{this.mouseEnter()}} onMouseLeave={(e)=>{this.mouseLeave()}} onClick={(e)=>{this.mouseClick()}} className='dashboard-expand'>
+              <div className='dashboard-contents'> {'<'} </div>
+            </div>
+        </section>
+        )
+      } else {
+        dashboard = (
+          <section className='dashboard-container'>
+            <div className='dashboard-title'>Dashboard</div>
+            <Link className='dashboard-user-events' to={'/dashboard/events'}>My Events</Link>
+            <Link className='dashboard-user-posts' to={'/dashboard/posts'}>My Posts</Link>
+            <Link className='dashboard-user-account' to={'/dashboard/account'}>Account Settings</Link>
+            <a className="dashboard-user-logout" href="http://localhost:3001/auth/logout">Logout</a>
+            <div onMouseEnter={(e)=>{this.mouseEnter()}} onMouseLeave={(e)=>{this.mouseLeave()}} onClick={(e)=>{this.mouseClick()}} className='dashboard-expand'>
+              <div className='dashboard-contents'> {'<'} </div>
+            </div>
+        </section>
+        )
+      }
+    } else {
+      dashboard = (
+        <section className='dashboard-container'>
+          <div className='dashboard-title'>Dashboard</div>
+          <a className="dashboard-login" href="http://localhost:3001/auth">Signup/Login</a>
+          <div onMouseEnter={(e)=>{this.mouseEnter()}} onMouseLeave={(e)=>{this.mouseLeave()}} onClick={(e)=>{this.mouseClick()}} className='dashboard-expand'>
+            <div className='dashboard-contents'> {'<'} </div>
+          </div>
+        </section>
+      )
+    }
     return (
       <section onMouseLeave={(e)=>{this.mouseLeaveSection()}} className='dashboard-section'>
       {dashboard}
