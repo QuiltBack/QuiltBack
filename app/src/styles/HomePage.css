@@ -8,7 +8,7 @@
 	display: grid;
 	grid-template: auto / 20vw 70vw;
 	overflow-x: hidden;
-  background-image: url("https://i.pinimg.com/originals/34/15/28/3415288947aaeaeef2a23f63db951fcc.jpg");
+  background: url("https://i.pinimg.com/originals/34/15/28/3415288947aaeaeef2a23f63db951fcc.jpg") no-repeat center center fixed;
   background-size: cover;
 	max-height: 475px;
 	height: 475px;
