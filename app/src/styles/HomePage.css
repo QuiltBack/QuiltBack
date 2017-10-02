@@ -236,3 +236,9 @@
 	line-height: 47px;
 	text-align: center;
 }
+@media screen and(min-width: 40em) {
+	.banner-container{
+		border-color: red;
+		border-style: solid;
+	}
+}
