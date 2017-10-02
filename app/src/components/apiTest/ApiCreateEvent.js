@@ -88,6 +88,8 @@ loadEvent(props){
                if (oldevent.catalogue){
                    oldCatalog= JSON.parse(oldevent.catalogue);
                }
+               if (!Array.isArray(oldCatalog))
+                 oldCatalog=[];
                console.log("response for event to edit was");
                console.log(response);
              
@@ -104,8 +106,11 @@ loadEvent(props){
                    uploaded_uri:oldevent.imageref?oldevent.imageref:'',
                    title:oldevent.title?oldevent.title:'',
                    host:oldevent.host?oldevent.host:'',
-                   catalogue:oldCatalog
-                   
+                   catalogue:oldCatalog,
+                   users_id: oldevent.users_id?oldevent.users_id:null,
+                   catalogueImage_uri:(oldCatalog.length >0)?oldCatalog[0].image_uri:'',
+                   catalogueItemName:(oldCatalog.length >0)?oldCatalog[0].Name:'',
+                   catalogueItemAuctionId:(oldCatalog.length >0)?oldCatalog[0].AuctionId:'',
 
 
                 })
@@ -136,18 +141,20 @@ saveAndPublish(){
         userid=this.props.general.user.users_id;
     }
     if (userid ===null) return;
-    
+    console.log("userID save event " +userid);
     let newEvent={
         title:this.state.title?this.state.title:'',
         description:this.state.description?this.state.description:'',
         catalogue:this.state.catalogue?this.state.catalogue:[],
         donor:this.state.donor?this.state.donor:'',
         volunteer:this.state.volunteer?this.state.volunteer:'',
-        image_uri:this.state.uploaded_uri?this.staet.uploaded_uri:'',
+        image_uri:this.state.uploaded_uri?this.state.uploaded_uri:'',
         id:this.state.eventid,
-        owner:userid,
+        users_id:userid,
         date:this.state.date?this.state.date : moment(),
         host:this.state.host?this.state.host:'',
+        city:this.state.city?this.state.city:'',
+        state:this.state.state?this.state.state:'',
         zip:this.state.zip?this.state.zip:'',
         
        
@@ -175,6 +182,7 @@ saveAndPublish(){
         
 
         })
+        this.props.history.push("/");
 
     })
     .catch(err=>console.log(err))

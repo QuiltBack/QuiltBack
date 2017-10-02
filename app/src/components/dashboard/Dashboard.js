@@ -13,7 +13,7 @@ class Dashboard extends Component {
   }
   componentWillMount(){
     if (this.props && this.props.getUser && 
-    !(this.props.general && this.props.general.user && this.props.general.user.id))
+    !(this.props.general && this.props.general.user && this.props.general.user.users_id))
     {
         this.props.getUser();
     }

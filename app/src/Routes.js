@@ -7,6 +7,7 @@ import EventsPage from './components/events/EventsPage';
 import HomePage from './components/home/HomePage';
 import BlogPage from './components/blog/BlogPage';
 import CreateEvent from './components/createEvent/CreateEvent';
+import EventDetail from './components/events/EventDetail'
 
 export default (
     <Switch>
@@ -15,5 +16,6 @@ export default (
         <Route path="/events" component={EventsPage}/>
         <Route path="/blog" component={BlogPage}/>
         <Route path="/createEvent" component={CreateEvent}/>
+         <Route path="/event/:eventId" component={EventDetail}/>
     </Switch>
 );
