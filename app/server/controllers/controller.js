@@ -52,7 +52,6 @@ console.log("page is " +req.params.page)
             console.log("getting addresses");
                 req.app.get("db").getAddress()
                     .then(response=>{
-                        console.log(response)
                         res.status(200).send(response)
                     })
                     .catch(err=>{

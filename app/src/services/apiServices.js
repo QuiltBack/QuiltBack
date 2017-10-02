@@ -187,6 +187,7 @@ export function apiGetAddress(){
     return axios.get(localApiUrl + '/api/address')
         .then(response=>{
             console.log('address' + response);
+            
             return response.data;
         })
         .catch(err=>{
