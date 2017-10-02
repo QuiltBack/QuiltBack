@@ -79,6 +79,10 @@ loadEvent(props){
            console.log("eventid " +eventid);
            apiGetEventById(eventid)
            .then(response=>{
+               console.log("OLD EVENT RESPONSE")
+               console.log(response);
+
+                let oldevent=response[0];
                let oldCatalog;
                oldCatalog=[];
                if (oldevent.catalogue){
@@ -86,7 +90,7 @@ loadEvent(props){
                }
                console.log("response for event to edit was");
                console.log(response);
-              let oldevent=response[0];
+             
                 this.setState({
                    address:oldevent.address,
                    city:oldevent.city,
