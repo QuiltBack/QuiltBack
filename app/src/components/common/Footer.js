@@ -1,8 +1,34 @@
 import React from 'react';
+import {Component} from 'react';
 import '../../styles/Footer.css';
 
-const Footer = () => {
-  return (
+import {apiAddSubscriber} from '../../services/apiServices.js';
+
+export default class Footer extends Component{
+constructor(props){
+  super(props);
+  this.newSubscriber=this.newSubscriber.bind(this);
+  
+}
+newSubscriber(e){
+  e.preventDefault();
+
+  if (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(this.refs.subscriberEmail.value))
+  {
+    
+    apiAddSubscriber(this.refs.subscriberEmail.value).then(response=>{
+     alert("Thanks for subscribing");  
+    });
+    
+  }
+  else{
+    
+    alert('bad email');
+  }
+  this.refs.subscriberEmail.value='';
+}
+  render(){
+    return (
     <footer className='main-footer-container'>
       <div className='footer-grid-one'>
         <div className='footer-question'>Have a question? Comment?</div>
@@ -13,8 +39,8 @@ const Footer = () => {
         <div className='footer-stay-connected'>Stay Connected</div>
         <div className='footer-receive-emails'>Receive e-mails when a new event is hosted or a new blog posted.</div>
         <form className='footer-form'>
-          <input className='footer-email-address' placeholder='Email Address'/>
-          <button className='footer-button-subscribe'>SUBSCRIBE</button>
+          <input className='footer-email-address' ref="subscriberEmail" placeholder='Email Address'/>
+          <button className='footer-button-subscribe' onClick={this.newSubscriber}>SUBSCRIBE</button>
         </form>
       </div>
       <div className='footer-grid-three'>
@@ -24,7 +50,9 @@ const Footer = () => {
         <div className='footer-instagram'/>
       </div>
     </footer>  
-  )
+   )
+  }
 }
 
-export default Footer;
+
+

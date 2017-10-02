@@ -12,6 +12,8 @@ const moment = require('moment');
 
 class ApiEventDetail extends Component{
 
+
+
 eventdetails()
 {
     console.log("GET EVENT DETAIL")

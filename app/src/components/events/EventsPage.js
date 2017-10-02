@@ -1,10 +1,34 @@
 import React, {Component} from 'react';
-import {TimelineMax, Power4} from 'greensock';
-import axios from 'axios';
+import {TimelineMax, Power4, Power0} from 'greensock';
 import {connect} from 'react-redux';
 import {getEvents} from '../../reducers/generalReducer';
 import moment from 'moment';
 import '../../styles/EventsPage.css';
+import DownArrow from '../../styles/images/events/down_arrow.svg'
+import {
+  ShareButtons,
+  ShareCounts,
+  generateShareIcon,
+} from 'react-share';
+
+
+const {
+  FacebookShareButton,
+  GooglePlusShareButton,
+  TwitterShareButton,
+  EmailShareButton,
+} = ShareButtons;
+
+const {
+  FacebookShareCount,
+  GooglePlusShareCount,
+} = ShareCounts;
+
+const FacebookIcon = generateShareIcon('facebook');
+const TwitterIcon = generateShareIcon('twitter');
+const GooglePlusIcon = generateShareIcon('google');
+const EmailIcon = generateShareIcon('email');
+
 
 class EventsPage extends Component {
   constructor(props){
@@ -28,24 +52,33 @@ class EventsPage extends Component {
       query:'',
       location:'',
       numberOfEvents:6,
+      resetButton:true
     }
   }
+
   componentDidMount() {
     this.loadEvents();
+    let tl = new TimelineMax({
+      repeat: -1,
+      repeatDelay:0,
+    })
+    tl.from('.events-page-down-arrow', 1, {bottom: 30, height: '25px', opacity: 0, ease: Power4.easeOut})
+      .from('.events-page-down-arrow2', 1, {bottom: 20, ease:Power0.easeOut}, '-=1')
+      .from('.events-page-down-arrow3', 1, {bottom: 10, height: '50px', opacity:.7, ease:Power4.easeOut}, '-=1')
   }
+
   componentWillReceiveProps() {
     this.loadEvents();
   }
+
   loadEvents() {
     if (this.props && this.props.getEvents && (this.props.general.events.length < 1) ){
       this.props.getEvents();
     }
-    
   }
+
   updateForm(form, type) {
-    let newType;
-    eval('newType=this.state.'+type);
-    
+    let newType = this.state[type]
     type==='sortBy'?
     this.setState({
       sortBy : {
@@ -74,15 +107,13 @@ class EventsPage extends Component {
     },100)
   }
   expandForm(type) {
-    let newType;
-    eval('newType=this.state.'+type);
-
+    let newType = this.state[type]
     let tl = new TimelineMax();
     let className = type==='sortBy'? 
     '.events-page-filter-two-options' : type==='distance'? 
     '.events-page-filter-three-options':'.events-page-filter-four-options';
     let height = type==='sortBy'? 
-    '137px' : type==='distance'? 
+    '100px' : type==='distance'? 
     '197px':'227px';
 
     type==='sortBy'?
@@ -136,6 +167,7 @@ class EventsPage extends Component {
       });
     },500) 
   }
+
   handleChange(val, type) {
     type==='query'?
     this.setState({
@@ -145,11 +177,9 @@ class EventsPage extends Component {
     });
     console.log(val)
   }
-  submitForm(event) {
-    event.preventDefault();
-    console.log(event.target)
-  }
+
   render(){
+    let button;
     let events='Loading events...';
     let weekDays={
         1:"Sun",
@@ -166,30 +196,107 @@ class EventsPage extends Component {
       if (this.state.sortBy.value) {
         switch(this.state.sortBy.value) {
           case 'Relevance':
+            this.props.general.events.sort((a, b)=>{
+              let split = this.state.query.split(' ');
+              let aCount = split.reduce((acc, current)=>{
+                if (!current) {
+                  return acc;
+                }
+                let reg = new RegExp(current, "gi");
+                acc += ((a.title.match(reg) || []).length) * 2;
+                return acc + (a.description.match(reg) || []).length;
+              },0)
+              let bCount = split.reduce((acc, current)=>{
+                if (!current) {
+                  return acc;
+                }
+                let reg = new RegExp(current, "gi");
+                acc += ((b.title.match(reg) || []).length) * 2;
+                return acc + (b.description.match(reg) || []).length;
+              },0)
+              return (bCount - aCount);
+            })
             break;
           case 'Newest':
             this.props.general.events.sort((a, b)=>{
               let date1 = new Date(a.date);
               let date2 = new Date(b.date);
-            return (date2 - date1);
-          })
+              return (date2 - date1);
+            })
+            break;
         }
       }
       let eventsFiltered = this.props.general.events.filter((e)=>{
-        let splitQuery = this.state.query.split(' ')
-        console.log(splitQuery);
-        return splitQuery.reduce((acc, current)=>
-        {
-          console.log(e.description, 'description')
-          console.log(current, 'current')
-            if (! e.description.toLowerCase().includes(current.toLowerCase()) &&  ! e.title.toLowerCase().includes(current.toLowerCase())) {console.log('returning false'); return false}
+        let splitQuery = this.state.query.split(' ');
+        return splitQuery.reduce((acc, current)=>{
+            if (!e.description.toLowerCase().includes(current.toLowerCase()) && !e.title.toLowerCase().includes(current.toLowerCase())) return false
             else return acc;
         },true)
       });
-      events = eventsFiltered.map((event,index)=>{
+      let locationFiltered = eventsFiltered.filter((e)=>{
+        let splitLocation = this.state.location.split(' ');
+        return splitLocation.reduce((acc, current)=>{
+          if (!e.city.toLowerCase().includes(current.toLowerCase()) && !e.state.toLowerCase().includes(current.toLowerCase()) && !e.address.includes(current)) return false
+          else return acc;
+      },true)
+      })
+      let arrowStyle = {
+        height: '50px',
+        display: 'grid',
+        gridArea: '2 / 2',
+        position: 'relative',
+        margin: '0 auto',
+      }
+      let arrowStyle2 = {
+        height: '50px',
+        display: 'grid',
+        gridArea: '4 / 2',
+        position: 'relative',
+        margin: '0 auto',
+        opacity: .7,
+      }
+      let arrowStyle3 = {
+        height: '25px',
+        display: 'grid',
+        gridArea: '5 / 2',
+        position: 'relative',
+        margin: '0 auto',
+        opacity: 0,
+        bottom: -20,
+      }
+      button = locationFiltered.length >= this.state.numberOfEvents? 
+      (
+        <section className='events-page-scroll' onClick={(e)=>{this.setState({numberOfEvents: this.state.numberOfEvents + 6, resetButton: true})}}>
+          <div className='events-page-show-more'>
+            Show more
+          </div>
+          <img className='events-page-down-arrow' style={arrowStyle} src={DownArrow}/>
+          <img className='events-page-down-arrow2' style={arrowStyle2} src={DownArrow}/>
+          <img className='events-page-down-arrow3' style={arrowStyle3} src={DownArrow}/>
+        </section>) :
+      (null)
+      
+      if(this.state.resetButton) {
+        let rtl = new TimelineMax()
+        rtl.to('.events-page-down-arrow', 0, {bottom: 0, height: '50px', opacity: .7})
+          .to('.events-page-down-arrow2', 0, {bottom: 0})
+          .to('.events-page-down-arrow3', 0, {bottom:-20, height:'25px', opacity: 0})
+          .to('.events-page-show-more', 0, {color: 'black', ease: Power0.easeOut})
+      }
+      let tl = new TimelineMax({
+        repeat: -1,
+        repeatDelay:0,
+      })
+      tl.from('.events-page-down-arrow', 1, {bottom: 30, height: '25px', opacity: 0, ease: Power4.easeOut})
+        .from('.events-page-down-arrow2', 1, {bottom: 24, ease:Power0.easeOut}, '-=1')
+        .from('.events-page-down-arrow3', 1, {bottom: 10, height: '50px', opacity:.7, ease:Power4.easeOut}, '-=1')
+      
+      events = locationFiltered.map((event,index)=>{
         console.log("EVENT");
         console.log(event);
         var d1 = moment.utc(event.date);
+        let shareUrl="http://www.google.com";
+        let title=event.title;
         return index<(this.state.numberOfEvents)?
            (
             <div className="events-page-events" key={index}>
@@ -197,10 +304,54 @@ class EventsPage extends Component {
               <div className='events-page-banner-image'/>
             </div>
             <div className='events-page-social-media'>
-              <div className='events-page-facebook'>F</div>
-              <div className='events-page-twitter'>T</div>
-              <div className='events-page-google'>G</div>
-              <div className='events-page-email'>E</div>
+
+
+              <div className='events-page-facebook'>
+           
+         <FacebookShareButton
+            url={shareUrl}
+            quote={title}
+            className="share-button">
+            <FacebookIcon
+              size={49}
+              round />
+          </FacebookShareButton>
+              </div>
+              <div className='events-page-twitter'>
+               <TwitterShareButton
+            url={shareUrl}
+            quote={title}
+            className="share-button">
+            <TwitterIcon
+              size={49}
+              round />
+
+          </TwitterShareButton>
+
+              </div>
+              <div className='events-page-google'>
+                <GooglePlusShareButton
+            url={shareUrl}
+            quote={title}
+            className="share-button">
+            <GooglePlusIcon
+              size={49}
+              round />
+
+          </GooglePlusShareButton>
+                </div>
+              <div className='events-page-email'>
+              <EmailShareButton
+             url={shareUrl}
+            subject={title}
+            body="body"
+            className="share-button">
+            <EmailIcon
+              size={49}
+              round />
+
+          </EmailShareButton>
+              </div>
             </div>
             <div className="events-page-event-info">
               <div className='events-page-event-title'>{ 30 > event.title.length? 
@@ -213,11 +364,14 @@ class EventsPage extends Component {
         ) : null
       }) 
     }
-    let button = this.props.general.events.length >= this.state.numberOfEvents? 
-    (<button onClick={(e)=>{this.setState({numberOfEvents: this.state.numberOfEvents + 6})}}>Show more</button>) :
-    (null)
+    let stl = new TimelineMax({
+      repeat: -1,
+      yoyo: true
+    });
+    stl.from('.events-page-show-more', 1, {color:'#4E4E4E', ease: Power0.easeOut})
+
     return (
-      <section>
+      <section className='events-page-section'>
       <div className='events-page-background'>
         <div className='events-page-title'>Events</div>
       </div>
@@ -237,7 +391,6 @@ class EventsPage extends Component {
           <div className='events-page-filter-two-options'>
             <li onClick={()=>{this.updateForm('Relevance', 'sortBy')}} className='events-page-filter-two-option-one'>Relevance</li>
             <li onClick={()=>{this.updateForm('Newest', 'sortBy')}} className='events-page-filter-two-option-two'>Newest</li>
-            <li onClick={()=>{this.updateForm('Type', 'sortBy')}} className='events-page-filter-two-option-three'>Type</li>
           </div>
           <div onClick={(e)=>{this.state.sortBy.clickable?this.expandForm('sortBy'):null}} className='events-page-filter-two-arrow'>V</div>
         </div>
@@ -284,7 +437,6 @@ function mapStateToProps(state, ownProps) {
           });
       return state;
   }
-export default connect(mapStateToProps, {
-  
+export default connect(mapStateToProps, {  
    getEvents:getEvents
 })(EventsPage);

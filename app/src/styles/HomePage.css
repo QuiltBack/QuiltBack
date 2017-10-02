@@ -8,6 +8,8 @@
 	max-height: 475px;
 	height: 475px;
 	font-size: 72px;
+	position: relative;
+	top: 75px;
 }
 .banner-logo-container {
 	display: grid;
