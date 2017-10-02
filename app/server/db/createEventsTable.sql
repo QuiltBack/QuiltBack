@@ -13,4 +13,8 @@ ImageRef VARCHAR,
 VolunteerInfo VARCHAR,
 DonorInfo VARCHAR,
 EventID SERIAL PRIMARY KEY,
+latitude int,
+longitude int,
+catalogue text,
+host text
 );
