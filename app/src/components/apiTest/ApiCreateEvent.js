@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {bindAll} from 'lodash';
 import axios from "axios";
-
+import {connect} from 'react-redux';
 
 import Dropzone from 'react-dropzone';
 
@@ -14,7 +14,7 @@ import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 import './ApiCreateEvent.css';
 import 'font-awesome/css/font-awesome.min.css';
-export default class ApiCreateEvent extends Component{
+ class ApiCreateEvent extends Component{
 
 constructor(props) {
       super(props);
@@ -23,7 +23,7 @@ constructor(props) {
    this.state={
        
        catalogueItemView:0,
-       user:null,
+      
        eventid:null,
        uploaded_uri:'',
        date:initialDate,
@@ -71,19 +71,19 @@ componentWillMount(){
 }
 
 loadEvent(props){
-    if (this.state && ! this.state.user){
-        apiAuthUser().then(response=>{
-            console.log("auth response");
-            console.log(response);
-            this.setState({user:response});
-        })
-    }
+    
+    
      if (props && props.match && props.match.params && props.match.params.eventid){
        let eventid=props.match.params.eventid;
        if (eventid !='new'){
            console.log("eventid " +eventid);
            apiGetEventById(eventid)
            .then(response=>{
+               let oldCatalog;
+               oldCatalog=[];
+               if (oldevent.catalogue){
+                   oldCatalog= JSON.parse(oldevent.catalogue);
+               }
                console.log("response for event to edit was");
                console.log(response);
               let oldevent=response[0];
@@ -99,6 +99,8 @@ loadEvent(props){
                    eventid:eventid,
                    uploaded_uri:oldevent.imageref,
                    title:oldevent.title,
+                   host:oldevent.host,
+                   catalogue:oldCatalog
                    
 
 
@@ -390,8 +392,8 @@ onDateChange(date){
 
 render(){
     console.log(this.props);
-    console.log("state");
-    console.log(this.state);
+    console.log("USER")
+    console.log(this.props.general.user);
 let processing="";
 let imageStyle={};
 let catalogueImageStyle={};
@@ -740,6 +742,15 @@ let catalogue=(<div></div>);
 
 
 }
+
+
+function mapStateToProps(state,ownProps){
+    if (ownProps && ownProps.history && !(state && state.history))
+      return Object.assign({},state,{history:ownProps.history});
+    return state;
+}
+export default connect(mapStateToProps)(ApiCreateEvent);
+
 
 
 

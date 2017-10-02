@@ -142,7 +142,7 @@ console.log('zip is ' +zip);
 // check to see if id is null
 if (!id){
     console.log("CREATE NEW EVENT ");
-    req.app.get("db").createEvent([date,'',title,description,image_uri,volunteer,donor,city,state,zip,address,''])
+    req.app.get("db").createEvent([date,'',title,description,image_uri,volunteer,donor,city,state,zip,address,'',JSON.stringify(catalogue)])
     .then(response=>{console.log("event created");res.status(200).send(response)})
     .catch(err=>{console.log("event not created");console.log(err);res.status(500).end()});
 }

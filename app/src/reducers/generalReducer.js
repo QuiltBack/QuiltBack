@@ -1,6 +1,18 @@
 import * as types from '../actions/ActionTypes';
 import initialState from './initialState'
-import {apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
+import {apiGetUser,apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
+
+
+
+
+export function getUser(){
+        return {
+                type:types.GET_USER,
+                payload:apiGetUser()
+        }
+}
+
+
 
 export function getPostDetail(postId){
    return {
@@ -80,6 +92,10 @@ export default function rootReducer(state=initialState,action){
  console.log("action type: " + action.type);
 
  switch(action.type){
+
+ case types.GET_USER + types.FULFILLED:
+           return Object.assign({},state,{user:action.payload});
+
      case types.GET_EVENT_PAGE + types.FULFILLED:
        return Object.assign({},state,{postDetail:null,eventDetail:null,postPage:0,events:action.payload});
    

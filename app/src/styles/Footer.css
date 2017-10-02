@@ -4,6 +4,8 @@
   height: 235px;
   display: grid;
   grid-template: 235px / repeat(16, 1fr);
+  position: relative;
+  top: 75px;
 }
 .footer-grid-one {
   display: grid;
