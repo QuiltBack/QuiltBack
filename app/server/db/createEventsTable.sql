@@ -15,6 +15,7 @@ DonorInfo VARCHAR,
 EventID SERIAL PRIMARY KEY,
 latitude int,
 longitude int,
-catalogue text,
-host text
+catalogue TEXT,
+host TEXT,
+users_id INT FOREIGN KEY REFERENCES users(users_id)
 );
