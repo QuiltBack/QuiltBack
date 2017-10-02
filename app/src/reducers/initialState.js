@@ -10,6 +10,6 @@ export default {
     eventPage:0,
     blogPageSize:18,
     eventPageSize:6,
-    user:null,
+    user:{},
 
 }

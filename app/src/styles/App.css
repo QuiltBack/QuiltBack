@@ -28,3 +28,6 @@
     font-weight: normal;
     src: url('./fonts/GeorgiaRegular.ttf') format('truetype');
 }
+.App {
+ display: flex;
+}

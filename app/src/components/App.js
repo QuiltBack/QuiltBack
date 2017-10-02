@@ -7,15 +7,19 @@ import Login from './login/Login';
 import Header from './common/Header';
 import Footer from './common/Footer';
 import HomePage from './home/HomePage';
+import Dashboard from './dashboard/Dashboard';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <section className="App">
+        <Dashboard/>
+        <div>
         <Header/>
             {Routes}
         <Footer/>
-      </div>
+        </div>
+      </section>
     );
   }
 }

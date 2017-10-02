@@ -354,8 +354,8 @@ class EventsPage extends Component {
               </div>
             </div>
             <div className="events-page-event-info">
-              <div className='events-page-event-title'>{ 30 > event.title.length? 
-                event.title : (event.title).substring(0, 30) + '...'}</div>
+              <div className='events-page-event-title'>{ 27 > event.title.length? 
+                event.title : (event.title).substring(0, 27) + '...'}</div>
               <div className='events-page-event-place'>{d1.format("MMMM DD, YYYY ") + d1.format('h A ') + event.city + ', ' + event.state + ' ' + event.zipcode + ', ' + event.address}</div>
               <div className="events-page-event-description">{590 > event.description.length? 
                 event.description : (event.description).substring(0, 590) + '...'}</div>
@@ -431,12 +431,12 @@ class EventsPage extends Component {
   }
 }
 function mapStateToProps(state, ownProps) {
-      if (ownProps && ownProps.history && !(state && state.history))
-          return Object.assign({}, state, {
-              history: ownProps.history
-          });
-      return state;
-  }
+  if (ownProps && ownProps.history && !(state && state.history))
+    return Object.assign({}, state, {
+      history: ownProps.history
+    });
+  return state;
+}
 export default connect(mapStateToProps, {  
    getEvents:getEvents
 })(EventsPage);
