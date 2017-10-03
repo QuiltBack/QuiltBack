@@ -25,6 +25,8 @@ class Dashboard extends Component {
     if (this.props && this.props.logout){
       this.props.logout();
     }
+    let tl = new TimelineMax();
+    tl.to('.dashboard-container', 0, {marginLeft: '-258px'})
   }
   componentWillMount(){
     if (this.props && this.props.getUser && 
@@ -41,6 +43,7 @@ class Dashboard extends Component {
   mouseEnter() {
     let tl = new TimelineMax();
     tl.to('.dashboard-expand', .3, {marginLeft:'150px', opacity: '.8'})
+    tl.from('.dashboard-expand', .3, {marginLeft:'150px', opacity: '.8'})
   }
   mouseLeave() {
     let tl = new TimelineMax();

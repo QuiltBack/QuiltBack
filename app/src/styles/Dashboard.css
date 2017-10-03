@@ -60,7 +60,8 @@
   font-size: 24px;
   line-height: 32px;
   display: grid;
-  grid-area: 15 / 1; 
+  grid-area: 15 / 1;
+  cursor: pointer; 
 }
 /* Users */
 
@@ -95,6 +96,7 @@
   line-height: 32px;
   display: grid;
   grid-area: 12 / 1; 
+  cursor: pointer; 
 }
 /* Admin */
 .dashboard-logout {
@@ -104,6 +106,7 @@
   line-height: 32px;
   display: grid;
   grid-area: 15 / 1; 
+  cursor: pointer; 
 }
 
 .dashboard-admin-notifications {
