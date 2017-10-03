@@ -173,7 +173,7 @@ app.get('/auth', (req, res, next) => {
 
 app.get('/auth/logout', (req, res) => {
   req.logOut();
-  res.redirect(302, 'http://localhost:' + process.env.SERVER_FRONTEND_PORT)
+  res.redirect(302, process.env.REACT_APP_HOST)
 })
 
 
