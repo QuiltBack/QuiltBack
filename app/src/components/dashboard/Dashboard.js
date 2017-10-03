@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {TimelineMax, Power4} from 'greensock';
-import {getUser} from '../../reducers/generalReducer';
+import {getUser,logout} from '../../reducers/generalReducer';
 import {Link} from 'react-router-dom';
 import '../../styles/Dashboard.css';
 
@@ -11,12 +11,31 @@ class Dashboard extends Component {
     this.state = {
       expanded:false,
     }
+    this.logout=this.logout.bind(this);
+    this.login =this.login.bind(this);
+  }
+  login(){
+    let currentpage = this._reactInternalInstance._context.router.route.location.pathname
+   if ( currentpage!=="/" && currentpage)
+  localStorage.setItem("redirect",JSON.stringify(this._reactInternalInstance._context.router.route.location.pathname));
+
+  }
+  logout(){
+    if (this.props && this.props.logout){
+      this.props.logout();
+    }
   }
   componentWillMount(){
     if (this.props && this.props.getUser && 
     !(this.props.general && this.props.general.user && this.props.general.user.users_id)) {
       this.props.getUser();
     }
+    let redirect = JSON.parse(localStorage.getItem("redirect"));
+    localStorage.removeItem("redirect");
+    if (redirect != "/" && redirect)
+       this._reactInternalInstance._context.router.history.push(redirect);
+   
+    
  }
   mouseEnter() {
     let tl = new TimelineMax();
@@ -49,8 +68,9 @@ class Dashboard extends Component {
   render() {
     let dashboard;
     let props = this.props.general
-    if (props && props.user) {
-      console.log(props)
+   
+    if (props && props.user && props.user.users_id) {
+     
       if (props.user.user_type==='Admin') {
         dashboard = (
           <section className='dashboard-container'>
@@ -59,7 +79,7 @@ class Dashboard extends Component {
             <Link className='dashboard-admin-pages' to='/pages'>Pages</Link>
             <Link className='dashboard-admin-users' to='/users'>Users</Link>
             <Link className='dashboard-admin-posts' to='/posts'>Posts</Link>
-            <a className="dashboard-admin-logout" href="http://localhost:3001/auth/logout">Logout</a>
+            <div className="dashboard-admin-logout" onClick={this.logout}>Logout</div>
             <div onMouseEnter={(e)=>{this.mouseEnter()}} onMouseLeave={(e)=>{this.mouseLeave()}} onClick={(e)=>{this.mouseClick()}} className='dashboard-expand'>
               <div className='dashboard-contents'> {'<'} </div>
             </div>
@@ -72,7 +92,7 @@ class Dashboard extends Component {
             <Link className='dashboard-user-events' to={'/dashboard/events'}>My Events</Link>
             <Link className='dashboard-user-posts' to={'/dashboard/posts'}>My Posts</Link>
             <Link className='dashboard-user-account' to={'/dashboard/account'}>Account Settings</Link>
-            <a className="dashboard-user-logout" href="http://localhost:3001/auth/logout">Logout</a>
+            <div className="dashboard-user-logout" onClick={this.logout}>Logout</div>
             <div onMouseEnter={(e)=>{this.mouseEnter()}} onMouseLeave={(e)=>{this.mouseLeave()}} onClick={(e)=>{this.mouseClick()}} className='dashboard-expand'>
               <div className='dashboard-contents'> {'<'} </div>
             </div>
@@ -83,7 +103,7 @@ class Dashboard extends Component {
       dashboard = (
         <section className='dashboard-container'>
           <div className='dashboard-title'>Dashboard</div>
-          <a className="dashboard-login" href="http://localhost:3001/auth">Signup/Login</a>
+          <a className="dashboard-login" onClick={this.login} href="http://localhost:3001/auth">Signup/Login</a>
           <div onMouseEnter={(e)=>{this.mouseEnter()}} onMouseLeave={(e)=>{this.mouseLeave()}} onClick={(e)=>{this.mouseClick()}} className='dashboard-expand'>
             <div className='dashboard-contents'> {'<'} </div>
           </div>
@@ -99,13 +119,18 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  if (ownProps && ownProps.history && !(state && state.history))
+
+  if (ownProps && ownProps.history && !(state && state.history)){
+  
     return Object.assign({}, state, {
       history: ownProps.history
     });
+  }
   return state;
 }
 
 export default connect(mapStateToProps, {
   getUser: getUser,
+  logout:logout
+
 })(Dashboard);

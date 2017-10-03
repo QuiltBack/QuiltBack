@@ -19,13 +19,10 @@ export default (
         <Route path="/apitest" component={ApiTest}/>
         <Route path="/events" component={EventsPage}/>
         <Route path="/blog" component={BlogPage}/>
-        <Route path="/createEvent" component={CreateEvent}/>
-<<<<<<< HEAD
+        <Route path="/createEvent/:eventId" component={CreateEvent}/>
         <Route path="/dashboard/events" component={UserEvents}/>
         <Route path="/dashboard/posts" component={UserPosts}/>
-        <Route path="/dashboard/account" component={UserAccount}/>
-=======
-         <Route path="/event/:eventId" component={EventDetail}/>
->>>>>>> master
+        <Route path="/event/:eventId" component={EventDetail}/>
+
     </Switch>
 );
