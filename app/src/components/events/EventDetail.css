@@ -1,4 +1,7 @@
-
+.event{
+    position:relative;
+    z-index:4;
+}
 
 .EventShare h1{
     font-size:3rem;
@@ -116,6 +119,8 @@ height:280px;
 
     grid-column-start:1;
     grid-column-end:1;
+    position:relative;
+    z-index:4;
   
  
     

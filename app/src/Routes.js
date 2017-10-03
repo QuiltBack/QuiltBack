@@ -15,7 +15,7 @@ export default (
         <Route path="/apitest" component={ApiTest}/>
         <Route path="/events" component={EventsPage}/>
         <Route path="/blog" component={BlogPage}/>
-        <Route path="/createEvent" component={CreateEvent}/>
+        <Route path="/createEvent/:eventId" component={CreateEvent}/>
          <Route path="/event/:eventId" component={EventDetail}/>
     </Switch>
 );

@@ -11,5 +11,6 @@ export default {
     blogPageSize:18,
     eventPageSize:6,
     user:{},
-
+    redirect:'',
+    comments:[],
 }

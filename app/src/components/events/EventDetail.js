@@ -58,26 +58,21 @@ eventdetails()
 
   if (this.props && this.props.getEventDetail && this.props.general ) {
     
-   console.log("loading event");
-   console.log(this.props)
+
       if (  this.props.match.params.eventId && (!this.props.general.eventDetail || this.props.general.eventDetail.eventid != this.props.match.params.eventId)){
-         if (this.props.general.eventDetail)
-          console.log("event id is " +this.props.general.eventDetail.eventid );
-          if (this.props.match.params)
-          console.log("params  "+this.props.match.params.eventId)
+        
           this.props.getEventDetail(this.props.match.params.eventId);
       }
     }
 }
 
 componentDidMount() {
-    console.log("didMount")
+   
     this.eventdetails();
 }
 componentWillReceiveProps(ownProps) {
-    console.log("willReceive");  
-   console.log("ownProps");
-   console.log(ownProps);
+ 
+ 
     this.eventdetails();
 }
 
@@ -117,13 +112,12 @@ let catalogue='';
             if (catalogue.length>0)
             {
                 console.log("state item " +this.state.item)
-                let item = this.state.item % catalogue.length;
+                //Take n + abs(np)
+                let item = (this.state.item + Math.abs(this.state.item * catalogue.length)) % catalogue.length;
+                
         
-                 console.log("item " +item);
-                 console.log(catalogue);
+                
                  mainItem=catalogue[item];
-                 console.log("main item");
-                 console.log(mainItem);
                  
             }
 
@@ -136,10 +130,7 @@ let catalogue='';
             else location = event.zipcode;
             
             
-            console.log("EVENT");
-            console.log(event);
-            console.log("cat image");
-            console.log(mainItem.image_uri);
+        
            
    let d1 = moment.utc(event.date);
      eventDetail=(<div className="event">
