@@ -14,6 +14,7 @@ import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 import './CreateEvent.css';
 import 'font-awesome/css/font-awesome.min.css';
+const frontenv = require('../../frontenv.js');
  class CreateEvent extends Component{
 
 constructor(props) {
@@ -170,26 +171,27 @@ loadEvent(props){
     }
 // Set up Speeech Recognition object
 if (!('webkitSpeechRecognition' in window) && ! this.state.recognition) {
-  
+  alert("no speech");
 } else {
      
      const SpeechRecognition = window.SpeechRecognition
       || window.webkitSpeechRecognition
       || window.mozSpeechRecognition
       || window.msSpeechRecognition
-      || window.oSpeechRecognition
+      || window.oSpeechRecognition;
+
+    
 
 if (SpeechRecognition != null) {
-  
+  alert("speech object Created");
     
       var recognition = this.createRecognition(SpeechRecognition);
+      recognition.lang='en-US';
+      
         this.setState({recognition:recognition});
 
       recognition.onresult = this.onSpeechResult;
-          
-          
-          
-   
+
     } else {
       console.warn('The current browser does not support the SpeechRecognition API.');
     }
@@ -433,7 +435,7 @@ let fileType=upload.currentTarget.result.replace(/data:([^;]*);.*$/,"$1");
    }
 
 
- axios.post('http://localhost:3001/api/upload',{pic:pic})
+ axios.post(frontenv.BACKEND_HOST + '/api/upload',{pic:pic})
     .then(function(data){
        
         if (itemType === "catalogue"){
