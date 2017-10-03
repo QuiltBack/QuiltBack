@@ -23,6 +23,5 @@ export default (
         <Route path="/dashboard/events" component={UserEvents}/>
         <Route path="/dashboard/posts" component={UserPosts}/>
         <Route path="/event/:eventId" component={EventDetail}/>
-
     </Switch>
 );
