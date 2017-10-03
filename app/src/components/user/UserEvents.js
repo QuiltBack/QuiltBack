@@ -26,5 +26,13 @@ class UserEvents extends Component {
     )
   }
 }
-
-export default connect()(UserEvents);
+function mapStateToProps(state, ownProps) {
+  if (ownProps && ownProps.history && !(state && state.history))
+    return Object.assign({}, state, {
+      history: ownProps.history
+    });
+  return state;
+}
+export default connect(mapStateToProps, {  
+  
+})(UserEvents);

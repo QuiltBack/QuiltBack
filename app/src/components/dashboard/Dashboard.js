@@ -10,6 +10,7 @@ class Dashboard extends Component {
     super(props)
     this.state = {
       expanded:false,
+      pagesExpanded:false,
     }
   }
   componentWillMount(){
@@ -46,6 +47,24 @@ class Dashboard extends Component {
       document.getElementsByClassName('dashboard-section')[0].classList.remove('zIndex');
     },300)
   }
+  expandPages() {
+    let tl = new TimelineMax();
+    if (this.state.pagesExpanded) {
+      tl.to('.dashboard-admin-hidden-pages', .3, {height:'0px'});
+      setTimeout(()=>{
+        this.setState({
+          pagesExpanded:false,
+        })
+      },400)
+    } else {
+      tl.to('.dashboard-admin-hidden-pages', .3, {height:'100px'})
+      setTimeout(()=>{
+        this.setState({
+          pagesExpanded:true,
+        })
+      },400)
+    }
+  }
   render() {
     let dashboard;
     let props = this.props.general
@@ -56,7 +75,13 @@ class Dashboard extends Component {
           <section className='dashboard-container'>
             <div className='dashboard-title'>Dashboard</div>
             <Link className='dashboard-admin-notifications' to='/notifications'>Notifications</Link>
-            <Link className='dashboard-admin-pages' to='/pages'>Pages</Link>
+            <div onClick={()=>{this.expandPages()}} className='dashboard-admin-pages'>Pages</div>
+            <div className='dashboard-admin-hidden-pages'>
+              <Link className='dashboard-hidden-home' to='/'>Home</Link>
+              <Link className='dashboard-hidden-blog' to='/blog'>Blog</Link>
+              <Link className='dashboard-hidden-events' to='/events'>Events</Link>
+              <Link className='dashboard-hidden-account' to='/dashboard/account'>Account</Link>
+            </div>
             <Link className='dashboard-admin-users' to='/users'>Users</Link>
             <Link className='dashboard-admin-posts' to='/posts'>Posts</Link>
             <a className="dashboard-admin-logout" href="http://localhost:3001/auth/logout">Logout</a>

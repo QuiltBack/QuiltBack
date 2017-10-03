@@ -10,8 +10,8 @@ import CreateEvent from './components/createEvent/CreateEvent';
 import UserEvents from './components/user/UserEvents';
 import UserPosts from './components/user/UserPosts';
 import UserAccount from './components/user/UserAccount';
-import EventDetail from './components/events/EventDetail'
-
+import EventDetail from './components/events/EventDetail';
+import AdminNotifications from './components/admin/AdminNotifications';
 
 export default (
     <Switch>
@@ -24,5 +24,6 @@ export default (
         <Route path="/dashboard/posts" component={UserPosts}/>
         <Route path="/dashboard/account" component={UserAccount}/>
         <Route path="/event/:eventId" component={EventDetail}/>
+        <Route path='/notifications' component={AdminNotifications}/>
     </Switch>
 );
