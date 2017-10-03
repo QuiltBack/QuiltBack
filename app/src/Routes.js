@@ -7,7 +7,11 @@ import EventsPage from './components/events/EventsPage';
 import HomePage from './components/home/HomePage';
 import BlogPage from './components/blog/BlogPage';
 import CreateEvent from './components/createEvent/CreateEvent';
+import UserEvents from './components/user/UserEvents';
+import UserPosts from './components/user/UserPosts';
+import UserAccount from './components/user/UserAccount';
 import EventDetail from './components/events/EventDetail'
+
 
 export default (
     <Switch>
@@ -15,7 +19,10 @@ export default (
         <Route path="/apitest" component={ApiTest}/>
         <Route path="/events" component={EventsPage}/>
         <Route path="/blog" component={BlogPage}/>
-        <Route path="/createEvent/:eventId" component={CreateEvent}/>
+        <Route path="/createEvent" component={CreateEvent}/>
+        <Route path="/dashboard/events" component={UserEvents}/>
+        <Route path="/dashboard/posts" component={UserPosts}/>
+        <Route path="/dashboard/account" component={UserAccount}/>
          <Route path="/event/:eventId" component={EventDetail}/>
     </Switch>
 );
