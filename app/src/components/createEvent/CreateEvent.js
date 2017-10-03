@@ -171,7 +171,7 @@ loadEvent(props){
     }
 // Set up Speeech Recognition object
 if (!('webkitSpeechRecognition' in window) && ! this.state.recognition) {
-  alert("no speech");
+ 
 } else {
      
      const SpeechRecognition = window.SpeechRecognition
@@ -183,7 +183,7 @@ if (!('webkitSpeechRecognition' in window) && ! this.state.recognition) {
     
 
 if (SpeechRecognition != null) {
-  alert("speech object Created");
+
     
       var recognition = this.createRecognition(SpeechRecognition);
       recognition.lang='en-US';
