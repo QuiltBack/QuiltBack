@@ -16,6 +16,7 @@ const app = express();
 const port = process.env.SERVER_PORT;
 app.use(cors());
 app.use(bodyParser.json({limit: '50mb'}));
+app.use(express.static(__dirname + '/../build'))
 
 /* CorsOptions change this when production rolls */
 /* I think this is needed when backend and front end running on different ports */
@@ -217,7 +218,9 @@ app.post('/api/upload',(req, res) => {
 
 
 /* END ENDPOINTS */
-
+app.get('*', (req,res)=>{
+  req.sendFile(path.join(__dirname, '../build/index.html'))
+})
 
 
 app.listen(port, () => console.log(`listening on port ${port}`))
