@@ -99,7 +99,7 @@ let catalogue='';
    if (this.props && this.props.general.eventDetail ){
        
         
-            shareUrl="http://localhost:3000/event/" + this.props.match.params.eventId;
+            shareUrl="/event/" + this.props.match.params.eventId;
             title=this.props.general.eventDetail.title;
  
              event=this.props.general.eventDetail;
