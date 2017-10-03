@@ -22,6 +22,7 @@ export default (
         <Route path="/createEvent/:eventId" component={CreateEvent}/>
         <Route path="/dashboard/events" component={UserEvents}/>
         <Route path="/dashboard/posts" component={UserPosts}/>
+        <Route path="/dashboard/account" component={UserAccount}/>      
         <Route path="/event/:eventId" component={EventDetail}/>
     </Switch>
 );
