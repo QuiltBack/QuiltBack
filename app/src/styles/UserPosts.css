@@ -1,0 +1,56 @@
+.user-posts-section {
+  width: 100%;
+  display: grid;
+  grid-template: 126px 70vh / 10% 80% 10%; 
+  position: relative;
+  top: 75px;
+  padding-bottom: 80px;
+}
+.user-posts-title {
+  display: grid;
+  grid-area: 1 / 2;
+  color: #D93044;	
+  font-family: FuturaMedium;	
+  font-size: 36px;	
+  line-height: 47px;
+  align-content: center;
+}
+.user-posts-container {
+  display: grid;
+  grid-area: 2 / 2;
+  border: 1px solid #C2C2C2;
+  border-radius: 3px;
+  width: 100%;
+  grid-template: 41px 175px 24px 31px 40px 37px / 40% 20% 40%;
+}
+.user-posts-share-icon {
+  display: grid;
+  grid-area: 2 / 2;
+  margin: 0 auto;
+}
+.user-posts-text {
+  display: grid;
+  grid-area: 4 / 2;
+  text-align: center;
+  color: #5E5E5E;	
+  font-family: FuturaMedium;	
+  font-size: 24px;	
+  line-height: 32px;
+}
+.user-posts-button {
+  display: grid;
+  grid-area: 6 / 2;
+  height: 37px;	
+  width: 192px;	
+  border: 1.87px solid #D93044;	
+  border-radius: 93.69px;	
+  background-color: #D93044;
+  color: #FFFFFF;	
+  font-family: FuturaMedium;	
+  font-size: 16px;	
+  line-height: 21px;
+  text-align: center;
+  align-content: center;
+  margin: 0 auto;
+  outline: none;
+}
