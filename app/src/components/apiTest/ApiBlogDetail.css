@@ -1,0 +1,58 @@
+.blogDetails{
+    padding-top:80px;
+
+display:grid;
+grid-template-columns: 5% 70% 20% 5%;
+grid-template-rows:100%;
+}
+.blogTitle{
+    font-size:6rem;
+}
+.blogAuthorFooter{
+    font-size:0.90rem;
+    
+}
+
+.blogLeftSide{
+    grid-column-start:2;
+    grid-column-end:2;
+}
+
+.blogRightSide{
+    grid-column-start:3;
+    grid-column-end:3;
+}
+.blogRightSide h1{
+    font-size:2rem;
+}
+
+.blogRecentPost{
+    padding-top:32px;
+    display:grid;
+    grid-template-columns: 50% 50%;
+}
+.blogRecentPostImage{
+   grid-column-start:1;
+   grid-column-end:1;
+   width:100px;
+   height:100px;
+   background-color:blue;
+
+}
+.blogRecentPostInfo{
+    grid-column-start:2;
+    grid-column-end:2;
+    display:grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 30% 70%
+
+}
+.blogRecentPostDate{
+    grid-row-start:1;
+    grid-grow-end:1;
+    font-size:1rem;
+}
+.blogRecentPostTitle{
+    grid-row-start:2;
+    grid-row-end:2;
+}

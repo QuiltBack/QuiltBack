@@ -7,10 +7,51 @@ const api = axios.create({
     withCredentials:true
 
 });
+export function apiAddComment(comment){
+    return [];
+   return axios.post(localApiUrl + '/api/comment/',{comment:comment})
+    .then(response=>{
+        console.log('returning from post api/comment');
+        console.log(response);
+        return response.data;
+    })
+    .catch(err=>{
+        console.log ("error in AddComment");
+        console.log(err);
+
+    })
+}
+export function apiGetComments(postId){
+    return [];
+    return axios.get(localApiUrl + '/api/comments/+postId')
+     .then(response =>{
+          return response.data;
+        })
+        .catch(err=>{
+            console.log("auth me error");
+            console.log(err)
+            return '';    
+        });
+}
 export function apiGetUser(){
         // debug try this
         //end debug try this
         return  api.get(localApiUrl  + '/auth/me')
+                    .then(response =>{
+                     return response.data;
+                    })
+                    .catch(err=>{
+                            console.log("auth me error");
+                            console.log(err)
+                            return '';    
+                    });
+                            
+
+}
+export function apiLogout(){
+        // debug try this
+        //end debug try this
+        return  api.get(localApiUrl  + '/auth/logout')
                     .then(response =>{
                      return response.data;
                     })
@@ -23,7 +64,7 @@ export function apiGetUser(){
 
 export function apiCreateEvent(event){
 
-    return axios.post(localApiUrl + '/api/event', {event:event})
+    return api.post(localApiUrl + '/api/event', {event:event})
     .then(response=>{
         console.log("response");
         console.log(response);
@@ -78,7 +119,7 @@ export function apiGetNextPostPage(page,limit){
 export function apiGetPostDetail(postId){
     return axios.get(localApiUrl + '/api/post/' + postId)
           .then(response=>{
-                  return response.data;
+                  return response.data[0];
               })
               .catch(err=>{
               console.log("apiGetPosts error");
@@ -91,7 +132,7 @@ export function apiGetPostDetail(postId){
 export function apiGetEventDetail(eventId){
 return axios.get(localApiUrl + '/api/event/' + eventId)
              .then(response=>{
-                  return response.data;
+                  return response.data[0];
               })
               .catch(err=>{
               console.log("apiGetPosts error");

@@ -138,12 +138,14 @@ app.get('/auth/callback', passport.authenticate('auth0', {
 }));
 
 passport.serializeUser(function (user, done) {
+  console.log("SERIALIZING");
   done(null, user);
 });
 
 passport.deserializeUser(function (obj, done) {
   app.get('db').findSessionUser([obj.users_id])
     .then(user => { return done(null, user[0]); })
+    .catch(err=>console.log(err))
 });
 
 

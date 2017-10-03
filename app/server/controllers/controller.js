@@ -130,8 +130,11 @@ console.log("req.body")
 console.log(req.body);
 console.log("end req.body");
 let {zip,title,description,date,host,catalogue,donor
-    ,volunteer,image_uri,id,owner,address,city,state}=req.body.event;
-
+    ,volunteer,image_uri,id,users_id,address,city,state}=req.body.event;
+    console.log("CATALOGUE");
+    console.log(catalogue);
+catalogue = JSON.stringify(catalogue);
+console.log(catalogue);
 /*
 (Date, StartTime, Title, Description, ImageRef
 , VolunteerInfo, DonorInfo, City, State, Zipcode
@@ -145,13 +148,13 @@ console.log('zip is ' +zip);
 if (!id){
     console.log("CREATE NEW EVENT ");
     req.app.get("db").createEvent([date,'',title,description,image_uri,volunteer
-    ,donor,city,state,zip,address,'',JSON.stringify(catalogue),host])
+    ,donor,city,state,zip,address,'',catalogue,host,users_id])
     .then(response=>{console.log("event created");res.status(200).send(response)})
     .catch(err=>{console.log("event not created");console.log(err);res.status(500).end()});
 }
 else{
     console.log("EVENT EDITED");
-     req.app.get("db").editEvent([id,date,'',title,description,image_uri,volunteer,donor,city,state,zip,address,'',catalogue,host])
+     req.app.get("db").editEvent([id,date,'',title,description,image_uri,volunteer,donor,city,state,zip,address,'',catalogue,host,users_id])
     .then(response=>{console.log("event created");console.log(response);res.status(200).send(response)})
     .catch(err=>{console.log("event not created");console.log(err);res.status(500).end()});
     

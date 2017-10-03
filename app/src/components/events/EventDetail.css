@@ -1,0 +1,180 @@
+.event{
+    position:relative;
+    z-index:4;
+}
+
+.EventShare h1{
+    font-size:3rem;
+}
+
+
+.eventdetail-page-social-media{
+    width:25%;
+    display:grid;
+    grid-template-columns:25% 25% 25% 25% 25%;
+}
+.eventdetail-page-facebook{
+    grid-column-start:1;
+    grid-column-end:1;
+}
+
+.eventdetail-page-twitter{
+    grid-column-start:2;
+    grid-column-end:2;
+}
+
+.eventdetail-page-google{
+    grid-column-start:3;
+    grid-column-end:3;
+}
+
+.eventdetail-page-email{
+    grid-column-start:4;
+    grid-column-end:4;
+}
+
+
+.eventDetailCatalogueBanner{
+    display:grid;
+    width:100%;
+    background-color:black;
+    color:white;
+    grid-template-columns: 50% 50%;
+    font-size:3rem;
+   padding-top:16px;
+   padding-bottom:16px;
+}
+.eventDetailName{
+    padding-left:16px;
+
+    grid-column-start:1;
+    grid-column-end:1;
+    grid-row-start:1;
+    grid-row-end:1;
+    align-self:start;
+}
+.eventDetailAuctionId{
+    grid-column-start:2;
+    grid-column-end:2;
+    grid-row-start:1;
+    grid-row-end:1;
+   
+    align-self:end;
+}
+
+.eventRightSection h1{
+    font-size:3rem;
+}
+
+.eventDetailCatalogueImages{
+    display:grid;
+    grid-template-columns:5% 90% 5%;
+
+}
+.eventDetailCataloguePrevious{
+    grid-column-start:1;
+    grid-column-end:1;
+    align-self:center;
+    font-size:4rem;
+
+}
+.eventCatalogueMainImage{
+    grid-column-start:2;
+    grid-column-end:2;
+}
+.eventDetailCatalogueNext{
+    grid-column-start:3;
+    grid-column-end:3;
+    align-self:center;
+    font-size:4rem;
+}
+.events{
+    width:80%;
+    margin:0 auto;
+}
+.eventImage{
+    width:100px;
+    height:100px;
+}
+.eventLabel {
+
+font-weight:600;
+padding-right:16px;
+}
+
+.eventBanner{
+ 
+height:280px;
+    display:grid;
+    grid-template-columns: 70% 5% 30%;
+   
+
+}
+.eventMainSection{
+    
+   display:grid;
+   grid-template-columns: 70% 5% 30%;
+}
+.eventLeftSection{
+
+    grid-column-start:1;
+    grid-column-end:1;
+    position:relative;
+    z-index:4;
+  
+ 
+    
+}
+.eventRightSection{
+    grid-column-start:3;
+    grid-column-end:3;
+    
+}
+.eventBannerDate{
+   
+    grid-column-start:1;
+    grid-column-end:1;
+    grid-row-start:1;
+    grid-row-end:1;
+
+}
+.eventBannerTitle{
+    font-size:3rem;
+    font-weight:400;
+    grid-column-start:1;
+    grid-column-end:1;
+    grid-row-start:2;
+    grid-row-end:2;
+
+}
+.eventBannerHost{
+    grid-column-start:1;
+    grid-column-end:1;
+    grid-row-start:3;
+    grid-row-end:3;
+
+}
+
+.eventBannerImage{
+ 
+    grid-column-start:1;
+    grid-column-end:1;
+    grid-row:1;
+   
+}
+
+.eventBannerInfo{
+    
+ 
+    grid-column-start:3;
+    grid-column-end:3;
+     grid-row-start:1;
+     grid-row-end:1;
+      display:grid;
+      grid-template-columns: 100%;
+      grid-template-rows: 25% 50% 25%;
+}
+.eventRightSection p{
+    line-height:50%;
+    
+}

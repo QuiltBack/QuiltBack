@@ -1,28 +1,30 @@
-.banner-container {
+.homepage-section {
+	width: 100%;
+	overflow: hidden;
+}
+.homepage-banner-container {
 	width: 100%;
 	background-color: #F7F7F7;
-    display: grid;
-    grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
-    background-image: url("https://i.pinimg.com/originals/34/15/28/3415288947aaeaeef2a23f63db951fcc.jpg");
-    background-size: cover;
+	display: grid;
+	grid-template: auto / 20vw 70vw;
+	overflow-x: hidden;
+  background: url("https://i.pinimg.com/originals/34/15/28/3415288947aaeaeef2a23f63db951fcc.jpg") no-repeat center center fixed;
+  background-size: cover;
 	max-height: 475px;
 	height: 475px;
 	font-size: 72px;
 	position: relative;
 	top: 75px;
 }
-.banner-logo-container {
+.homepage-logo-container {
 	display: grid;
-	grid-area: 2 / 1 / span 1 / span 1;
-	align-content: end;
-	
+	grid-area: 1 / 1;
+	grid-template: 75px 325px 75px / 80% 20%;
 }
-.banner-title-container {
+.homepage-text-container {
 	display: grid;
-	grid-area: 2 / 2 / span 1 / span 1;
-	grid-template: 1fr / 1fr;
-	text-align: center;
-	align-content: center;
+	grid-area: 1 / 2;
+	grid-template: 120px 72px 40px 2px 12px 74px 100px / 200px auto;
 }
 #QUILT {
 	color: #FFFFFF;
@@ -39,38 +41,36 @@
 	letter-spacing: 1px;
 	text-align: center;
 }
-.section_b {
+.homepage-QB-logo {
 	display: grid;
-	grid-area: 1 / 2 / span 3 / span 1;
-	grid-template:  78px 60px 37px / 1fr;
-	align-content: center;
-	max-width: 480px;
+	grid-area: 2 / 2;
+	align-self: center;
 }
-.quilt-back-gives-back {
+.homepage-give-back {
 	display: grid;
-	grid-area: 1 / 1 / span 1 / span 6;
 	color: #FFFFFF;
 	font-family: "BloggerSansMedium";
-	font-size: 8rem;
-	font-weight: 500;
-	text-align: center;
+	font-size: 72px;
+	height: 193px;
+	width: 619px;
+	grid-area: 2 / 2;
 }
-.we-are-a-community {
+.homepage-community {
 	display: grid;
-	grid-area: 3 / 1 / span 1 / span 6;
 	color: #FFFFFF;
-	font-family: FuturaRegular;
-	font-size: 2.5rem;
+	font-family: "FuturaRegular";
+	font-size: 24px;
 	line-height: 37px;
-	text-align: center;
+	grid-area: 6 / 2;
+	width: 668px;
+	text-align: left;
 }
-.rectangle-2 {
+.homepage-rect2 {
 	display: grid;
-	grid-area: 2 / 1 / span 1 / span 6;
 	height: 2px;
-	width: 100%;
+	grid-area: 4 / 2;
+	width: 619px;
 	background-color: #FFFFFF;
-	align-self: center;
 }
 .host-section-container {
 	display: grid;

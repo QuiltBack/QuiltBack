@@ -3,7 +3,10 @@
   height: 100vh;
   position: fixed;
   top:0;
-  z-index: 6;
+  z-index: 3;
+}
+.zIndex {
+  z-index: 6
 }
 .dashboard-container {
   width: 258px;
@@ -46,8 +49,100 @@
 }
 .dashboard-login {
   display: grid;
-  grid-area: 4 / 1;
+  grid-area: 3 / 1;
 	font-family: 'FuturaMedium';
 	font-size: 22px;
 	line-height: 29px;
+}
+.dashboard-logout {
+  color: #5E5E5E;	
+  font-family: FuturaMedium;	
+  font-size: 24px;
+  line-height: 32px;
+  display: grid;
+  grid-area: 15 / 1; 
+}
+/* Users */
+
+.dashboard-user-events {
+  color: #5E5E5E;	
+  font-family: FuturaMedium;	
+  font-size: 24px;
+  line-height: 32px;
+  display: grid;
+  grid-area: 3 / 1; 
+}
+.dashboard-user-posts {
+  color: #5E5E5E;	
+  font-family: FuturaMedium;	
+  font-size: 24px;
+  line-height: 32px;
+  display: grid;
+  grid-area: 6 / 1; 
+}
+.dashboard-user-account {
+  color: #5E5E5E;	
+  font-family: FuturaMedium;	
+  font-size: 24px;
+  line-height: 32px;
+  display: grid;
+  grid-area: 9 / 1; 
+}
+.dashboard-user-logout {
+  color: #5E5E5E;	
+  font-family: FuturaMedium;	
+  font-size: 24px;
+  line-height: 32px;
+  display: grid;
+  grid-area: 12 / 1; 
+}
+/* Admin */
+.dashboard-logout {
+  color: #5E5E5E;	
+  font-family: FuturaMedium;	
+  font-size: 24px;
+  line-height: 32px;
+  display: grid;
+  grid-area: 15 / 1; 
+}
+
+.dashboard-admin-notifications {
+  color: #5E5E5E;	
+  font-family: FuturaMedium;	
+  font-size: 24px;
+  line-height: 32px;
+  display: grid;
+  grid-area: 3 / 1; 
+}
+.dashboard-admin-pages {
+  color: #5E5E5E;	
+  font-family: FuturaMedium;	
+  font-size: 24px;
+  line-height: 32px;
+  display: grid;
+  grid-area: 6 / 1; 
+}
+.dashboard-admin-users {
+  color: #5E5E5E;	
+  font-family: FuturaMedium;	
+  font-size: 24px;
+  line-height: 32px;
+  display: grid;
+  grid-area: 9 / 1; 
+}
+.dashboard-admin-posts {
+  color: #5E5E5E;	
+  font-family: FuturaMedium;	
+  font-size: 24px;
+  line-height: 32px;
+  display: grid;
+  grid-area: 12 / 1; 
+}
+.dashboard-admin-logout {
+  color: #5E5E5E;	
+  font-family: FuturaMedium;	
+  font-size: 24px;
+  line-height: 32px;
+  display: grid;
+  grid-area: 15 / 1; 
 }

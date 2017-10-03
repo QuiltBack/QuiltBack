@@ -20,6 +20,9 @@ constructor(props) {
       super(props);
       let initialDate=moment();
      initialDate._d.setMinutes(20);
+     let initialEndDate=moment();
+     initialEndDate._d.setMinutes(20);
+
    this.state={
        
        catalogueItemView:0,
@@ -27,8 +30,11 @@ constructor(props) {
        eventid:null,
        uploaded_uri:'',
        date:initialDate,
+       endDate:initialEndDate,
        showDate:false,
+       showEndDate:false,
        dateSelected:false,
+       endDateSelected:false,
        title:'',
        editTitle:false,
        editHost:false,
@@ -57,10 +63,10 @@ constructor(props) {
      bindAll(this, 'loadEvent','editLocation','addLocation','saveAndPublish','addCatalogueItemAuctionId','addCatalogueItemName','editCatalogueItemAuctionId'
      ,'editCatalogueItemName','editDescription','addDescription'
      ,'editHost','addHost','editTitle','addTitle'
-     ,'handleCatalogueFile'
+     ,'handleCatalogueFile','onEndDateChange'
      ,'editDonor','editVolunteer','addDonor','addVolunteer'
      ,'addItem','nextCatalogueItem','prevCatalogueItem'
-     ,'onDateChange','showDate', 'handleFile');
+     ,'onDateChange','showDate', 'showEndDate','handleFile');
 }
 componentWillReceiveProps(props){
    this.loadEvent(props);
@@ -88,24 +94,29 @@ loadEvent(props){
                if (oldevent.catalogue){
                    oldCatalog= JSON.parse(oldevent.catalogue);
                }
+               if (!Array.isArray(oldCatalog))
+                 oldCatalog=[];
                console.log("response for event to edit was");
                console.log(response);
              
                 this.setState({
-                   address:oldevent.address,
-                   city:oldevent.city,
-                   state:oldevent.state,
-                   zip:oldevent.zipcode, 
-                   date:moment(oldevent.date),
-                   description:oldevent.description,
-                   donor:oldevent.donorinfo,
-                   volunteer:oldevent.volunteerinfo,
+                   address:oldevent.address?oldevent.address:'',
+                   city:oldevent.city?oldevent.city:'',
+                   state:oldevent.state?oldevent.state:'',
+                   zip:oldevent.zipcode?oldevent.zipcode:'', 
+                   date:moment(oldevent.date?oldevent.date:''),
+                   description:oldevent.description?oldevent.description:'',
+                   donor:oldevent.donorinfo?oldevent.donorinfo:'',
+                   volunteer:oldevent.volunteerinfo?oldevent.volunteerinfo:'',
                    eventid:eventid,
-                   uploaded_uri:oldevent.imageref,
-                   title:oldevent.title,
-                   host:oldevent.host,
-                   catalogue:oldCatalog
-                   
+                   uploaded_uri:oldevent.imageref?oldevent.imageref:'',
+                   title:oldevent.title?oldevent.title:'',
+                   host:oldevent.host?oldevent.host:'',
+                   catalogue:oldCatalog,
+                   users_id: oldevent.users_id?oldevent.users_id:null,
+                   catalogueImage_uri:(oldCatalog.length >0)?oldCatalog[0].image_uri:'',
+                   catalogueItemName:(oldCatalog.length >0)?oldCatalog[0].Name:'',
+                   catalogueItemAuctionId:(oldCatalog.length >0)?oldCatalog[0].AuctionId:'',
 
 
                 })
@@ -133,20 +144,24 @@ saveAndPublish(){
     
     let userid=null;
     if (this.props && this.props.general && this.props.general.user){
-        userid=this.props.general.user.id;
+        userid=this.props.general.user.users_id;
     }
+    if (userid ===null) return;
+    console.log("userID save event " +userid);
     let newEvent={
-        title:this.state.title,
-        description:this.state.description,
-        catalogue:this.state.catalogue,
-        donor:this.state.donor,
-        volunteer:this.state.volunteer,
-        image_uri:this.state.uploaded_uri,
+        title:this.state.title?this.state.title:'',
+        description:this.state.description?this.state.description:'',
+        catalogue:this.state.catalogue?this.state.catalogue:[],
+        donor:this.state.donor?this.state.donor:'',
+        volunteer:this.state.volunteer?this.state.volunteer:'',
+        image_uri:this.state.uploaded_uri?this.state.uploaded_uri:'',
         id:this.state.eventid,
-        owner:this.state.user.id,
-        date:this.state.date,
-        host:this.state.host,
-        zip:this.state.zip,
+        users_id:userid,
+        date:this.state.date?this.state.date : moment(),
+        host:this.state.host?this.state.host:'',
+        city:this.state.city?this.state.city:'',
+        state:this.state.state?this.state.state:'',
+        zip:this.state.zip?this.state.zip:'',
         
        
     };
@@ -168,9 +183,12 @@ saveAndPublish(){
             editDonor:false,
             volunteer:'',
             donor:'',
+            host:''
+
         
 
         })
+        this.props.history.push("/");
 
     })
     .catch(err=>console.log(err))
@@ -325,6 +343,12 @@ showDate(){
     this.setState({showDate:true,date:initialDate});
     
 }
+showEndDate(){
+    let initialEndDate=this.state.endDate;
+    initialEndDate._d.setMinutes(20);
+    this.setState({showEndDate:true,date:initialEndDate});
+    
+}
 
 handleCatalogueFile(fileArray){
     console.log("handle CatalogueFile")
@@ -393,6 +417,22 @@ onDateChange(date){
     else this.setState({date:date,showDate:shouldShowDate,dateSelected:false});
 
 }
+onEndDateChange(date){
+    let shouldShowEndDate=false;
+   
+   
+    if (date._d.getMinutes() !== 30 && date._d.getMinutes()!==0){
+        
+         shouldShowEndDate=true;
+       
+    }
+    
+ 
+    if (!shouldShowEndDate) this.setState({endDate:date,showEndDate:shouldShowEndDate,endDateSelected:true});
+    else this.setState({endDate:date,showEndDate:shouldShowEndDate,endDateSelected:false});
+
+}
+
 
 render(){
     console.log(this.props);
@@ -587,22 +627,23 @@ if (this.state.host){
 
 let date='';
 
-let startDateElement=(<div className="startDateContainer staticColor" onClick={this.showDate}><div className="startDateFull">Month Day</div></div>);
+let startDateElement=(<div className="startDateContainer staticColor" onClick={this.showDate}><div className="startDateFull">Begins Month Day</div></div>);
 
 
 if (this.state.dateSelected){
    
    startDateElement=(<div className="startDateContainer staticColor" onClick={this.showDate}>
        <div className="startDateFull">
-       {this.state.date.format("MMM D h:mm A")}
+       Begins {this.state.date.format("MMM D h:mm A")}
        </div></div>
        )
 }
 if (this.state.date) date=this.state.date;
+
 if (this.state.showDate){
     startDateElement=(
         <div className="startDateContainer staticColor">
-       <div className="startDateLabel">Date</div>
+       <div className="startDateLabel">Begins</div>
        <div className="startDateSelector">
    <DatePicker 
         inline
@@ -619,6 +660,43 @@ if (this.state.showDate){
     )
 }
 
+// start end date
+
+
+let endDateElement=(<div className="endDateContainer staticColor" onClick={this.showEndDate}><div className="endDateFull">Ends Month Day</div></div>);
+
+
+if (this.state.endDateSelected){
+   
+   endDateElement=(<div className="endDateContainer staticColor" onClick={this.showEndDate}>
+       <div className="endDateFull">
+       Ends {this.state.endDate.format("MMM D h:mm A")}
+       </div></div>
+       )
+}
+if (this.state.endDate) date=this.state.endDate;
+
+if (this.state.showEndDate){
+    endDateElement=(
+        <div className="startDateContainer staticColor">
+       <div className="startDateLabel">Ends</div>
+       <div className="startDateSelector">
+   <DatePicker 
+        inline
+        selected={this.state.endDate}
+        onChange={this.onEndDateChange}
+        showTimeSelect
+        dateFormat="LLL"
+        className="inputcalendar"
+
+    />
+      </div>
+      </div>  
+    
+    )
+}
+
+//end END date
 let donorInfoElement=(<div onClick={this.editDonor} className="eventDonor staticColor">Donor Contact</div>);
 if (this.state.donor){
     donorInfoElement=(<div onClick={this.editDonor} className="eventDonor staticColor">{this.state.donor}</div>)
@@ -688,6 +766,12 @@ let catalogue=(<div></div>);
 
 
 )
+let dateElement=(
+    <div className="dateElement">
+        {startDateElement}
+        {endDateElement}
+    </div>
+)
 
  return (
 
@@ -720,7 +804,8 @@ let catalogue=(<div></div>);
      </div> 
      <div className="inputContainer">
          
-        {startDateElement}   
+        {dateElement} 
+        
         {titleElement}
         {locationElement}
         {hostingGroupElement}

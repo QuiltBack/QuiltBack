@@ -1,9 +1,28 @@
 import * as types from '../actions/ActionTypes';
 import initialState from './initialState'
-import {apiGetUser,apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
+import {apiGetComments,apiAddComment,apiLogout,apiGetUser,apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
+
+export function getComments(postId){
+  return {
+      type:types.GET_COMMENTS,
+      payload:apiGetComments(postId)
+  }
+
+}
+export function addComment(comment){
+     return {
+         type:types.ADD_COMMENT,
+         payload:apiAddComment(comment)
+     }
+}
 
 
-
+export function logout(){
+    return{
+        type:types.LOGOUT,
+        payload:apiLogout()
+    }
+}
 
 export function getUser(){
         return {
@@ -93,7 +112,15 @@ export default function rootReducer(state=initialState,action){
 
  switch(action.type){
 
+    case types.GET_COMMENTS + types.FULFILLED:
+      return Object.assign({},state,{comments:action.payload});
+    case types.ADD_COMMENT + types.FULFILLED:
+     return Object.assign({},state,{comments:action.payload});
+
+ case types.LOGOUT + types.FULFILLED:
+    return Object.assign({},state,{user:{}});
  case types.GET_USER + types.FULFILLED:
+
            return Object.assign({},state,{user:action.payload});
 
      case types.GET_EVENT_PAGE + types.FULFILLED:

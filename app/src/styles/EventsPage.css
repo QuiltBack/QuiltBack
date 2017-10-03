@@ -1,6 +1,7 @@
 .events-page-section {
   position: relative;
   top: 75px;
+  
 }
 .events-page-background {
   height: 400px;
@@ -213,10 +214,13 @@
   cursor: pointer;
 }
 .events-page-banner-image {
+   cursor:pointer;
   display: grid;
   grid-area: 2 / 2;
   background: url('./images/events/quilt_placeholder.jpg') no-repeat center center;
   background-size: cover;
+  position:relative;
+  z-index:4;
 }
 .events-page-social-media {
   display: grid;
@@ -274,10 +278,13 @@
   color: #D93044;
 }
 .events-page-event-info {
+  cursor:pointer;
   display: grid;
   grid-area: 1 / 3;
   grid-template: 20px 73px 24px 26px 8px 120px 49px / auto;
   padding-left: 30px;
+  position:relative;
+  z-index:4;
 }
 .events-page-event-title {
   display: grid;
