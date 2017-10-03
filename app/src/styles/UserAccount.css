@@ -27,7 +27,7 @@
   display: grid;
   grid-area: 1 / 1;
   width: 100%;
-  grid-template: 41px 240px 16px 90px 100px / 17% 296px 28%;
+  grid-template: 67px 240px 16px 90px 100px / 17% 296px 28%;
 }
 .user-account-left-profile-image {
   display: grid;
