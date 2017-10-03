@@ -71,6 +71,7 @@ console.log("page is " +req.params.page)
                    })
         
     },
+    
   
 
 /* api/subscriber GET -> return subscriber emails 

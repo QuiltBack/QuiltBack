@@ -13,3 +13,7 @@ export const GET_NEXT_POST_PAGE="GET_NEXT_POST_PAGE";
 export const GET_EVENT_PAGE="GET_EVENT_PAGE";
 export const GET_ADDRESS="GET_ADDRESS";
 export const GET_USER="GET_USER";
+export const LOGOUT ="LOGOUT";
+export const LOGIN="LOGIN";
+export const GET_COMMENTS="GET_COMMENTS";
+export const ADD_COMMENT="ADD_COMMENT";

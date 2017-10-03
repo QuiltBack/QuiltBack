@@ -47,6 +47,8 @@ class BlogPage extends Component {
 
   render() {
     let button;
+    console.log("BLOGS")
+    console.log(this.props.general.posts);
     let blogs = 'loading blogs...';
     if (this.props && this.props.general.posts ){
       this.props.general.posts.sort((a, b)=>{
