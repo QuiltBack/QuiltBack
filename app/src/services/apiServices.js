@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-const localApiUrl ='http://localhost:3001'
-
 
 const api = axios.create({
     withCredentials:true
@@ -9,7 +7,7 @@ const api = axios.create({
 });
 export function apiAddComment(comment){
     return [];
-   return axios.post(localApiUrl + '/api/comment/',{comment:comment})
+   return axios.post('/api/comment/',{comment:comment})
     .then(response=>{
         console.log('returning from post api/comment');
         console.log(response);
@@ -23,7 +21,7 @@ export function apiAddComment(comment){
 }
 export function apiGetComments(postId){
     return [];
-    return axios.get(localApiUrl + '/api/comments/+postId')
+    return axios.get( '/api/comments/+postId')
      .then(response =>{
           return response.data;
         })
@@ -36,7 +34,7 @@ export function apiGetComments(postId){
 export function apiGetUser(){
         // debug try this
         //end debug try this
-        return  api.get(localApiUrl  + '/auth/me')
+        return  api.get( '/auth/me')
                     .then(response =>{
                      return response.data;
                     })
@@ -51,7 +49,7 @@ export function apiGetUser(){
 export function apiLogout(){
         // debug try this
         //end debug try this
-        return  api.get(localApiUrl  + '/auth/logout')
+        return  api.get('/auth/logout')
                     .then(response =>{
                      return response.data;
                     })
@@ -64,7 +62,7 @@ export function apiLogout(){
 
 export function apiCreateEvent(event){
 
-    return api.post(localApiUrl + '/api/event', {event:event})
+    return api.post( '/api/event', {event:event})
     .then(response=>{
         console.log("response");
         console.log(response);
@@ -74,7 +72,7 @@ export function apiCreateEvent(event){
 }
 
 export function apiGetNextEventPage(page,limit){
-    return axios.get(localApiUrl + '/api/eventpage/' + limit + '/' + page+1)
+    return axios.get( '/api/eventpage/' + limit + '/' + page+1)
        .then(response=>{
                   return response.data;
               })
@@ -89,7 +87,7 @@ export function apiGetEventPage(page,limit){
     page is ${page}
     limit is ${limit}
     `)
-    return axios.get(localApiUrl + '/api/eventpage/' + limit + '/' + page)
+    return axios.get( '/api/eventpage/' + limit + '/' + page)
        .then(response=>{
                   return response.data;
               })
@@ -103,7 +101,7 @@ export function apiGetEventPage(page,limit){
 
 
 export function apiGetNextPostPage(page,limit){
-    return axios.get(localApiUrl + '/api/postpage/' + limit + '/' + page)
+    return axios.get( '/api/postpage/' + limit + '/' + page)
        .then(response=>{
                   return response.data;
               })
@@ -117,7 +115,7 @@ export function apiGetNextPostPage(page,limit){
 
 
 export function apiGetPostDetail(postId){
-    return axios.get(localApiUrl + '/api/post/' + postId)
+    return axios.get( '/api/post/' + postId)
           .then(response=>{
                   return response.data[0];
               })
@@ -130,7 +128,7 @@ export function apiGetPostDetail(postId){
 
 
 export function apiGetEventDetail(eventId){
-return axios.get(localApiUrl + '/api/event/' + eventId)
+return axios.get( '/api/event/' + eventId)
              .then(response=>{
                   return response.data[0];
               })
@@ -143,7 +141,7 @@ return axios.get(localApiUrl + '/api/event/' + eventId)
 }
 export function apiGetPosts(){
     console.log("inside apiGetPosts");
-    return axios.get(localApiUrl + '/api/posts')
+    return axios.get( '/api/posts')
               .then(response=>{
                   return response.data;
               })
@@ -156,7 +154,7 @@ export function apiGetPosts(){
 }
 export function apiGetSubscribers(){
     console.log("getting subscribers");
-    return axios.get(localApiUrl + '/api/subscriber')
+    return axios.get( '/api/subscriber')
     .then(response=>{
         console.log('returning from get api/subscriber');
         console.log(response);
@@ -172,7 +170,7 @@ export function apiGetSubscribers(){
 
 export function apiAddSubscriber(email){
     console.log("adding email " + email);
-    return axios.post(localApiUrl + '/api/subscriber',{email:email})
+    return axios.post( '/api/subscriber',{email:email})
     .then(response=>{
         console.log('returning from post api/subscriber');
         console.log(response);
@@ -187,7 +185,7 @@ export function apiAddSubscriber(email){
 
 export function apiRemoveSubscriber(email){
     console.log("removingemail " + email);
-    return axios.delete(localApiUrl + '/api/subscriber/' +email )
+    return axios.delete( '/api/subscriber/' +email )
     .then(response=>{
         console.log('returning from delete  api/subscriber');
         console.log(response);
@@ -205,7 +203,7 @@ export function apiRemoveSubscriber(email){
 
 export function apiGetEvents(){
     console.log("inside apiGetEvents");
-    return axios.get(localApiUrl + '/api/events')
+    return axios.get( '/api/events')
               .then(response=>{
                   console.log("EVENTS");
                   console.log(response);
@@ -222,7 +220,7 @@ export function apiGetEvents(){
 export function apiGetEventById(eventid){
     //app.get('/api/event/:eventId',CTRL.getEvent);
     console.log("inside apiGetEventById");
-    return axios.get(localApiUrl + '/api/event/' + eventid)
+    return axios.get( '/api/event/' + eventid)
               .then(response=>{
                   console.log("EVENTS");
                   console.log(response);
@@ -238,7 +236,7 @@ export function apiGetEventById(eventid){
 
 export function apiGetAddress(){
     console.log('inside getAddress');
-    return axios.get(localApiUrl + '/api/address')
+    return axios.get( '/api/address')
         .then(response=>{
             console.log('address' + response);
             
@@ -251,7 +249,7 @@ export function apiGetAddress(){
 
 export function apiAuthUser(){
     console.log('inside getAddress');
-    return api.get(localApiUrl + '/auth/me')
+    return api.get( '/auth/me')
         .then(response=>{
             console.log('auth/me' + response);
             return response.data;
