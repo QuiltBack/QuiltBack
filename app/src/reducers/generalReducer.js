@@ -94,6 +94,8 @@ export default function rootReducer(state=initialState,action){
  switch(action.type){
 
  case types.GET_USER + types.FULFILLED:
+ console.log("returning for GET_USER");
+ console.log(action.payload);
            return Object.assign({},state,{user:action.payload});
 
      case types.GET_EVENT_PAGE + types.FULFILLED:

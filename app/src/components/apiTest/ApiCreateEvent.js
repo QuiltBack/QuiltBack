@@ -88,24 +88,29 @@ loadEvent(props){
                if (oldevent.catalogue){
                    oldCatalog= JSON.parse(oldevent.catalogue);
                }
+               if (!Array.isArray(oldCatalog))
+                 oldCatalog=[];
                console.log("response for event to edit was");
                console.log(response);
              
                 this.setState({
-                   address:oldevent.address,
-                   city:oldevent.city,
-                   state:oldevent.state,
-                   zip:oldevent.zipcode, 
-                   date:moment(oldevent.date),
-                   description:oldevent.description,
-                   donor:oldevent.donorinfo,
-                   volunteer:oldevent.volunteerinfo,
+                   address:oldevent.address?oldevent.address:'',
+                   city:oldevent.city?oldevent.city:'',
+                   state:oldevent.state?oldevent.state:'',
+                   zip:oldevent.zipcode?oldevent.zipcode:'', 
+                   date:moment(oldevent.date?oldevent.date:''),
+                   description:oldevent.description?oldevent.description:'',
+                   donor:oldevent.donorinfo?oldevent.donorinfo:'',
+                   volunteer:oldevent.volunteerinfo?oldevent.volunteerinfo:'',
                    eventid:eventid,
-                   uploaded_uri:oldevent.imageref,
-                   title:oldevent.title,
-                   host:oldevent.host,
-                   catalogue:oldCatalog
-                   
+                   uploaded_uri:oldevent.imageref?oldevent.imageref:'',
+                   title:oldevent.title?oldevent.title:'',
+                   host:oldevent.host?oldevent.host:'',
+                   catalogue:oldCatalog,
+                   users_id: oldevent.users_id?oldevent.users_id:null,
+                   catalogueImage_uri:(oldCatalog.length >0)?oldCatalog[0].image_uri:'',
+                   catalogueItemName:(oldCatalog.length >0)?oldCatalog[0].Name:'',
+                   catalogueItemAuctionId:(oldCatalog.length >0)?oldCatalog[0].AuctionId:'',
 
 
                 })
@@ -133,20 +138,24 @@ saveAndPublish(){
     
     let userid=null;
     if (this.props && this.props.general && this.props.general.user){
-        userid=this.props.general.user.id;
+        userid=this.props.general.user.users_id;
     }
+    if (userid ===null) return;
+    console.log("userID save event " +userid);
     let newEvent={
-        title:this.state.title,
-        description:this.state.description,
-        catalogue:this.state.catalogue,
-        donor:this.state.donor,
-        volunteer:this.state.volunteer,
-        image_uri:this.state.uploaded_uri,
+        title:this.state.title?this.state.title:'',
+        description:this.state.description?this.state.description:'',
+        catalogue:this.state.catalogue?this.state.catalogue:[],
+        donor:this.state.donor?this.state.donor:'',
+        volunteer:this.state.volunteer?this.state.volunteer:'',
+        image_uri:this.state.uploaded_uri?this.state.uploaded_uri:'',
         id:this.state.eventid,
-        owner:this.state.user.id,
-        date:this.state.date,
-        host:this.state.host,
-        zip:this.state.zip,
+        users_id:userid,
+        date:this.state.date?this.state.date : moment(),
+        host:this.state.host?this.state.host:'',
+        city:this.state.city?this.state.city:'',
+        state:this.state.state?this.state.state:'',
+        zip:this.state.zip?this.state.zip:'',
         
        
     };
@@ -168,9 +177,12 @@ saveAndPublish(){
             editDonor:false,
             volunteer:'',
             donor:'',
+            host:''
+
         
 
         })
+        this.props.history.push("/");
 
     })
     .catch(err=>console.log(err))

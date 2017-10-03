@@ -91,7 +91,7 @@ export function apiGetPostDetail(postId){
 export function apiGetEventDetail(eventId){
 return axios.get(localApiUrl + '/api/event/' + eventId)
              .then(response=>{
-                  return response.data;
+                  return response.data[0];
               })
               .catch(err=>{
               console.log("apiGetPosts error");

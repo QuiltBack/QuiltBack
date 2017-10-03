@@ -54,6 +54,12 @@ class EventsPage extends Component {
       numberOfEvents:6,
       resetButton:true
     }
+    this.gotoDetail = this.gotoDetail.bind(this);
+  }
+  gotoDetail(eventid){
+   if (this.props && this.props.history)
+     this.props.history.push("/event/" + eventid);
+
   }
 
   componentDidMount() {
@@ -295,13 +301,15 @@ class EventsPage extends Component {
         console.log("EVENT");
         console.log(event);
         var d1 = moment.utc(event.date);
-        let shareUrl="http://www.google.com";
+        let shareUrl="http://localhost:3000/event/" + event.eventid;
         let title=event.title;
+        
         return index<(this.state.numberOfEvents)?
            (
-            <div className="events-page-events" key={index}>
+             
+            <div className="events-page-events"   key={index}>
             <div className="events-page-banner">
-              <div className='events-page-banner-image'/>
+            <div onClick={e=>{this.gotoDetail(event.eventid)}} className='events-page-banner-image'/>
             </div>
             <div className='events-page-social-media'>
 
@@ -353,7 +361,7 @@ class EventsPage extends Component {
           </EmailShareButton>
               </div>
             </div>
-            <div className="events-page-event-info">
+            <div onClick={e=>{this.gotoDetail(event.eventid)}}  className="events-page-event-info">
               <div className='events-page-event-title'>{ 27 > event.title.length? 
                 event.title : (event.title).substring(0, 27) + '...'}</div>
               <div className='events-page-event-place'>{d1.format("MMMM DD, YYYY ") + d1.format('h A ') + event.city + ', ' + event.state + ' ' + event.zipcode + ', ' + event.address}</div>

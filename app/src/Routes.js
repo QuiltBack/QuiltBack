@@ -10,6 +10,8 @@ import CreateEvent from './components/createEvent/CreateEvent';
 import UserEvents from './components/user/UserEvents';
 import UserPosts from './components/user/UserPosts';
 import UserAccount from './components/user/UserAccount';
+import EventDetail from './components/events/EventDetail'
+
 
 export default (
     <Switch>
@@ -18,8 +20,12 @@ export default (
         <Route path="/events" component={EventsPage}/>
         <Route path="/blog" component={BlogPage}/>
         <Route path="/createEvent" component={CreateEvent}/>
+<<<<<<< HEAD
         <Route path="/dashboard/events" component={UserEvents}/>
         <Route path="/dashboard/posts" component={UserPosts}/>
         <Route path="/dashboard/account" component={UserAccount}/>
+=======
+         <Route path="/event/:eventId" component={EventDetail}/>
+>>>>>>> master
     </Switch>
 );
