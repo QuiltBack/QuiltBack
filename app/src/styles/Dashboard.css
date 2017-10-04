@@ -1,12 +1,8 @@
 .dashboard-section {
-  width: 258px;
   height: 100vh;
   position: fixed;
   top:0;
-  z-index: 3;
-}
-.zIndex {
-  z-index: 6
+  z-index: 6;
 }
 .dashboard-container {
   width: 258px;
@@ -150,6 +146,7 @@
   line-height: 32px;
   display: grid;
   grid-area: 15 / 1; 
+  cursor: pointer;
 }
 .dashboard-admin-hidden-pages {
   height: 0px;

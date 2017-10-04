@@ -66,6 +66,8 @@ class EventsPage extends Component {
   }
 
   componentDidMount() {
+    let wtl = new TimelineMax();
+    wtl.to(window, .5, {scrollTo:0, ease:Power4.easeOut})
     this.loadEvents();
     let tl = new TimelineMax({
       repeat: -1,

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {TimelineMax, Power4} from 'greensock'
 import {getEventDetail} from '../../reducers/generalReducer';
 
 import 'font-awesome/css/font-awesome.min.css';
@@ -67,7 +68,8 @@ eventdetails()
 }
 
 componentDidMount() {
-   
+   let tl = new TimelineMax();
+   tl.to(window, .5, {scrollTo:0, ease:Power4.easeOut})
     this.eventdetails();
 }
 componentWillReceiveProps(ownProps) {
