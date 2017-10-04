@@ -1,6 +1,6 @@
 import * as types from '../actions/ActionTypes';
 import initialState from './initialState'
-import {apiGetComments,apiAddComment,apiLogout,apiGetUser,apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
+import {apiEditAccount,apiGetComments,apiAddComment,apiLogout,apiGetUser,apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
 
 export function getComments(postId){
   return {
@@ -105,6 +105,12 @@ export function getEventDetail(event_id){
         payload:apiGetEventDetail(event_id)
     }
 }
+export function editAccount(users_id,nickname,contactemail,number,imageref){
+    return{
+        type:types.EDIT_ACCOUNT,
+        payload:apiEditAccount(users_id,nickname,contactemail,number,imageref)
+    }
+}
 
 
 export default function rootReducer(state=initialState,action){
@@ -153,6 +159,8 @@ export default function rootReducer(state=initialState,action){
      
      case types.GET_POSTS + types.FULFILLED:
        return Object.assign({},state,{posts:action.payload});
+      case types.EDIT_ACCOUNT + types.FULFILLED:
+        return Object.assign({},state,{usersInfo: action.payload})
 
      default:return state;
  }

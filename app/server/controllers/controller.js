@@ -91,8 +91,21 @@ module.exports ={
             })
     },
     editAccount:(req,res)=>{
-        //post
-        //doing it when Im not dying
+        let nickname = req.body.nickname;
+        let contactemail = req.body.contactemail;
+        let number = req.body.number;
+        let imageref = req.body.imageref;
+        let users_id = req.params.users_id;
+
+        req.app.get('db').editAccount([users_id,nickname,contactemail,number,imageref])
+                .then(response=>{
+                    res.status(200).send(response);
+                })
+                .catch(err=>{
+                    console.log('edit account err, in ctrl')
+                    console.log(err)
+                    res.status(500).end();
+                })
     },
     
   

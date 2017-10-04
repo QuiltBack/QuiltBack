@@ -192,6 +192,8 @@ app.get('/api/address', CTRL.getAddress);
 app.get('/api/dashboard/events/:users_id', CTRL.getUsersEvents);
 app.get('/api/dashboard/posts/:users_id', CTRL.getUsersPosts);
 
+app.post('/api/dashboard/account/:users_id', CTRL.editAccount);
+
 
 /* End points for NewsLetter Subscriptions */
 
