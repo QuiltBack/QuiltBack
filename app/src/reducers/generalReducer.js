@@ -3,6 +3,7 @@ import initialState from './initialState'
 import {apiGetComments,apiAddComment,apiLogout,apiGetUser,apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
 
 export function getComments(postId){
+    console.log("REDUCER postid" +postId);
   return {
       type:types.GET_COMMENTS,
       payload:apiGetComments(postId)
