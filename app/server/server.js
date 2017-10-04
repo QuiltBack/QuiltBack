@@ -9,7 +9,7 @@ passport = require('passport'),
   env = require('dotenv').config({ path: './server/config/.env' }),
   imageUpload = require('./controllers/imageUpload'),
   path = require('path');
-console.log(env);
+
 
 
 const app = express();
@@ -221,7 +221,7 @@ app.post('/api/upload',(req, res) => {
 
 /* END ENDPOINTS */
 app.get('*', (req,res)=>{
-  req.sendFile(path.join(__dirname, '../build/index.html'))
+  res.sendFile(path.join(__dirname, '../build/index.html'))
 })
 
 

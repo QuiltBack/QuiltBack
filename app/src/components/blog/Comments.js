@@ -8,18 +8,52 @@ import {getComments,addComment} from '../../reducers/generalReducer';
 class Comments extends Component{
 constructor(props){
     super(props);
+    this.state={loaded:false};
+    //this.getcomments = this.getcomments.bind(this);
 }
 
- getcomments(props){
-    if (props && props.general && props.general.comments){
-       props.getComments(props.postid);
-   }
- }
- componentWillMount(){
-    this.getcomments(this.props);
- }
+//  getcomments(number,props){
+//     if (props && props.general && props.general.comments){
+//         console.log("passing this postid to comments " +number);
+//         console.log(props.postid);
+//         console.log(props);
+//         console.log("THIS");
+//         console.log(this);
+//         console.log("ENDTHIS");
+//        props.getComments(props.postid);
+//    }
+//  }
+//  componentDidMount(){
+//      console.log("WillMount")
+//      console.log(this);
+//      console.log(this.props)
+//      console.log("DEBUG");
+//      let subProps = Object.assign({},this.props);
+//      console.log(subProps);
+//     this.getcomments(1,subProps);
+//  }
  componentWillReceiveProps(props){
-    this.getcomments(props);
+    //  console.log("WillReceive")
+    //  console.log(props)
+    // this.getcomments(2,props);
+
+console.log("willRecieve")
+    if (props && props.general && props.general.comments ){
+        console.log("debug part1");
+       if (!this.state.loaded){
+          if (this.props.postid){
+              console.log("GOT postid" + this.props.postid);
+            this.setState({loaded:true});
+              props.getComments(props.postid);
+          }
+  
+       } 
+       else{
+           console.log("debug not loaded");
+       }
+    }
+       
+
  }
  addcomment(){
      if (this.props && this.props.general && this.props.general.user && this.props.general.user.users_id && this.refs.comment_text.value){

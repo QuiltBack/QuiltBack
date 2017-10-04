@@ -21,8 +21,11 @@ export function apiAddComment(comment){
 }
 export function apiGetComments(postId){
    
-    return axios.get( '/api/comments/' + 'postId')
+   console.log("apiServices apiGetComments");
+   console.log(postId);
+    return axios.get( '/api/comments/' + postId)
      .then(response =>{
+         console.log(response);
           return response.data;
         })
         .catch(err=>{

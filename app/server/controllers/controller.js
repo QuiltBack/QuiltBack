@@ -1,5 +1,4 @@
 
-
 module.exports ={
     getComments:(req,res)=>{
       /*
@@ -8,9 +7,13 @@ module.exports ={
             post_id:this.props.postid
             */
        
+       let blogId = +req.params.blogId;
+       console.log("blogid is" + req.params.blogId);
+       console.log(req.params);
      
         req.app.get("db").getComments([blogId])
             .then(response=>{
+                console.log("getComments result");
                 console.log(response);
                 res.status(200).json(response);
 
@@ -22,7 +25,20 @@ module.exports ={
             })
     },
     addComment: (req,res) =>{
-        req.app.get("db").addComment([post_id,user_id,text])
+        let {post_id,user_id,text} = req.body.comment;
+        let date = '';
+        //comment();
+        req.app.get("db").addComment([post_id,user_id,text,date])
+           .then(response=>{
+               console.log("addComment ");
+               console.log(response);
+               res.status(200).json(response);
+           })
+           .catch(err=>{
+               console.log("addComment ERROR");
+               console.log(err);
+               res.status(500).end();
+           })
     },
     getPosts:(req,res)=>{
        
