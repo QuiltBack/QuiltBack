@@ -48,6 +48,7 @@
   display: grid;
   grid-area: 1 / 2;
   width: 100%;
+  align-items: center;
   grid-template: 41px 26px 64px 45px 24px 45px 24px 45px 24px 45px 24px 45px 40px / 10% 30% 50% 10%;  
 }
 .user-account-right-username {
@@ -106,6 +107,7 @@
   font-size: 16px;	
   line-height: 21px;
   padding-left: 16px;
+  height: 40px;
 }
 .user-account-right-input-nickname {
   display: grid;
@@ -114,6 +116,7 @@
   font-family: FuturaMedium;	
   font-size: 16px;	
   line-height: 21px;
+  height: 40px;
 }
 .user-account-right-input-email {
   display: grid;
@@ -122,6 +125,7 @@
   font-family: FuturaMedium;	
   font-size: 16px;	
   line-height: 21px;
+  height: 40px;
 }
 .user-account-right-input-password {
   display: grid;
@@ -130,6 +134,7 @@
   font-family: FuturaMedium;	
   font-size: 16px;	
   line-height: 21px;
+  height: 40px;
 }
 .user-account-right-input-confirm {
   display: grid;
@@ -138,4 +143,5 @@
   font-family: FuturaMedium;	
   font-size: 16px;	
   line-height: 21px;
+  height: 40px;
 }
