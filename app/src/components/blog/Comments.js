@@ -31,6 +31,8 @@ constructor(props){
             post_id:this.props.postid
             
         }
+        console.log("adding comment ")
+        console.log(comment);
         this.props.addComment(comment);
      }
  }

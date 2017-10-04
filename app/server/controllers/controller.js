@@ -1,6 +1,29 @@
 
 
 module.exports ={
+    getComments:(req,res)=>{
+      /*
+          text:commentText,
+            user_id: this.props.general.user.users_id,
+            post_id:this.props.postid
+            */
+       
+     
+        req.app.get("db").getComments([blogId])
+            .then(response=>{
+                console.log(response);
+                res.status(200).json(response);
+
+            })
+            .catch(err=>{
+                console.log("getComments ERROR");
+                console.log(err);
+                res.status(500).end();
+            })
+    },
+    addComment: (req,res) =>{
+        req.app.get("db").addComment([post_id,user_id,text])
+    },
     getPosts:(req,res)=>{
        
             req.app.get("db").getAllPosts()

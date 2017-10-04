@@ -177,8 +177,8 @@ app.get('/auth/logout', (req, res) => {
 })
 
 
-
-
+app.post('/api/comment',CTRL.addComment);
+app.get('/api/comments/:blogId',CTRL.getComments)
 app.get('/api/posts',  CTRL.getPosts);
 app.get('/api/post/:postId',CTRL.getPost);
 

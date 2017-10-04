@@ -6,7 +6,7 @@ const api = axios.create({
 
 });
 export function apiAddComment(comment){
-    return [];
+  
    return axios.post('/api/comment/',{comment:comment})
     .then(response=>{
         console.log('returning from post api/comment');
@@ -20,8 +20,8 @@ export function apiAddComment(comment){
     })
 }
 export function apiGetComments(postId){
-    return [];
-    return axios.get( '/api/comments/+postId')
+   
+    return axios.get( '/api/comments/' + 'postId')
      .then(response =>{
           return response.data;
         })
