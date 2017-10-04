@@ -2,7 +2,8 @@ create table comments(
   id SERIAL,
   users_id INT,
   date TIMESTAMP,
-  post_id SERIAL,
+  post_id INT,
   text TEXT,
-  FOREIGN KEY(users_id) REFERENCES users(users_id)
+  FOREIGN KEY(users_id) REFERENCES users(users_id),
+  FOREIGN KEY(post_id) REFERENCES posts(post_id)
 );

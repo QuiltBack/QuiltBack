@@ -189,6 +189,10 @@ app.get('/api/events', CTRL.getEvents);
 app.get('/api/eventpage/:limit/:page',CTRL.getEventPage);
 app.get('/api/address', CTRL.getAddress);
 
+app.get('/api/dashboard/events/:users_id', CTRL.getUsersEvents);
+app.get('/api/dashboard/posts/:users_id', CTRL.getUsersPosts);
+
+
 /* End points for NewsLetter Subscriptions */
 
 /* api/subscriber GET -> return subscriber emails */
@@ -199,6 +203,7 @@ app.post('/api/subscriber',CTRL.addSubscriber);
 
 /* api/subscriber/:subscriberID remove Subscriber */
 app.delete('/api/subscriber/:subscriberEmail',cors(corsOptions),CTRL.removeSubscriber);
+
 
 
 

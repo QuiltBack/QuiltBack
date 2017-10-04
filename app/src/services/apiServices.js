@@ -236,6 +236,32 @@ export function apiGetEventById(eventid){
             })
            
 }
+export function apiGetUsersEvents(users_id){
+    console.log('inside getUsersEvents');
+    return axios.get('/api/dashboard/events/' + users_id)
+            .then(response=>{
+                console.log('USER EVENTS');
+                console.log(response);
+                return response.data;
+            })
+            .catch(err=>{
+                console.log('apiGetUsersEvents Error')
+                console.log(err)
+            })
+}
+export function apiGetUsersPosts(users_id){
+    console.log('inside getUsersPosts');
+    return axios.get('/api/dashboard/posts' + users_id)
+        .then(response=>{
+            console.log('USERS POSTS');
+            console.log(response);
+            return response.data;
+        })
+        .catch(err=>{
+            console.log('apiGetUsersPosts error');
+            console.log(err);
+        })
+}
 
 export function apiGetAddress(){
     console.log('inside getAddress');
