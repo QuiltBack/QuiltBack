@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+ const frontenv = require('../../frontenv.js');
 
 class Login extends Component {
 
     render() {
         return (
             <div>
-                <a href="http://localhost:3001/auth"><p>Login</p></a>
+                <a href={`${frontenv.BACKEND_HOST}/auth`}><p>Login</p></a>
             </div>
         )
     }

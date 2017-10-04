@@ -3,3 +3,5 @@
 /node_modules
 /server/config
 /npm-debug.log
+#config
+frontenv.js

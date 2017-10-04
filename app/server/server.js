@@ -9,7 +9,7 @@ passport = require('passport'),
   env = require('dotenv').config({ path: './server/config/.env' }),
   imageUpload = require('./controllers/imageUpload'),
   path = require('path');
-
+console.log(env);
 
 
 const app = express();
@@ -173,7 +173,7 @@ app.get('/auth', (req, res, next) => {
 
 app.get('/auth/logout', (req, res) => {
   req.logOut();
-  res.redirect(302, process.env.REACT_APP_HOST)
+  res.redirect(302,  process.env.REACT_APP_HOST + '/')
 })
 
 

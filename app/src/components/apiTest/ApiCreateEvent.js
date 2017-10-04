@@ -14,6 +14,7 @@ import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 import './ApiCreateEvent.css';
 import 'font-awesome/css/font-awesome.min.css';
+const frontenv = require('../../frontenv.js');
  class ApiCreateEvent extends Component{
 
 constructor(props) {
@@ -129,13 +130,11 @@ loadEvent(props){
 }
 
 editLocation(){
-   console.log("editLocation");
+   
     this.setState({editLocation:true})
 }
 addLocation(){
-    console.log("add Location");
-    console.log("address");
-    console.log(this.refs.address.value);
+   
     this.setState({editLocation:false,city:this.refs.city.value,state:this.refs.state.value,address:this.refs.address.value})
 }
 
@@ -147,7 +146,7 @@ saveAndPublish(){
         userid=this.props.general.user.users_id;
     }
     if (userid ===null) return;
-    console.log("userID save event " +userid);
+  
     let newEvent={
         title:this.state.title?this.state.title:'',
         description:this.state.description?this.state.description:'',
@@ -167,7 +166,7 @@ saveAndPublish(){
     };
   
     apiCreateEvent(newEvent).then(res=>{
-        console.log("event created")
+     
         this.setState({
             catalogue:[],
             description:'',
@@ -252,10 +251,9 @@ prevCatalogueItem(){
 
 
 addItem(){
-    console.log("Adding catalogue item to my list");
-    console.log(this.state);
+
     if (this.state.catalogueItemName && this.state.catalogueItemAuctionId){
-        console.log("debug1");
+
      let newCatalogue = this.state.catalogue;
      if (this.state.catalogueItemView === this.state.catalogue.length){
             newCatalogue.push({
@@ -276,20 +274,18 @@ addItem(){
          catalogue:newCatalogue,catalogueItemName:'',catalogueItemAuctionId:''
      ,editCatalogueItemAuctionId:false,editCatalogueItemName:false
     })
-    console.log("debug2")
+  
     }
 }
 editDonor(){
     this.setState({editDonor:true})
 }
 editVolunteer(){
-    console.log("set editVolunteer")
+
     this.setState({editVolunteer:true})
 }
 addDonor(){
-   
-   console.log("addDonor");
-   console.log(this.refs.donor.value);
+  
     this.setState({editDonor:false,donor:this.refs.donor.value})
 }
 addVolunteer(){
@@ -297,26 +293,26 @@ addVolunteer(){
 }
 
 addCatalogueItemAuctionId(){
-    console.log("add ItemAuctionId")
+
     this.setState({editCatalogueItemAuctionId:false,catalogueItemAuctionId:this.refs.catalogueItemAuctionId.value})
 }
 addCatalogueItemName(){
-    console.log("add ItemName")
+
     this.setState({editCatalogueItemName:false,catalogueItemName:this.refs.catalogueItemName.value})
 }
 
 
 editCatalogueItemName(){
-    console.log("edit ItemName");
+   
     this.setState({editCatalogueItemName:true});
 }
 editCatalogueItemAuctionId(){
-    console.log("edit ItemAuctionId")
+   
     this.setState({editCatalogueItemAuctionId:true});
 }
 
 editDescription(){
-    console.log("editing description??")
+   
     this.setState({editDescription:true})
 }
 addDescription(){
@@ -358,16 +354,15 @@ handleCatalogueFile(fileArray){
 handleFile(fileArray,itemType) {
     
     let that=this;
-    console.log("handling Image File");
-    console.log(itemType);
+    
     const reader = new FileReader();
     const file = fileArray[0];
-    console.log(file);
+   
  
    this.setState({
       processing: true
     });
-    console.log("debug 3 itemType " +itemType);
+  
     reader.onload = (upload) => {
 
 
@@ -378,9 +373,9 @@ let fileType=upload.currentTarget.result.replace(/data:([^;]*);.*$/,"$1");
             imageName: file.name,
             imageExtension: fileType
    }
-  console.log("debug1 item Type " +itemType);
 
- axios.post('http://localhost:3001/api/upload',{pic:pic})
+
+ axios.post(frontenv.BACKEND_HOST + '/api/upload',{pic:pic})
     .then(function(data){
        
         if (itemType === "catalogue"){
@@ -435,9 +430,6 @@ onEndDateChange(date){
 
 
 render(){
-    console.log(this.props);
-    console.log("USER")
-    console.log(this.props.general.user);
 let processing="";
 let imageStyle={};
 let catalogueImageStyle={};
@@ -446,7 +438,7 @@ let locationElement=(<div className="eventLocation staticColor" onClick={this.ed
 
 if (this.state.city || this.state.state || this.state.address){
   let location='';
-  console.log("SETTING LOCATION");
+
   location=this.state.address;
   if (location !== "" &&  this.state.city) location = location + ", " +this.state.city;
   else location = location + this.state.city;
@@ -457,7 +449,6 @@ if (this.state.city || this.state.state || this.state.address){
   if (location !== "" && this.state.zip ) location = location + ", " + this.state.zip;
   else location =location + this.state.zip; 
 
-  console.log("location is " + location);
 
   locationElement=(
     <div onClick={this.editLocation} className="eventLocation staticColor">
@@ -467,7 +458,7 @@ if (this.state.city || this.state.state || this.state.address){
 
 }
 if (this.state.editLocation){
-    console.log("create location Element");
+   
     locationElement=(
     <div className="eventLocation">
         <span className="eventLabel locationInput">Address</span>
@@ -491,17 +482,15 @@ let catalogueItemNameElement=(
         
 );
 if (this.state.catalogueItemName){
-    console.log("debug1A")
-    console.log(this.state.catalogueItemName)
+
 
     catalogueItemNameElement=( <div className="catalogueItemName staticColor" onClick={this.editCatalogueItemName}>
         {this.state.catalogueItemName}</div>); 
 
-     console.log(catalogueItemNameElement);     
+  
 }
 
 if (this.state.editCatalogueItemName){
-    console.log("editing Item Name")
     catalogueItemNameElement=(
         <div className="catalogueItemName"><input autoFocus="autofocus" defaultValue={this.state.catalogueItemName} type="text" ref="catalogueItemName" />
         <button className="redButton" onClick={this.addCatalogueItemName}>Done</button>
@@ -509,21 +498,21 @@ if (this.state.editCatalogueItemName){
     )
 }
 
-console.log("debug1AA")
+
 
 let catalogueItemAuctionIdElement=(
     <div className="catalogueItemAuctionId staticColor" onClick={this.editCatalogueItemAuctionId}>Auction ID</div>
  );
 
 if (this.state.catalogueItemAuctionId){
-    console.log("debug1B")
+
       catalogueItemAuctionIdElement=(
     <div className="catalogueItemAuctionId staticColor" onClick={this.editCatalogueItemAuctionId}>{this.state.catalogueItemAuctionId}</div>
     );
 }
 
 if (this.state.editCatalogueItemAuctionId){
-    console.log("editing Item AuctionId")
+
     catalogueItemAuctionIdElement=(
         <div className="catalogueItemAuctionId"><input autoFocus="autofocus" defaultValue={this.state.catalogueItemAuctionId} type="text" ref="catalogueItemAuctionId" />
         <button className="redButton" onClick={this.addCatalogueItemAuctionId}>Done</button>
@@ -532,7 +521,7 @@ if (this.state.editCatalogueItemAuctionId){
 }
 
 
-console.log("debug1AB")
+
 
 if (this.state.uploaded_uri) {
   
@@ -608,7 +597,6 @@ if (this.state.host){
         titleElement=(
           <div className="eventTitle staticColor staticSizeLarge" onClick={this.editTitle}>{this.state.title}</div>);
       }
-      console.log("this.state.editTitle is " + this.state.editTitle)
       if (this.state.editTitle){
            titleElement=(
               <div className="eventTitle">
@@ -618,8 +606,6 @@ if (this.state.host){
               </div>
           )
  
-          console.log("Edit Title with element")
-          console.log(titleElement);
       }
 
     

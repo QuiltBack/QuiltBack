@@ -4,12 +4,15 @@ import {TimelineMax, Power4} from 'greensock';
 import {getUser,logout} from '../../reducers/generalReducer';
 import {Link} from 'react-router-dom';
 import '../../styles/Dashboard.css';
+const frontenv = require('../../frontenv.js');
+
 
 class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
       expanded:false,
+      pagesExpanded:false,
     }
     this.logout=this.logout.bind(this);
     this.login =this.login.bind(this);
@@ -18,12 +21,14 @@ class Dashboard extends Component {
     let currentpage = this._reactInternalInstance._context.router.route.location.pathname
    if ( currentpage!=="/" && currentpage)
   localStorage.setItem("redirect",JSON.stringify(this._reactInternalInstance._context.router.route.location.pathname));
-
+ 
   }
   logout(){
     if (this.props && this.props.logout){
       this.props.logout();
     }
+    let tl = new TimelineMax();
+    tl.to('.dashboard-container', 0, {marginLeft: '-258px'})
   }
   componentWillMount(){
     if (this.props && this.props.getUser && 
@@ -40,6 +45,7 @@ class Dashboard extends Component {
   mouseEnter() {
     let tl = new TimelineMax();
     tl.to('.dashboard-expand', .3, {marginLeft:'150px', opacity: '.8'})
+    tl.from('.dashboard-expand', .3, {marginLeft:'150px', opacity: '.8'})
   }
   mouseLeave() {
     let tl = new TimelineMax();
@@ -65,8 +71,28 @@ class Dashboard extends Component {
       document.getElementsByClassName('dashboard-section')[0].classList.remove('zIndex');
     },300)
   }
+  expandPages() {
+    let tl = new TimelineMax();
+    if (this.state.pagesExpanded) {
+      tl.to('.dashboard-admin-hidden-pages', .3, {height:'0px'});
+      setTimeout(()=>{
+        this.setState({
+          pagesExpanded:false,
+        })
+      },400)
+    } else {
+      tl.to('.dashboard-admin-hidden-pages', .3, {height:'100px'})
+      setTimeout(()=>{
+        this.setState({
+          pagesExpanded:true,
+        })
+      },400)
+    }
+  }
   render() {
     let dashboard;
+  
+    
     let props = this.props.general
    
     if (props && props.user && props.user.users_id) {
@@ -76,7 +102,13 @@ class Dashboard extends Component {
           <section className='dashboard-container'>
             <div className='dashboard-title'>Dashboard</div>
             <Link className='dashboard-admin-notifications' to='/notifications'>Notifications</Link>
-            <Link className='dashboard-admin-pages' to='/pages'>Pages</Link>
+            <div onClick={()=>{this.expandPages()}} className='dashboard-admin-pages'>Pages</div>
+            <div className='dashboard-admin-hidden-pages'>
+              <Link className='dashboard-hidden-home' to='/'>Home</Link>
+              <Link className='dashboard-hidden-blog' to='/blog'>Blog</Link>
+              <Link className='dashboard-hidden-events' to='/events'>Events</Link>
+              <Link className='dashboard-hidden-account' to='/dashboard/account'>Account</Link>
+            </div>
             <Link className='dashboard-admin-users' to='/users'>Users</Link>
             <Link className='dashboard-admin-posts' to='/posts'>Posts</Link>
             <div className="dashboard-admin-logout" onClick={this.logout}>Logout</div>
@@ -103,7 +135,7 @@ class Dashboard extends Component {
       dashboard = (
         <section className='dashboard-container'>
           <div className='dashboard-title'>Dashboard</div>
-          <a className="dashboard-login" onClick={this.login} href="http://localhost:3001/auth">Signup/Login</a>
+          <a className="dashboard-login" onClick={this.login} href={`${frontenv.BACKEND_HOST}/auth`}>Signup/Login</a>
           <div onMouseEnter={(e)=>{this.mouseEnter()}} onMouseLeave={(e)=>{this.mouseLeave()}} onClick={(e)=>{this.mouseClick()}} className='dashboard-expand'>
             <div className='dashboard-contents'> {'<'} </div>
           </div>

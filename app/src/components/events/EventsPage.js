@@ -4,12 +4,15 @@ import {connect} from 'react-redux';
 import {getEvents} from '../../reducers/generalReducer';
 import moment from 'moment';
 import '../../styles/EventsPage.css';
-import DownArrow from '../../styles/images/events/down_arrow.svg'
+import DownArrow from '../../styles/images/events/down_arrow.svg';
+
+
 import {
   ShareButtons,
   ShareCounts,
   generateShareIcon,
 } from 'react-share';
+
 
 
 const {
@@ -28,7 +31,7 @@ const FacebookIcon = generateShareIcon('facebook');
 const TwitterIcon = generateShareIcon('twitter');
 const GooglePlusIcon = generateShareIcon('google');
 const EmailIcon = generateShareIcon('email');
-
+ const frontenv = require('../../frontenv.js');
 
 class EventsPage extends Component {
   constructor(props){
@@ -301,7 +304,7 @@ class EventsPage extends Component {
         console.log("EVENT");
         console.log(event);
         var d1 = moment.utc(event.date);
-        let shareUrl="http://localhost:3000/event/" + event.eventid;
+        let shareUrl=`${frontenv.REACT_APP_HOST}/event/` + event.eventid;
         let title=event.title;
         
         return index<(this.state.numberOfEvents)?

@@ -60,7 +60,8 @@
   font-size: 24px;
   line-height: 32px;
   display: grid;
-  grid-area: 15 / 1; 
+  grid-area: 15 / 1;
+  cursor: pointer; 
 }
 /* Users */
 
@@ -95,6 +96,7 @@
   line-height: 32px;
   display: grid;
   grid-area: 12 / 1; 
+  cursor: pointer; 
 }
 /* Admin */
 .dashboard-logout {
@@ -104,6 +106,7 @@
   line-height: 32px;
   display: grid;
   grid-area: 15 / 1; 
+  cursor: pointer; 
 }
 
 .dashboard-admin-notifications {
@@ -121,6 +124,8 @@
   line-height: 32px;
   display: grid;
   grid-area: 6 / 1; 
+  cursor: pointer;
+  user-select: none;
 }
 .dashboard-admin-users {
   color: #5E5E5E;	
@@ -145,4 +150,21 @@
   line-height: 32px;
   display: grid;
   grid-area: 15 / 1; 
+}
+.dashboard-admin-hidden-pages {
+  height: 0px;
+  overflow: hidden;
+  display: grid;
+  grid-area: 6 / 1 / span 2 / span 1;
+  margin-top: 50px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 120px;
+  font-family: FuturaMedium;	
+  font-size: 18px;	
+  line-height: 25px;
+}
+.dashboard-hidden-home, .dashboard-hidden-blog, .dashboard-hidden-events, .dashboard-hidden-account  {
+  color: #5E5E5E;	
 }
