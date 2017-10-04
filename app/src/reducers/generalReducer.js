@@ -1,10 +1,6 @@
 import * as types from '../actions/ActionTypes';
 import initialState from './initialState'
-<<<<<<< HEAD
-import {apiGetUsersPosts,apiGetUsersEvents,apiGetComments,apiAddComment,apiLogout,apiGetUser,apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
-=======
-import {apiEditAccount,apiGetComments,apiAddComment,apiLogout,apiGetUser,apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
->>>>>>> master
+import {apiEditAccount,apiGetUsersPosts,apiGetUsersEvents,apiGetComments,apiAddComment,apiLogout,apiGetUser,apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
 
 export function getComments(postId){
     console.log("REDUCER postid" +postId);
@@ -121,6 +117,7 @@ export function getUsersPosts(users_id) {
     return {
         type:types.GET_USERS_POSTS,
         payload:apiGetUsersPosts(users_id)
+    }
 }
 export function editAccount(users_id,nickname,contactemail,number,imageref){
     return{
@@ -174,7 +171,6 @@ export default function rootReducer(state=initialState,action){
     case types.GET_EVENTS + types.FULFILLED:
         return Object.assign({},state,{events:action.payload});
      
-<<<<<<< HEAD
     case types.GET_POSTS + types.FULFILLED:
         return Object.assign({},state,{posts:action.payload});
     case types.GET_USERS_EVENTS + types.FULFILLED:
@@ -182,12 +178,8 @@ export default function rootReducer(state=initialState,action){
         return Object.assign({},state,{events:action.payload});
     case types.GET_USERS_POSTS + types.FULFILLED:
         return Object.assign({},state,{posts:action.payload});
-=======
-     case types.GET_POSTS + types.FULFILLED:
-       return Object.assign({},state,{posts:action.payload});
-      case types.EDIT_ACCOUNT + types.FULFILLED:
-        return Object.assign({},state,{usersInfo: action.payload})
->>>>>>> master
+    case types.EDIT_ACCOUNT + types.FULFILLED:
+          return Object.assign({},state,{usersInfo: action.payload})
 
      default:return state;
  }
