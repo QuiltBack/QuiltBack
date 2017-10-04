@@ -4,6 +4,8 @@ import {TimelineMax, Power4} from 'greensock';
 import {getUser,logout} from '../../reducers/generalReducer';
 import {Link} from 'react-router-dom';
 import '../../styles/Dashboard.css';
+const frontenv = require('../../frontenv.js');
+
 
 class Dashboard extends Component {
   constructor(props) {
@@ -19,7 +21,7 @@ class Dashboard extends Component {
     let currentpage = this._reactInternalInstance._context.router.route.location.pathname
    if ( currentpage!=="/" && currentpage)
   localStorage.setItem("redirect",JSON.stringify(this._reactInternalInstance._context.router.route.location.pathname));
-
+ 
   }
   logout(){
     if (this.props && this.props.logout){
@@ -89,6 +91,8 @@ class Dashboard extends Component {
   }
   render() {
     let dashboard;
+  
+    
     let props = this.props.general
    
     if (props && props.user && props.user.users_id) {
@@ -131,7 +135,7 @@ class Dashboard extends Component {
       dashboard = (
         <section className='dashboard-container'>
           <div className='dashboard-title'>Dashboard</div>
-          <a className="dashboard-login" onClick={this.login} href="http://localhost:3001/auth">Signup/Login</a>
+          <a className="dashboard-login" onClick={this.login} href={`${frontenv.BACKEND_HOST}/auth`}>Signup/Login</a>
           <div onMouseEnter={(e)=>{this.mouseEnter()}} onMouseLeave={(e)=>{this.mouseLeave()}} onClick={(e)=>{this.mouseClick()}} className='dashboard-expand'>
             <div className='dashboard-contents'> {'<'} </div>
           </div>

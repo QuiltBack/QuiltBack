@@ -6,7 +6,7 @@ import QBLogo from '../../styles/images/home/QB_Full_Logo.js';
 
 import {apiGetAddress} from '../../services/apiServices';
 var NodeGeocoder = require('node-geocoder');
-var env = require('dotenv').config({ path: './server/config/.env' });
+
 var options = {
     provider: 'google',
     httpAdapter: 'https',

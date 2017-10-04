@@ -30,7 +30,7 @@ const EmailIcon = generateShareIcon('email');
 
 
 const moment = require('moment');
-
+const frontenv = require('../../frontenv.js');
 
 class EventDetail extends Component{
 
@@ -99,7 +99,7 @@ let catalogue='';
    if (this.props && this.props.general.eventDetail ){
        
         
-            shareUrl="/event/" + this.props.match.params.eventId;
+            shareUrl=`${frontenv.REACT_APP_HOST}/event/` + this.props.match.params.eventId;
             title=this.props.general.eventDetail.title;
  
              event=this.props.general.eventDetail;
@@ -111,7 +111,7 @@ let catalogue='';
 
             if (catalogue.length>0)
             {
-                console.log("state item " +this.state.item)
+                
                 //Take n + abs(np)
                 let item = (this.state.item + Math.abs(this.state.item * catalogue.length)) % catalogue.length;
                 

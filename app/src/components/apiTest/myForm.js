@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {bindAll} from 'lodash';
 import axios from "axios";
-
+const frontenv = require('../../frontenv.js');
 
 
 
@@ -27,11 +27,7 @@ class myForm extends Component {
     this.setState({
       processing: true
     });
-console.log("file data?");
-console.log(this.state.data_uri);
-console.log(this.state.filename);
-console.log(this.state.filetype);
-console.log("sending data");
+
    let pic={
             imageBody:this.state.data_uri,
             imageName: this.state.filename,
@@ -39,12 +35,10 @@ console.log("sending data");
     
      
    }
-   console.log("pic");
-   console.log(pic);
-   axios.post('http://localhost:3001/api/upload',{pic:pic})
+   
+   axios.post(frontenv.BACKEND_HOST + '/api/upload',{pic:pic})
     .then(function(data){
-        console.log("s3 return");
-        console.log(data);
+       
       _this.setState({
         processing: false,
         uploaded_uri: data.uri
