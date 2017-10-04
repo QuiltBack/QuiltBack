@@ -1,4 +1,4 @@
-
+let moment = require('moment');
 module.exports ={
     getComments:(req,res)=>{
       /*
@@ -25,10 +25,10 @@ module.exports ={
             })
     },
     addComment: (req,res) =>{
-        let {post_id,user_id,text} = req.body.comment;
-        let date = '';
-        //comment();
-        req.app.get("db").addComment([post_id,user_id,text,date])
+        let {post_id,users_id,text} = req.body.comment;
+        let date = moment();
+        console.log(req.body);
+        req.app.get("db").addComment([post_id,users_id,text,date])
            .then(response=>{
                console.log("addComment ");
                console.log(response);

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getPostDetail,getPosts} from '../../reducers/generalReducer';
-import Comments from './Comments';
+import {addComment,getComments,getPostDetail,getPosts} from '../../reducers/generalReducer';
+
 import 'font-awesome/css/font-awesome.min.css';
 import '../../styles/BlogDetails.css';
 import {
@@ -33,6 +33,30 @@ const moment = require('moment');
 
 class BlogDetails extends Component{
 
+constructor(props){
+    super(props);
+    this.state={loaded:false};
+    this.blogdetails=this.blogdetails.bind(this);
+    this.addcomment=this.addcomment.bind(this);
+}
+
+
+ addcomment(){
+     console.log("CALLING addcomments");
+     if (this.props && this.props.general && this.props.general.user && this.props.general.user.users_id && this.refs.addcomment_text.value){
+        let commentText = this.refs.addcomment_text.value;
+        this.refs.addcomment_text.value='';
+        let comment={
+            text:commentText,
+            users_id: this.props.general.user.users_id,
+            post_id:this.props.match.params.blogId
+        }
+        console.log(this.props);
+        console.log("adding comment ")
+        console.log(comment);
+        this.props.addComment(comment);
+     }
+ }
 
 
 blogdetails()
@@ -51,6 +75,22 @@ console.log(this.props);
           this.props.getPosts();
 
       }
+    }
+
+    console.log("debug1 - getcomments")
+    console.log(this);
+if (this.props && this.props.general && this.props.general.comments.length <1  && this.props.match && this.props.match.params && this.props.match.params.blogId){
+       console.log("debug2")
+       if (!this.state.loaded){
+         console.log("debug3")
+          if (this.props.match.params.blogId){
+              console.log("GET COMMENTS FOR " + this.props.match.params.blogId)
+            this.setState({loaded:true});
+              this.props.getComments(this.props.match.params.blogId);
+          }
+  
+       } 
+  
     }
 }
 
@@ -71,6 +111,50 @@ componentWillReceiveProps(ownProps) {
 
 
 render(){
+
+let comments='';
+if (this.props && this.props.general && this.props.general.comments){
+    comments = this.props.general.comments.map((comment,index)=>
+    {
+        let date = moment.utc(comment.date).format("MMMM d, YYYY h:mm A");
+    
+       return (
+        <div className="comment" key={index}>
+            <div className="commentHeader">
+                <div className="commentUser">
+                    {comment.username}
+                </div>
+                <div className="commentDate">
+                    {date}
+                </div>
+            </div>
+            <div className="commentText">
+                {comment.text}
+            </div>
+        </div>
+
+
+
+       )
+    })
+}
+
+
+let leavecomment='';
+if (this.props && this.props.general && this.props.general.user && this.props.general.user.users_id){
+    leavecomment=(
+           <div className="addComment">
+           <div className="addCommentHeader">
+                 Leave a Comment
+             </div>
+         <textarea placeholder="leave a comment" rows="5" columns="50" ref="addcomment_text" >
+             </textarea>     
+       
+         <button className="redButton" onClick={this.addcomment}>Post</button>
+         </div>
+    );
+}
+
     console.log("API BLOG DETAIL PAGE")
     let recentposts='';
     if (this.props && this.props.general && this.props.general.posts){
@@ -106,12 +190,19 @@ render(){
     }
 
 
+
+
+
+
 let title=(this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.post_title)?this.props.general.postDetail.post_title:'';
 let text=(this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.post_text)?this.props.general.postDetail.post_text:'';
 
 let date=(this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.post_date)?moment.utc(this.props.general.postDetail.post_date).format("MMMM D, YYYY"):'';
 let author=(this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.post_author)?this.props.general.postDetail.post_author:'';
 let postid=(this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.post_id)?this.props.general.postDetail.post_id:'';
+
+
+
 
 return(
 <div className="blogDetails">
@@ -124,7 +215,8 @@ return(
       <div className="blogText">{text}</div>
       <div classname="blogComments">
        
-       <Comments postid={postid} />
+       {comments}
+       {leavecomment}
       </div>
    </div>
 <div className="blogRightSide">
@@ -160,5 +252,7 @@ function mapStateToProps(state, ownProps) {
 export default connect(mapStateToProps, {
    
     getPostDetail:getPostDetail,
+    getComments:getComments,
+    addComment:addComment,
     getPosts:getPosts
 })(BlogDetails);

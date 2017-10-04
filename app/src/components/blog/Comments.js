@@ -9,7 +9,12 @@ class Comments extends Component{
 constructor(props){
     super(props);
     this.state={loaded:false};
+    this.textChange=this.textChange.bind(this);
+    this.addcomment = this.addcomment.bind(this);
     //this.getcomments = this.getcomments.bind(this);
+}
+textChange(){
+    console.log("textchange");
 }
 
 //  getcomments(number,props){
@@ -37,7 +42,7 @@ constructor(props){
     //  console.log(props)
     // this.getcomments(2,props);
 
-console.log("willRecieve")
+console.log("willReceive")
     if (props && props.general && props.general.comments ){
         console.log("debug part1");
        if (!this.state.loaded){
@@ -56,6 +61,7 @@ console.log("willRecieve")
 
  }
  addcomment(){
+     console.log("CALLING addcomments");
      if (this.props && this.props.general && this.props.general.user && this.props.general.user.users_id && this.refs.comment_text.value){
         let commentText = this.refs.comment_text.value;
         this.refs.comment_text.value='';
@@ -63,7 +69,6 @@ console.log("willRecieve")
             text:commentText,
             user_id: this.props.general.user.users_id,
             post_id:this.props.postid
-            
         }
         console.log("adding comment ")
         console.log(comment);
@@ -74,7 +79,7 @@ console.log("willRecieve")
 render(){
 let comments='';
 if (this.props && this.props.general && this.props.general.comments){
-    comments= this.props.general.comments.map((comment,index)=>
+    comments = this.props.general.comments.map((comment,index)=>
     {
         let date = comment.date;
     
@@ -106,9 +111,9 @@ if (this.props && this.props.general && this.props.general.user && this.props.ge
            <div className="addCommentHeader">
                  Leave a Comment
              </div>
-         <textarea autoFocus="autofocus" rows = "5" cols="50" placeholder="Leae your comment here" ref="addcomment_text" name="addcomment_text">     
-         </textarea>
-         <button className="redButton">Post</button>
+         <input type="text" ref="addcomment_text" />     
+       
+         <button className="redButton" onClick={this.addcomment}>Post</button>
          </div>
     );
 }
