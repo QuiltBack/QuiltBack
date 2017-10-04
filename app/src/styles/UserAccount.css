@@ -61,7 +61,7 @@
 }
 .user-account-right-nickname {
   display: grid;
-  grid-area: 6 / 2;
+  grid-area: 4 / 2;
   color: #5E5E5E;	
   font-family: FuturaMedium;	
   font-size: 20px;	
@@ -69,23 +69,15 @@
 }
 .user-account-right-email {
   display: grid;
+  grid-area: 6 / 2;
+  color: #5E5E5E;	
+  font-family: FuturaMedium;	
+  font-size: 20px;	
+  line-height: 27px;
+}
+.user-account-right-number {
+  display: grid;
   grid-area: 8 / 2;
-  color: #5E5E5E;	
-  font-family: FuturaMedium;	
-  font-size: 20px;	
-  line-height: 27px;
-}
-.user-account-right-password {
-  display: grid;
-  grid-area: 10 / 2;
-  color: #5E5E5E;	
-  font-family: FuturaMedium;	
-  font-size: 20px;	
-  line-height: 27px;
-}
-.user-account-right-confirm {
-  display: grid;
-  grid-area: 12 / 2;
   color: #5E5E5E;	
   font-family: FuturaMedium;	
   font-size: 20px;	
@@ -99,7 +91,7 @@
   font-size: 20px;	
   line-height: 27px;
 }
-.user-account-right-input-username {
+.user-account-right-input-nickname {
   display: grid;
   grid-area: 4 / 3;
   color: #606060;	
@@ -109,7 +101,7 @@
   padding-left: 16px;
   height: 40px;
 }
-.user-account-right-input-nickname {
+.user-account-right-input-contact-email {
   display: grid;
   grid-area: 6 / 3;
   color: #606060;	
@@ -118,27 +110,9 @@
   line-height: 21px;
   height: 40px;
 }
-.user-account-right-input-email {
+.user-account-right-input-contact-number {
   display: grid;
   grid-area: 8 / 3;
-  color: #606060;	
-  font-family: FuturaMedium;	
-  font-size: 16px;	
-  line-height: 21px;
-  height: 40px;
-}
-.user-account-right-input-password {
-  display: grid;
-  grid-area: 10 / 3;
-  color: #606060;	
-  font-family: FuturaMedium;	
-  font-size: 16px;	
-  line-height: 21px;
-  height: 40px;
-}
-.user-account-right-input-confirm {
-  display: grid;
-  grid-area: 12 / 3;
   color: #606060;	
   font-family: FuturaMedium;	
   font-size: 16px;	
