@@ -1,3 +1,29 @@
+.addComment{
+    position:relative;
+    left:60px;
+    z-index:5;
+}
+.commentHeader{
+    display:grid;
+    grid-template-columns:50% 50%;
+    grid-template-rows:100%;
+    font-size:1rem;
+    padding-top:32px;
+    width:50%;
+}
+.commentUser{
+    grid-column-start:1;
+    grid-column-end:1;
+    grid-row-start:1;
+    grid-row-end:1;
+    
+}
+.commentDate{
+    grid-column-start:2;
+    grid-column-end:2;
+    grid-row-start:1;
+    grid-row-end:1;
+}
 .blogDetails{
     padding-top:80px;
 

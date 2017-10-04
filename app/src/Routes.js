@@ -1,8 +1,8 @@
 import React from 'react';
 import {Switch,Route} from 'react-router-dom';
 import ApiTest from './components/apiTest/ApiTest';
-import ApiPosts from './components/apiTest/ApiPosts';
-import ApiEvents from './components/apiTest/ApiEvents';
+
+
 import EventsPage from './components/events/EventsPage';
 import HomePage from './components/home/HomePage';
 import BlogPage from './components/blog/BlogPage';
@@ -11,6 +11,7 @@ import UserEvents from './components/user/UserEvents';
 import UserPosts from './components/user/UserPosts';
 import UserAccount from './components/user/UserAccount';
 import EventDetail from './components/events/EventDetail';
+import BlogDetails from './components/blog/BlogDetails';
 import AdminNotifications from './components/admin/AdminNotifications';
 
 export default (
@@ -18,7 +19,9 @@ export default (
         <Route exact path="/" component={HomePage}/>
         <Route path="/apitest" component={ApiTest}/>
         <Route path="/events" component={EventsPage}/>
+         <Route path="/blog/:blogId" component={BlogDetails}/>
         <Route path="/blog" component={BlogPage}/>
+       
         <Route path="/createEvent/:eventId" component={CreateEvent}/>
         <Route path="/dashboard/events" component={UserEvents}/>
         <Route path="/dashboard/posts" component={UserPosts}/>

@@ -1,6 +1,45 @@
-
-
+let moment = require('moment');
 module.exports ={
+    getComments:(req,res)=>{
+      /*
+          text:commentText,
+            user_id: this.props.general.user.users_id,
+            post_id:this.props.postid
+            */
+       
+       let blogId = +req.params.blogId;
+       console.log("blogid is" + req.params.blogId);
+       console.log(req.params);
+     
+        req.app.get("db").getComments([blogId])
+            .then(response=>{
+                console.log("getComments result");
+                console.log(response);
+                res.status(200).json(response);
+
+            })
+            .catch(err=>{
+                console.log("getComments ERROR");
+                console.log(err);
+                res.status(500).end();
+            })
+    },
+    addComment: (req,res) =>{
+        let {post_id,users_id,text} = req.body.comment;
+        let date = moment();
+        console.log(req.body);
+        req.app.get("db").addComment([post_id,users_id,text,date])
+           .then(response=>{
+               console.log("addComment ");
+               console.log(response);
+               res.status(200).json(response);
+           })
+           .catch(err=>{
+               console.log("addComment ERROR");
+               console.log(err);
+               res.status(500).end();
+           })
+    },
     getPosts:(req,res)=>{
        
             req.app.get("db").getAllPosts()
