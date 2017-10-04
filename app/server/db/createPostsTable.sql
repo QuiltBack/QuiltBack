@@ -1,9 +1,10 @@
 CREATE TABLE posts(
-    post_id SERIAL,
+    post_id SERIAL PRIMARY KEY,
     post_title VARCHAR(50),
     post_date TIMESTAMP,
     deleted INT,
     owner_id SERIAL REFERENCES users (id),
     post_text VARCHAR,
-    flagged BOOLEAN
+    flagged BOOLEAN,
+    users_id INT FOREIGN KEY REFERENCES users(users_id)
 );
