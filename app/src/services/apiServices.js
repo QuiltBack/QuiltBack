@@ -262,6 +262,22 @@ export function apiGetUsersPosts(users_id){
             console.log(err);
         })
 }
+export function apiEditAccount(users_id,nickname,contactemail,number,imageref){
+    console.log("adding nickname,contactemail,number,imageref" + nickname,contactemail,number,imageref);
+    return axios.post ( '/api/dashboard/editAccount',
+    {nickname:nickname, contactemail:contactemail, number:number, imageref:imageref}
+    + users_id)
+    .then(response=>{
+        console.log('returning from post api/dashboard/editaccount');
+        console.log(response);
+        return response.data;
+    })
+    .catch(err=>{
+        console.log ("error in EditAccount");
+        console.log(err);
+
+    })
+}
 
 export function apiGetAddress(){
     console.log('inside getAddress');
