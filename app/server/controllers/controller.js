@@ -1,6 +1,45 @@
-
-
+let moment = require('moment');
 module.exports ={
+    getComments:(req,res)=>{
+      /*
+          text:commentText,
+            user_id: this.props.general.user.users_id,
+            post_id:this.props.postid
+            */
+       
+       let blogId = +req.params.blogId;
+       console.log("blogid is" + req.params.blogId);
+       console.log(req.params);
+     
+        req.app.get("db").getComments([blogId])
+            .then(response=>{
+                console.log("getComments result");
+                console.log(response);
+                res.status(200).json(response);
+
+            })
+            .catch(err=>{
+                console.log("getComments ERROR");
+                console.log(err);
+                res.status(500).end();
+            })
+    },
+    addComment: (req,res) =>{
+        let {post_id,users_id,text} = req.body.comment;
+        let date = moment();
+        console.log(req.body);
+        req.app.get("db").addComment([post_id,users_id,text,date])
+           .then(response=>{
+               console.log("addComment ");
+               console.log(response);
+               res.status(200).json(response);
+           })
+           .catch(err=>{
+               console.log("addComment ERROR");
+               console.log(err);
+               res.status(500).end();
+           })
+    },
     getPosts:(req,res)=>{
        
             req.app.get("db").getAllPosts()
@@ -91,8 +130,21 @@ module.exports ={
             })
     },
     editAccount:(req,res)=>{
-        //post
-        //doing it when Im not dying
+        let nickname = req.body.nickname;
+        let contactemail = req.body.contactemail;
+        let number = req.body.number;
+        let imageref = req.body.imageref;
+        let users_id = req.params.users_id;
+
+        req.app.get('db').editAccount([users_id,nickname,contactemail,number,imageref])
+                .then(response=>{
+                    res.status(200).send(response);
+                })
+                .catch(err=>{
+                    console.log('edit account err, in ctrl')
+                    console.log(err)
+                    res.status(500).end();
+                })
     },
     
   

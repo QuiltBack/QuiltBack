@@ -9,7 +9,7 @@ passport = require('passport'),
   env = require('dotenv').config({ path: './server/config/.env' }),
   imageUpload = require('./controllers/imageUpload'),
   path = require('path');
-console.log(env);
+
 
 
 const app = express();
@@ -177,8 +177,8 @@ app.get('/auth/logout', (req, res) => {
 })
 
 
-
-
+app.post('/api/comment',CTRL.addComment);
+app.get('/api/comments/:blogId',CTRL.getComments)
 app.get('/api/posts',  CTRL.getPosts);
 app.get('/api/post/:postId',CTRL.getPost);
 
@@ -191,6 +191,8 @@ app.get('/api/address', CTRL.getAddress);
 
 app.get('/api/dashboard/events/:users_id', CTRL.getUsersEvents);
 app.get('/api/dashboard/posts/:users_id', CTRL.getUsersPosts);
+
+app.post('/api/dashboard/account/:users_id', CTRL.editAccount);
 
 
 /* End points for NewsLetter Subscriptions */
@@ -226,7 +228,7 @@ app.post('/api/upload',(req, res) => {
 
 /* END ENDPOINTS */
 app.get('*', (req,res)=>{
-  req.sendFile(path.join(__dirname, '../build/index.html'))
+  res.sendFile(path.join(__dirname, '../build/index.html'))
 })
 
 
