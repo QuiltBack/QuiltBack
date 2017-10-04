@@ -71,6 +71,32 @@ console.log("page is " +req.params.page)
                    })
         
     },
+    getUsersEvents:(req,res)=>{
+        console.log('gettins all events for users');
+        req.app.get("db").getUsersEvents([+req.params.users_id])
+            .then(response=>{
+                res.status(200).json(response);
+            })    
+            .catch(err=>{
+                console.log(err);
+                res.status(500).end();
+            })
+    },
+    getUsersPosts:(req,res)=>{
+        console.log('getting all them posts for the dashboard');
+        req.app.get("db").getUsersPosts([+req.params.users_id])
+            .then(response=>{
+                res.status(200).json(response);
+            })
+            .catch(err=>{
+                console.log(err);
+                res.status(500).end();
+            })
+    },
+    editAccount:(req,res)=>{
+        //post
+        //doing it when Im not dying
+    },
     
   
 
