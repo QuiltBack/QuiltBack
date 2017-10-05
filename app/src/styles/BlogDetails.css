@@ -28,15 +28,92 @@
     padding-top:80px;
 
 display:grid;
-grid-template-columns: 5% 70% 20% 5%;
+grid-template-columns: 5% 65% 5% 20% 5%;
 grid-template-rows:100%;
 }
+.blogAuthor{
+    grid-column-start:2;
+    grid-column-end:2;
+    grid-row-start:1;
+    grid-row-end:1;
+    align-self:start;
+    justify-content:center;
+}
+.blogDate{
+     grid-column-start:3;
+    grid-column-end:3;
+    grid-row-start:1;
+    grid-row-end:1;  
+     align-self:end;
+     justify-content:center;
+}
+.blogSharing{
+    grid-column-start:5;
+    grid-column-end:5;
+    grid-row-start:1;
+    grid-row-end:1;
+    align-self:center;
+    justify-content:end;
+    display:grid;
+    grid-template-columns:25% 25% 25% 25%;
+    grid-template-rows:100%;
+}
+.blogText{
+    padding-top:64px;
+    font-size:2rem;
+}
+
+.blogFacebook{
+    grid-column-start:1;
+    grid-column-end:1;
+    grid-row-start:1;
+    grid-row-end:1;
+}
+.blogTwitter{
+    grid-column-start:2;
+    grid-column-end:2;
+    grid-row-start:1;
+    grid-row-end:1;
+}
+
+.blogGooglePlus{
+    grid-column-start:3;
+    grid-column-end:3;
+    grid-row-start:1;
+    grid-row-end:1;
+}
+
+.blogEmail{
+    grid-column-start:4;
+    grid-column-end:4;
+    grid-row-start:1;
+    grid-row-end:1;
+}
+
+.blogTitleText{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .blogTitle{
+
     font-size:6rem;
+    width:100%;
+    height:200px;
+    text-align:center;
+    color:white;
+    border: 1px dashed #C5C5C5;
+    position:relative;
+    
 }
 .blogAuthorFooter{
-    font-size:0.90rem;
-    
+    font-size: 1.4rem;
+   
+    display:grid;
+    grid-template-columns: 5% 15% 20% 20% 40%;
+    grid-template-rows:100%;
 }
 
 .blogLeftSide{
@@ -45,8 +122,8 @@ grid-template-rows:100%;
 }
 
 .blogRightSide{
-    grid-column-start:3;
-    grid-column-end:3;
+    grid-column-start:4;
+    grid-column-end:4;
 }
 .blogRightSide h1{
     font-size:2rem;

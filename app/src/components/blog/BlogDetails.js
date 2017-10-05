@@ -31,6 +31,7 @@ const EmailIcon = generateShareIcon('email');
 
 
 const moment = require('moment');
+const frontenv = require('../../frontenv.js');
 
 class BlogDetails extends Component{
 
@@ -67,7 +68,7 @@ console.log(this.props);
   if (this.props && this.props.getPostDetail && this.props.general ) {
     
 
-      if (  this.props.match.params.blogId && (!this.props.general.postDetail || this.props.general.postDetail.post_id != this.props.match.params.blogId)){
+      if (  this.props.match.params.blogId && (!this.props.general.postDetail || this.props.general.postDetail.post_id !== this.props.match.params.blogId)){
 
           this.props.getPostDetail(this.props.match.params.blogId);
       }
@@ -112,6 +113,9 @@ componentWillReceiveProps(ownProps) {
 
 
 render(){
+    let shareUrl='';
+    if (this.props && this.props.match && this.props.match.params && this.props.match.params.blogId)
+       shareUrl=`${frontenv.REACT_APP_HOST}/event/` + this.props.match.params.blogId;
 
 let comments='';
 if (this.props && this.props.general && this.props.general.comments){
@@ -194,24 +198,84 @@ if (this.props && this.props.general && this.props.general.user && this.props.ge
 
 
 
-
 let title=(this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.post_title)?this.props.general.postDetail.post_title:'';
 let text=(this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.post_text)?this.props.general.postDetail.post_text:'';
 
 let date=(this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.post_date)?moment.utc(this.props.general.postDetail.post_date).format("MMMM D, YYYY"):'';
 let author=(this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.post_author)?this.props.general.postDetail.post_author:'';
 let postid=(this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.post_id)?this.props.general.postDetail.post_id:'';
-
+let mainImageStyle={
+    backgroundColor:"lightblue"
+};
+if (this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.main_image_ref){
+    let mainImageStyle={
+                   backgroundImage: 'url("' + this.props.general.postDetail.main_image_ref+ '")',
+                  backgroundRepeat:"no-repeat",
+                  backgroundSize:"cover"
+    }
+}
 
 
 
 return(
 <div className="blogDetails">
  <div className="blogLeftSide">
-   <div className="blogTitle">{title}</div>
+     
+   <div className="blogTitle" style={mainImageStyle}>
+       <div className="blogTitleText">{title}</div>
+       </div>
    <div className="blogAuthorFooter">
       <div className="blogAuthor">{author}</div>
       <div className="blogDate">{date}</div>
+      <div className="blogSharing">
+               <div className="blogFacebook">
+           
+         <FacebookShareButton
+            url={shareUrl}
+            quote={title}
+            className="share-button">
+            <FacebookIcon
+              size={16}
+              round />
+          </FacebookShareButton>
+              </div>
+              <div className='blogTwitter'>
+               <TwitterShareButton
+            url={shareUrl}
+            quote={title}
+            className="share-button">
+            <TwitterIcon
+              size={16}
+              round />
+
+          </TwitterShareButton>
+
+              </div>
+              <div className='blogGooglePlus'>
+                <GooglePlusShareButton
+            url={shareUrl}
+            quote={title}
+            className="share-button">
+            <GooglePlusIcon
+              size={16}
+              round />
+
+          </GooglePlusShareButton>
+                </div>
+              <div className='blogEmail'>
+              <EmailShareButton
+             url={shareUrl}
+            subject={title}
+            body="body"
+            className="share-button">
+            <EmailIcon
+              size={16}
+              round />
+
+          </EmailShareButton>
+              </div>
+          </div>
+          
    </div>
       <div className="blogText">{text}</div>
       <div classname="blogComments">
