@@ -15,6 +15,8 @@ import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import './CreateEvent.css';
 import 'font-awesome/css/font-awesome.min.css';
 const frontenv = require('../../frontenv.js');
+
+
  class CreateEvent extends Component{
 
 constructor(props) {
