@@ -1,6 +1,6 @@
 .event{
     position:relative;
-    z-index:4;
+    z-index:3;
 }
 
 .EventShare h1{
@@ -91,6 +91,8 @@
 .events{
     width:80%;
     margin:0 auto;
+    position: relative;
+    top: 75px;
 }
 .eventImage{
     width:100px;

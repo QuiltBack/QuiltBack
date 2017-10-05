@@ -1,6 +1,6 @@
 import * as types from '../actions/ActionTypes';
 import initialState from './initialState'
-import {apiAddPost,apiGetComments,apiAddComment,apiLogout,apiGetUser,apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
+import {apiEditAccount,apiGetUsersPost,apiAddPost,apiGetComments,apiAddComment,apiLogout,apiGetUser,apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
 
 export function addPost(post){
     return {
@@ -113,6 +113,25 @@ export function getEventDetail(event_id){
         payload:apiGetEventDetail(event_id)
     }
 }
+export function getUsersEvents(users_id) {
+    console.log('inside reducer')
+    return {
+        type:types.GET_USERS_EVENTS,
+        payload:apiGetUsersEvents(users_id)
+    }
+}
+export function getUsersPosts(users_id) {
+    return {
+        type:types.GET_USERS_POSTS,
+        payload:apiGetUsersPosts(users_id)
+    }
+}
+export function editAccount(users_id,nickname,contactemail,number,imageref){
+    return{
+        type:types.EDIT_ACCOUNT,
+        payload:apiEditAccount(users_id,nickname,contactemail,number,imageref)
+    }
+}
 
 
 export default function rootReducer(state=initialState,action){
@@ -158,11 +177,18 @@ export default function rootReducer(state=initialState,action){
          return Object.assign({},state,{emailList:action.payload})
 
 
-     case types.GET_EVENTS + types.FULFILLED:
-     return Object.assign({},state,{events:action.payload});
+    case types.GET_EVENTS + types.FULFILLED:
+        return Object.assign({},state,{events:action.payload});
      
-     case types.GET_POSTS + types.FULFILLED:
-       return Object.assign({},state,{posts:action.payload});
+    case types.GET_POSTS + types.FULFILLED:
+        return Object.assign({},state,{posts:action.payload});
+    case types.GET_USERS_EVENTS + types.FULFILLED:
+        console.log('fulfilled');
+        return Object.assign({},state,{events:action.payload});
+    case types.GET_USERS_POSTS + types.FULFILLED:
+        return Object.assign({},state,{posts:action.payload});
+    case types.EDIT_ACCOUNT + types.FULFILLED:
+          return Object.assign({},state,{usersInfo: action.payload})
 
      default:return state;
  }

@@ -3,6 +3,7 @@ import Discover from '../../styles/images/home/Discover_Image.svg';
 import Promote from '../../styles/images/home/Promote_Image.svg';
 import Share from '../../styles/images/home/Share_Image.svg';
 import QBLogo from '../../styles/images/home/QB_Full_Logo.js';
+import {TimelineMax, Power4} from 'greensock';
 
 import {apiGetAddress} from '../../services/apiServices';
 var NodeGeocoder = require('node-geocoder');
@@ -26,6 +27,8 @@ constructor(props){
     this.loadAddress = this.loadAddress.bind(this)
 }
 componentDidMount(){
+    let wtl = new TimelineMax();
+    wtl.to(window, .5, {scrollTo:0, ease:Power4.easeOut})    
 this.loadAddress()
 
 }

@@ -18,3 +18,6 @@ export const LOGIN="LOGIN";
 export const GET_COMMENTS="GET_COMMENTS";
 export const ADD_COMMENT="ADD_COMMENT";
 export const ADD_POST="ADD_POST";
+export const GET_USERS_EVENTS="GET_USERS_EVENTS";
+export const GET_USERS_POSTS="GET_USERS_POSTS";
+export const EDIT_ACCOUNT="EDIT_ACCOUNT";

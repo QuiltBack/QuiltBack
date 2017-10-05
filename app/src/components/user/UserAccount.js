@@ -18,17 +18,15 @@ class UserAccount extends Component {
           <div className='user-account-left-username'>Username</div>
         </div>
         <div className='user-account-right-container'>
-          <div className='user-account-right-username'>Username</div>
+          
           <div className='user-account-right-nickname'>Nickname</div>
-          <div className='user-account-right-email'>Email</div>
-          <div className='user-account-right-password'>Password</div>
-          <div className='user-account-right-confirm'>Confirm Password</div>
+          <div className='user-account-right-email'>Contact Email</div>
+          <div className='user-account-right-number'>Contact Number</div>
           <div className='user-account-right-edit'>EDIT ACCOUNT INFORMATION</div>
-          <input className='user-account-right-input-username' placeholder='Username'/>
           <input className='user-account-right-input-nickname' placeholder='Nickname'/>
-          <input className='user-account-right-input-email' placeholder='email@email.com'/>
-          <input className='user-account-right-input-password' placeholder='password'/>
-          <input className='user-account-right-input-confirm' placeholder='password'/>
+          <input className='user-account-right-input-contact-email' placeholder='email@email.com'/>
+          <input className='user-account-right-input-contact-number' placeholder='(123)-456-7890'/>
+          
         </div>
       </div>
     )

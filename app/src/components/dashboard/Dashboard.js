@@ -42,10 +42,22 @@ class Dashboard extends Component {
    
     
  }
+ componentDidMount() {
+   setTimeout(()=>{
+     let props = this.props.general
+     if (!(props && props.user && props.user.users_id)) {
+       let tl = new TimelineMax();
+       tl.to('.dashboard-container', .5, {marginLeft: 0})
+         .to('.dashboard-expand', 0, {display:'none', opacity:0}, '-=.5')
+         .to('.dashboard-container', .5, {marginLeft: '-258px'}, '+=1')
+         .to('.dashboard-expand', .1, {display:'flex', opacity:.5})
+         .to('.dashboard-contents', 0, {opacity:1, marginLeft:'60px', color: 'white'})
+     }
+   },500)
+ }
   mouseEnter() {
     let tl = new TimelineMax();
     tl.to('.dashboard-expand', .3, {marginLeft:'150px', opacity: '.8'})
-    tl.from('.dashboard-expand', .3, {marginLeft:'150px', opacity: '.8'})
   }
   mouseLeave() {
     let tl = new TimelineMax();
@@ -53,7 +65,6 @@ class Dashboard extends Component {
   }
   mouseClick() {
     let tl = new TimelineMax();
-    document.getElementsByClassName('dashboard-section')[0].classList.add('zIndex');
     tl.to('.dashboard-container', .5, {marginLeft: 0})
     .to('.dashboard-expand', 0, {display:'none', opacity:0}, '-=.5');
     this.setState({
@@ -68,7 +79,9 @@ class Dashboard extends Component {
         .to('.dashboard-contents', 0, {opacity:1, marginLeft:'60px', color: 'white'})
       }
     setTimeout(()=>{
-      document.getElementsByClassName('dashboard-section')[0].classList.remove('zIndex');
+      this.setState({
+        expanded:false,
+      })
     },300)
   }
   expandPages() {

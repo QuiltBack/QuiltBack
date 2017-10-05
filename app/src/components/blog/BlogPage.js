@@ -15,6 +15,8 @@ class BlogPage extends Component {
     }
   } 
   componentDidMount() {
+    let wtl = new TimelineMax();
+    wtl.to(window, .5, {scrollTo:0, ease:Power4.easeOut})
     this.loadPosts();
     let tl = new TimelineMax({
       repeat: -1,
