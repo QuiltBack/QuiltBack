@@ -17,11 +17,12 @@ const {
   TwitterShareButton,
   EmailShareButton,
 } = ShareButtons;
-
+/* not yet used
 const {
   FacebookShareCount,
   GooglePlusShareCount,
 } = ShareCounts;
+*/
 
 const FacebookIcon = generateShareIcon('facebook');
 const TwitterIcon = generateShareIcon('twitter');

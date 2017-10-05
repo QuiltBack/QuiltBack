@@ -21,12 +21,12 @@ const {
   TwitterShareButton,
   EmailShareButton,
 } = ShareButtons;
-
+/* Not yet used
 const {
   FacebookShareCount,
   GooglePlusShareCount,
 } = ShareCounts;
-
+*/
 const FacebookIcon = generateShareIcon('facebook');
 const TwitterIcon = generateShareIcon('twitter');
 const GooglePlusIcon = generateShareIcon('google');
@@ -192,15 +192,7 @@ class EventsPage extends Component {
   render(){
     let button;
     let events='Loading events...';
-    let weekDays={
-        1:"Sun",
-        2:"Mon",
-        3:"Tues",
-        4:"Wed",
-        5:"Thurs",
-        6:"Fri",
-        7:"Sat"
-    };
+
   console.log(this.props.general);
     if (this.props && this.props.general.events ){
       console.log("map events object");

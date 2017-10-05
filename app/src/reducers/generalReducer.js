@@ -1,6 +1,6 @@
 import * as types from '../actions/ActionTypes';
 import initialState from './initialState'
-import {apiEditAccount,apiGetUsersPost,apiAddPost,apiGetComments,apiAddComment,apiLogout,apiGetUser,apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
+import {apiAddPost,apiEditAccount,apiGetUsersPosts,apiGetUsersEvents,apiGetComments,apiAddComment,apiLogout,apiGetUser,apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
 
 export function addPost(post){
     return {

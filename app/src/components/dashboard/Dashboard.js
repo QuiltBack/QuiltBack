@@ -37,7 +37,7 @@ class Dashboard extends Component {
     }
     let redirect = JSON.parse(localStorage.getItem("redirect"));
     localStorage.removeItem("redirect");
-    if (redirect != "/" && redirect)
+    if (redirect && redirect !== "/")
        this._reactInternalInstance._context.router.history.push(redirect);
    
     
