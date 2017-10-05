@@ -2,6 +2,8 @@ export default {
     someData: "Yeah Tiny Rick!",
     posts:[],
     events:[],
+    userPosts:[],
+    userEvents:[],
     subscriberEmail:null,
     emailList:[],
     eventDetail:null,

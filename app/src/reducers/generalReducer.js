@@ -174,10 +174,9 @@ export default function rootReducer(state=initialState,action){
     case types.GET_POSTS + types.FULFILLED:
         return Object.assign({},state,{posts:action.payload});
     case types.GET_USERS_EVENTS + types.FULFILLED:
-        console.log('fulfilled');
-        return Object.assign({},state,{events:action.payload});
+    return Object.assign({},state,{userEvents:action.payload});
     case types.GET_USERS_POSTS + types.FULFILLED:
-        return Object.assign({},state,{posts:action.payload});
+        return Object.assign({},state,{userPosts:action.payload});
     case types.EDIT_ACCOUNT + types.FULFILLED:
           return Object.assign({},state,{usersInfo: action.payload})
 

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getUsersEvents} from '../../reducers/generalReducer';
+import {Link} from 'react-router-dom';
 import PromoteIcon from '../../styles/images/home/Promote_Image.svg';
 import moment from 'moment';
 import '../../styles/UserEvents.css';
@@ -10,36 +11,46 @@ class UserEvents extends Component {
     super();
     this.state = {
       loadedEvents:false,
-      numberOfEvents:6,
+      numberOfEvents:10,
     }
   }
   componentDidMount() {
-    this.fillPage();
-  }
-  componentWillReceiveProps() {
-    this.fillPage();
+  console.log('mounted component');
+  this.fillPage();
+}
+componentWillReceiveProps() {
+  console.log('received props');
+  this.fillPage();
   }
   fillPage() {
-    if (this.props.general && this.props.general.user && !this.state.loadedEvents) {
-      this.setState({
-        loadedEvents:true
-      })
-      this.props.getUsersEvents(this.props.general.user.users_id);
-    }
+    let interval = setInterval(()=>{
+      if (this.props.general && this.props.general.user.users_id && !this.state.loadedEvents) {
+        this.updatePage();
+        clearInterval(interval);
+      } else {
+        clearInterval(interval);
+      }
+    },100)
+  }
+  updatePage() {
+    console.log('filled page')
+    this.setState({
+      loadedEvents:true
+    })
+      this.props.getUsersEvents(this.props.general.user.users_id)
   }
   render() {
-    let userEventList = (
-      <section className='user-events-empty'>
-        <div className='user-events-container'>
-          <img className='user-events-promote-icon' src={PromoteIcon}/> 
-          <div className='user-events-text'>No Events Found</div> 
-          <button className='user-events-button'>Add New Event</button> 
-        </div>
-      </section>
-    );
-    if (this.props.general && this.props.general.events) {
+    let userEventList = (<section className='user-events-empty'>
+    <div className='user-events-container'>
+      <img className='user-events-promote-icon' src={PromoteIcon}/> 
+      <div className='user-events-text'>No Events Found</div> 
+      <button className='user-events-button'>Add New Event</button> 
+    </div>
+  </section>)
+    if (this.props.general && this.props.general.userEvents && this.props.general.userEvents.length > 0) {
       let props = this.props;
-      userEventList = props.general.events.map((e, i)=>{
+      userEventList = props.general.userEvents.map((e, i)=>{
+        console.log(e)
         let d1 = moment.utc(e.date);
         return i<(this.state.numberOfEvents)? ( 
           <section className='user-events-filled'>
@@ -54,7 +65,7 @@ class UserEvents extends Component {
               </div>
             </div>
             <div className='user-events-view-container'>
-              <div className='user-events-view-view'>View</div>
+              <Link to={'/event/' + e.eventid} className='user-events-view-view'>View</Link>
               <div className='user-events-view-delete'>Delete</div>
             </div>
           </section>
