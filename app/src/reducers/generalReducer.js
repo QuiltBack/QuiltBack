@@ -1,6 +1,13 @@
 import * as types from '../actions/ActionTypes';
 import initialState from './initialState'
-import {apiEditAccount,apiGetUsersPosts,apiGetUsersEvents,apiGetComments,apiAddComment,apiLogout,apiGetUser,apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
+import {apiAddPost,apiEditAccount,apiGetUsersPosts,apiGetUsersEvents,apiGetComments,apiAddComment,apiLogout,apiGetUser,apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
+
+export function addPost(post){
+    return {
+        type:types.ADD_POST,
+        payload:apiAddPost(post)
+    }
+}
 
 export function getComments(postId){
     console.log("REDUCER postid" +postId);
@@ -131,6 +138,8 @@ export default function rootReducer(state=initialState,action){
  console.log("action type: " + action.type);
 
  switch(action.type){
+    case types.ADD_POST + types.FULFILLED:
+       return Object.assign({},state,{postDetail:''});
 
     case types.GET_COMMENTS + types.FULFILLED:
       return Object.assign({},state,{comments:action.payload});

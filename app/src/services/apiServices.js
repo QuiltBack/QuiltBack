@@ -5,6 +5,23 @@ const api = axios.create({
     withCredentials:true
 
 });
+
+export function apiAddPost(post){
+  
+   return axios.post('/api/post/',{post:post})
+    .then(response=>{
+        console.log('returning from post api/post');
+        console.log(response);
+        return response.data;
+    })
+    .catch(err=>{
+        console.log ("error in AddPost");
+        console.log(err);
+
+    })
+}
+
+
 export function apiAddComment(comment){
   
    return axios.post('/api/comment/',{comment:comment})

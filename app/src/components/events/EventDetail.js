@@ -19,11 +19,13 @@ const {
   EmailShareButton,
 } = ShareButtons;
 
+/* not yet used
 const {
   FacebookShareCount,
   GooglePlusShareCount,
 } = ShareCounts;
 
+*/
 const FacebookIcon = generateShareIcon('facebook');
 const TwitterIcon = generateShareIcon('twitter');
 const GooglePlusIcon = generateShareIcon('google');
@@ -60,7 +62,7 @@ eventdetails()
   if (this.props && this.props.getEventDetail && this.props.general ) {
     
 
-      if (  this.props.match.params.eventId && (!this.props.general.eventDetail || this.props.general.eventDetail.eventid != this.props.match.params.eventId)){
+      if (  this.props.match.params.eventId && (!this.props.general.eventDetail || this.props.general.eventDetail.eventid !== this.props.match.params.eventId)){
         
           this.props.getEventDetail(this.props.match.params.eventId);
       }
@@ -162,7 +164,7 @@ let catalogue='';
         <h1>Catalogue</h1>
         <div className="eventDetailCatalogueImages">
             <div onClick={this.prevItem} className="eventDetailCataloguePrevious">&lt;</div>
-            <div className="eventCatalogueMainImage"><img src={mainItem.image_uri} width="100%" height="400px"/></div>
+            <div className="eventCatalogueMainImage"><img src={mainItem.image_uri} width="100%" height="400px" alt="Catalogue Image" /></div>
             <div onClick={this.nextItem} className="eventDetailCatalogueNext">&gt;</div>
         </div>
         <div className="eventDetailCatalogueBanner">
