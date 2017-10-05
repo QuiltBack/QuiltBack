@@ -7,7 +7,7 @@ import Dropzone from 'react-dropzone';
 
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-import {apiCreateEvent,apiGetEventById,apiAuthUser} from '../../services/apiServices';
+import {apiCreateEvent,apiGetEventById} from '../../services/apiServices';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
@@ -15,6 +15,8 @@ import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import './CreateEvent.css';
 import 'font-awesome/css/font-awesome.min.css';
 const frontenv = require('../../frontenv.js');
+
+
  class CreateEvent extends Component{
 
 constructor(props) {
@@ -28,7 +30,7 @@ constructor(props) {
        listening:false,
        recognition:null,
        catalogueItemView:0,
-      
+       processing:false,
        eventid:null,
        uploaded_uri:'',
        date:initialDate,
@@ -127,7 +129,7 @@ loadEvent(props){
      if (props && props.match && props.match.params && props.match.params.eventId){
        let eventid=props.match.params.eventId;
      
-       if (eventid !='new'){
+       if (eventid !=='new'){
          
            apiGetEventById(eventid)
            .then(response=>{
@@ -272,7 +274,7 @@ nextCatalogueItem(){
 
     if (item >this.state.catalogue.length) item = 0;
     let image_uri,Name,AuctionId;
-    if (item ==this.state.catalogue.length){
+    if (item ===this.state.catalogue.length){
         image_uri='';
         Name='';
         AuctionId='';
@@ -299,7 +301,7 @@ prevCatalogueItem(){
 
     if (item <0) item = this.state.catalogue.length;
 
-      if (item ==this.state.catalogue.length){
+      if (item ===this.state.catalogue.length){
         image_uri='';
         Name='';
         AuctionId='';
@@ -439,15 +441,16 @@ let fileType=upload.currentTarget.result.replace(/data:([^;]*);.*$/,"$1");
     .then(function(data){
        
         if (itemType === "catalogue"){
-            that.setState({catalogueImage_uri:data.data.Location})
+            that.setState({processing:false,catalogueImage_uri:data.data.Location})
         }
        else {
             
-           that.setState({uploaded_uri:data.data.Location})
+           that.setState({processing:false,uploaded_uri:data.data.Location})
         }
        
     })
     .catch(err=>{
+        this.setState({processing:false})
         console.log("UPLOAD ERROR");
         console.log(err);
     })
@@ -490,8 +493,7 @@ onEndDateChange(date){
 
 
 render(){
-
-let processing="";
+let processingmessage = (this.state.processing)?"Image Processing...":"";
 let imageStyle={};
 let catalogueImageStyle={};
 
@@ -672,7 +674,6 @@ if (this.state.host){
     
 
 
-let date='';
 
 let startDateElement=(<div className="startDateContainer staticColor" onClick={this.showDate}><div className="startDateFull">Begins Month Day</div></div>);
 
@@ -685,7 +686,6 @@ if (this.state.dateSelected){
        </div></div>
        )
 }
-if (this.state.date) date=this.state.date;
 
 if (this.state.showDate){
     startDateElement=(
@@ -721,7 +721,6 @@ if (this.state.endDateSelected){
        </div></div>
        )
 }
-if (this.state.endDate) date=this.state.endDate;
 
 if (this.state.showEndDate){
     endDateElement=(

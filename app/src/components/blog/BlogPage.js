@@ -37,14 +37,14 @@ class BlogPage extends Component {
   
   mouseEnter(e) {
     let tl = new TimelineMax();
-    e.target.className==='blog-page-blog-details'?
-    tl.to(e.target, 1, {height: '280px', ease:Power4.easeOut}):null
+    if (e.target.className==='blog-page-blog-details')
+    tl.to(e.target, 1, {height: '280px', ease:Power4.easeOut})
   }
 
   mouseLeave(e) {
     let tl = new TimelineMax();
-    e.target.className==='blog-page-blog-details'?
-    tl.to(e.target, 1, {height: '100px', ease:Power4.easeOut}):null
+    if(e.target.className==='blog-page-blog-details')
+      tl.to(e.target, 1, {height: '100px', ease:Power4.easeOut})
   }
 
   render() {
@@ -134,9 +134,9 @@ class BlogPage extends Component {
           <div className='blogs-page-show-more'>
             Show more
           </div>
-          <img className='blogs-page-down-arrow' style={arrowStyle} src={DownArrow}/>
-          <img className='blogs-page-down-arrow2' style={arrowStyle2} src={DownArrow}/>
-          <img className='blogs-page-down-arrow3' style={arrowStyle3} src={DownArrow}/>
+          <img className='blogs-page-down-arrow' style={arrowStyle} src={DownArrow} alt="Down Arrow"/>
+          <img className='blogs-page-down-arrow2' style={arrowStyle2} src={DownArrow} alt="Down Arrow"/>
+          <img className='blogs-page-down-arrow3' style={arrowStyle3} src={DownArrow} alt="Down Arrow"/>
         </section>) :
       (null)
       

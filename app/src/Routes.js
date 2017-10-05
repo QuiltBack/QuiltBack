@@ -12,6 +12,7 @@ import UserPosts from './components/user/UserPosts';
 import UserAccount from './components/user/UserAccount';
 import EventDetail from './components/events/EventDetail';
 import BlogDetails from './components/blog/BlogDetails';
+import CreateBlog from './components/createblog/CreateBlog'
 import AdminNotifications from './components/admin/AdminNotifications';
 
 export default (
@@ -21,6 +22,7 @@ export default (
         <Route path="/events" component={EventsPage}/>
          <Route path="/blog/:blogId" component={BlogDetails}/>
         <Route path="/blog" component={BlogPage}/>
+        <Route path="/createblog/:blogId" component={CreateBlog} />
        
         <Route path="/createEvent/:eventId" component={CreateEvent}/>
         <Route path="/dashboard/events" component={UserEvents}/>

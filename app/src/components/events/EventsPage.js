@@ -21,12 +21,12 @@ const {
   TwitterShareButton,
   EmailShareButton,
 } = ShareButtons;
-
+/* Not yet used
 const {
   FacebookShareCount,
   GooglePlusShareCount,
 } = ShareCounts;
-
+*/
 const FacebookIcon = generateShareIcon('facebook');
 const TwitterIcon = generateShareIcon('twitter');
 const GooglePlusIcon = generateShareIcon('google');
@@ -192,15 +192,7 @@ class EventsPage extends Component {
   render(){
     let button;
     let events='Loading events...';
-    let weekDays={
-        1:"Sun",
-        2:"Mon",
-        3:"Tues",
-        4:"Wed",
-        5:"Thurs",
-        6:"Fri",
-        7:"Sat"
-    };
+
   console.log(this.props.general);
     if (this.props && this.props.general.events ){
       console.log("map events object");
@@ -281,9 +273,9 @@ class EventsPage extends Component {
           <div className='events-page-show-more'>
             Show more
           </div>
-          <img className='events-page-down-arrow' style={arrowStyle} src={DownArrow}/>
-          <img className='events-page-down-arrow2' style={arrowStyle2} src={DownArrow}/>
-          <img className='events-page-down-arrow3' style={arrowStyle3} src={DownArrow}/>
+          <img className='events-page-down-arrow' style={arrowStyle} src={DownArrow} alt="Down Arrow"/>
+          <img className='events-page-down-arrow2' style={arrowStyle2} src={DownArrow} alt="Down Arrow"/>
+          <img className='events-page-down-arrow3' style={arrowStyle3} src={DownArrow} alt="Down Arrow"/>
         </section>) :
       (null)
       

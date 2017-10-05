@@ -40,11 +40,11 @@ loadAddress(){
             /*geocoder.geocode(config, function(err,res){
             console.log(res);
             });*/   
-        
+        let that=this;
         apiGetAddress()
             .then((res)=>{
                 console.log(res)
-                this.setState({
+                that.setState({
                     data: res
                 })
             })
