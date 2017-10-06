@@ -4,7 +4,8 @@ import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
 
 import axios from "axios";
-
+import {connect} from 'react-redux';
+import {getPostDetail} from '../../reducers/generalReducer';
 
 import ReactQuill from 'react-quill';
 import theme from 'react-quill/dist/quill.snow.css';
@@ -26,10 +27,12 @@ const CustomButton =  (<span className="octicon octicon-star" />)
  */
 var myQuill=null;
 var myEditor;
+var speechRecognitionStart='';
 
 function Dummy () {
   if (!myQuill)
      myQuill = this.quill; 
+    console.log(this);
 }
 
 
@@ -42,13 +45,29 @@ function insertStar (ref) {
 }
 
 function onSpeechResult(event){
- let text = event.results[event.results.length -1][0].transcript;
-          
-           const cursorPosition = myQuill.getSelection().index
-           myQuill.insertText(cursorPosition, text)
-           myQuill.setSelection(cursorPosition + text.length)
-           
+    
+    console.log("DEBUG");
+    console.log(event);
+    console.log("global speechRecognitionStart")
+    console.log(speechRecognitionStart);
+    console.log("end  global")
+    console.log("END")
+    let text='';
+    for (let i=0;i<event.results.length;i++){
+      text += event.results[i][0].transcript;
+    }
+         
+          myQuill.setContents(speechRecognitionStart);
+ 
+         let len = myQuill.getLength();
+       
+         myQuill.editor.insertText(len, text);
+      
+         
+
+
 }
+
 
 
 
@@ -59,7 +78,16 @@ function onSpeechResult(event){
  */
 
 
-export default class CreateBlog extends Component{
+class CreateBlog extends Component{
+  SpeechOnEnd(event){
+    console.log("SpeechOnEnd");
+   
+    speechRecognitionStart=  myQuill.getContents();
+    if (this.state.listening)
+     this.state.recognition.start();
+    
+}
+  
  CustomToolbar = () => (
   <div id="toolbar">
     <select className="ql-header">
@@ -110,10 +138,15 @@ export default class CreateBlog extends Component{
     super(props)
     this.state = { 
         text: '',
+        speechRecognitionStartText:'',
         quillImage:'',
+        editorHtml:'',
         uploaded_uri:'',
         recognition:null,
-        listening:false
+        listening:false,
+        loaded:false,
+        header:'',
+        mainImage:''
     } // You can also pass a Quill Delta here
     this.handleChange = this.handleChange.bind(this);
   
@@ -122,8 +155,12 @@ export default class CreateBlog extends Component{
    this.insertImage = this.insertImage.bind(this);
    this.toggleListening = this.toggleListening.bind(this);
    this.saveBlog=this.saveBlog.bind(this);
+   this.loadBlogDetails=this.loadBlogDetails.bind(this);
+   this.SpeechOnEnd = this.SpeechOnEnd.bind(this);
    
+ 
   }
+
 
 
 saveBlog(){
@@ -143,13 +180,38 @@ insertImage(ref){
 
 
 
-   handleChange(value) {
+   handleChange(content, delta, source, editor) {
  
-    this.setState({ text: value })
+    this.setState({ text:content,editorHtml: editor.getContents() })
   }
 
+
+loadBlogDetails(props)
+{
+console.log("loadBlogDetails");
+console.log(props);
+  if (props && props.getPostDetail && props.general ) {
+      if (  props.match.params.blogId && (!props.general.postDetail || props.general.postDetail.post_id !== +props.match.params.blogId)){
+          props.getPostDetail(props.match.params.blogId);
+      }
+    }
+
+    if (props && props.general && props.general.postDetail && !this.state.loaded){
+      console.log("LOADING " + props.general.postDetail.post_text);
+       this.setState({loaded:true,text:props.general.postDetail.post_text,header:props.general.postDetail.post_title})
+  }
+
+}
+
+
+
+componentWillReceiveProps(newProps){
+  this.loadBlogDetails(newProps);
+  
+}
  componentDidMount(){
     
+     this.loadBlogDetails(this.props);
      if (!('webkitSpeechRecognition' in window) && ! this.state.recognition) {
  
 } else {
@@ -166,13 +228,15 @@ if (SpeechRecognition != null) {
 
     
       var recognition = this.createRecognition(SpeechRecognition);
-      recognition.lang='en-US';
-      recognition.continuous = true;
-      recognition.interimResults = true;
+      recognition.lang='en-US';  
       
         this.setState({recognition:recognition});
-
+       let whichResult=this;
       recognition.onresult = onSpeechResult;
+   
+  
+      recognition.onend = this.SpeechOnEnd;
+
 
     } else {
       console.warn('The current browser does not support the SpeechRecognition API.');
@@ -189,7 +253,7 @@ if (SpeechRecognition != null) {
 createRecognition = (SpeechRecognition) => {
   
     const defaults = {
-      continuous: true,
+      continuous: false,
       interimResults: false,
       lang: 'en-US'
     }
@@ -201,6 +265,7 @@ createRecognition = (SpeechRecognition) => {
     recognition.continuous = options.continuous
     recognition.interimResults = options.interimResults
     recognition.lang = options.lang
+  
 
     return recognition
  
@@ -214,7 +279,9 @@ toggleListening(){
 
  }
  else{
-     
+   
+     let initialText=this.state.text;
+     speechRecognitionStart = this.state.editorHtml;
      this.setState({listening:true});
      this.state.recognition.start();
  }
@@ -272,7 +339,7 @@ let fileType=upload.currentTarget.result.replace(/data:([^;]*);.*$/,"$1");
 
   render() {
       let imageStyle={};
-   
+   console.log(this.state.header);
 
 if (this.state.uploaded_uri) {
   
@@ -311,7 +378,7 @@ if (this.state.uploaded_uri) {
      </div> 
    <div className="creeateBlogHeader" >
      <span className="createBlogHeaderLabel">Heading</span>
-     <input type="text" ref="blogHeader" size="80"/>
+     <input type="text" value={this.state.header} ref="blogHeader" size="80"/>
    </div>
        
         <div 
@@ -334,6 +401,8 @@ if (this.state.uploaded_uri) {
           modules={CreateBlog.modules}
           formats={CreateBlog.formats}
           theme={"snow"} // pass false to use minimal theme
+          value={this.state.text}
+         
         >
           <div 
             key="editor"                     
@@ -384,4 +453,9 @@ CreateBlog.modules = {
 
 
 
-
+function mapStateToProps(state,ownProps){
+    if (ownProps && ownProps.history && !(state && state.history))
+      return Object.assign({},state,{history:ownProps.history});
+    return state;
+}
+export default connect(mapStateToProps,{getPostDetail:getPostDetail})(CreateBlog);

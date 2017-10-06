@@ -1,11 +1,29 @@
 import * as types from '../actions/ActionTypes';
 import initialState from './initialState'
-import {apiAddPost,apiEditAccount,apiGetUsersPosts,apiGetUsersEvents,apiGetComments,apiAddComment,apiLogout,apiGetUser,apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
+import {apiGetAdminNotifications,apiGetAdminPosts,apiGetAdminUsers,apiAddPost,apiEditAccount,apiGetUsersPosts,apiGetUsersEvents,apiGetComments,apiAddComment,apiLogout,apiGetUser,apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
 
 export function addPost(post){
     return {
         type:types.ADD_POST,
         payload:apiAddPost(post)
+    }
+}
+export function getAdminNotifications(){
+    return {
+        type:types.GET_ADMIN_NOTIFICATIONS,
+        payload:apiGetAdminNotifications()
+    }
+}
+export function getAdminPosts(){
+    return {
+        type:types.GET_ADMIN_POSTS,
+        payload:apiGetAdminPosts()
+    }
+}
+export function getAdminUsers(){
+    return {
+        type:types.GET_ADMIN_USERS,
+        payload:apiGetAdminUsers()
     }
 }
 
@@ -189,7 +207,15 @@ export default function rootReducer(state=initialState,action){
         return Object.assign({},state,{userPosts:action.payload});
     case types.EDIT_ACCOUNT + types.FULFILLED:
           return Object.assign({},state,{usersInfo: action.payload})
+    
+    case types.GET_ADMIN_NOTIFICATIONS + types.FULFILLED:
+        return Object.assign({},state,{adminNotifications:action.payload})
+    case types.GET_ADMIN_POSTS + types.FULFILLED:
+        return Object.assign({},state,{adminPosts:action.payload})
+    case types.GET_ADMIN_USERS + types.FULFILLED:
+        return Object.assign({},state,{adminUsers:action.payload})
 
+        
      default:return state;
  }
 

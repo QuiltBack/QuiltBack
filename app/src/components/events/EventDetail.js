@@ -60,13 +60,13 @@ class EventDetail extends Component{
                 this.props.getEvents();
             }
         }
-        
     }
 
     componentDidMount() {
+  
         let tl = new TimelineMax();
         tl.to(window, .5, {scrollTo:0, ease:Power4.easeOut})
-        this.eventdetails();
+        this.eventdetails(this.props);
     }
 
     componentWillReceiveProps(ownProps) {
@@ -74,6 +74,7 @@ class EventDetail extends Component{
     }
 
     render() {
+     console.log(this);
         let eventDetail='';
         let weekDays={
             1:"Sun",
@@ -129,7 +130,7 @@ class EventDetail extends Component{
                 })
                 displayEvents = this.props.general.events.map((e, i)=>{
                     let d1 = moment.utc(e.date);
-                    console.log(e)
+                  
                     return i<(this.state.numberOfEvents)?(
                         <Link to={'/event/'+e.eventid} className='event-details-recent-events-container'>
                             <div className="event-details-recent-events-image" 

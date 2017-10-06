@@ -107,6 +107,39 @@ module.exports ={
                    })
         
     },
+    getAdminNotifications:(req,res)=>{
+        console.log('getting notifications for admin')
+        req.app.get('db').getAdminNotifications()
+            .then(response=>{
+                res.status(200).json(response);
+            })
+            .catch(err=>{
+                console.log(err);
+                res.status(500).end();
+            })
+    },
+    getAdminPosts:(req,res)=>{
+        console.log('getting Posts for admin')
+        req.app.get('db').getAdminPosts()
+            .then(response=>{
+                res.status(200).json(response);
+            })
+            .catch(err=>{
+                console.log(err);
+                res.status(500).end();
+            })
+    },
+    getAdminUsers:(req,res)=>{
+        console.log('getting Users for admin')
+        req.app.get('db').getAdminUsers()
+            .then(response=>{
+                res.status(200).json(response);
+            })
+            .catch(err=>{
+                console.log(err);
+                res.status(500).end();
+            })
+    },
     getUsersEvents:(req,res)=>{
         console.log('gettins all events for users');
         req.app.get("db").getUsersEvents([+req.params.users_id])

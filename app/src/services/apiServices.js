@@ -322,5 +322,36 @@ export function apiAuthUser(){
         })
 }
 
+export function apiGetAdminUsers(){
+    console.log('inside get admin users');
+    return axios.get('/api/users')
+        .then(response=>{
+            return response.data;
+        })
+        .catch(err=>{
+            console.log('get users fpr admin error' + err)
+        })
+}
+export function apiGetAdminPosts(){
+    console.log('inside get admin posts');
+    return axios.get('/api/userposts')
+        .then(response=>{
+            return response.data;
+        })
+        .catch(err=>{
+            console.log('get admin posts' + err)
+        })
+}
+export function apiGetAdminNotifications(){
+    console.log('inside get admin notifications');
+    return axios.get('/api/notifications')
+        .then(response=>{
+            return response.data;
+        })
+        .catch(err=>{
+            console.log('get admin notifications' + err)
+        })
+}
+
 
 
