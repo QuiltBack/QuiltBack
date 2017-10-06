@@ -54,21 +54,24 @@ class EventDetail extends Component{
         });
     }
 
-    eventdetails() {
-        if (this.props && this.props.getEventDetail && this.props.general) {
-            if (this.props.match.params.eventId && (!this.props.general.eventDetail || this.props.general.eventDetail.eventid !== +this.props.match.params.eventId)) {  
-                this.props.getEventDetail(this.props.match.params.eventId);
+    eventdetails(props) {
+        if (props && props.getEventDetail && props.general) {
+            if (props.match.params.eventId && (!props.general.eventDetail || props.general.eventDetail.eventid !== +props.match.params.eventId)) {  
+                props.getEventDetail(props.match.params.eventId);
             }
+           
         }
-        if (this.props && this.props.getEvents && (this.props.general.events.length < 1) ){
-            this.props.getEvents();
+
+        if (props && props.getEvents && props.general && !props.general.events) {
+           props.getEvents();
         }
     }
 
     componentDidMount() {
+  
         let tl = new TimelineMax();
         tl.to(window, .5, {scrollTo:0, ease:Power4.easeOut})
-        this.eventdetails();
+        this.eventdetails(this.props);
     }
 
     componentWillReceiveProps(ownProps) {
@@ -76,6 +79,7 @@ class EventDetail extends Component{
     }
 
     render() {
+     console.log(this);
         let eventDetail='';
         let weekDays={
             1:"Sun",
@@ -131,7 +135,7 @@ class EventDetail extends Component{
                 })
                 displayEvents = this.props.general.events.map((e, i)=>{
                     let d1 = moment.utc(e.date);
-                    console.log(e)
+                  
                     return i<(this.state.numberOfEvents)?(
                         <div className='event-details-recent-events-container'>
                             <Link className="event-details-recent-events-image" to={'/event/'+e.eventid}
