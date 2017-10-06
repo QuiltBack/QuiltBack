@@ -72,11 +72,10 @@ class EventDetail extends Component{
     }
 
     componentWillReceiveProps(ownProps) {
-        this.eventdetails();
+        this.eventdetails(ownProps);
     }
 
     render() {
-        
         let eventDetail='';
         let weekDays={
             1:"Sun",

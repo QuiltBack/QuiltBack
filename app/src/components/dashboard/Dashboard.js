@@ -32,8 +32,7 @@ class Dashboard extends Component {
     }
   }
   componentWillMount(){
-    if (this.props && this.props.getUser && 
-    !(this.props.general && this.props.general.user && this.props.general.user.users_id)) {
+    if (this.props && this.props.getUser && this.props.general && !this.props.general.user) {
       this.props.getUser();
     }
     let redirect = JSON.parse(localStorage.getItem("redirect"));

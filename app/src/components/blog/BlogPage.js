@@ -30,7 +30,7 @@ class BlogPage extends Component {
     this.loadPosts();
   }
   loadPosts() {
-    if (this.props && this.props.getPosts && (this.props.general.posts.length < 1) ){
+    if (this.props && this.props.getPosts && !this.props.general.posts ){
       this.props.getPosts();
     }
   }
@@ -49,10 +49,8 @@ class BlogPage extends Component {
 
   render() {
     let button;
-    console.log("BLOGS")
-    console.log(this.props.general.posts);
     let blogs = 'loading blogs...';
-    if (this.props && this.props.general.posts ){
+    if (this.props && this.props.general && this.props.general.posts ){
       this.props.general.posts.sort((a, b)=>{
         let date1 = new Date(a.post_date);
         let date2 = new Date(b.post_date);

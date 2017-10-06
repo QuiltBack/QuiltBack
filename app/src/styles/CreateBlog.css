@@ -8,7 +8,7 @@
 .CreateBlogMainImageContainer{
 
     position:relative;
-    top:100px;
+ 
     z-index:5;
     width:800px;
     height:100px;
@@ -16,6 +16,11 @@
 }
 .createBlog{
      position:relative;
+     top:100px;
      z-Index:7;
      left:200px;
+}
+.createBlogHeaderLabel{
+    font-size:3rem;
+    padding-right:32px;
 }

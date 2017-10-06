@@ -164,7 +164,8 @@ export default function rootReducer(state=initialState,action){
 
         return Object.assign({},state,{postDetail:action.payload});
      case types.GET_EVENT_DETAIL + types.FULFILLED:
-         return Object.assign({},state,{eventDetail:action.payload});
+         let newState= Object.assign({},state,{eventDetail:Object.assign({},action.payload)});
+         return newState;
 
     case types.ADD_SUBSCRIBER + types.FULFILLED:
     console.log("apiAddSubscriber FULFILLED");

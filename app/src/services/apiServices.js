@@ -150,6 +150,7 @@ export function apiGetPostDetail(postId){
 export function apiGetEventDetail(eventId){
 return axios.get( '/api/event/' + eventId)
              .then(response=>{
+            
                   return response.data[0];
               })
               .catch(err=>{
