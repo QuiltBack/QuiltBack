@@ -265,7 +265,7 @@ return(
              <EmailShareButton
              url={shareUrl}
             subject={title}
-            body="body"
+            body={`Come read this blog ${shareUrl}`}
             className="share-button">
             <EmailIcon
               size={49}
