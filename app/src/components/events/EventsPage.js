@@ -3,8 +3,8 @@ import {TimelineMax, Power4, Power0} from 'greensock';
 import {connect} from 'react-redux';
 import {getEvents} from '../../reducers/generalReducer';
 import moment from 'moment';
-import '../../styles/EventsPage.css';
 import DownArrow from '../../styles/images/events/down_arrow.svg';
+import '../../styles/EventsPage.css';
 
 
 import {
@@ -83,7 +83,7 @@ class EventsPage extends Component {
   }
 
   loadEvents() {
-    if (this.props && this.props.getEvents && (this.props.general.events.length < 1) ){
+    if (this.props && this.props.getEvents && this.props.general && !this.props.general.events){
       this.props.getEvents();
     }
   }
@@ -191,10 +191,10 @@ class EventsPage extends Component {
 
   render(){
     let button;
-    let events='Loading events...';
+    let events='';
 
   console.log(this.props.general);
-    if (this.props && this.props.general.events ){
+    if (this.props && this.props.general && this.props.general.events ){
       console.log("map events object");
       if (this.state.sortBy.value) {
         switch(this.state.sortBy.value) {
