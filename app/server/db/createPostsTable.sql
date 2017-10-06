@@ -6,5 +6,6 @@ CREATE TABLE posts(
     owner_id SERIAL REFERENCES users (id),
     post_text VARCHAR,
     flagged BOOLEAN,
+    views INT NOT NULL DEFAULT '0',
     users_id INT FOREIGN KEY REFERENCES users(users_id)
 );
