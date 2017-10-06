@@ -4,7 +4,7 @@ CREATE TABLE posts(
     post_date TIMESTAMP,
     deleted INT,
     owner_id SERIAL REFERENCES users (id),
-    post_text VARCHAR,
+    post_text TEXT,
     flagged BOOLEAN,
     views INT NOT NULL DEFAULT '0',
     users_id INT FOREIGN KEY REFERENCES users(users_id)

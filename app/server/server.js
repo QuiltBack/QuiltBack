@@ -194,6 +194,12 @@ app.get('/api/dashboard/posts/:users_id', CTRL.getUsersPosts);
 
 app.post('/api/dashboard/account/:users_id', CTRL.editAccount);
 
+//users
+app.get('/api/users', CTRL.getAdminUsers)
+//posts
+app.get('/api/userposts', CTRL.getAdminPosts)
+//notifications
+app.get('/api/notifications', CTRL.getAdminNotifications)
 
 /* End points for NewsLetter Subscriptions */
 

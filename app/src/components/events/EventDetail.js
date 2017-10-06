@@ -54,16 +54,12 @@ class EventDetail extends Component{
         });
     }
 
-    eventdetails(props) {
-        if (props && props.getEventDetail && props.general) {
-            if (props.match.params.eventId && (!props.general.eventDetail || props.general.eventDetail.eventid !== +props.match.params.eventId)) {  
-                props.getEventDetail(props.match.params.eventId);
+    eventdetails() {
+        if (this.props && this.props.getEventDetail && this.props.general) {
+            if (this.props.match.params.eventId && (!this.props.general.eventDetail || this.props.general.eventDetail.eventid !== +this.props.match.params.eventId)) {  
+                this.props.getEventDetail(this.props.match.params.eventId);
+                this.props.getEvents();
             }
-           
-        }
-
-        if (props && props.getEvents && props.general && !props.general.events) {
-           props.getEvents();
         }
     }
 

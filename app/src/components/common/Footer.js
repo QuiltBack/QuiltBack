@@ -45,9 +45,9 @@ newSubscriber(e){
       </div>
       <div className='footer-grid-three'>
         <div className='footer-follow-us'>Follow Us</div>
-        <div className='footer-facebook'/>
-        <div className='footer-pinterest'/>
-        <div className='footer-instagram'/>
+        <a href="https://www.facebook.com/QuiltingDigest/" target="_blank" className='footer-facebook'/>
+        <a href="https://www.pinterest.com/feleciaozant/quilts-for-all/" target="_blank" className='footer-pinterest'/>
+        <a href="https://www.instagram.com/explore/tags/quilts/" target="_blank" className='footer-instagram'/>
       </div>
     </footer>  
    )
