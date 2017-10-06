@@ -81,7 +81,7 @@ componentWillReceiveProps() {
   }
 }
 function mapStateToProps(state, ownProps) {
-  if (ownProps && ownProps.history && !(state && state.history))
+  if (ownProps && ownProps.history && !(state && state.history)) {}
     return Object.assign({}, state, {
       history: ownProps.history
     });

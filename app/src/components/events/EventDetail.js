@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {TimelineMax, Power4} from 'greensock'
 import {getEventDetail} from '../../reducers/generalReducer';
 import {getEvents} from '../../reducers/generalReducer';
+import {Link} from 'react-router-dom';
 import {ShareButtons, ShareCounts, generateShareIcon} from 'react-share';
 import './EventDetail.css';
 
@@ -133,8 +134,21 @@ class EventDetail extends Component{
                     let d1 = moment.utc(e.date);
                     console.log(e)
                     return i<(this.state.numberOfEvents)?(
-                        <div>
-
+                        <div className='event-details-recent-events-container'>
+                            <Link className="event-details-recent-events-image" to={'/event/'+e.eventid}
+                                style={{
+                                backgroundImage: 'url("' + e.imageref + '")',
+                                backgroundRepeat:"no-repeat",
+                                backgroundPosition: "center center",
+                                backgroundSize:"cover",
+                                height:'125px',
+                                width:'125px',
+                                }}>
+                            </Link>
+                            <Link className='event-details-recent-events-info' to={'/event/'+e.eventid}>
+                                <div className='event-details-recent-events-date'>{d1.format("MMMM DD, YYYY")}</div>
+                                <div className='event-details-recent-events-title'>{e.title}</div>
+                            </Link>
                         </div>
                     ) : null
                 })
