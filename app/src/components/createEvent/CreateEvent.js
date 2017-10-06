@@ -27,6 +27,7 @@ constructor(props) {
      initialEndDate._d.setMinutes(20);
 
    this.state={
+
        listening:false,
        recognition:null,
        catalogueItemView:0,
@@ -71,13 +72,19 @@ constructor(props) {
      ,'editDonor','editVolunteer','addDonor','addVolunteer'
      ,'addItem','nextCatalogueItem','prevCatalogueItem'
      ,'onDateChange','showDate', 'showEndDate','handleFile'
-     ,'toggleListening','onSpeechResult');
+     ,'toggleListening','onSpeechResult','SpeechOnEnd');
 }
-
+  SpeechOnEnd(event){
+    console.log("SpeechOnEnd");
+   
+    if (this.state.listening)
+     this.state.recognition.start();
+    
+}
 createRecognition = (SpeechRecognition) => {
     console.log("start create recognition")
     const defaults = {
-      continuous: true,
+      continuous: false,
       interimResults: false,
       lang: 'en-US'
     }
@@ -90,7 +97,7 @@ createRecognition = (SpeechRecognition) => {
     recognition.interimResults = options.interimResults
     recognition.lang = options.lang
 
-    return recognition
+    return recognition;
  
  }
 
@@ -190,10 +197,11 @@ if (SpeechRecognition != null) {
 
     
       var recognition = this.createRecognition(SpeechRecognition);
-      recognition.lang='en-US';
+    
       
         this.setState({recognition:recognition});
 
+        recognition.onend = this.SpeechOnEnd;
       recognition.onresult = this.onSpeechResult;
 
     } else {
