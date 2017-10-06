@@ -1,8 +1,6 @@
 import React from 'react';
 import {Switch,Route} from 'react-router-dom';
 import ApiTest from './components/apiTest/ApiTest';
-
-
 import EventsPage from './components/events/EventsPage';
 import HomePage from './components/home/HomePage';
 import BlogPage from './components/blog/BlogPage';
@@ -20,10 +18,9 @@ export default (
         <Route exact path="/" component={HomePage}/>
         <Route path="/apitest" component={ApiTest}/>
         <Route path="/events" component={EventsPage}/>
-         <Route path="/blog/:blogId" component={BlogDetails}/>
+        <Route path="/blog/:blogId" component={BlogDetails}/>
         <Route path="/blog" component={BlogPage}/>
         <Route path="/createblog/:blogId" component={CreateBlog} />
-       
         <Route path="/createEvent/:eventId" component={CreateEvent}/>
         <Route path="/dashboard/events" component={UserEvents}/>
         <Route path="/dashboard/posts" component={UserPosts}/>

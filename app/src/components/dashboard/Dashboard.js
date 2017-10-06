@@ -87,19 +87,21 @@ class Dashboard extends Component {
   expandPages() {
     let tl = new TimelineMax();
     if (this.state.pagesExpanded) {
-      tl.to('.dashboard-admin-hidden-pages', .3, {height:'0px'});
+      tl.to('.dashboard-admin-hidden-pages', .5, {height:'6px'})
+        .to('.dashboard-admin-line', .5, {width:'0%', ease:Power4.easeOut});
       setTimeout(()=>{
         this.setState({
           pagesExpanded:false,
         })
-      },400)
+      },1200)
     } else {
-      tl.to('.dashboard-admin-hidden-pages', .3, {height:'100px'})
+      tl.to('.dashboard-admin-line', .5, {width:'100%', ease:Power4.easeOut})
+        .to('.dashboard-admin-hidden-pages', .5, {height: '100px', ease: Power4.easeOut})
       setTimeout(()=>{
         this.setState({
           pagesExpanded:true,
         })
-      },400)
+      },1200)
     }
   }
   render() {
@@ -115,12 +117,15 @@ class Dashboard extends Component {
           <section className='dashboard-container'>
             <div className='dashboard-title'>Dashboard</div>
             <Link className='dashboard-admin-notifications' to='/notifications'>Notifications</Link>
-            <div onClick={()=>{this.expandPages()}} className='dashboard-admin-pages'>Pages</div>
-            <div className='dashboard-admin-hidden-pages'>
-              <Link className='dashboard-hidden-home' to='/'>Home</Link>
-              <Link className='dashboard-hidden-blog' to='/blog'>Blog</Link>
-              <Link className='dashboard-hidden-events' to='/events'>Events</Link>
-              <Link className='dashboard-hidden-account' to='/dashboard/account'>Account</Link>
+            <div className='dashboard-admin-pages'>
+              <div className='dashboard-admin-pages-text' onClick={()=>{this.expandPages()}}>Pages</div>
+              <div className='dashboard-admin-hidden-pages'>
+                <div className='dashboard-admin-line'/>
+                <Link className='dashboard-hidden-home' to='/'>Home</Link>
+                <Link className='dashboard-hidden-blog' to='/blog'>Blog</Link>
+                <Link className='dashboard-hidden-events' to='/events'>Events</Link>
+                <Link className='dashboard-hidden-account' to='/dashboard/account'>Account</Link>
+              </div>
             </div>
             <Link className='dashboard-admin-users' to='/users'>Users</Link>
             <Link className='dashboard-admin-posts' to='/posts'>Posts</Link>
