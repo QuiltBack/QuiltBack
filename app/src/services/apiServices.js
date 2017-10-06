@@ -269,7 +269,7 @@ export function apiGetUsersEvents(users_id){
 }
 export function apiGetUsersPosts(users_id){
     console.log('inside getUsersPosts');
-    return axios.get('/api/dashboard/posts' + users_id)
+    return axios.get('/api/dashboard/posts/' + users_id)
         .then(response=>{
             console.log('USERS POSTS');
             console.log(response);

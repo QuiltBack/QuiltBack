@@ -2,6 +2,8 @@ export default {
     someData: "Yeah Tiny Rick!",
     posts:null,
     events:null,
+    userPosts:null,
+    userEvents:null,
     subscriberEmail:null,
     emailList:null,
     eventDetail:null,
