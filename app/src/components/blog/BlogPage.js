@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {TimelineMax, Power4, Power0} from 'greensock';
 import {connect} from 'react-redux';
 import {getPosts} from '../../reducers/generalReducer';
+import {Link} from 'react-router-dom';
 import moment from 'moment';
 import '../../styles/BlogPage.css';
 import DownArrow from '../../styles/images/events/down_arrow.svg';
@@ -49,7 +50,7 @@ class BlogPage extends Component {
 
   render() {
     let button;
-    let blogs = 'loading blogs...';
+    let blogs = '';
     if (this.props && this.props.general && this.props.general.posts ){
       this.props.general.posts.sort((a, b)=>{
         let date1 = new Date(a.post_date);
@@ -57,6 +58,7 @@ class BlogPage extends Component {
         return (date2 - date1);
       })
       blogs = this.props.general.posts.map((e, i)=>{
+        console.log(e)
         let d = moment.utc(e.post_date)
         if (i === 0) {
           return (
@@ -72,9 +74,9 @@ class BlogPage extends Component {
                 <div className='blog-page-blog-text'>
                   {300 > e.post_text.length? e.post_text : (e.post_text).substring(0, 300) + '...'}
                 </div>
-                <div className='blog-page-blog-button'>
+                <Link to={'/blog/'+e.post_id} className='blog-page-blog-button'>
                   Read More
-                </div>
+                </Link>
               </div>
             </div>
           </section>
@@ -93,9 +95,9 @@ class BlogPage extends Component {
                 <div className='blog-page-blog-text'>
                   {100 > e.post_text.length? e.post_text : (e.post_text).substring(0, 100) + '...'}
                 </div>
-                <div className='blog-page-blog-button'>
+                <Link to={'/blog/'+e.post_id} className='blog-page-blog-button'>
                   Read More
-                </div>
+                </Link>
               </div>
             </div>
           </section>
