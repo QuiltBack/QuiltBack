@@ -83,7 +83,7 @@ class EventsPage extends Component {
   }
 
   loadEvents() {
-    if (this.props && this.props.getEvents && (this.props.general.events.length < 1) ){
+    if (this.props && this.props.getEvents && this.props.general && !this.props.general.events){
       this.props.getEvents();
     }
   }
@@ -194,7 +194,7 @@ class EventsPage extends Component {
     let events='Loading events...';
 
   console.log(this.props.general);
-    if (this.props && this.props.general.events ){
+    if (this.props && this.props.general && this.props.general.events ){
       console.log("map events object");
       if (this.state.sortBy.value) {
         switch(this.state.sortBy.value) {

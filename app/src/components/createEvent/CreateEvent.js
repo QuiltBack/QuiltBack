@@ -93,6 +93,8 @@ createRecognition = (SpeechRecognition) => {
     return recognition
  
  }
+
+
 toggleListening(){
  if (this.state.listening){
      this.state.recognition.stop();
@@ -239,7 +241,7 @@ saveAndPublish(){
         
        
     };
-  
+  console.log("create Event");
     apiCreateEvent(newEvent).then(res=>{
       
         this.setState({
