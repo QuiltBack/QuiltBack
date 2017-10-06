@@ -60,9 +60,8 @@ class EventsPage extends Component {
     this.gotoDetail = this.gotoDetail.bind(this);
   }
   gotoDetail(eventid){
-   if (this.props && this.props.history)
-     this.props.history.push("/event/" + eventid);
-
+  if (this.props && this.props.history)
+    this.props.history.push("/event/" + eventid);
   }
 
   componentDidMount() {
@@ -301,63 +300,32 @@ class EventsPage extends Component {
         let shareUrl=`${frontenv.REACT_APP_HOST}/event/` + event.eventid;
         let title=event.title;
         
-        return index<(this.state.numberOfEvents)?
-           (
-             
+        return index<(this.state.numberOfEvents)?(
             <div className="events-page-events"   key={index}>
-            <div className="events-page-banner">
-            <div onClick={e=>{this.gotoDetail(event.eventid)}} className='events-page-banner-image'/>
-            </div>
-            <div className='events-page-social-media'>
-
-
-              <div className='events-page-facebook'>
-           
-         <FacebookShareButton
-            url={shareUrl}
-            quote={title}
-            className="share-button">
-            <FacebookIcon
-              size={49}
-              round />
-          </FacebookShareButton>
+              <div className="events-page-banner">
+                <div onClick={e=>{this.gotoDetail(event.eventid)}} className='events-page-banner-image' style={{
+                    backgroundImage: 'url("' + event.imageref + '")',
+                    backgroundRepeat:"no-repeat",
+                    backgroundPosition: "center center",
+                    backgroundSize:"cover",
+                    height:'100%',
+                    width:'100%',
+                }}/>
               </div>
-              <div className='events-page-twitter'>
-               <TwitterShareButton
-            url={shareUrl}
-            quote={title}
-            className="share-button">
-            <TwitterIcon
-              size={49}
-              round />
-
-          </TwitterShareButton>
-
+              <div className='events-page-social-media'>
+                <FacebookShareButton url={shareUrl} quote={title} className='events-page-facebook'>
+                    <FacebookIcon size={49} round />
+                </FacebookShareButton>
+                <TwitterShareButton url={shareUrl} quote={title} className='events-page-twitter'>
+                  <TwitterIcon size={49} round />
+                </TwitterShareButton>
+                <GooglePlusShareButton url={shareUrl} quote={title} className='events-page-google'>
+                  <GooglePlusIcon size={49} round />
+                </GooglePlusShareButton>
+                <EmailShareButton url={shareUrl} subject={title} body="body" className='events-page-email'>
+                  <EmailIcon size={49} round />
+                </EmailShareButton>
               </div>
-              <div className='events-page-google'>
-                <GooglePlusShareButton
-            url={shareUrl}
-            quote={title}
-            className="share-button">
-            <GooglePlusIcon
-              size={49}
-              round />
-
-          </GooglePlusShareButton>
-                </div>
-              <div className='events-page-email'>
-              <EmailShareButton
-             url={shareUrl}
-            subject={title}
-            body="body"
-            className="share-button">
-            <EmailIcon
-              size={49}
-              round />
-
-          </EmailShareButton>
-              </div>
-            </div>
             <div onClick={e=>{this.gotoDetail(event.eventid)}}  className="events-page-event-info">
               <div className='events-page-event-title'>{ 27 > event.title.length? 
                 event.title : (event.title).substring(0, 27) + '...'}</div>
