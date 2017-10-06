@@ -1,13 +1,299 @@
-.event{
-    position:relative;
-    z-index:3;
+.event-detail-main-section {
+    width:80%;
+    margin:0 auto;
+    position: relative;
+    top: 115px;
+}
+.event-details-section {
+    width: 100%;
+    display: grid;
+    grid-template: 400px 40px auto 40px auto 37px 119px / auto;
+}
+.event-details-banner-container {
+    width: 100%;
+    display: grid;
+    grid-area: 1 / 1;
+    grid-template: auto / 65% 2% 33%;
+    border: 1px solid #979797;
+}
+.event-details-banner-image {
+    width: 100%;
+    display: grid;
+    grid-area: 1 / 1;
+}
+.event-details-banner-info {
+    width: 100%;
+    display: grid;
+    grid-area: 1 / 3;
+    grid-template: 40px 31px 20px 123px 124px 31px 30px / auto;
+}
+.event-details-banner-date {
+    display: grid;
+    grid-area: 2 / 1;
+    color: #5E5E5E;	
+    font-family: FuturaRegular;	
+    font-size: 24px;	
+    line-height: 31px;
+}
+.event-details-banner-title {
+    display: grid;
+    grid-area: 4 / 1;
+    color: #5E5E5E;	
+    font-family: FuturaMedium;	
+    font-size: 38px;	
+    line-height: 63px;
+}
+.event-details-banner-host {
+    display: grid;
+    grid-area: 6 / 1;
+    color: #5E5E5E;	
+    font-family: FuturaMedium;	
+    font-size: 24px;	
+    line-height: 32px;
+}
+.event-details-main-container {
+    width: 100%;
+    display: grid;
+    grid-area: 3 / 1;
+    grid-template: auto / 57% 10% 33%;
+    
+}
+.event-details-left-container {
+    width: 100%;
+    display: grid;
+    grid-area: 1 / 1;
+    grid-template: 46px 24px auto 40px 46px 24px 788px 37px 119px / auto;
+}
+.event-details-description-title {
+    display: grid;
+    grid-area: 1 / 1;
+    align-content: center;
+    color: #5E5E5E;	
+    font-family: FuturaMedium;	
+    font-size: 36px;	
+    line-height: 47px;
+}
+.event-details-description-text {
+    display: grid;
+    grid-area: 3 / 1;
+    color: #5E5E5E;	
+    font-family: GeorgiaRegular;	
+    font-size: 24px;	
+    line-height: 27px;
+}
+.event-details-catalogue-title {
+    display: grid;
+    grid-area: 5 / 1;
+    align-content: center;
+    color: #5E5E5E;	
+    font-family: FuturaMedium;	
+    font-size: 36px;	
+    line-height: 47px;
+}
+.event-details-catalogue-container {
+    display: grid;
+    grid-area: 7 / 1;
+    grid-template: 516px 24px 248px / auto;
+}
+.event-details-catalogue-top-container {
+    display: grid;
+    grid-area: 1 / 1;
+    position: relative;
+}
+.event-details-catalogue-top-image {
+    position: absolute;
+    top: 0;
+}
+.event-details-catalogue-top-left-arrow {
+    height: 35px;	
+    width: 35px;	
+    opacity: 0.8;	
+    border-radius: 3px;	
+    background-color: #000000;
+    position: absolute;
+    left: 0;
+    top: 223px;
+    z-index: 1;
+    display: grid;
+    align-content: center;
+    text-align: center;
+    color: lightgray;
+    font-family: FuturaRegular;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.event-details-catalogue-top-right-arrow {
+    height: 35px;	
+    width: 35px;	
+    opacity: 0.8;	
+    border-radius: 3px;	
+    background-color: #000000;
+    position: absolute;
+    right: 0;
+    top: 223px;
+    z-index: 1;
+    display: grid;
+    align-content: center;
+    text-align: center;
+    color: lightgray;
+    font-family: FuturaRegular;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.event-details-catalogue-top-banner {
+    width: 100%;
+    height: 79px;
+    display: grid;
+    position: absolute;
+    bottom: 0;
+    grid-template: auto / 5% 62% 5% 23% 5%;
+    align-items: center;
+    background-color: rgba(0,0,0,0.8);
+    color: #FFFFFF;	
+    font-family: FuturaMedium;	
+    font-size: 26px;	
+    line-height: 47px;
+}
+.event-details-catalogue-top-banner-name {
+    display: grid;
+    grid-area: 1 / 2;
+}
+.event-details-catalogue-top-banner-detail-id {
+    display: grid;
+    grid-area: 1 / 4;
+}
+.event-details-catalogue-bottom-container {
+    display: grid;
+    grid-area: 3 / 1;
+}
+.event-details-share-container {
+    display: grid;
+    grid-area: 9 / 1;
+    flex-direction: column;
+    width: 266px;
+    align-items: flex-start;
+}
+.event-details-share-title {
+    color: #5E5E5E;	
+    font-family: FuturaMedium;	
+    font-size: 36px;	
+    line-height: 47px;
+    text-align: center;
+    height: 46px;
+}
+.event-details-share-buttons {
+    display: flex;
+    justify-content: space-around;
+    align-self: flex-end;
+}
+.event-details-facebook-button {
+    height: 50px;
+    width: 50px;
+}
+.event-details-twitter-button {
+    height: 50px;
+    width: 50px;
+}
+.event-details-google-button {
+    height: 50px;
+    width: 50px;
+}
+.event-details-email-button {
+    height: 50px;
+    width: 50px;
+}
+.event-details-right-container {
+    width: 100%;
+    display: grid;
+    grid-area: 1 / 3;
+    grid-template: 32px 46px 50px auto 8px auto 50px 46px 50px auto 50px 46px 50px auto 8px auto 50px 46px 50px auto / auto;    
+    
+}
+.event-details-right-container-date-title {
+    display: grid;
+    grid-area: 2 / 1;
+    color: #5E5E5E;	
+    font-family: FuturaMedium;	
+    font-size: 36px;	
+    line-height: 47px;
+}
+.event-details-right-container-date-day {
+    display: grid;
+    grid-area: 4 / 1;
+    color: #5E5E5E;	
+    font-family: FuturaMedium;	
+    font-size: 18px;	
+    line-height: 25px;
+}
+.event-details-right-container-date-time {
+    display: grid;
+    grid-area: 6 / 1;
+    color: #5E5E5E;	
+    font-family: FuturaMedium;	
+    font-size: 18px;	
+    line-height: 25px;
+}
+.event-details-right-container-location-title {
+    display: grid;
+    grid-area: 8 / 1;
+    color: #5E5E5E;	
+    font-family: FuturaMedium;	
+    font-size: 36px;	
+    line-height: 47px;
+}
+.event-details-right-container-location-text {
+    display: grid;
+    grid-area: 10 / 1;
+    color: #5E5E5E;	
+    font-family: FuturaMedium;	
+    font-size: 18px;	
+    line-height: 25px;
+}
+.event-details-right-container-contact-title {
+    display: grid;
+    grid-area: 12 / 1;
+    color: #5E5E5E;	
+    font-family: FuturaMedium;	
+    font-size: 36px;	
+    line-height: 47px;
+}
+.event-details-right-container-donor {
+    display: grid;
+    grid-area: 14 / 1;
+    color: #5E5E5E;	
+    font-family: FuturaMedium;	
+    font-size: 18px;	
+    line-height: 25px;
+}
+.event-details-right-container-volunteer {
+    display: grid;
+    grid-area: 16 / 1;
+    color: #5E5E5E;	
+    font-family: FuturaMedium;	
+    font-size: 18px;	
+    line-height: 25px;
+}
+.event-details-right-container-recent-title {
+    display: grid;
+    grid-area: 18 / 1;
+    color: #5E5E5E;	
+    font-family: FuturaMedium;	
+    font-size: 36px;	
+    line-height: 47px;
+}
+.event-details-right-container-recent-events {
+    display: grid;
+    grid-area: 20 / 1;
+    height:700px;
 }
 
 .EventShare h1{
     font-size:3rem;
 }
-
-
 .eventdetail-page-social-media{
     width:25%;
     display:grid;
@@ -88,12 +374,6 @@
     align-self:center;
     font-size:4rem;
 }
-.events{
-    width:80%;
-    margin:0 auto;
-    position: relative;
-    top: 75px;
-}
 .eventImage{
     width:100px;
     height:100px;
@@ -131,50 +411,6 @@ height:280px;
     grid-column-start:3;
     grid-column-end:3;
     
-}
-.eventBannerDate{
-   
-    grid-column-start:1;
-    grid-column-end:1;
-    grid-row-start:1;
-    grid-row-end:1;
-
-}
-.eventBannerTitle{
-    font-size:3rem;
-    font-weight:400;
-    grid-column-start:1;
-    grid-column-end:1;
-    grid-row-start:2;
-    grid-row-end:2;
-
-}
-.eventBannerHost{
-    grid-column-start:1;
-    grid-column-end:1;
-    grid-row-start:3;
-    grid-row-end:3;
-
-}
-
-.eventBannerImage{
- 
-    grid-column-start:1;
-    grid-column-end:1;
-    grid-row:1;
-   
-}
-
-.eventBannerInfo{
-    
- 
-    grid-column-start:3;
-    grid-column-end:3;
-     grid-row-start:1;
-     grid-row-end:1;
-      display:grid;
-      grid-template-columns: 100%;
-      grid-template-rows: 25% 50% 25%;
 }
 .eventRightSection p{
     line-height:50%;

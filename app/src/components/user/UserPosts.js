@@ -54,7 +54,7 @@ class UserPosts extends Component {
               </div>
             </div>
             <div className='user-posts-view-container'>
-              <Link to={'/post/' + e.post_id} className='user-posts-view-view'>View</Link>
+              <Link to={'/blog/' + e.post_id} className='user-posts-view-view'>View</Link>
               <div className='user-posts-view-delete'>Delete</div>
             </div>
           </section>

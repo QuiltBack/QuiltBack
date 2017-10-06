@@ -68,7 +68,7 @@ console.log(this.props);
   if (this.props && this.props.getPostDetail && this.props.general ) {
     
 
-      if (  this.props.match.params.blogId && (!this.props.general.postDetail || this.props.general.postDetail.post_id !== this.props.match.params.blogId)){
+      if (  this.props.match.params.blogId && (!this.props.general.postDetail || this.props.general.postDetail.post_id !== +this.props.match.params.blogId)){
 
           this.props.getPostDetail(this.props.match.params.blogId);
       }

@@ -147,7 +147,7 @@ export default function rootReducer(state=initialState,action){
      return Object.assign({},state,{comments:action.payload});
 
  case types.LOGOUT + types.FULFILLED:
-    return Object.assign({},state,{user:{}});
+    return Object.assign({},state,{user:null});
  case types.GET_USER + types.FULFILLED:
 
            return Object.assign({},state,{user:action.payload});

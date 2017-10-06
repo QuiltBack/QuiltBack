@@ -26,9 +26,10 @@ class Dashboard extends Component {
   logout(){
     if (this.props && this.props.logout){
       this.props.logout();
+      this._reactInternalInstance._context.router.history.push('/');
+      let tl = new TimelineMax();
+      tl.to('.dashboard-container', 0, {marginLeft: '-258px'})
     }
-    let tl = new TimelineMax();
-    tl.to('.dashboard-container', 0, {marginLeft: '-258px'})
   }
   componentWillMount(){
     if (this.props && this.props.getUser && 
@@ -66,7 +67,7 @@ class Dashboard extends Component {
   mouseClick() {
     let tl = new TimelineMax();
     tl.to('.dashboard-container', .5, {marginLeft: 0})
-    .to('.dashboard-expand', 0, {display:'none', opacity:0}, '-=.5');
+    .to('.dashboard-expand', .1, {display:'none', opacity:0}, '-=.5');
     this.setState({
       expanded:true,
     })
