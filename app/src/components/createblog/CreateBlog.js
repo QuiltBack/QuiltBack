@@ -26,28 +26,32 @@ const CustomButton =  (<span className="octicon octicon-star" />)
  */
 var myQuill=null;
 var myEditor;
-function insertImageDummy () {
-    console.log("InsertImageDummy");
-    console.log(this.quill);
- myQuill = this.quill;
- if (!myEditor)
-   myEditor=this.quill.editor;
 
- console.log("EDITOR")
- console.log(myEditor);
- console.log("AFTER");
-  
+function Dummy () {
+  if (!myQuill)
+     myQuill = this.quill; 
 }
+
+
 //demo
 function insertStar (ref) {
-  const cursorPosition = myQuill.getSelection().index
- myQuill.insertText(cursorPosition, "★")
- myQuill.setSelection(cursorPosition + 1)
-
+      const cursorPosition = myQuill.getSelection().index
       const range = myQuill.getSelection();
       myQuill.editor.insertEmbed(range.index, 'image', ref);
 
 }
+
+function onSpeechResult(event){
+ let text = event.results[event.results.length -1][0].transcript;
+          
+           const cursorPosition = myQuill.getSelection().index
+           myQuill.insertText(cursorPosition, text)
+           myQuill.setSelection(cursorPosition + text.length)
+           
+}
+
+
+
 //end demo
 
 /*
@@ -65,6 +69,8 @@ export default class CreateBlog extends Component{
     </select>
     <button className="ql-bold"></button>
     <button className="ql-italic"></button>
+    <button className="ql-underline"></button>
+    <button className="ql-strike"></button>
     <select className="ql-color">
       <option value="red"></option>
       <option value="green"></option>
@@ -74,16 +80,28 @@ export default class CreateBlog extends Component{
       <option value="#d0d1d2"></option>
       <option selected></option>
     </select>    
-    <button className="ql-insertImage">
+    <button className="ql-list" value="ordered"></button>
+      <button className="ql-list" value="bullet"></button>
+       <button className="ql-link" value="bullet"></button>
+    <button style={{position:"relative",width:"50px"}} className="ql-image">
        <Dropzone
         multiple={false}
         accept="image/*"
-        style={{width:"10px",height:"10px"}}
+        style={{}}
           onDrop={(e)=>this.handleFile(e,this.insertImage)}
         >
-           <span style={{textAlign:"center",color:"red"}}>Image</span>
+           <span style={{textAlign:"center",position:"absolute",top:"50%",left:"50%", transform: "translate(-50%, -50%)"}}>Image</span>
     </Dropzone>
     </button>
+   {(this.state.listening)?(
+   <button onClick={this.toggleListening} className="ql-toggleMicrophone">
+     <i style={{fontSize:"2rem",color:"red"}} className="fa fa-microphone"></i></button>
+   ):(
+     <button onClick={this.toggleListening} className="ql-toggleMicrophone">
+     <i style={{fontSize:"2rem",color:"black"}} className="fa fa-microphone"></i></button>
+   )}
+   <button onClick={this.saveBlog} className="ql-saveBlog">Save</button>
+  
   </div>
 )
 
@@ -93,50 +111,115 @@ export default class CreateBlog extends Component{
     this.state = { 
         text: '',
         quillImage:'',
-        uploaded_uri:'' 
+        uploaded_uri:'',
+        recognition:null,
+        listening:false
     } // You can also pass a Quill Delta here
     this.handleChange = this.handleChange.bind(this);
   
    
    this.handleFile = this.handleFile.bind(this);
    this.insertImage = this.insertImage.bind(this);
+   this.toggleListening = this.toggleListening.bind(this);
+   this.saveBlog=this.saveBlog.bind(this);
    
   }
 
 
-
+saveBlog(){
+  console.log("SAVING? blog")
+}
 
 // START INSERTIMAGE
 
-
 insertImage(ref){
-    console.log("insertImage " +ref);
    let  str = this.state.text;
-   
-  let imageElement=`<img src="${ref}" />`;
-  console.log("STR")
- console.log(str);
-insertStar(ref);
-     // const range = myEditor.getSelection();
-     // myEditor.insertEmbed(range.index, 'image', imageElement);
+   let imageElement=`<img src="${ref}" />`;
+   insertStar(ref);
   
 }
-
-
 
 // END insertIMAGE
 
 
 
    handleChange(value) {
-       console.log(value);
+ 
     this.setState({ text: value })
   }
 
  componentDidMount(){
-     console.log("component");
+    
+     if (!('webkitSpeechRecognition' in window) && ! this.state.recognition) {
+ 
+} else {
+     
+     const SpeechRecognition = window.SpeechRecognition
+      || window.webkitSpeechRecognition
+      || window.mozSpeechRecognition
+      || window.msSpeechRecognition
+      || window.oSpeechRecognition;
+
+    
+
+if (SpeechRecognition != null) {
+
+    
+      var recognition = this.createRecognition(SpeechRecognition);
+      recognition.lang='en-US';
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      
+        this.setState({recognition:recognition});
+
+      recognition.onresult = onSpeechResult;
+
+    } else {
+      console.warn('The current browser does not support the SpeechRecognition API.');
+    }
+
+
+
+  }
+
      
  }
+
+
+createRecognition = (SpeechRecognition) => {
+  
+    const defaults = {
+      continuous: true,
+      interimResults: false,
+      lang: 'en-US'
+    }
+
+    const options = Object.assign({}, defaults, this.props)
+
+    let recognition = new SpeechRecognition()
+
+    recognition.continuous = options.continuous
+    recognition.interimResults = options.interimResults
+    recognition.lang = options.lang
+
+    return recognition
+ 
+ }
+
+ 
+toggleListening(){
+ if (this.state.listening){
+     this.state.recognition.stop();
+     this.setState({listening:false})
+
+ }
+ else{
+     
+     this.setState({listening:true});
+     this.state.recognition.start();
+ }
+
+}
 
 
 
@@ -189,8 +272,7 @@ let fileType=upload.currentTarget.result.replace(/data:([^;]*);.*$/,"$1");
 
   render() {
       let imageStyle={};
-      console.log("text")
-      console.log(this.state.text);
+   
 
 if (this.state.uploaded_uri) {
   
@@ -227,22 +309,25 @@ if (this.state.uploaded_uri) {
     </Dropzone>
    
      </div> 
-   
+   <div className="creeateBlogHeader" >
+     <span className="createBlogHeaderLabel">Heading</span>
+     <input type="text" ref="blogHeader" size="80"/>
+   </div>
        
         <div 
         style={
             {position:"relative"
             ,zIndex:7
-            ,top:"100px"
-            ,width:"500px"
-            ,height:"500px"
-            ,border:"1px solid blue"
+            ,paddingTop:"16px"
+            ,width:"800px"
+            ,minHeight:"500px"
+           
             }} >
 
           <div className="text-editor">
-              <span>toolbar</span>
+           
         <this.CustomToolbar />
-        <span>end</span>
+     
         <ReactQuill 
           onChange={this.handleChange} 
           placeholder={this.props.placeholder}
@@ -287,7 +372,9 @@ CreateBlog.modules = {
   toolbar: {
     container: "#toolbar",
     handlers: {
-      "insertImage": insertImageDummy,
+      "insertImage": Dummy,
+      "toggleMicrophone" :Dummy,
+      "saveBlog" : Dummy,
     }
   }
 }

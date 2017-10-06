@@ -55,16 +55,18 @@ prevItem(){
 }
 
 
-eventdetails()
+eventdetails(props)
 {
 
 
-  if (this.props && this.props.getEventDetail && this.props.general ) {
+  if (props && props.getEventDetail && props.general ) {
     
 
-      if (  this.props.match.params.eventId && (!this.props.general.eventDetail || this.props.general.eventDetail.eventid !== this.props.match.params.eventId)){
+      if (  props.match   && props.match.params && props.match.params.eventId && (!props.general.eventDetail || props.general.eventDetail.eventid !== +props.match.params.eventId)){
         
-          this.props.getEventDetail(this.props.match.params.eventId);
+         
+         
+          props.getEventDetail(props.match.params.eventId);
       }
     }
 }
@@ -72,16 +74,15 @@ eventdetails()
 componentDidMount() {
    let tl = new TimelineMax();
    tl.to(window, .5, {scrollTo:0, ease:Power4.easeOut})
-    this.eventdetails();
+    this.eventdetails(this.props);
 }
 componentWillReceiveProps(ownProps) {
- 
- 
-    this.eventdetails();
+
+    this.eventdetails(ownProps);
 }
 
  render(){
-  
+  console.log(this);
    let eventDetail='';
   let weekDays={
       1:"Sun",

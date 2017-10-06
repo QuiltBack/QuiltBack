@@ -68,11 +68,11 @@ console.log(this.props);
   if (this.props && this.props.getPostDetail && this.props.general ) {
     
 
-      if (  this.props.match.params.blogId && (!this.props.general.postDetail || this.props.general.postDetail.post_id !== this.props.match.params.blogId)){
+      if (  this.props.match.params.blogId && (!this.props.general.postDetail || this.props.general.postDetail.post_id !== +this.props.match.params.blogId)){
 
           this.props.getPostDetail(this.props.match.params.blogId);
       }
-      if (this.props.getPosts && (!this.props.general || !this.props.general.posts || this.props.general.posts.length <1)){
+      if (this.props.getPosts && this.props.general && !this.props.general.posts ){
           console.log("Calling getPosts")
           this.props.getPosts();
 
@@ -81,7 +81,7 @@ console.log(this.props);
 
     console.log("debug1 - getcomments")
     console.log(this);
-if (this.props && this.props.general && this.props.general.comments.length <1  && this.props.match && this.props.match.params && this.props.match.params.blogId){
+if (this.props && this.props.general && !this.props.general.comments && this.props.match && this.props.match.params && this.props.match.params.blogId){
        console.log("debug2")
        if (!this.state.loaded){
          console.log("debug3")
@@ -215,8 +215,6 @@ if (this.props && this.props.general && this.props.general.postDetail && this.pr
     }
 }
 
-
-
 return(
 <div className="blogDetails">
  <div className="blogLeftSide">
@@ -235,7 +233,7 @@ return(
             quote={title}
             className="share-button">
             <FacebookIcon
-              size={16}
+              size={49}
               round />
           </FacebookShareButton>
               </div>
@@ -245,7 +243,7 @@ return(
             quote={title}
             className="share-button">
             <TwitterIcon
-              size={16}
+              size={49}
               round />
 
           </TwitterShareButton>
@@ -257,22 +255,24 @@ return(
             quote={title}
             className="share-button">
             <GooglePlusIcon
-              size={16}
+              size={49}
               round />
 
           </GooglePlusShareButton>
                 </div>
               <div className='blogEmail'>
-              <EmailShareButton
+              
+             <EmailShareButton
              url={shareUrl}
             subject={title}
             body="body"
             className="share-button">
             <EmailIcon
-              size={16}
+              size={49}
               round />
 
           </EmailShareButton>
+            
               </div>
           </div>
           
