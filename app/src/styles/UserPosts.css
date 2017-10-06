@@ -1,29 +1,34 @@
 .user-posts-section {
   width: 100%;
-  display: grid;
-  grid-template: 126px 70vh / 10% 80% 10%; 
   position: relative;
   top: 75px;
   padding-bottom: 80px;
 }
-.user-posts-title {
+.user-posts-empty {
+  width: 100%;
+  margin: 0 auto;
   display: grid;
-  grid-area: 1 / 2;
+  grid-template: auto / auto; 
+}
+.user-posts-title {
+  width: 80%;
+  margin: 0 auto;
   color: #D93044;	
   font-family: FuturaMedium;	
   font-size: 36px;	
   line-height: 47px;
   align-content: center;
+  padding-top: 40px;
+  padding-bottom:40px;
 }
 .user-posts-container {
   display: grid;
-  grid-area: 2 / 2;
-  border: 1px solid #C2C2C2;
-  border-radius: 3px;
+  grid-area: 1 / 1;
   width: 100%;
+  height: 80vh;
   grid-template: 41px 175px 24px 31px 40px 37px / 40% 20% 40%;
 }
-.user-posts-share-icon {
+.user-posts-promote-icon {
   display: grid;
   grid-area: 2 / 2;
   margin: 0 auto;
@@ -53,4 +58,98 @@
   align-content: center;
   margin: 0 auto;
   outline: none;
+}
+/* filled */
+
+.user-posts-filled {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-area: 2 / 2;
+  grid-template: auto / 80% 20%;
+}
+.user-posts-filled-container {
+  width: 80%;
+  margin: 0 auto;
+  border: 1px solid #C2C2C2;	
+  border-radius: 3px;
+}
+.user-posts-posts {
+  height: 250px;
+  width: 100%;
+  display: grid;
+  grid-area: 1 / 1;
+  grid-template: auto / 250px auto;
+  background: #F7F7F7;
+  margin-top:20px;
+  margin-bottom:20px;
+}
+.user-posts-banner {
+  display: grid;
+  grid-area: 1 / 1;
+  background: url('./images/blogs/quilt_placeholder.jpg') no-repeat center center;
+  background-size: cover;
+}
+.user-posts-info {
+  display: grid;
+  width: 100%;
+  grid-area: 1 / 2;
+  grid-template: 36px 26px 21px 92px 24px 25px / 24px auto;
+  align-items: center;
+}
+.user-posts-date {
+  display: grid;
+  grid-area: 2 / 2;
+  color: #4E4E4E;	
+  font-family: FuturaBold;	
+  font-size: 20px;	
+  line-height: 27px;
+}
+.user-posts-title-filled {
+  display: grid;
+  grid-area: 4 / 2;
+  color: #4E4E4E;	
+  font-family: FuturaMedium;
+  font-size: 36px;	
+  line-height: 47px;
+}
+.user-posts-owner {
+  display: grid;
+  grid-area: 6 / 2;
+  color: #4E4E4E;	
+  font-family: FuturaMedium;
+  font-size: 20px;	
+  line-height: 27px;
+}
+.user-posts-view-container {
+  display: grid;
+  grid-area: 1 / 2;
+  grid-template: 126px 37px 40px 14px 53px / auto;
+}
+.user-posts-view-view {
+  display: grid;
+  grid-area: 2 / 1;
+  width: 162px;	
+  border: 1.87px solid #D93044;	
+  border-radius: 93.69px;	
+  background-color: #D93044;
+  color: #FFFFFF;	
+  font-family: FuturaMedium;	
+  font-size: 16px;	
+  line-height: 21px;	
+  text-align: center;
+  align-content: center;
+  margin: 0 auto;
+  cursor: pointer;
+}
+.user-posts-view-delete {
+  display: grid;
+  grid-area: 4 / 1;
+  color: #5E5E5E;	
+  font-family: GeorgiaRegular;	
+  font-size: 12px;	
+  line-height: 14px;	
+  text-align: center;
+  cursor: pointer;
+  text-decoration: underline;
 }
