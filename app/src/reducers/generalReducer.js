@@ -21,6 +21,8 @@ export function getAdminPosts(){
     }
 }
 export function getAdminUsers(){
+    console.log('TYPE!!!!')
+    console.log(types.GET_ADMIN_USERS);
     return {
         type:types.GET_ADMIN_USERS,
         payload:apiGetAdminUsers()
@@ -153,7 +155,7 @@ export function editAccount(users_id,nickname,contactemail,number,imageref){
 
 
 export default function rootReducer(state=initialState,action){
- console.log("action type: " + action.type);
+// console.log("action type: " + action.type);
 
  switch(action.type){
     case types.ADD_POST + types.FULFILLED:
