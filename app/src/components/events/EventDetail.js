@@ -58,10 +58,8 @@ class EventDetail extends Component{
         if (this.props && this.props.getEventDetail && this.props.general) {
             if (this.props.match.params.eventId && (!this.props.general.eventDetail || this.props.general.eventDetail.eventid !== +this.props.match.params.eventId)) {  
                 this.props.getEventDetail(this.props.match.params.eventId);
+                this.props.getEvents();
             }
-        }
-        if (this.props && this.props.getEvents && (this.props.general.events.length < 1) ){
-            this.props.getEvents();
         }
     }
 
