@@ -7,10 +7,12 @@ const api = axios.create({
 });
 
 export function apiAddPost(post){
-  
+  console.log("apiAddPost")
+  console.log('post object')
+  console.log(post);
    return axios.post('/api/post/',{post:post})
     .then(response=>{
-        console.log('returning from post api/post');
+        console.log('returning from adding post api/post');
         console.log(response);
         return response.data;
     })
@@ -164,6 +166,7 @@ export function apiGetPosts(){
     console.log("inside apiGetPosts");
     return axios.get( '/api/posts')
               .then(response=>{
+                  console.log(response);
                   return response.data;
               })
               .catch(err=>{

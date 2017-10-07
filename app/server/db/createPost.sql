@@ -1,4 +1,4 @@
-INSERT INTO posts (post_id,post_title, deleted, owner_id, post_text, flagged)
-		VALUES ($1,$2,$3,null,$4,false)
+INSERT INTO posts (post_title, deleted, users_id, post_text, flagged,imageref,post_date)
+		VALUES ($1,null,$2,$3,false,$4,$5)
 
 RETURNING *; 

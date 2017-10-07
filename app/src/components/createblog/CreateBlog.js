@@ -5,7 +5,7 @@ import Dropzone from 'react-dropzone';
 
 import axios from "axios";
 import {connect} from 'react-redux';
-import {getPostDetail} from '../../reducers/generalReducer';
+import {addPost,getPostDetail} from '../../reducers/generalReducer';
 
 import ReactQuill from 'react-quill';
 import theme from 'react-quill/dist/quill.snow.css';
@@ -135,10 +135,10 @@ class CreateBlog extends Component{
 
 
  constructor(props) {
+   console.log("CONSTRUCTOR - createBlog")
     super(props)
     this.state = { 
         text: '',
-        speechRecognitionStartText:'',
         quillImage:'',
         editorHtml:'',
         uploaded_uri:'',
@@ -157,14 +157,67 @@ class CreateBlog extends Component{
    this.saveBlog=this.saveBlog.bind(this);
    this.loadBlogDetails=this.loadBlogDetails.bind(this);
    this.SpeechOnEnd = this.SpeechOnEnd.bind(this);
+   this.addMainImage = this.addMainImage.bind(this);
+   this.loadBlogDetails = this.loadBlogDetails.bind(this);
    
  
+  }
+  addMainImage(newImageRef){
+    console.log("addign main image " +  newImageRef);
+    this.setState({mainImage:newImageRef});
   }
 
 
 
 saveBlog(){
   console.log("SAVING? blog")
+    
+    console.log(this);
+   if (! (this.props && this.props.general && this.props.general.user && this.props.general.user.users_id)){
+     //access denied - not logged in.
+     console.log("security error 1")
+     return;
+   }
+   // CHANGE THIS FOR PRODUCTION (currently allowing anyone to edit.)
+   if (false && this.props && this.props.general && this.props.general.postDetail && this.props.user && this.props.user.users_id 
+   && this.props.general.postDetail && this.props.general.postDetail.users_id !==  this.props.general.user.users_id)
+   {
+     // access denied not the same user
+     console.log("security error 2")
+     return;
+   }
+   console.log("saving blog - debug 1")
+   /*
+     let {post_text,post_owner_id,post_title,post_id,imageref} = req.body.post;
+     */
+    let post_id = "New";
+    
+    let content = myQuill.root.innerHTML;
+    console.log("content is")
+    console.log(content);
+    console.log(myQuill);
+    console.log(myQuill.editor);
+    
+    if (this.props && this.props.general && this.props.general.postDetail)
+      post_id= this.props.general.postDetail.post_id;
+
+      let mypost={
+         post_id : post_id,
+         post_text: content,
+         users_id:this.props.general.user.users_id,
+         post_title:this.refs.blogHeader.value,
+         imageref:this.state.mainImage
+         
+
+      }
+      console.log("mypost");
+      console.log(mypost);
+     
+      console.log("just before addPost")
+      if (this.props && this.props.addPost){
+         console.log("ADDING POST ")
+         this.props.addPost(mypost);
+      }
 }
 
 // START INSERTIMAGE
@@ -191,7 +244,7 @@ loadBlogDetails(props)
 console.log("loadBlogDetails");
 console.log(props);
   if (props && props.getPostDetail && props.general ) {
-      if (  props.match.params.blogId && (!props.general.postDetail || props.general.postDetail.post_id !== +props.match.params.blogId)){
+      if (  props.match.params.blogId && !isNaN(props.match.params.blogId)  && (!props.general.postDetail || props.general.postDetail.post_id !== +props.match.params.blogId)){
           props.getPostDetail(props.match.params.blogId);
       }
     }
@@ -201,6 +254,9 @@ console.log(props);
        this.setState({loaded:true,text:props.general.postDetail.post_text,header:props.general.postDetail.post_title})
   }
 
+   if(props && props.general && props.general.postDetail && props.general.postDetail.imageref && !this.state.mainImage){
+    this.setState({mainImage:props.general.postDetail.imageref});
+  }
 }
 
 
@@ -321,7 +377,7 @@ let fileType=upload.currentTarget.result.replace(/data:([^;]*);.*$/,"$1");
          }
        else {
             
-           that.setState({uploaded_uri:data.data.Location})
+           that.setState({mainImage:data.data.Location})
         }
 
        
@@ -339,29 +395,36 @@ let fileType=upload.currentTarget.result.replace(/data:([^;]*);.*$/,"$1");
 
   render() {
       let imageStyle={};
+      console.log("render");
    console.log(this.state.header);
 
-if (this.state.uploaded_uri) {
+if (this.state.mainImage) {
   
      imageStyle={
          height:"400px",
-         backgroundImage:"url('" + this.state.uploaded_uri + "')",
+         backgroundImage:"url('" + this.state.mainImage + "')",
          backgroundRepeat:"no-repeat",
          backgroundSize:"100% 100%"
        }
     
     }
+  
 
     return (
         <div className="createBlog" >
 
-<div className="CreateBlogMainImageContainer" onClick={this.handleFile}>
+<div className="CreateBlogMainImageContainer" style={imageStyle} onClick={this.handleFile}>
    
        <Dropzone
         multiple={false}
         accept="image/*"
         style={{width:"800px",height:"100px"}}
-          onDrop={this.handleFile}>
+          onDrop={this.handleFile}
+          
+          onDrop={(e)=>this.handleFile(e,this.addMainImage)}
+        >
+          
+          
        <div  style={imageStyle}>
            <div style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
            <div>
@@ -378,7 +441,7 @@ if (this.state.uploaded_uri) {
      </div> 
    <div className="creeateBlogHeader" >
      <span className="createBlogHeaderLabel">Heading</span>
-     <input type="text" value={this.state.header} ref="blogHeader" size="80"/>
+     <input type="text" defaultValue={this.state.header} ref="blogHeader" size="80"/>
    </div>
        
         <div 
@@ -458,4 +521,4 @@ function mapStateToProps(state,ownProps){
       return Object.assign({},state,{history:ownProps.history});
     return state;
 }
-export default connect(mapStateToProps,{getPostDetail:getPostDetail})(CreateBlog);
+export default connect(mapStateToProps,{addPost:addPost,getPostDetail:getPostDetail})(CreateBlog);
