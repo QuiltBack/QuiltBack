@@ -12,6 +12,7 @@ import EventDetail from './components/events/EventDetail';
 import BlogDetails from './components/blog/BlogDetails';
 import CreateBlog from './components/createblog/CreateBlog'
 import AdminNotifications from './components/admin/AdminNotifications';
+import AdminUsers from './components/admin/AdminUsers';
 
 export default (
     <Switch>
@@ -27,5 +28,6 @@ export default (
         <Route path="/dashboard/account" component={UserAccount}/>      
         <Route path="/event/:eventId" component={EventDetail}/>
         <Route path='/notifications' component={AdminNotifications}/>
+        <Route path='/users' component={AdminUsers}/>
     </Switch>
 );

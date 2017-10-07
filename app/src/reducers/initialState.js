@@ -15,4 +15,7 @@ export default {
     user:null,
     redirect:'',
     comments:[],
+    adminNotifications:null,
+    adminUsers:null,
+    adminPosts:null
 }
