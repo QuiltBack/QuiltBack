@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {TimelineMax, Power4} from 'greensock'
 import {getEventDetail, getEvents} from '../../reducers/generalReducer';
 import {Link} from 'react-router-dom';
-import {ShareButtons, ShareCounts, generateShareIcon} from 'react-share';
+import {ShareButtons, generateShareIcon} from 'react-share';
 import './EventDetail.css';
 
 const {
@@ -173,7 +173,7 @@ class EventDetail extends Component{
                             <h1 className='event-details-catalogue-title'>Catalogue</h1>
                             <div className='event-details-catalogue-container'>
                                 <div className='event-details-catalogue-top-container'>
-                                    <img className='event-details-catalogue-top-image' src={mainItem.image_uri} width="100%" height="516px" alt="Catalogue Image"/>
+                                    <img className='event-details-catalogue-top-image' src={mainItem.image_uri} width="100%" height="516px" alt="Catalogue"/>
                                     <div className='event-details-catalogue-top-left-arrow' onClick={this.prevItem}>{'<'}</div>
                                     <div className='event-details-catalogue-top-right-arrow' onClick={this.nextItem}>{'>'}</div>
                                     <div className="event-details-catalogue-top-banner">

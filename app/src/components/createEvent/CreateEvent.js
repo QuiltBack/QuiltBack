@@ -503,7 +503,7 @@ onEndDateChange(date){
 
 
 render(){
-let processingmessage = (this.state.processing)?"Image Processing...":"";
+//let processingmessage = (this.state.processing)?"Image Processing...":"";
 let imageStyle={};
 let catalogueImageStyle={};
 

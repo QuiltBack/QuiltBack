@@ -8,25 +8,24 @@ import {connect} from 'react-redux';
 import {addPost,getPostDetail} from '../../reducers/generalReducer';
 
 import ReactQuill from 'react-quill';
-import theme from 'react-quill/dist/quill.snow.css';
+import   'react-quill/dist/quill.snow.css';
 
 import '../../styles/CreateBlog.css';
 
 const frontenv = require('../../frontenv.js');
 
-const {Quill, Mixin,Toolbar } = ReactQuill;
+//const {Quill, Mixin,Toolbar } = ReactQuill;
 /*
  * Custom "star" icon for the toolbar using an Octicon
  * https://octicons.github.io
  */
-const CustomButton =  (<span className="octicon octicon-star" />)
+//const CustomButton =  (<span className="octicon octicon-star" />)
 
 /*
  * Event handler to be attached using Quill toolbar module (see line 73)
  * https://quilljs.com/docs/modules/toolbar/
  */
 var myQuill=null;
-var myEditor;
 var speechRecognitionStart='';
 
 function Dummy () {
@@ -38,7 +37,6 @@ function Dummy () {
 
 //demo
 function insertStar (ref) {
-      const cursorPosition = myQuill.getSelection().index
       const range = myQuill.getSelection();
       myQuill.editor.insertEmbed(range.index, 'image', ref);
 
@@ -223,8 +221,7 @@ saveBlog(){
 // START INSERTIMAGE
 
 insertImage(ref){
-   let  str = this.state.text;
-   let imageElement=`<img src="${ref}" width="100%" />`;
+   //let imageElement=`<img src="${ref}" width="100%" />`;
    insertStar(ref);
   
 }
@@ -287,7 +284,6 @@ if (SpeechRecognition != null) {
       recognition.lang='en-US';  
       
         this.setState({recognition:recognition});
-       let whichResult=this;
       recognition.onresult = onSpeechResult;
    
   
@@ -336,7 +332,6 @@ toggleListening(){
  }
  else{
    
-     let initialText=this.state.text;
      speechRecognitionStart = this.state.editorHtml;
      this.setState({listening:true});
      this.state.recognition.start();
@@ -419,7 +414,6 @@ if (this.state.mainImage) {
         multiple={false}
         accept="image/*"
         style={{width:"800px",height:"100px"}}
-          onDrop={this.handleFile}
           
           onDrop={(e)=>this.handleFile(e,this.addMainImage)}
         >
