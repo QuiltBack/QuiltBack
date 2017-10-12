@@ -70,17 +70,17 @@ loadAddress(){
                 <span className="host-section-container">
                     <span className="host-an-event" >Host an Event</span>
                     <section className="host-a">
-                        <img className="discover-icon" src={Discover}/>
+                        <img className="discover-icon" src={Discover} alt="Discover"/>
                         <p className="discover">Discover.</p>
                         <p className="learn-how-to-host-yo">Learn how to host your own event using our free online resources.</p>
                     </section>
                     <section className="host-b">
-                        <img className="promote-icon" src={Promote} />
+                        <img className="promote-icon" src={Promote} alt="Promote"/>
                         <p className="promote">Promote</p>
                         <p className="publish-your-event-b">Publish your event page and upload an auction catalogue.</p>
                     </section>
                     <section className="host-c">
-                        <img className="share-icon" src={Share} />
+                        <img className="share-icon" src={Share} alt="Share" />
                         <p className="share">Share.</p>
                         <p className="create-an-account-to">Create an account to blog your experience with the community.</p>
                     </section>

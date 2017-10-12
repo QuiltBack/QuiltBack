@@ -9,7 +9,6 @@ import '../../styles/EventsPage.css';
 
 import {
   ShareButtons,
-  ShareCounts,
   generateShareIcon,
 } from 'react-share';
 
@@ -220,6 +219,7 @@ class EventsPage extends Component {
             })
             break;
           case 'Newest':
+          default:
             this.props.general.events.sort((a, b)=>{
               let date1 = new Date(a.date);
               let date2 = new Date(b.date);
@@ -365,7 +365,7 @@ class EventsPage extends Component {
             <li onClick={()=>{this.updateForm('Relevance', 'sortBy')}} className='events-page-filter-two-option-one'>Relevance</li>
             <li onClick={()=>{this.updateForm('Newest', 'sortBy')}} className='events-page-filter-two-option-two'>Newest</li>
           </div>
-          <div onClick={(e)=>{this.state.sortBy.clickable?this.expandForm('sortBy'):null}} className='events-page-filter-two-arrow'>V</div>
+          <div onClick={(e)=>this.state.sortBy.clickable?this.expandForm('sortBy'):null} className='events-page-filter-two-arrow'>V</div>
         </div>
         <div className='events-page-filter-three'>
           <div className='events-page-filter-three-select'>
@@ -378,7 +378,7 @@ class EventsPage extends Component {
             <li onClick={()=>{this.updateForm('within 100 miles', 'distance')}} className='events-page-filter-three-option-four'>within 100 Miles</li>
             <li onClick={()=>{this.updateForm('within 100+ miles', 'distance')}} className='events-page-filter-three-option-five'>within 100+ Miles</li>
           </div>
-          <div onClick={(e)=>{this.state.distance.clickable?this.expandForm('distance'):null}} className='events-page-filter-three-arrow'>V</div>
+          <div onClick={(e)=>this.state.distance.clickable?this.expandForm('distance'):null} className='events-page-filter-three-arrow'>V</div>
         </div>
         <div className='events-page-filter-four'>
           <div className='events-page-filter-four-select'>
@@ -392,7 +392,7 @@ class EventsPage extends Component {
             <li onClick={()=>{this.updateForm('Last Month', 'date')}} className='events-page-filter-four-option-five'>Last Month</li>
             <li onClick={()=>{this.updateForm('This Year', 'date')}} className='events-page-filter-four-option-six'>This Year</li>
           </div>
-          <div onClick={(e)=>{this.state.date.clickable?this.expandForm('date'):null}} className='events-page-filter-three-arrow'>V</div>
+          <div onClick={(e)=>this.state.date.clickable?this.expandForm('date'):null} className='events-page-filter-three-arrow'>V</div>
         </div>
       </div>
       <div>

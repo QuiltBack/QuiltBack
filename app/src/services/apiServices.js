@@ -48,8 +48,8 @@ export function apiGetComments(postId){
           return response.data;
         })
         .catch(err=>{
-            console.log("auth me error");
-            console.log(err)
+            //console.log("auth me error");
+            //console.log(err)
             return '';    
         });
 }
@@ -61,8 +61,8 @@ export function apiGetUser(){
                      return response.data;
                     })
                     .catch(err=>{
-                            console.log("auth me error");
-                            console.log(err)
+                            //console.log("auth me error");
+                            //console.log(err)
                             return '';    
                     });
                             

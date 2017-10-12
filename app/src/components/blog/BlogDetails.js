@@ -6,7 +6,6 @@ import 'font-awesome/css/font-awesome.min.css';
 import '../../styles/BlogDetails.css';
 import {
   ShareButtons,
-  ShareCounts,
   generateShareIcon,
 } from 'react-share';
 
@@ -145,20 +144,25 @@ if (this.props && this.props.general && this.props.general.comments){
 }
 
 
-let leavecomment='';
+let leaveCommentButton='';
+let leaveCommentPlaceHolder="Login to leave a comment";
 if (this.props && this.props.general && this.props.general.user && this.props.general.user.users_id){
-    leavecomment=(
+
+   leaveCommentPlaceHolder="leave a comment";
+         leaveCommentButton=(<button className="redButton" onClick={this.addcomment}>Post</button>)
+
+}
+    let leavecomment=(
            <div className="addComment">
            <div className="addCommentHeader">
                  Leave a Comment
              </div>
-         <textarea placeholder="leave a comment" rows="5" columns="50" ref="addcomment_text" >
+         <textarea placeholder={leaveCommentPlaceHolder} rows="5" cols="50" ref="addcomment_text" >
              </textarea>     
-       
-         <button className="redButton" onClick={this.addcomment}>Post</button>
+        {leaveCommentButton} 
          </div>
     );
-}
+
 
     console.log("API BLOG DETAIL PAGE")
     let recentposts='';
@@ -203,12 +207,10 @@ let text=(this.props && this.props.general && this.props.general.postDetail && t
 
 let date=(this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.post_date)?moment.utc(this.props.general.postDetail.post_date).format("MMMM D, YYYY"):'';
 let author=(this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.post_author)?this.props.general.postDetail.post_author:'';
-let postid=(this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.post_id)?this.props.general.postDetail.post_id:'';
-let mainImageStyle={
-    backgroundColor:"lightblue"
-};
+
+let mainImageStyle={backgroundColor:"lightblue"};
 if (this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.main_image_ref){
-    let mainImageStyle={
+     mainImageStyle={
                    backgroundImage: 'url("' + this.props.general.postDetail.main_image_ref+ '")',
                   backgroundRepeat:"no-repeat",
                   backgroundSize:"cover"
@@ -278,7 +280,7 @@ return(
           
    </div>
       <div className="blogText">{text}</div>
-      <div classname="blogComments">
+      <div className="blogComments">
        
        {comments}
        {leavecomment}
