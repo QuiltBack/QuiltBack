@@ -44,6 +44,7 @@ export function apiGetComments(postId){
    console.log(postId);
     return axios.get( '/api/comments/' + postId)
      .then(response =>{
+         console.log("XCOMMENTS")
          console.log(response);
           return response.data;
         })
