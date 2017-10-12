@@ -1,3 +1,5 @@
+import React from 'react';
+import Parser from 'html-react-parser';
 import * as types from '../actions/ActionTypes';
 import initialState from './initialState'
 import {apiGetAdminNotifications,apiGetAdminPosts,apiGetAdminUsers,apiAddPost,apiEditAccount,apiGetUsersPosts,apiGetUsersEvents,apiGetComments,apiAddComment,apiLogout,apiGetUser,apiGetEventPage,apiGetNextEventPage,apiGetNextPostPage,apiGetPostDetail,apiGetEventDetail,apiGetSubscribers,apiRemoveSubscriber,apiAddSubscriber,apiGetPosts,apiGetEvents, apiGetAddress} from '../services/apiServices';
@@ -182,7 +184,11 @@ export default function rootReducer(state=initialState,action){
 
      case types.GET_POST_DETAIL + types.FULFILLED:
 
-        return Object.assign({},state,{postDetail:action.payload});
+       let newpayload=action.payload;
+        newpayload.quill_text=newpayload.post_text;
+        newpayload.post_text=Parser(newpayload.post_text);
+        
+        return Object.assign({},state,{postDetail:newpayload});
      case types.GET_EVENT_DETAIL + types.FULFILLED:
          let newState= Object.assign({},state,{eventDetail:Object.assign({},action.payload)});
          return newState;
@@ -202,7 +208,13 @@ export default function rootReducer(state=initialState,action){
         return Object.assign({},state,{events:action.payload});
      
     case types.GET_POSTS + types.FULFILLED:
-        return Object.assign({},state,{posts:action.payload});
+        let newposts = action.payload.map(post=>{
+            post.quill_text=post.post_text;
+            post.post_text = Parser(post.post_text);
+            
+            return post;
+        });
+        return Object.assign({},state,{posts:newposts});
     case types.GET_USERS_EVENTS + types.FULFILLED:
     return Object.assign({},state,{userEvents:action.payload});
     case types.GET_USERS_POSTS + types.FULFILLED:
