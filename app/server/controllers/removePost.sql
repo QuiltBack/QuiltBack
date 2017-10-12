@@ -1,0 +1,1 @@
+delete from posts where post_id=$2 AND (users_id=$1 OR $1 in (select users_id from users where user_type='Admin'))

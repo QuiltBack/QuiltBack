@@ -40,6 +40,69 @@ module.exports ={
                res.status(500).end();
            })
     },
+    addPost:(req,res)=>{
+     let {post_text,users_id,post_title,post_id,imageref} = req.body.post;
+     console.log("req.body.post");
+     console.log(req.body.post);
+     post_date=moment();
+       if (isNaN(post_id))
+       {
+           console.log("not a number")
+           // not a number - new.
+           /*INSERT INTO posts (post_title, deleted, owner_id, post_text, flagged,imageref)
+		VALUES ($1,null,$2,$3,false,$4)
+        */
+           req.app.get("db").createPost([post_title,users_id,post_text,imageref,post_date])
+           .then(response=>{
+               res.status(200).json(response);
+           })
+           .catch(err=>{
+               console.log("ERROR creating new post");
+               console.log(err);
+           })
+       }
+       else{
+           //number - old post
+           /*UPDATE posts post_title=$2, post_text=$3, post_date=$4,imageref=$5  WHERE  post_id=$1 SET 
+        */
+        console.log("IS A NUMBER");
+        console.log("type is " +typeof users_id)
+        req.app.get("db").findSessionUser([users_id]).then(response=>{
+            console.log("find user response");
+            console.log(response);
+        })
+        .catch(err=>{
+            console.log("GET USER exception in addPost")
+            console.log(err);
+        })
+        req.app.get("db").editPost([post_id,post_title,users_id,post_text,post_date,imageref])
+           .then(response=>{
+               res.status(200).json(response);
+           })
+           .catch(err=>{
+               console.log("ERROR updating post");
+               console.log(err);
+               res.status(500).end();
+           })
+         
+
+       }
+     
+
+    },
+    removePost:(req,res)=>{
+    let post_id=req.params.postId;
+    let users_id= req.user.users_id;
+    console.log("Removing post " +post_id);
+    console.log("ussers_id " + req.user.users_id);
+       req.app.get("db").removePost([users_id,+post_id])
+       .then(response=>{res.status(200).send(response)})
+       .catch(err=>{
+           console.log("removePostError");
+           console.log(err);
+           res.status(500).end();
+       })
+    },
     getPosts:(req,res)=>{
        
             req.app.get("db").getAllPosts()
