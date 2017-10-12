@@ -66,6 +66,15 @@ module.exports ={
            /*UPDATE posts post_title=$2, post_text=$3, post_date=$4,imageref=$5  WHERE  post_id=$1 SET 
         */
         console.log("IS A NUMBER");
+        console.log("type is " +typeof users_id)
+        req.app.get("db").findSessionUser([users_id]).then(response=>{
+            console.log("find user response");
+            console.log(response);
+        })
+        .catch(err=>{
+            console.log("GET USER exception in addPost")
+            console.log(err);
+        })
         req.app.get("db").editPost([post_id,post_title,users_id,post_text,post_date,imageref])
            .then(response=>{
                res.status(200).json(response);

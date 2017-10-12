@@ -224,7 +224,7 @@ saveBlog(){
 
 insertImage(ref){
    let  str = this.state.text;
-   let imageElement=`<img src="${ref}" />`;
+   let imageElement=`<img src="${ref}" width="100%" />`;
    insertStar(ref);
   
 }
