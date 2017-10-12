@@ -81,6 +81,19 @@ module.exports ={
      
 
     },
+    removePost:(req,res)=>{
+    let post_id=req.params.postId;
+    let users_id= req.user.users_id;
+    console.log("Removing post " +post_id);
+    console.log("ussers_id " + req.user.users_id);
+       req.app.get("db").removePost([users_id,+post_id])
+       .then(response=>{res.status(200).send(response)})
+       .catch(err=>{
+           console.log("removePostError");
+           console.log(err);
+           res.status(500).end();
+       })
+    },
     getPosts:(req,res)=>{
        
             req.app.get("db").getAllPosts()
