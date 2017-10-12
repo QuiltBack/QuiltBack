@@ -80,9 +80,8 @@ console.log(this.props);
 
     console.log("debug1 - getcomments")
     console.log(this);
-if (this.props && this.props.general && !this.props.general.comments && this.props.match && this.props.match.params && this.props.match.params.blogId){
-       console.log("debug2")
-       if (!this.state.loaded){
+if (this.props && this.props.general && !this.state.loaded && this.props.match && this.props.match.params && this.props.match.params.blogId){
+       
          console.log("debug3")
           if (this.props.match.params.blogId){
               console.log("GET COMMENTS FOR " + this.props.match.params.blogId)
@@ -90,7 +89,7 @@ if (this.props && this.props.general && !this.props.general.comments && this.pro
               this.props.getComments(this.props.match.params.blogId);
           }
   
-       } 
+       
   
     }
 }

@@ -18,6 +18,20 @@
     grid-row-end:1;
     
 }
+.commentText{
+  
+  height: 65px;
+  padding: 0 10px;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  position: relative;
+
+
+}
 .commentDate{
     grid-column-start:2;
     grid-column-end:2;

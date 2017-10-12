@@ -25,6 +25,12 @@ module.exports ={
             })
     },
     addComment: (req,res) =>{
+        /*
+        
+        NSERT INTO comments (post_id,users_id,text,date) VALUES ($1,$2,$3,$4)
+RETURNING *;
+         */
+
         let {post_id,users_id,text} = req.body.comment;
         let date = moment();
         console.log(req.body);
