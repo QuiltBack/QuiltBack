@@ -44,7 +44,7 @@ componentWillReceiveProps() {
     <div className='user-events-container'>
       <img className='user-events-promote-icon' src={PromoteIcon}/> 
       <div className='user-events-text'>No Events Found</div> 
-      <button className='user-events-button'>Add New Event</button> 
+      <Link to={'/createEvent/new'} className='user-events-button'>Add New Event</Link> 
     </div>
   </section>)
     if (this.props.general && this.props.general.userEvents && this.props.general.userEvents.length > 0) {
