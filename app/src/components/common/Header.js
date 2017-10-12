@@ -11,7 +11,7 @@ class Header extends Component {
                     <Link to='/' className="qb-small-logo">
                         <QBSmallLogo/>
                     </Link>
-                    <Link to='/createEvent' className='host-an-event-text'>
+                    <Link to='/createEvent/new' className='host-an-event-text'>
                         Host an Event
                     </Link>
                     <Link to='/events' className='find-an-event'>

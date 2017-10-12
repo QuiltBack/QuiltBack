@@ -176,7 +176,7 @@ if (this.props && this.props.general && this.props.general.user && this.props.ge
           return (
               <div className="blogRecentPost" key={index}>
                   <div className="blogRecentPostImage" style={{
-                      backgroundImage: "url(" + post.image_url + ")",
+                      backgroundImage: "url(" + post.imageref + ")",
                       backgroundSize: "cover",
                       backgroundRepeat:"no-repeat"
                   }}>
@@ -208,9 +208,9 @@ let date=(this.props && this.props.general && this.props.general.postDetail && t
 let author=(this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.post_author)?this.props.general.postDetail.post_author:'';
 
 let mainImageStyle={backgroundColor:"lightblue"};
-if (this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.main_image_ref){
+if (this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.imageref){
      mainImageStyle={
-                   backgroundImage: 'url("' + this.props.general.postDetail.main_image_ref+ '")',
+                   backgroundImage: 'url("' + this.props.general.postDetail.imageref+ '")',
                   backgroundRepeat:"no-repeat",
                   backgroundSize:"cover"
     }

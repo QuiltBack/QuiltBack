@@ -87,7 +87,7 @@ passport.use(new Auth0Strategy({
 
   db.findUser(["" + profile.identities[0].user_id])
     .then(user => {
-
+console.log(profile.picture);
       if (user[0]) {
         console.log("user found");
         return done(null, { users_id: user[0].users_id });
@@ -123,7 +123,7 @@ passport.use(new Auth0Strategy({
 console.log(`
 profile ${profile} displayName ${profile.displayName}, email ${email}, given ${given_name}, family ${family_name}, user_id ${profile.identities[0].user_id}
 `)
-        db.createUser([profile.displayName, email, given_name, family_name, "" + profile.identities[0].user_id])
+        db.createUser([profile.displayName, email, given_name, family_name, "" + profile.identities[0].user_id, profile.picture])
           .then(user => { return done(null, { users_id: user[0].users_id }) })
           .catch(err => { console.log("CREATE USER ERROR"); console.log(err); });
       }
