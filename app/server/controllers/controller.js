@@ -77,6 +77,8 @@ module.exports ={
         })
         req.app.get("db").editPost([post_id,post_title,users_id,post_text,post_date,imageref])
            .then(response=>{
+               console.log("post added ");
+	       console.log(response);
                res.status(200).json(response);
            })
            .catch(err=>{

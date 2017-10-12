@@ -157,8 +157,12 @@ class CreateBlog extends Component{
    this.SpeechOnEnd = this.SpeechOnEnd.bind(this);
    this.addMainImage = this.addMainImage.bind(this);
    this.loadBlogDetails = this.loadBlogDetails.bind(this);
+   this.headerChange=this.headerChange.bind(this);
    
  
+  }
+  headerChange(event){
+    this.setState({header:event.target.value});
   }
   addMainImage(newImageRef){
     console.log("addign main image " +  newImageRef);
@@ -203,7 +207,7 @@ saveBlog(){
          post_id : post_id,
          post_text: content,
          users_id:this.props.general.user.users_id,
-         post_title:this.refs.blogHeader.value,
+         post_title:this.state.header,
          imageref:this.state.mainImage
          
 
@@ -389,9 +393,13 @@ let fileType=upload.currentTarget.result.replace(/data:([^;]*);.*$/,"$1");
 
 
   render() {
+    
       let imageStyle={};
       console.log("render");
-   console.log(this.state.header);
+      console.log(this.state.header);
+      console.log(this.props);
+      console.log("state");
+      console.log(this.state);
 
 if (this.state.mainImage) {
   
@@ -435,7 +443,7 @@ if (this.state.mainImage) {
      </div> 
    <div className="creeateBlogHeader" >
      <span className="createBlogHeaderLabel">Heading</span>
-     <input type="text" defaultValue={this.state.header} ref="blogHeader" size="80"/>
+     <input type="text" value={this.state.header} onChange={(e)=>this.headerChange(e)}  size="80"/>
    </div>
        
         <div 
