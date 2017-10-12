@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import Routes from '../Routes';
 import '../styles/App.css';
-import '../styles/Header.css';
 import '../styles/HomePage.css';
+import '../styles/Header.css';
 import Header from './common/Header';
 import Footer from './common/Footer';
-import HomePage from './home/HomePage';
-import Dashboard from './dashboard/Dashboard';
 
+import Dashboard from './dashboard/Dashboard';
 class App extends Component {
   render() {
     return (

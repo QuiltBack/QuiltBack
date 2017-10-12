@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {Component} from 'react';
 const QBSmallLogo = () => {
   return (
-    <svg width="238px" height="57px" viewBox="0 0 238 57" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+    <svg width="238px" height="57px" viewBox="0 0 238 57" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <title>QuiltBack - Small Logo Site Banner</title>
         <desc>Created with Sketch.</desc>
         <defs></defs>
-        <g id="Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+        <g id="Symbols" stroke="none" stroke-width="1" fill="none" fillRule="evenodd">
             <g id="HEADER-FOR-REAL" transform="translate(-102.000000, -9.000000)">
                 <g id="Group">
                     <g id="QuiltBack---Small-Logo-Site-Banner" transform="translate(102.000000, 9.000000)">
