@@ -59,6 +59,25 @@
   margin: 0 auto;
   outline: none;
 }
+.user-events-button-2 {
+  display: grid;
+  height: 37px;	
+  width: 192px;	
+  border: 1.87px solid #D93044;	
+  border-radius: 93.69px;	
+  background-color: #D93044;
+  color: #FFFFFF;	
+  font-family: FuturaMedium;	
+  font-size: 16px;	
+  line-height: 21px;
+  text-align: center;
+  align-content: center;
+  margin: 0 auto;
+  outline: none;
+  margin-top: 20px;
+  text-decoration: none;
+  align-items: center;
+}
 
 /* filled */
 .user-events-filled {
@@ -69,6 +88,9 @@
   grid-template: auto / 80% 20%;
 }
 .user-events-filled-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   width: 80%;
   margin: 0 auto;
   border: 1px solid #C2C2C2;	

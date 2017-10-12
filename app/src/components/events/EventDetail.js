@@ -96,7 +96,8 @@ class EventDetail extends Component{
             shareUrl = `${frontenv.REACT_APP_HOST}/event/` + this.props.match.params.eventId;
             title = this.props.general.eventDetail.title;
             event = this.props.general.eventDetail;
-            location = event.address;
+            console.log(event)
+            location = event.address + ' ' + event.city + ' ' + event.state + ' ' + event.zipcode + ' ';
             catalogue = JSON.parse(event.catalogue);
             if(!catalogue)
             catalogue=[];
@@ -105,21 +106,7 @@ class EventDetail extends Component{
                 let item = (this.state.item + Math.abs(this.state.item * catalogue.length)) % catalogue.length;    
                 mainItem=catalogue[item];     
             }
-            if (location && event.city) {
-                location = location + ", " + event.city;
-            } else {
-                location = event.city;
-            } 
-            if (location && event.state) {
-                location = location + ", " + event.state;
-            } else {
-                location = event.state;
-            }
-            if (location && event.zipcode) {
-                location = location + " " + event.zipcode;
-            } else {
-                location = event.zipcode;
-            }    
+            
             let d1 = moment.utc(event.date);
             let displayEvents='';
             if (this.props && this.props.general.events ){

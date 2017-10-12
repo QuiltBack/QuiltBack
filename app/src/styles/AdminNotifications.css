@@ -61,8 +61,10 @@
 .notifications-approve {
   padding-right: 20px;
   color: #4A90E2;
+  cursor: pointer;
 }
 .notifications-decline {
   padding-left: 20px;
   color: #4A90E2;
+  cursor: pointer;
 }

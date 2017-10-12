@@ -14,6 +14,13 @@ import CreateBlog from './components/createblog/CreateBlog'
 import AdminNotifications from './components/admin/AdminNotifications';
 import AdminUsers from './components/admin/AdminUsers';
 
+const adminRoutes = () => {
+    return (
+        <Switch>
+            <Route/>
+        </Switch>
+    )
+}
 export default (
     <Switch>
         <Route exact path="/" component={HomePage}/>

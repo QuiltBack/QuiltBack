@@ -1,3 +1,86 @@
+.blog-details-main-section{
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    top: 115px;
+    display:grid;
+    grid-template: auto / 57% 10% 33%;
+}
+.blog-details-left-side {
+    display: grid;
+    grid-area: 1 / 1;
+    grid-template: 350px 25px auto 80px 21px auto 25px 21px 40px 260px / auto;
+}
+.blog-details-right-side {
+    display: grid;
+    grid-area: 1 / 3;
+    grid-template: 31px auto / auto;
+}
+.blog-details-left-title-container {
+    display: grid;
+    grid-area: 1 / 1;
+    width: 100%;
+}
+.blog-details-left-image {
+    width: 100%;
+    height: 311px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+.blog-details-left-title {
+    color: #FFFFFF;	
+    font-family: FuturaMedium;	
+    font-size: 48px;	
+    line-height: 63px;	
+    text-align: center;
+    text-shadow: 1px 1px 2px black;
+}
+.blog-details-left-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.blog-details-left-footer-author-container {
+    display: flex;
+}
+.blog-details-left-footer-author {
+    color: #5E5E5E;	
+    font-family: FuturaRegular;	
+    font-size: 12px;	
+    line-height: 15px;
+}
+.blog-details-left-footer-date {
+    color: #5E5E5E;	
+    font-family: FuturaRegular;	
+    font-size: 12px;	
+    line-height: 15px;
+}
+.blog-details-left-footer-social-media {
+    display: flex;
+    width: 180px;
+    justify-content: space-between;
+}
+.blog-details-blog-text {
+    display: grid;
+    grid-area: 3 / 1;
+    color: #5E5E5E;	
+    font-family: GeorgiaRegular;	
+    font-size: 24px;	
+    line-height: 27px;
+}
+.blog-details-comment-container {
+    display: grid;
+    grid-area: 5/ 1;
+    width: 100%;
+}
+.blog-details-comment-section {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template: 48px 8px 95px / auto;
+}
+
 .addComment{
     position:relative;
     left:60px;
@@ -23,13 +106,6 @@
     grid-column-end:2;
     grid-row-start:1;
     grid-row-end:1;
-}
-.blogDetails{
-    padding-top:80px;
-
-display:grid;
-grid-template-columns: 5% 65% 5% 20% 5%;
-grid-template-rows:100%;
 }
 .blogAuthor{
     grid-column-start:2;
@@ -117,13 +193,12 @@ grid-template-rows:100%;
 }
 
 .blogLeftSide{
-    grid-column-start:2;
-    grid-column-end:2;
+    display: grid;
+    grid-area: 1 / 1;
 }
 
 .blogRightSide{
-    grid-column-start:4;
-    grid-column-end:4;
+    grid-area: 1 / 3;
 }
 .blogRightSide h1{
     font-size:2rem;

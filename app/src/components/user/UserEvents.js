@@ -75,7 +75,10 @@ componentWillReceiveProps() {
     return (
       <section className='user-events-section'>
         <div className='user-events-title'>MY EVENTS</div>
-        <div className='user-events-filled-container'>{userEventList}</div>
+        <div className='user-events-filled-container'>
+          {this.props.general.userEvents?(<Link to='/createEvent/new' className='user-events-button-2'>Add New Event</Link>):null}
+          {userEventList}
+        </div>
       </section>
     )
   }
