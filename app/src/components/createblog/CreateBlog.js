@@ -257,8 +257,14 @@ class CreateBlog extends Component{
     recognition.interimResults = options.interimResults
     recognition.lang = options.lang
     return recognition
+ 
   }
-
+  componentWillUnmount(){
+    if (this.state.listening){
+      this.state.listening=false;
+      this.state.recognition.stop();
+    }
+  }
   toggleListening(){
     if (this.state.listening){
       this.state.recognition.stop();

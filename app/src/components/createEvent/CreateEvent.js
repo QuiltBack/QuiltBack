@@ -135,6 +135,13 @@ componentWillMount(){
     console.log("didmount")
   this.loadEvent(this.props);
 }
+ componentWillUnmount(){
+   if (this.state.listening){
+     this.state.listening=false;
+    
+       this.state.recognition.stop();
+  }
+ }
 
 loadEvent(props){
 
