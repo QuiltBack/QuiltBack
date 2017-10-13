@@ -60,6 +60,7 @@ RETURNING *;
         */
            req.app.get("db").createPost([post_title,users_id,post_text,imageref,post_date])
            .then(response=>{
+               console.log(response);
                res.status(200).json(response);
            })
            .catch(err=>{
@@ -145,6 +146,8 @@ RETURNING *;
         
     },
       getEvent:(req,res)=>{
+        
+
         req.app.get("db").getEventById([+req.params.eventId])
                    .then(response=>{
                        res.status(200).json(response);
@@ -153,6 +156,7 @@ RETURNING *;
                        console.log(err);
                        res.status(500).end();
                    })
+        
         
     },
         getAddress:(req,res)=>{
@@ -168,14 +172,19 @@ RETURNING *;
         },
         getPost:(req,res)=>{
   
+   
+           
         req.app.get("db").getPostById([+req.params.postId])
                    .then(response=>{
+                       console.log("postresponse")
+                       console.log(response);
                        res.status(200).json(response);
                    })
                    .catch(err=>{
                        console.log(err);
                        res.status(500).end();
                    })
+       
         
     },
     getAdminNotifications:(req,res)=>{

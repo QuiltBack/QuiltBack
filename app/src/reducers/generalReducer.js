@@ -161,7 +161,7 @@ export default function rootReducer(state=initialState,action){
 
  switch(action.type){
     case types.ADD_POST + types.FULFILLED:
-       return Object.assign({},state,{postDetail:''});
+       return Object.assign({},state,{postDetail:action.payload});
 
     case types.GET_COMMENTS + types.FULFILLED:
       return Object.assign({},state,{comments:action.payload});
@@ -183,14 +183,23 @@ export default function rootReducer(state=initialState,action){
        return Object.assign({},state,{postDetail:null,eventDetail:null,postPage:state.postPage +1,eventPage:0,posts:action.payload});
 
      case types.GET_POST_DETAIL + types.FULFILLED:
-
+      
+      
        let newpayload=action.payload;
-        newpayload.quill_text=newpayload.post_text;
-        newpayload.post_text=Parser(newpayload.post_text);
+       if (newpayload){
+        newpayload.quill_text=JSON.parse(newpayload.post_text);
+        newpayload.post_text=Parser(newpayload.quill_text);
+       }
+       else
+         newpayload="";
         
         return Object.assign({},state,{postDetail:newpayload});
+   
+
      case types.GET_EVENT_DETAIL + types.FULFILLED:
-         let newState= Object.assign({},state,{eventDetail:Object.assign({},action.payload)});
+        let eventpayload=action.payload;
+        if (!action.payload) eventpayload={empty:true};
+         let newState= Object.assign({},state,{eventDetail:Object.assign({},eventpayload)});
          return newState;
 
     case types.ADD_SUBSCRIBER + types.FULFILLED:
@@ -208,13 +217,14 @@ export default function rootReducer(state=initialState,action){
         return Object.assign({},state,{events:action.payload});
      
     case types.GET_POSTS + types.FULFILLED:
-        let newposts = action.payload.map(post=>{
-            post.quill_text=post.post_text;
-            post.post_text = Parser(post.post_text);
+         let newposts = action.payload.map(post=>{
+            post.quill_text=JSON.parse(post.post_text);
+            post.post_text = Parser(post.quill_text);
             
             return post;
         });
         return Object.assign({},state,{posts:newposts});
+
     case types.GET_USERS_EVENTS + types.FULFILLED:
     return Object.assign({},state,{userEvents:action.payload});
     case types.GET_USERS_POSTS + types.FULFILLED:

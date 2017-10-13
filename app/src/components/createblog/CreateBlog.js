@@ -205,7 +205,7 @@ saveBlog(){
 
       let mypost={
          post_id : post_id,
-         post_text: content,
+         post_text: JSON.stringify(content),
          users_id:this.props.general.user.users_id,
          post_title:this.state.header,
          imageref:this.state.mainImage
@@ -242,32 +242,78 @@ insertImage(ref){
 
 loadBlogDetails(props)
 {
-console.log("loadBlogDetails");
+ if (props && props.general && props.general.postDetail && props.general.postDetail.redirect){
+ // we added a post now redirect
+ console.log("redirect to new blog edit page")
+  this._reactInternalInstance._context.router.history.push('/createblog/' + props.general.postDetail.post_id);
+ }
+ //redirect if not a number and not 'new'
+ if (props && props.match && isNaN(props.match.params.blogId)  && props.match.params.blogId !=='new')
+     this._reactInternalInstance._context.router.history.push("/");
+
 console.log(props);
+
   if (props && props.getPostDetail && props.general ) {
       if (  props.match.params.blogId && !isNaN(props.match.params.blogId)  && (!props.general.postDetail || props.general.postDetail.post_id !== +props.match.params.blogId)){
           props.getPostDetail(props.match.params.blogId);
+         
       }
     }
-
+//redirect if invalid data
+if (props && props.general && typeof props.general.postDetail === 'string')
+       this._reactInternalInstance._context.router.history.push("/");
+       
     if (props && props.general && props.general.postDetail && !this.state.loaded){
-      console.log("LOADING " + props.general.postDetail.post_text);
+    
        this.setState({loaded:true,text:props.general.postDetail.quill_text,header:props.general.postDetail.post_title})
-  }
+   
+}
 
-   if(props && props.general && props.general.postDetail && props.general.postDetail.imageref && !this.state.mainImage){
+   if(props && props.general && props.general.postDetail && props.general.postDetail.imageref && !this.state.imageref){
     this.setState({mainImage:props.general.postDetail.imageref});
+  
+}
+
+    
+    // Check to see if unauthorized page
+    console.log("unauthorized check debug 0")
+    console.log(this);
+    console.log(props);
+   
+     if (props && props.general && typeof props.general.user === 'string')
+    {
+      // redirect because not logged 
+      this._reactInternalInstance._context.router.history.push('/');
+
+    }
+    if (props && props.general && this.props.general.postDetail){
+
+
+
+
+     if (!props.general.user || !props.general.user.users_id || 
+    (+props.general.postDetail.users_id != +props.general.user.users_id && props.general.user.user_type!=='Admin')){
+     { 
+       //redirect because not authorized
+      this._reactInternalInstance._context.router.history.push('/');
+      
+     } 
   }
+ }
+ 
+
+
 }
 
 
 
 componentWillReceiveProps(newProps){
+  
   this.loadBlogDetails(newProps);
   
 }
  componentDidMount(){
-    
+   
      this.loadBlogDetails(this.props);
      if (!('webkitSpeechRecognition' in window) && ! this.state.recognition) {
  
