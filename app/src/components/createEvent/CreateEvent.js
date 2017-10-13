@@ -220,7 +220,7 @@ editLocation(){
     this.setState({editLocation:true})
 }
 addLocation(){
-    this.setState({editLocation:false,city:this.refs.city.value,state:this.refs.state.value,address:this.refs.address.value})
+    this.setState({editLocation:false,city:this.refs.city.value,state:this.refs.state.value,address:this.refs.address.value,zip:this.refs.zip.value})
 }
 
 
@@ -243,6 +243,7 @@ saveAndPublish(){
         users_id:userid,
         date:this.state.date?this.state.date : moment(),
         host:this.state.host?this.state.host:'',
+        address:this.state.address?this.state.address:'',
         city:this.state.city?this.state.city:'',
         state:this.state.state?this.state.state:'',
         zip:this.state.zip?this.state.zip:'',
@@ -503,7 +504,7 @@ onEndDateChange(date){
 
 
 render(){
-let processingmessage = (this.state.processing)?"Image Processing...":"";
+//let processingmessage = (this.state.processing)?"Image Processing...":"";
 let imageStyle={};
 let catalogueImageStyle={};
 

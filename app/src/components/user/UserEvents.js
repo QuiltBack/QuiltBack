@@ -42,9 +42,9 @@ componentWillReceiveProps() {
   render() {
     let userEventList = (<section className='user-events-empty'>
     <div className='user-events-container'>
-      <img className='user-events-promote-icon' src={PromoteIcon}/> 
+      <img className='user-events-promote-icon' src={PromoteIcon} alt="Promote"/> 
       <div className='user-events-text'>No Events Found</div> 
-      <button className='user-events-button'>Add New Event</button> 
+      <Link to={'/createEvent/new'} className='user-events-button'>Add New Event</Link> 
     </div>
   </section>)
     if (this.props.general && this.props.general.userEvents && this.props.general.userEvents.length > 0) {
@@ -84,7 +84,7 @@ componentWillReceiveProps() {
   }
 }
 function mapStateToProps(state, ownProps) {
-  if (ownProps && ownProps.history && !(state && state.history)) {}
+  if (ownProps && ownProps.history && !(state && state.history))
     return Object.assign({}, state, {
       history: ownProps.history
     });

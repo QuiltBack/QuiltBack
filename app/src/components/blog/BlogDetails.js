@@ -4,7 +4,7 @@ import {addComment,getComments,getPostDetail,getPosts} from '../../reducers/gene
 import moment from 'moment';
 import 'font-awesome/css/font-awesome.min.css';
 import '../../styles/BlogDetails.css';
-import {ShareButtons,ShareCounts,generateShareIcon} from 'react-share';
+import {ShareButtons,generateShareIcon} from 'react-share';
 const {FacebookShareButton,GooglePlusShareButton,TwitterShareButton,EmailShareButton} = ShareButtons;
 /* not yet used
 const {
@@ -22,7 +22,8 @@ class BlogDetails extends Component{
     constructor(props){
         super(props);
         this.state={
-            loaded:false
+            loaded:false,
+            comment:''
         };
         this.blogdetails = this.blogdetails.bind(this);
         this.addcomment = this.addcomment.bind(this);
@@ -58,7 +59,7 @@ class BlogDetails extends Component{
         }
         console.log("debug1 - getcomments")
         console.log(this);
-        if (this.props && this.props.general && !this.props.general.comments && this.props.match && this.props.match.params && this.props.match.params.blogId){
+        if (this.props && this.props.general && !this.state.loaded && this.props.match && this.props.match.params && this.props.match.params.blogId){
             console.log("debug2")
             if (!this.state.loaded){
                 console.log("debug3")
@@ -80,7 +81,14 @@ class BlogDetails extends Component{
     componentWillReceiveProps(ownProps) { 
         this.blogdetails();
     }
+    handleChange(val) {
+        this.setState({
+            comment:val
+        })
+    }
+    selectBox() {
 
+    }
     render(){
         let shareUrl='';
         if (this.props && this.props.match && this.props.match.params && this.props.match.params.blogId) {
@@ -125,24 +133,41 @@ class BlogDetails extends Component{
                 <textarea placeholder="leave a comment" rows="5" columns="50" ref="addcomment_text"/>        
                 <button className="redButton" onClick={this.addcomment}>Post</button>
             </div>
-        );
+
+       )
     }
+    let leaveCommentButton=(<button className="blog-details-leave-comment-button-login">Please Log in to Post Comments!</button>);
+    let leaveCommentPlaceHolder="Login to leave a comment";
+    if (this.props && this.props.general && this.props.general.user && this.props.general.user.users_id) {
+        leaveCommentPlaceHolder="leave a comment";
+        leaveCommentButton=(<button className="blog-details-leave-comment-button-post" onClick={this.addcomment}>Post</button>)
+    };
+    let leaveComment = '';
+    leaveComment = (
+        <section className="blog-details-leave-comment-section">     
+            <div className='blog-details-leave-comment-input-show'>
+                <textarea onChange={(e)=>this.handleChange(e.target.value)} className='blog-details-leave-comment-input' placeholder={leaveCommentPlaceHolder} ref="addcomment_text"/>
+                {this.state.comment}
+            </div>     
+            {leaveCommentButton} 
+        </section>
+    );
     console.log("API BLOG DETAIL PAGE")
     let recentposts='';
     if (this.props && this.props.general && this.props.general.posts) {
         recentposts = this.props.general.posts.sort((a,b)=>{
             return (new Date(b.post_date) - new Date(a.post_date));
         }).map((post,index)=>{
-            let date=moment.utc(post.post_date).format("MMMM D, YYYY");
-            let title=(post.post_title.length<20)?post.post_title : post.post_title.substring(0, 20) + '...';
-            if (index > 10)
+          let date=moment.utc(post.post_date).format("MMMM D, YYYY");
+          let title=(post.post_title.length<20)?post.post_title : post.post_title.substring(0, 20) + '...';
+            if (index >10)
             return '';
             return (
                 <div className="blogRecentPost" key={index}>
                     <div className="blogRecentPostImage" style={{
-                        backgroundImage: "url(" + post.image_url + ")",
-                        backgroundSize: "cover",
-                        backgroundRepeat:"no-repeat"
+                      backgroundImage: "url(" + post.imageref + ")",
+                      backgroundSize: "cover",
+                      backgroundRepeat:"no-repeat"
                     }}/>
                     <div className="blogRecentPostInfo">
                         <div className="blogRecentPostDate">
@@ -160,7 +185,6 @@ class BlogDetails extends Component{
     let text=(this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.post_text)?this.props.general.postDetail.post_text:'';
     let date=(this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.post_date)?moment.utc(this.props.general.postDetail.post_date).format("MMMM D, YYYY"):'';
     let author=(this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.post_author)?this.props.general.postDetail.post_author:'';
-    let postid=(this.props && this.props.general && this.props.general.postDetail && this.props.general.postDetail.post_id)?this.props.general.postDetail.post_id:'';
     let mainImageStyle={
         backgroundColor:"lightblue"
     };
@@ -201,10 +225,14 @@ class BlogDetails extends Component{
                         </div>
                     </div>
                     <div className="blog-details-blog-text">{text}</div>
-                    <div classname="blog-details-comment-container">
+                    <div className="blog-details-comment-title">COMMENTS</div>
+                    <div className="blog-details-comment-container">
                         {comments}
                     </div>
-                        {leavecomment}
+                    <div className="blog-details-leave-comment-title">LEAVE A COMMENT</div>
+                    <div className='blog-details-leave-comment-container'>
+                        {leaveComment}
+                    </div>
                 </div>
                 <div className="blog-details-right-side">
                     <h1>Recent Posts</h1>

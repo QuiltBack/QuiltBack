@@ -29,6 +29,7 @@
 }
 .blog-page-blog-details {
   position: absolute;
+  width: 100%;
   bottom: 0;
   height: 100px;
   overflow: hidden;

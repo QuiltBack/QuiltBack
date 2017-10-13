@@ -31,9 +31,9 @@ class UserPosts extends Component {
   render() {
     let userPostsList = (<section className='user-posts-empty'>
     <div className='user-posts-container'>
-      <img className='user-posts-promote-icon' src={ShareIcon}/> 
+      <img className='user-posts-promote-icon' src={ShareIcon} alt="Promote"/> 
       <div className='user-posts-text'>No Posts Found</div> 
-      <button className='user-posts-button'>Add New Post</button> 
+      <Link to={'/createblog/new'} className='user-posts-button'>Add New Post</Link> 
     </div>
   </section>)
     if (this.props.general && this.props.general.userPosts && this.props.general.userPosts.length > 0) {

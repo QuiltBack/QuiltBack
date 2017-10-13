@@ -8,25 +8,24 @@ import {connect} from 'react-redux';
 import {addPost,getPostDetail} from '../../reducers/generalReducer';
 
 import ReactQuill from 'react-quill';
-import theme from 'react-quill/dist/quill.snow.css';
+import   'react-quill/dist/quill.snow.css';
 
 import '../../styles/CreateBlog.css';
 
 const frontenv = require('../../frontenv.js');
 
-const {Quill, Mixin,Toolbar } = ReactQuill;
+//const {Quill, Mixin,Toolbar } = ReactQuill;
 /*
  * Custom "star" icon for the toolbar using an Octicon
  * https://octicons.github.io
  */
-const CustomButton =  (<span className="octicon octicon-star" />)
+//const CustomButton =  (<span className="octicon octicon-star" />)
 
 /*
  * Event handler to be attached using Quill toolbar module (see line 73)
  * https://quilljs.com/docs/modules/toolbar/
  */
 var myQuill=null;
-var myEditor;
 var speechRecognitionStart='';
 
 function Dummy () {
@@ -38,7 +37,6 @@ function Dummy () {
 
 //demo
 function insertStar (ref) {
-      const cursorPosition = myQuill.getSelection().index
       const range = myQuill.getSelection();
       myQuill.editor.insertEmbed(range.index, 'image', ref);
 
@@ -90,23 +88,23 @@ class CreateBlog extends Component{
   
  CustomToolbar = () => (
   <div id="toolbar">
-    <select className="ql-header">
+    <select className="ql-header" defaultValue="">
       <option value="1"></option>
       <option value="2"></option>
-      <option selected></option>
+      <option value=""></option>
     </select>
     <button className="ql-bold"></button>
     <button className="ql-italic"></button>
     <button className="ql-underline"></button>
     <button className="ql-strike"></button>
-    <select className="ql-color">
+    <select className="ql-color" defaultValue="">
       <option value="red"></option>
       <option value="green"></option>
       <option value="blue"></option>
       <option value="orange"></option>
       <option value="violet"></option>
       <option value="#d0d1d2"></option>
-      <option selected></option>
+      <option value=""></option>
     </select>    
     <button className="ql-list" value="ordered"></button>
       <button className="ql-list" value="bullet"></button>
@@ -159,8 +157,12 @@ class CreateBlog extends Component{
    this.SpeechOnEnd = this.SpeechOnEnd.bind(this);
    this.addMainImage = this.addMainImage.bind(this);
    this.loadBlogDetails = this.loadBlogDetails.bind(this);
+   this.headerChange=this.headerChange.bind(this);
    
  
+  }
+  headerChange(event){
+    this.setState({header:event.target.value});
   }
   addMainImage(newImageRef){
     console.log("addign main image " +  newImageRef);
@@ -205,7 +207,7 @@ saveBlog(){
          post_id : post_id,
          post_text: content,
          users_id:this.props.general.user.users_id,
-         post_title:this.refs.blogHeader.value,
+         post_title:this.state.header,
          imageref:this.state.mainImage
          
 
@@ -223,8 +225,7 @@ saveBlog(){
 // START INSERTIMAGE
 
 insertImage(ref){
-   let  str = this.state.text;
-   let imageElement=`<img src="${ref}" width="100%" />`;
+   //let imageElement=`<img src="${ref}" width="100%" />`;
    insertStar(ref);
   
 }
@@ -251,7 +252,7 @@ console.log(props);
 
     if (props && props.general && props.general.postDetail && !this.state.loaded){
       console.log("LOADING " + props.general.postDetail.post_text);
-       this.setState({loaded:true,text:props.general.postDetail.post_text,header:props.general.postDetail.post_title})
+       this.setState({loaded:true,text:props.general.postDetail.quill_text,header:props.general.postDetail.post_title})
   }
 
    if(props && props.general && props.general.postDetail && props.general.postDetail.imageref && !this.state.mainImage){
@@ -287,7 +288,6 @@ if (SpeechRecognition != null) {
       recognition.lang='en-US';  
       
         this.setState({recognition:recognition});
-       let whichResult=this;
       recognition.onresult = onSpeechResult;
    
   
@@ -336,7 +336,6 @@ toggleListening(){
  }
  else{
    
-     let initialText=this.state.text;
      speechRecognitionStart = this.state.editorHtml;
      this.setState({listening:true});
      this.state.recognition.start();
@@ -394,9 +393,13 @@ let fileType=upload.currentTarget.result.replace(/data:([^;]*);.*$/,"$1");
 
 
   render() {
+    
       let imageStyle={};
       console.log("render");
-   console.log(this.state.header);
+      console.log(this.state.header);
+      console.log(this.props);
+      console.log("state");
+      console.log(this.state);
 
 if (this.state.mainImage) {
   
@@ -419,7 +422,6 @@ if (this.state.mainImage) {
         multiple={false}
         accept="image/*"
         style={{width:"800px",height:"100px"}}
-          onDrop={this.handleFile}
           
           onDrop={(e)=>this.handleFile(e,this.addMainImage)}
         >
@@ -441,7 +443,7 @@ if (this.state.mainImage) {
      </div> 
    <div className="creeateBlogHeader" >
      <span className="createBlogHeaderLabel">Heading</span>
-     <input type="text" defaultValue={this.state.header} ref="blogHeader" size="80"/>
+     <input type="text" value={this.state.header} onChange={(e)=>this.headerChange(e)}  size="80"/>
    </div>
        
         <div 

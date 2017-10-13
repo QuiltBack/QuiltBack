@@ -25,6 +25,12 @@ module.exports ={
             })
     },
     addComment: (req,res) =>{
+        /*
+        
+        NSERT INTO comments (post_id,users_id,text,date) VALUES ($1,$2,$3,$4)
+RETURNING *;
+         */
+
         let {post_id,users_id,text} = req.body.comment;
         let date = moment();
         console.log(req.body);
@@ -77,6 +83,8 @@ module.exports ={
         })
         req.app.get("db").editPost([post_id,post_title,users_id,post_text,post_date,imageref])
            .then(response=>{
+               console.log("post added ");
+	       console.log(response);
                res.status(200).json(response);
            })
            .catch(err=>{
