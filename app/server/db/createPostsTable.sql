@@ -4,7 +4,7 @@ CREATE TABLE posts(
     post_date TIMESTAMP,
     deleted INT,
     owner_id SERIAL REFERENCES users (id),
-    post_text TEXT,
+    post_text TEXT NOT NULL DEFAULT '""',
     flagged BOOLEAN,
     views INT NOT NULL DEFAULT '0',
     imageref VARCHAR NOT NULL DEFAULT 'https://quiltbackmedia.nyc3.digitaloceanspaces.com/LovecraftQuilt.jpg',
