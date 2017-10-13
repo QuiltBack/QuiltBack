@@ -13,6 +13,7 @@ import BlogDetails from './components/blog/BlogDetails';
 import CreateBlog from './components/createblog/CreateBlog'
 import AdminNotifications from './components/admin/AdminNotifications';
 import AdminUsers from './components/admin/AdminUsers';
+import AdminPosts from './components/admin/AdminPosts';
 
 const adminRoutes = () => {
     return (
@@ -36,5 +37,6 @@ export default (
         <Route path="/event/:eventId" component={EventDetail}/>
         <Route path='/notifications' component={AdminNotifications}/>
         <Route path='/users' component={AdminUsers}/>
+        <Route path='/posts' component={AdminPosts}/>
     </Switch>
 );

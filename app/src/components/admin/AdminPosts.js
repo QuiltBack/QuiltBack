@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import '../../styles/AdminPosts.css';
 import {getAdminPosts} from '../../reducers/generalReducer';
+import moment from 'moment';
+import '../../styles/AdminPosts.css';
 
 class AdminPosts extends Component {
     constructor() {
@@ -35,12 +36,13 @@ class AdminPosts extends Component {
         if (this.props.general && this.props.general.adminPosts) {
           posts = this.props.general.adminPosts.map((e, i)=>{
             console.log(e)
+            let d1 = moment.utc(e.post_date);
             return (
-              <div className='posts-border' key={i}>
-                <div className='posts-author'>{e.first_name + ' ' + e.last_name}</div>
-                <div className='posts-email'>{e.email}</div>
-                <div className='posts-role'>{e.user_type}</div>
-                <div className='posts-post'>{e.post_count}</div>
+              <div className='users-border' key={i}>
+                <div className='users-author'>{d1.format("MMMM DD, YYYY, h A")}</div>
+                <div className='users-email'>{e.post_title}</div>
+                <div className='users-role'>{e.flagged? 'yes' : 'no'}</div>
+                <div className='users-post'>{e.views}</div>
               </div>
             )
           })
@@ -48,15 +50,15 @@ class AdminPosts extends Component {
     return (
       <section className='users-section'>
         <div className='users-tab'>
-          <div className='users-tab-pending'>Pending Review</div>
-          <div className='users-tab-approved'>Approved</div>
-          <div className='users-tab-declined'>Declined</div>
+          <div className='users-tab-pending'>All</div>
+          <div className='users-tab-approved'>MOST VIEWS</div>
+          <div className='users-tab-declined'>ALPHABETICAL</div>
         </div>
         <div className='users-title-container'>
-          <div className='users-title-username'>USERNAME</div>
-          <div className='users-title-email'>EMAIL</div>
-          <div className='users-title-role'>ROLE</div>
-          <div className='users-title-post'>POST</div>
+          <div className='users-title-username'>DATE</div>
+          <div className='users-title-email'>POST</div>
+          <div className='users-title-role'>FLAGGED</div>
+          <div className='users-title-post'>VIEWS</div>
         </div>
         {posts}
       </section>
