@@ -48,9 +48,9 @@ class AdminUsers extends Component {
     return (
       <section className='users-section'>
         <div className='users-tab'>
-          <div className='users-tab-pending'>Pending Review</div>
-          <div className='users-tab-approved'>Approved</div>
-          <div className='users-tab-declined'>Declined</div>
+          <div className='users-tab-pending'>All Users</div>
+          <div className='users-tab-pending'>Admins</div>
+          <div className='users-tab-pending'>Users</div>
         </div>
         <div className='users-title-container'>
           <div className='users-title-username'>USERNAME</div>

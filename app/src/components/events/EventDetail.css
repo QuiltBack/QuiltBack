@@ -210,7 +210,7 @@
     width: 100%;
     display: grid;
     grid-area: 1 / 3;
-    grid-template: 32px 46px 50px auto 8px auto 50px 46px 50px auto 50px 46px 50px auto 8px auto 50px 46px 50px auto / auto;    
+    grid-template: 32px 46px 50px 20px 8px 20px 50px 46px 50px 20px 50px 46px 50px 50px 8px 20px 50px 46px 50px 100px / auto;    
     
 }
 .event-details-right-container-date-title {

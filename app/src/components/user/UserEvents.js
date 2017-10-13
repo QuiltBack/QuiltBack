@@ -51,17 +51,22 @@ componentWillReceiveProps() {
       let props = this.props;
       userEventList = props.general.userEvents.map((e, i)=>{
         console.log(e)
-        let d1 = moment.utc(e.date);
+        let d1 = moment.utc(e.date)
         return i<(this.state.numberOfEvents)? ( 
           <section className='user-events-filled'>
             <div className="user-events-events"   key={i}>
-              <div className="user-events-banner"/>
+              <div className="user-events-banner" style={{
+                      backgroundImage: "url(" + e.imageref + ")",
+                      backgroundSize: "cover",
+                      backgroundRepeat:"no-repeat",
+                      backgroundPosition:'center center'
+                    }}/>
               <div className="user-events-info">
                 <div className='user-events-date'>{d1.format("MMMM DD, YYYY ")}</div>
                 <div className='user-events-title-filled'>{ 40 > e.title.length? 
                   e.title : (e.title).substring(0, 40) + '...'}
                 </div>
-                <div className='user-events-owner'>hosted by {props.general.user.first_name + ' '} {props.general.user.last_name}</div>
+                <div className='user-events-owner'>hosted by {e.host}</div>
               </div>
             </div>
             <div className='user-events-view-container'>

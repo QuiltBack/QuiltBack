@@ -44,7 +44,12 @@ class UserPosts extends Component {
         return i<(this.state.numberOfPosts)? ( 
           <section className='user-posts-filled'>
             <div className="user-posts-posts"   key={i}>
-              <div className="user-posts-banner"/>
+              <div className="user-posts-banner" style={{
+                      backgroundImage: "url(" + e.imageref + ")",
+                      backgroundSize: "cover",
+                      backgroundRepeat:"no-repeat",
+                      backgroundPosition:'center center'
+                    }}/>
               <div className="user-posts-info">
                 <div className='user-posts-date'>{d1.format("MMMM DD, YYYY ")}</div>
                 <div className='user-posts-title-filled'>{ 40 > e.post_title.length? 
