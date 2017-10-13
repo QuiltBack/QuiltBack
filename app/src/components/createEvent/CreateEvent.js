@@ -126,15 +126,36 @@ onSpeechResult(event){
 }
 
 componentWillReceiveProps(props){
+    console.log("willreceive");
+    console.log(this.props);
    this.loadEvent(props);
 }
 
 componentWillMount(){
+    console.log("didmount")
   this.loadEvent(this.props);
 }
 
 loadEvent(props){
-   
+
+
+//redirect if not a number and not 'new'
+ if (props && props.match && isNaN(props.match.params.eventId)  && props.match.params.eventId !=='new')
+     this._reactInternalInstance._context.router.history.push("/");
+
+
+     //redirect if invalid data
+if (props && props.general && typeof props.general.eventDetail === 'string')
+       this._reactInternalInstance._context.router.history.push("/");
+
+
+     if (props && props.general && typeof props.general.user === 'string')
+    {
+      // redirect because not logged 
+      this._reactInternalInstance._context.router.history.push('/');
+
+    }
+
      if (props && props.match && props.match.params && props.match.params.eventId){
        let eventid=props.match.params.eventId;
      
@@ -145,6 +166,7 @@ loadEvent(props){
               
 
                 let oldevent=response[0];
+               
                let oldCatalog;
                oldCatalog=[];
                if (oldevent.catalogue){
@@ -152,6 +174,29 @@ loadEvent(props){
                }
                if (!Array.isArray(oldCatalog))
                  oldCatalog=[];
+
+                         // Check to see if unauthorized page
+     
+    if (this.props && this.props.general){
+    
+
+     if (!this.props.general.user || !this.props.general.user.users_id || 
+    (+oldevent.users_id != +this.props.general.user.users_id && this.props.general.user.user_type!=='Admin')){
+     { 
+     console.log("this debug");
+     console.log(this);    
+     if (this._reactInternalInstance && this._reactInternalInstance._context){
+       this._reactInternalInstance._context.router.history.push('/');
+  
+     }
+     else if (this.props && this.props.history){
+         this.props.history.push("/")
+  
+     }
+      
+     } 
+  }
+ }
            
                 this.setState({
                    address:oldevent.address?oldevent.address:'',
@@ -174,10 +219,22 @@ loadEvent(props){
 
 
                 })
+
             
 
            })
+           .catch(err=>{
+               console.log("ERROR WITH THIS ID");
+               
+               
+                 this.props.history.push('/');
+                
+                
+                
+           })
        }
+
+ 
 
     }
 // Set up Speeech Recognition object
@@ -253,6 +310,11 @@ saveAndPublish(){
   console.log("create Event");
     apiCreateEvent(newEvent).then(res=>{
       
+      if (res.redirect){
+          console.log("NEW EVENTID " + res.eventid);
+          console.log(res);
+         this._reactInternalInstance._context.router.history.push('/createevent/' + res.eventid);   
+      }
         this.setState({
             catalogue:[],
             description:'',
@@ -273,7 +335,7 @@ saveAndPublish(){
         
 
         })
-        this.props.history.push("/");
+        
 
     })
     .catch(err=>console.log(err))

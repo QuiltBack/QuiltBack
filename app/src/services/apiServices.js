@@ -7,14 +7,13 @@ const api = axios.create({
 });
 
 export function apiAddPost(post){
-  console.log("apiAddPost")
-  console.log('post object')
-  console.log(post);
+ 
    return axios.post('/api/post/',{post:post})
     .then(response=>{
-        console.log('returning from adding post api/post');
-        console.log(response);
-        return response.data;
+        
+        response.data[0].redirect=true;
+   
+        return response.data[0];
     })
     .catch(err=>{
         console.log ("error in AddPost");
@@ -89,7 +88,11 @@ export function apiCreateEvent(event){
     .then(response=>{
         console.log("response");
         console.log(response);
-        return response;
+           
+        response.data[0].redirect=true;
+   
+        return response.data[0];
+    
     })
 
 }

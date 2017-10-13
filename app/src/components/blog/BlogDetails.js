@@ -30,6 +30,7 @@ class BlogDetails extends Component{
     }
 
     addcomment() {
+      
         console.log("CALLING addcomments");
         if (this.props && this.props.general && this.props.general.user && this.props.general.user.users_id && this.refs.addcomment_text.value){
             let commentText = this.refs.addcomment_text.value;
@@ -43,6 +44,7 @@ class BlogDetails extends Component{
             console.log("adding comment ")
             console.log(comment);
             this.props.addComment(comment);
+              this.setState({comment:''});
         }
     }
 
@@ -73,6 +75,23 @@ class BlogDetails extends Component{
             } 
         }
     }
+    
+
+
+componentDidMount() {
+   
+    this.blogdetails();
+}
+componentWillReceiveProps(ownProps) {
+ 
+ 
+    this.blogdetails();
+}
+
+
+
+
+
 
     componentDidMount() {
         this.blogdetails();
