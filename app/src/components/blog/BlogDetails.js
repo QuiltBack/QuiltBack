@@ -30,7 +30,6 @@ class BlogDetails extends Component{
     }
 
     addcomment() {
-      
         console.log("CALLING addcomments");
         if (this.props && this.props.general && this.props.general.user && this.props.general.user.users_id && this.refs.addcomment_text.value){
             let commentText = this.refs.addcomment_text.value;
@@ -44,7 +43,9 @@ class BlogDetails extends Component{
             console.log("adding comment ")
             console.log(comment);
             this.props.addComment(comment);
-              this.setState({comment:''});
+            this.setState({
+                comment:''
+            });
         }
     }
 
@@ -75,24 +76,6 @@ class BlogDetails extends Component{
             } 
         }
     }
-    
-
-
-componentDidMount() {
-   
-    this.blogdetails();
-}
-componentWillReceiveProps(ownProps) {
- 
- 
-    this.blogdetails();
-}
-
-
-
-
-
-
     componentDidMount() {
         this.blogdetails();
     }
@@ -182,17 +165,18 @@ componentWillReceiveProps(ownProps) {
             if (index >10)
             return '';
             return (
-                <div className="blogRecentPost" key={index}>
-                    <div className="blogRecentPostImage" style={{
+                <div className="blog-details-recent-posts" key={index}>
+                    <div className="blog-details-recent-posts-image" style={{
                       backgroundImage: "url(" + post.imageref + ")",
                       backgroundSize: "cover",
-                      backgroundRepeat:"no-repeat"
+                      backgroundRepeat:"no-repeat",
+                      backgroundPosition:'center center'
                     }}/>
-                    <div className="blogRecentPostInfo">
-                        <div className="blogRecentPostDate">
+                    <div className="blog-details-recent-posts-info">
+                        <div className="blog-details-recent-posts-date">
                             {date}
                         </div>
-                        <div className="">
+                        <div className="blog-details-recent-posts-title">
                             {title}
                         </div>
                     </div>               
@@ -254,8 +238,8 @@ componentWillReceiveProps(ownProps) {
                     </div>
                 </div>
                 <div className="blog-details-right-side">
-                    <h1>Recent Posts</h1>
-                    {recentposts}
+                    <h1 className='blog-details-right-title'>Recent Posts</h1>
+                    <div className='blog-details-recent-posts-container'>{recentposts}</div>
                 </div>    
             </section>
         )
