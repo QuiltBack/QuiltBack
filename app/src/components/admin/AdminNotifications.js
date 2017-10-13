@@ -31,20 +31,26 @@ class AdminNotifications extends Component {
       }
     },100)
   }
+  approvePost(id) {
+    
+  }
+  deletePost(id) {
+    
+  }
   render() {
     let notifications; 
     if (this.props.general && this.props.general.adminNotifications) {
       notifications = this.props.general.adminNotifications.map((e, i)=>{
         console.log(e)
-        let d1 = moment.utc(e.date);
+        let d1 = moment.utc(e.post_date);
         return (
           <div className='notifications-border' key={i}>
             <div className='notifications-date'>{d1.format("MMMM DD, YYYY, h A")}</div>
             <div className='notifications-title'><Link to={'/blog/' + e.post_id}>{e.post_title}</Link></div>
             <div className='notifications-author'>{e.first_name + ' ' + e.last_name}</div>
             <div className='notifications-decisions'>
-              <div className='notifications-approve'>Approve</div>
-              <div className='notifications-decline'>Decline</div>
+              <div className='notifications-approve' onClick={()=>{this.approvePost(e.post_id)}}>Keep</div>
+              <div className='notifications-decline' onClick={()=>{this.deletePost(e.post_id)}}>Delete</div>
             </div>
           </div>
         )
@@ -54,8 +60,6 @@ class AdminNotifications extends Component {
       <section className='notifications-section'>
         <div className='notifications-tab'>
           <div className='notifications-tab-pending'>Pending Review</div>
-          <div className='notifications-tab-approved'>Approved</div>
-          <div className='notifications-tab-declined'>Declined</div>
         </div>
         <div className='notifications-title-container'>
           <div className='notifications-title-date'>DATE</div>

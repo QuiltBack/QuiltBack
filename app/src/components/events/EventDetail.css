@@ -13,7 +13,7 @@
     width: 100%;
     display: grid;
     grid-area: 1 / 1;
-    grid-template: auto / 65% 2% 33%;
+    grid-template: 398px / 65% 2% 33%;
     border: 1px solid #979797;
 }
 .event-details-banner-image {
