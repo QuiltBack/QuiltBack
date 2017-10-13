@@ -372,6 +372,13 @@ createRecognition = (SpeechRecognition) => {
     return recognition
  
  }
+ componentWillUnmount(){
+   if (this.state.listening){
+     this.state.listening=false;
+    
+       this.state.recognition.stop();
+  }
+ }
 
  
 toggleListening(){
