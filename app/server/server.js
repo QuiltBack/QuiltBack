@@ -235,6 +235,7 @@ app.post('/api/upload',(req, res) => {
 
 /* END ENDPOINTS */
 app.get('*', (req,res)=>{
+  console.log(req.originalUrl)
   res.sendFile(path.join(__dirname, '../build/index.html'))
 })
 
